@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/bunnyroom
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: yyc
+    password: yyc
+#
+#mybatis:
+#  mapper-locations: classpath:resources/mapper/**/*.xml
+#  config-location: classpath:mapper/mapper-config.xml
