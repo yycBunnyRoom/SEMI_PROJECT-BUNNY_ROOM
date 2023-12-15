@@ -20,6 +20,8 @@
             *
         FROM
             TBL_USER
+        WHERE
+            USER_STATUS = 'active'
     </select>
 
     <select id="searchAllMemberByInt" resultMap="memberResult">
@@ -37,6 +39,8 @@
             USER_REGIST_DATE = #{str}
         OR
             USER_UPDATE_DATE = #{str}
+        AND
+        USER_STATUS = 'active'
     </select>
 
     <select id="searchAllMemberByString" resultMap="memberResult">
@@ -52,6 +56,8 @@
             USER_AUTH LIKE #{str}
             OR
             USER_STATUS LIKE #{str}
+            AND
+            USER_STATUS = 'active'
     </select>
 
 </mapper>

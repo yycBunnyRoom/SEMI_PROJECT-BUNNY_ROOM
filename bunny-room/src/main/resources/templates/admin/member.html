@@ -32,16 +32,16 @@
                   <th>회원 상태</th>
               </tr>
               <tr th:each="member : ${members}">
-                  <td th:text="member.userNo"></td>
-                  <td th:text="member.auth"></td>
-                  <td th:text="member.email"></td>
-                  <td th:text="member.nickname"></td>
-                  <td th:text="member.phone"></td>
-                  <td th:text="member.userRegistDate"></td>
-                  <td th:text="member.userUpdateDate"></td>
-                  <td th:text="member.status"></td>
+                  <td th:text="${member.userNo}"></td>
+                  <td th:text="${member.auth}"></td>
+                  <td th:text="${member.email}"></td>
+                  <td th:text="${member.nickname}"></td>
+                  <td th:text="${member.phone}"></td>
+                  <td th:text="${member.userRegistDate}"></td>
+                  <td th:text="${member.userUpdateDate}"></td>
+                  <td th:text="${member.status}"></td>
                   <td><a href="admin/black">블랙리스트 추가</a></td>
-                  <td><a href="admin/">탈퇴</a> </td>
+                  <td><a href="admin/out">탈퇴</a> </td>
               </tr>
           </table>
 
