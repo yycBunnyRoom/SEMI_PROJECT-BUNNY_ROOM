@@ -11,6 +11,7 @@
 
     <mappers>
         <mapper resource="mapper/security/user/user.xml" />
+        <mapper resource="mapper/admin/admin.xml" />
     </mappers>
 
 </configuration>
