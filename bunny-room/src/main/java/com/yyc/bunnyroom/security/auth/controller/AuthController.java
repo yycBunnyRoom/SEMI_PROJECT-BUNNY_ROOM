@@ -22,4 +22,12 @@ public class AuthController {
         modelAndView.setViewName("/security/auth/fail");
         return modelAndView;
     }
+
+
+    // logOut
+    @GetMapping("/logout")
+    public ModelAndView logOut(ModelAndView modelAndView){
+        modelAndView.setViewName("/main");
+        return modelAndView;
+    }
 }

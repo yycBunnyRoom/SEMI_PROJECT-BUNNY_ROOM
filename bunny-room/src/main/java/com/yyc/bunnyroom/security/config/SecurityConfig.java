@@ -70,13 +70,13 @@ public class SecurityConfig {
             login.failureHandler(authFailHandler);
         }).logout(logout ->{
 
-            logout.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"));
+            logout.logoutRequestMatcher(new AntPathRequestMatcher("/security/auth/logout"));
             logout.deleteCookies("JSESSIONID");
             logout.invalidateHttpSession(true);// 세션을 소멸하도록 허용하는 것
 
 
             // 로그아웃시 메인 페이지로 이동
-            logout.logoutSuccessUrl("/");
+            logout.logoutSuccessUrl("/main");
 
 
         }).sessionManagement(session ->{
