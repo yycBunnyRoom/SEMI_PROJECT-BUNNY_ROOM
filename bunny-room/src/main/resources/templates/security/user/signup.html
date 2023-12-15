@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+    <h1>회원가입</h1>
+    <form th:action="@{/security/user/signup}" method="post">
+        USER_EMAIL : <input type="text" name="userEmail"/><br>
+        USER_PASSWORD : <input type="password" name="userPassword"/><br>
+        USER_NICKNAME : <input type="text" name="userNickname"/><br>
+        USER_PHONE : <input type="text" name="userPhone"/><br>
+        USER_AUTH :
+        <select name="userAuth">
+            <option value="GUEST">게스트</option>
+            <option value="ADMIN">어드민</option>
+        </select>
+        <br>
+        <button>회원가입</button>
+<!--        -->
+<!--        USER_STATUS-->
+<!--        USER_REGIST_DATE-->
+
+
+<!--        PROFILE_IMAGE_NO-->
+    </form>
+
+
+
+
+    <script th:inline="javascript">
+        const message = [[${message}]]
+        if (message){
+            alert(message);
+        }
+    </script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.security.user.dao.UserMapper">
+
+
+    <resultMap id="loginUser" type="com.yyc.bunnyroom.security.user.model.dto.LoginUserDTO">
+        <id property="userNo" column="USER_NO"/>
+        <result property="userEmail" column="USER_EMAIL"/>
+        <result property="userPassword" column="USER_PASSWORD"/>
+        <result property="userNickname" column="USER_NICKNAME"/>
+        <result property="userPhone" column="USER_PHONE"/>
+        <result property="userAuth" column="USER_AUTH"/>
+        <result property="userStatus" column="USER_STATUS"/>
+        <result property="userRegistDate" column="USER_REGIST_DATE"/>
+        <result property="userUpdateDate" column="USER_UPDATE_DATE"/>
+        <result property="profileImageNo" column="PROFILE_IMAGE_NO"/>
+    </resultMap>
+
+
+
+    <select id="findByUserEmail" resultMap="loginUser">
+        SELECT
+        USER_NO,
+        USER_EMAIL,
+        USER_PASSWORD,
+        USER_NICKNAME,
+        USER_PHONE,
+        USER_AUTH,
+        USER_STATUS,
+        USER_REGIST_DATE,
+        USER_UPDATE_DATE,
+        PROFILE_IMAGE_NO
+        FROM TBL_USER
+        WHERE USER_EMAIL = #{userEmail}
+    </select>
+
+
+
+
+    <insert id="registUser" parameterType="com.yyc.bunnyroom.security.user.model.dto.SignupDTO">
+        INSERT INTO TBL_USER(
+        USER_NO,
+        USER_EMAIL,
+        USER_PASSWORD,
+        USER_NICKNAME,
+        USER_PHONE,
+        USER_AUTH,
+        USER_STATUS,
+        USER_REGIST_DATE
+        )VALUES(
+        NULL,
+        #{userEmail},
+        #{userPassword},
+        #{userNickname},
+        #{userPhone},
+        #{userAuth},
+        #{userStatus},
+        #{userRegistDate}
+        )
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

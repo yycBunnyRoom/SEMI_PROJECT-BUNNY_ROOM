@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인 페이지</title>
+</head>
+<body>
+
+<h1>회원 로그인</h1>
+
+<div>
+<!--    auth/controller 에 있는 /auth/login 호출-->
+    <form th:action="@{/security/auth/login}" th:method="POST">
+        <!--회원의 이메일을 로그인 아이디로 받는 버튼-->
+        EMAIL <input type="text" name="userEmail"/><br>
+        <!--회원의 비밀번호를 받는 버튼-->
+        password<input type="password" name="userPassword"/>
+
+        <div><button>로그인</button></div>
+    </form>
+</div>
+
+
+
+
+<!--비밀번호 찾기-->
+
+<!--회원가입-->
+<a href="/security/user/signup">회원가입</a>
+
+</body>
+</html>
