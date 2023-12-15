@@ -18,6 +18,15 @@
     <a href="/security/auth/signup">회원가입</a>
 
 
+    <form th:action="@{/security/auth/logout}" th:method="post">
+        <button>로그아웃</button>
+    </form>
+
+    <form th:action="@{/admin/adminpage}">
+        <button>어드민페이지로 가기</button>
+    </form>
+
+
 <!--    <form th:action="@{/auth/logout}" th:method="post">-->
 <!--        <button>로그아웃</button>-->
 <!--    </form>-->
