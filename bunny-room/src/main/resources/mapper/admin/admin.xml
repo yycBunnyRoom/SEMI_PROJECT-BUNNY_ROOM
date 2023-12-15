@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.admin.model.dao.AdminDAO">
+
+    <resultMap id="memberResult" type="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        <id property="userNo" column="USER_NO"/>
+        <result property="auth" column="USER_AUTH"/>
+        <result property="email" column="USER_EMAIL"/>
+        <result property="nickname" column="USER_NICKNAME"/>
+        <result property="phone" column="USER_PHONE"/>
+        <result property="userRegistDate" column="USER_REGIST_DATE"/>
+        <result property="userUpdateDate" column="USER_UPDATE_DATE"/>
+        <result property="status" column="USER_STATUS"/>
+    </resultMap>
+
+    <select id="searchAllMember" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+    </select>
+
+    <select id="searchAllMemberByInt" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_NO = #{str}
+        OR
+            USER_NICKNAME = #{str}
+        OR
+            USER_PHONE = #{str}
+        OR
+            USER_REGIST_DATE = #{str}
+        OR
+            USER_UPDATE_DATE = #{str}
+    </select>
+
+    <select id="searchAllMemberByString" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_EMAIL LIKE #{str}
+            OR
+            USER_NICKNAME LIKE #{str}
+            OR
+            USER_AUTH LIKE #{str}
+            OR
+            USER_STATUS LIKE #{str}
+    </select>
+
+</mapper>
