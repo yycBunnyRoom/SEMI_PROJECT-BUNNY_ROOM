@@ -60,4 +60,12 @@
             USER_STATUS = 'active'
     </select>
 
+    <update id="withdraw" parameterType="email">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'inactive'
+        WHERE
+            USER_EMAIL = #{email}
+    </update>
+
 </mapper>

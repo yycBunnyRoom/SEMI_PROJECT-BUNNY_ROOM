@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,11 +22,13 @@ public class AdminController {
 
     @GetMapping("/adminpage")
     public String adminPage(){
+        // 관리자 메인 페이지로 이동
         return "admin/adminpage";
     }
 
     @GetMapping("/member")
     public String member(){
+        // 관리자 회원 관리 페이지로 이동
         adminService.searchAllMember();
         return "admin/member";
     }
@@ -48,38 +51,39 @@ public class AdminController {
         }
     }
 
-
-
-
-
-
     @GetMapping("/business")
     public String business(){
+        // 관리자 업체 관리 페이지로 이동
         return "admin/business";
     }
 
     @GetMapping("/room")
     public String room(){
+        // 관리자 공간 관리 페이지로 이동
         return "admin/room";
     }
 
     @GetMapping("/report")
     public String report(){
+        // 관리자 신고 관리 페이지로 이동
         return "admin/report";
     }
 
     @GetMapping("/announcement")
     public String announcement(){
+        // 관리자 공지사항 페이지로 이동
         return "admin/announcement";
     }
 
     @GetMapping("/inquiry")
     public String inquiry(){
+        // 관리자 문의사항 페이지로 이동
         return "admin/inquiry";
     }
 
     @GetMapping("/setting")
     public String setting(){
+        // 관리자 설정 페이지로 이동
         return "admin/setting";
     }
 }
