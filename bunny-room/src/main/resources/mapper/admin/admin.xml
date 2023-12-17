@@ -30,17 +30,18 @@
         FROM
             TBL_USER
         WHERE
+            USER_STATUS = 'active'
+            AND
             USER_NO = #{str}
-        OR
+            OR
             USER_NICKNAME = #{str}
-        OR
+            OR
             USER_PHONE = #{str}
-        OR
+            OR
             USER_REGIST_DATE = #{str}
-        OR
+            OR
             USER_UPDATE_DATE = #{str}
-        AND
-        USER_STATUS = 'active'
+
     </select>
 
     <select id="searchAllMemberByString" resultMap="memberResult">
@@ -49,6 +50,8 @@
         FROM
             TBL_USER
         WHERE
+            USER_STATUS = 'active'
+            AND
             USER_EMAIL LIKE #{str}
             OR
             USER_NICKNAME LIKE #{str}
@@ -56,8 +59,14 @@
             USER_AUTH LIKE #{str}
             OR
             USER_STATUS LIKE #{str}
-            AND
-            USER_STATUS = 'active'
     </select>
+
+    <update id="withdrawMember" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'inactive'
+        WHERE
+            USER_EMAIL = #{email}
+    </update>
 
 </mapper>

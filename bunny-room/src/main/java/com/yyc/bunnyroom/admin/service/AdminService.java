@@ -46,4 +46,17 @@ public class AdminService {
             return false;
         }
     }
+
+    public int withdrawMember(String email) {
+
+        int result = adminDAO.withdrawMember(email);
+
+        if(result > 0){
+            System.out.println("정상적으로 탈퇴처리되었습니다.");
+            return result;
+        }else {
+            System.out.println("정상적으로 처리되지 않았습니다.");
+            return 0;
+        }
+    }
 }

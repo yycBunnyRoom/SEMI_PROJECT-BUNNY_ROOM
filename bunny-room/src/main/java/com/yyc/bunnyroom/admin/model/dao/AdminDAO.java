@@ -12,4 +12,6 @@ public interface AdminDAO {
     List<MemberDTO> searchAllMemberByInt(int str);
 
     List<MemberDTO> searchAllMemberByString(String param);
+
+    int withdrawMember(String email);
 }
