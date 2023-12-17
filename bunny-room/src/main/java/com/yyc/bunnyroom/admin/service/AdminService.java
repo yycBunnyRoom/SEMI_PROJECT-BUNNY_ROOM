@@ -59,4 +59,17 @@ public class AdminService {
             return 0;
         }
     }
+
+    public int addBlacklist(String email) {
+
+        int result = adminDAO.addBlacklist(email);
+
+        if(result > 0){
+            System.out.println("정상적으로 블랙처리되었습니다.");
+            return result;
+        }else {
+            System.out.println("정상적으로 처리되지 않았습니다.");
+            return 0;
+        }
+    }
 }

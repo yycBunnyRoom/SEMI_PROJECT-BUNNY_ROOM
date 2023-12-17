@@ -14,4 +14,6 @@ public interface AdminDAO {
     List<MemberDTO> searchAllMemberByString(String param);
 
     int withdrawMember(String email);
+
+    int addBlacklist(String email);
 }

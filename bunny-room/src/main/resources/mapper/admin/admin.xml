@@ -61,6 +61,14 @@
             USER_STATUS LIKE #{str}
     </select>
 
+    <update id="addBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'black'
+        WHERE
+            USER_EMAIL = #{email}
+    </update>
+
     <update id="withdrawMember" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER
         SET
