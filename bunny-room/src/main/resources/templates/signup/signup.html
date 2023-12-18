@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
@@ -12,16 +12,28 @@
 
 
     <h1>회원가입</h1>
-    <form th:action="@{/signup/signup}" method="post">
+    <form th:action="@{/signup/signup}" method="post" modelAttribute="signupDTO">
 
         <input type="hidden" th:value="${userAuth}" name="userAuth"/>
 
-        USER_EMAIL : <input type="text" name="userEmail"/><br>
-        USER_PASSWORD : <input type="password" name="userPassword"/><br>
-        USER_NICKNAME : <input type="text" name="userNickname"/><br>
-        USER_PHONE : <input type="text" name="userPhone"/><br>
+        가입하실 이메일(ID) : <input type="text" name="userEmail"/><br>
+
+<!--        <div>-->
+<!--        <input type="text" name="userEmail" th:value="${signupDTO.userEmail}" placeholder="이메일을 입력해주세요. example@example.com"/>-->
+<!--        <span th:text="${valid_userEmail}"></span>-->
+<!--        </div>-->
+
+        비밀번호 : <input type="password" name="userPassword"/><br>
+        비밀번호 확인 : <input type="password" name="userPasswordConfirm"/><br>
+        닉네임 : <input type="text" name="userNickname"/><br>
+        전화번호 : <input type="text" name="userPhone"/><br>
+
+
         <br>
-        <button>회원가입</button>
+        <button>가입하기</button>
+
+
+
 <!--        -->
 <!--        USER_STATUS-->
 <!--        USER_REGIST_DATE-->

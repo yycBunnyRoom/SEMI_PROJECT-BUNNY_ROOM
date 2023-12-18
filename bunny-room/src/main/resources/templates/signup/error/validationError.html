@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Validation Error</title>
+</head>
+<body>
+<header th:replace="~{/common/header :: headerFragment}">
+  <h1>나는 header</h1>
+</header>
+<script th:inline="javascript">
+  const userAuth = [[${userAuth}]];
+  alert([[${error}]]);
+  window.location.replace("/signup/signup?userAuth="+userAuth);
+</script>
+</body>
+</html>
