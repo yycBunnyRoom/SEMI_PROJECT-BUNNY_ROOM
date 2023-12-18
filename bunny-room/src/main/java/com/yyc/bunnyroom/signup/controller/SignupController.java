@@ -54,16 +54,21 @@ public class SignupController {
         modelAndView.addObject("userAuth", signupDTO.getUserAuth());
         System.out.println(signupDTO.getUserAuth());
 
-        // 비밀번호 확인
-        Object password1 = modelAndView.getModel().get("UserPasswordConfirm");
-        String password2 = (password1 != null) ? password1.toString() : null ;
-        if (! signupDTO.getUserPassword().equals(password2)){
-
-            String error = "입력하신 비밀번호가 다릅니다.";
-            modelAndView.addObject("error", error);
-            modelAndView.setViewName("/signup/error/validationError"); // 에러가 있는 경우 errorView로 이동
-            return modelAndView;
-        }
+//        // 비밀번호 확인
+//        Object password1 = modelAndView.getModel().get("UserPasswordConfirm");
+//        String password2 = (password1 != null) ? password1.toString() : null ;
+//
+//        System.out.println(password1);
+//        System.out.println(password2);
+//        System.out.println(password1 == password2);
+//
+//        if (! signupDTO.getUserPassword().equals(password2)){
+//
+//            String error = "입력하신 비밀번호가 다릅니다.";
+//            modelAndView.addObject("error", error);
+//            modelAndView.setViewName("/signup/error/validationError"); // 에러가 있는 경우 errorView로 이동
+//            return modelAndView;
+//        }
 
 
         // 입력된 정보의 유효성 검사, 입력한 정보가 이상하면 alert 반환
