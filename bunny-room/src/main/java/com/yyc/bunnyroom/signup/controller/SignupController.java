@@ -1,20 +1,18 @@
-package com.yyc.bunnyroom.security.user.controller;
+package com.yyc.bunnyroom.signup.controller;
 
 
-import com.yyc.bunnyroom.security.user.model.dto.SignupDTO;
-import com.yyc.bunnyroom.security.user.service.UserService;
+import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
+import com.yyc.bunnyroom.signup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Controller
-@RequestMapping("/security/user")
-public class UserController {
+@RequestMapping("/signup")
+public class SignupController {
     @Autowired
     private UserService userService;
 
@@ -22,7 +20,7 @@ public class UserController {
     // signup 페이지로 이동하는 컨트롤러
     @GetMapping("/signup")
     public ModelAndView signupUser(ModelAndView modelAndView){
-        modelAndView.setViewName("/security/user/signup");
+        modelAndView.setViewName("/signup/signup");
         return modelAndView;
     }
 
@@ -30,14 +28,14 @@ public class UserController {
     // 회원가입 방법 선택
     @PostMapping("/signupMethod")
     public ModelAndView signupMethod(ModelAndView modelAndView, @RequestParam("userAuth") String userAuth){
-        modelAndView.setViewName("/security/user/signup");
+        modelAndView.setViewName("/signup/signup");
         modelAndView.addObject("userAuth", userAuth);
         return modelAndView;
     }
 
     @GetMapping("/signupMethod")
     public ModelAndView signupMethod(ModelAndView modelAndView){
-        modelAndView.setViewName("/security/user/signupMethod");
+        modelAndView.setViewName("/signup/signupMethod");
         return modelAndView;
     }
 
@@ -64,7 +62,7 @@ public class UserController {
             modelAndView.setViewName("/security/auth/login");
         } else {
             message = "회원가입이 실패했습니다.";
-            modelAndView.setViewName("/security/user/signup");
+            modelAndView.setViewName("/signup/signup");
         }
         modelAndView.addObject("message",message);
         return modelAndView;

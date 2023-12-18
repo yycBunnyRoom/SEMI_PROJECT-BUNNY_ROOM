@@ -42,8 +42,17 @@ public class SecurityConfig {
 
             //여기부터 로그인 권한을 설정하는 공간
 
-            auth.requestMatchers("/security/auth/login","/security/user/signup","/security/user/signupMethod","/security/auth/fail","/main","/").permitAll();
+            auth.requestMatchers(
+                    "/security/auth/login",
+                    "/signup/*",
+                    "/security/auth/fail",
+                    "/main",
+                    "/"
+            ).permitAll();
 
+
+            // 일단 개발의 편의성을 위해서 전체 권한 허용
+//            auth.requestMatchers("/*").permitAll();
 
             auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
             auth.requestMatchers("/guest/*").hasAnyAuthority(UserRole.GUEST.getRole());

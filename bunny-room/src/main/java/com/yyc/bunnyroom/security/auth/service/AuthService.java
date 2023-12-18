@@ -1,8 +1,8 @@
 package com.yyc.bunnyroom.security.auth.service;
 
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
-import com.yyc.bunnyroom.security.user.model.dto.LoginUserDTO;
-import com.yyc.bunnyroom.security.user.service.UserService;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
