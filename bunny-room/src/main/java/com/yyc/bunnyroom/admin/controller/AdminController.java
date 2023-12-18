@@ -24,10 +24,10 @@ public class AdminController {
     /**
      * 관리자 메인 페이지로 이동하는 요청을 수행하는 메소드
      * */
-    @GetMapping("/adminpage")
+    @GetMapping("/adminPage")
     public String adminPage(){
         // 관리자 메인 페이지로 이동
-        return "admin/adminpage";
+        return "admin/adminPage";
     }
 
     /**
@@ -57,33 +57,6 @@ public class AdminController {
             // 조건에 따른 검색
             List<MemberDTO> members = adminService.searchMember(str);
             model.addAttribute("members", members);
-            return "admin/member";
-        }
-    }
-
-    /**
-     * 해당 회원을 블랙리스트로 변경하고 블랙리스트 명단에 입력하는 메소드
-     * */
-    @PostMapping("addblacklist")
-    public String addBlacklist(@RequestParam(name = "email") String email, Model model){
-
-        // 정상적으로 email이 전달되지 않았을 경우
-        if(Objects.isNull(email)){
-            System.out.println("탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
-            model.addAttribute("blacklist", "탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
-            return "admin/member";
-        }
-
-        // 블랙리스트로 상태를 변경
-        System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
-        int result = adminService.addBlacklist(email);
-
-        if(result > 0) {// 정상적인 블랙 처리
-            model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
-            return "admin/member";
-        }else {// 비정상적인 블랙 처리
-            System.out.println("정상적으로 동작되지 않았습니다.");
-            model.addAttribute("blacklist", "블랙처리에 실패하였습니다.");
             return "admin/member";
         }
     }

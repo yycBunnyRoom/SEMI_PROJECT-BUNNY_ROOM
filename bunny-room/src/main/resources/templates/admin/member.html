@@ -9,7 +9,7 @@
 
   <h1>관리자 회원 관리 페이지</h1>
 
-  <nav th:replace="admin/adminnav :: nav"></nav>
+  <nav th:replace="admin/adminNav :: nav"></nav>
 
   <section>
       <div>
@@ -41,8 +41,11 @@
                   <td th:text="${member.userUpdateDate}"></td>
                   <td th:text="${member.status}"></td>
                   <td>
-                      <form action="/admin/addblacklist" method="post">
+                      <form action="/admin/black/addBlacklist" method="post">
+                          <input type="hidden" name="userNo" th:value="${member.userNo}">
                           <input type="hidden" name="email" th:value="${member.email}">
+                          <input type="hidden" name="nickname" th:value="${member.nickname}">
+                          <input type="hidden" name="phone" th:value="${member.phone}">
                           <button type="submit">블랙리스트에 추가</button>
                       </form>
                   </td>
