@@ -4,11 +4,9 @@ package com.yyc.bunnyroom.security.user.controller;
 import com.yyc.bunnyroom.security.user.model.dto.SignupDTO;
 import com.yyc.bunnyroom.security.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -28,11 +26,25 @@ public class UserController {
         return modelAndView;
     }
 
+
+    // 회원가입 방법 선택
+    @PostMapping("/signupMethod")
+    public ModelAndView signupMethod(ModelAndView modelAndView, @RequestParam("userAuth") String userAuth){
+        modelAndView.setViewName("/security/user/signup");
+        modelAndView.addObject("userAuth", userAuth);
+        return modelAndView;
+    }
+
+    @GetMapping("/signupMethod")
+    public ModelAndView signupMethod(ModelAndView modelAndView){
+        modelAndView.setViewName("/security/user/signupMethod");
+        return modelAndView;
+    }
+
     @PostMapping("/signup")
     public ModelAndView signupUser(ModelAndView modelAndView, @ModelAttribute SignupDTO signupDTO){
 
         //유효성 검사 로직
-
 
         // 등록하는 사용자의 상태를 활성화("active")로 설정
         signupDTO.setUserStatus("active");

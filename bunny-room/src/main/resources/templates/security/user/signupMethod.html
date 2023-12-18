@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 종류</title>
+</head>
+<body>
+    <header th:replace="~{/common/header :: headerFragment}">
+        <h1>나는 header</h1>
+    </header>
+
+    <form action="/security/user/signupMethod" method="post">
+        <button type="submit" name="userAuth" value="HOST">호스트 버니 가입</button>
+    </form>
+
+    <form action="/security/user/signupMethod" method="post">
+        <button type="submit" name="userAuth" value="GUEST">게스트 버니 가입</button>
+    </form>
+
+</body>
+</html>

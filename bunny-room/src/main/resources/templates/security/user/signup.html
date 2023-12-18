@@ -5,17 +5,21 @@
     <title>회원가입</title>
 </head>
 <body>
+
+    <header th:replace="~{/common/header :: headerFragment}">
+    <h1>나는 header</h1>
+    </header>
+
+
     <h1>회원가입</h1>
     <form th:action="@{/security/user/signup}" method="post">
+
+        <input type="hidden" th:value="${userAuth}" name="userAuth"/>
+
         USER_EMAIL : <input type="text" name="userEmail"/><br>
         USER_PASSWORD : <input type="password" name="userPassword"/><br>
         USER_NICKNAME : <input type="text" name="userNickname"/><br>
         USER_PHONE : <input type="text" name="userPhone"/><br>
-        USER_AUTH :
-        <select name="userAuth">
-            <option value="GUEST">게스트</option>
-            <option value="ADMIN">어드민</option>
-        </select>
         <br>
         <button>회원가입</button>
 <!--        -->
