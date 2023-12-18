@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.black.model.dao.BlackDAO">
+
+    <resultMap id="blacklist" type="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        <id property="blackNo" column="A.BLACK_NO"/>
+        <result property="userNo" column="A.USER_NO"/>
+        <result property="email" column="B.USER_EMAIL"/>
+        <result property="nickname" column="B.USER_NICKNAME"/>
+        <result property="phone" column="B.USER_PHONE"/>
+        <result property="blackReason" column="A.BLACK_REASON"/>
+        <result property="blackRegistDate" column="A.BLACK_REGIST_DATE"/>
+        <result property="blackStatus" column="A.BLACK_STATUS"/>
+        <result property="blackUpdateDate" column="A.BLACK_UPDATE_DATE"/>
+        <result property="blackSentencePeriod" column="A.BLACK_SENTENCE_PERIOD"/>
+    </resultMap>
+
+    <select id="showAll" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+    </select>
+
+    <select id="showBlacklistByString" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_EMAIL LIKE #{param}
+            OR
+            B.USER_NICKNAME LIKE #{param}
+            OR
+            A.BLACK_REASON LIKE #{param}
+            OR
+            A.BLACK_STATUS LIKE #{param}
+    </select>
+
+    <select id="showBlacklistByInt" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            A.BLACK_NO = #{str}
+            OR
+            A.USER_NO = #{str}
+            OR
+            B.USER_PHONE = #{str}
+    </select>
+
+    <update id="addBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+        USER_AUTH = 'BLACK'
+        WHERE
+        USER_EMAIL = #{email}
+    </update>
+
+</mapper>

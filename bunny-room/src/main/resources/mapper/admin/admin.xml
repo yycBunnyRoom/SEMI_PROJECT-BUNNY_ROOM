@@ -52,22 +52,14 @@
         WHERE
             USER_STATUS = 'active'
             AND
-            USER_EMAIL LIKE #{str}
+            USER_EMAIL LIKE #{param}
             OR
-            USER_NICKNAME LIKE #{str}
+            USER_NICKNAME LIKE #{param}
             OR
-            USER_AUTH LIKE #{str}
+            USER_AUTH LIKE #{param}
             OR
-            USER_STATUS LIKE #{str}
+            USER_STATUS LIKE #{param}
     </select>
-
-    <update id="addBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
-        UPDATE TBL_USER
-        SET
-            USER_STATUS = 'black'
-        WHERE
-            USER_EMAIL = #{email}
-    </update>
 
     <update id="withdrawMember" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER

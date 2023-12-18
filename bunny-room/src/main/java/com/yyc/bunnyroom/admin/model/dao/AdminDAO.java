@@ -15,5 +15,4 @@ public interface AdminDAO {
 
     int withdrawMember(String email);
 
-    int addBlacklist(String email);
 }
