@@ -9,3 +9,5 @@
 4. mybatis framework
 5. Spring security
 6. Spring dev tools
+7. Spring mail
+8. Spring validation
