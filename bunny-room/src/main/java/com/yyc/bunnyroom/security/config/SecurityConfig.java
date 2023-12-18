@@ -42,7 +42,7 @@ public class SecurityConfig {
 
             //여기부터 로그인 권한을 설정하는 공간
 
-            auth.requestMatchers("/security/auth/login","/security/user/signup","/security/auth/fail","/").permitAll();
+            auth.requestMatchers("/security/auth/login","/security/user/signup","/security/user/signupMethod","/security/auth/fail","/main","/").permitAll();
 
 
             auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());

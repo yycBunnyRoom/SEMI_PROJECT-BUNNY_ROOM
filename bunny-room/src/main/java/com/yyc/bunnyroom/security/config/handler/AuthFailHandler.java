@@ -24,7 +24,7 @@ public class AuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
         String errorMessage = null;
         if (exception instanceof BadCredentialsException){
             // BadCredentialException -> 사용자의 아이디가 DB에 존재하지 않거나, 비밀번호가 맞지 않는 경우 발생
-            errorMessage = "가입된 이메일이 존대하지 않거나 비밀번호가 일치하지 않습니다.";
+            errorMessage = "가입된 이메일이 존재하지 않거나 비밀번호가 일치하지 않습니다.";
         }else if (exception instanceof InternalAuthenticationServiceException){
             // 서버에서 사용자 정보를 검증하는 과정에서 발생하는 에러
             errorMessage = "서버에서 오류가 발생되었습니다.";
@@ -37,6 +37,8 @@ public class AuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
         }else {
             errorMessage = "알 수 없는 오류로 로그인 요청을 처리할 수 없습니다.";
         }
+
+
 
         errorMessage = URLEncoder.encode(errorMessage,"UTF-8");
         setDefaultFailureUrl("/security/auth/fail?message="+errorMessage);
