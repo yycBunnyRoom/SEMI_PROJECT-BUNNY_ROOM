@@ -1,6 +1,6 @@
 package com.yyc.bunnyroom.security.auth.model;
 
-import com.yyc.bunnyroom.security.user.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

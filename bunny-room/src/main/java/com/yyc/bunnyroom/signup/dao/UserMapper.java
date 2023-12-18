@@ -1,7 +1,7 @@
-package com.yyc.bunnyroom.security.user.dao;
+package com.yyc.bunnyroom.signup.dao;
 
-import com.yyc.bunnyroom.security.user.model.dto.LoginUserDTO;
-import com.yyc.bunnyroom.security.user.model.dto.SignupDTO;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

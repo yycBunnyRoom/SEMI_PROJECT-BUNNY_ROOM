@@ -1,8 +1,8 @@
-package com.yyc.bunnyroom.security.user.service;
+package com.yyc.bunnyroom.signup.service;
 
-import com.yyc.bunnyroom.security.user.dao.UserMapper;
-import com.yyc.bunnyroom.security.user.model.dto.LoginUserDTO;
-import com.yyc.bunnyroom.security.user.model.dto.SignupDTO;
+import com.yyc.bunnyroom.signup.dao.UserMapper;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
