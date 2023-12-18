@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -35,72 +36,62 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
+        HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
+        requestCache.setMatchingRequestParameterName(null);
 
-        //권한 접근은 여기서 설정
-        http.authorizeHttpRequests(auth -> { // 서버의 리소스에 접근 가능한 권한을 설정함
-
-
-            //여기부터 로그인 권한을 설정하는 공간
-
-            auth.requestMatchers(
-                    "/security/auth/login",
-                    "/signup/*",
-                    "/security/auth/fail",
-                    "/main",
-                    "/"
-            ).permitAll();
-
-
-            // 일단 개발의 편의성을 위해서 전체 권한 허용
-//            auth.requestMatchers("/*").permitAll();
-
-            auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
-            auth.requestMatchers("/guest/*").hasAnyAuthority(UserRole.GUEST.getRole());
+        http
+            .requestCache(request ->
+                    request.requestCache(requestCache))
+            .authorizeHttpRequests(auth -> { // 서버의 리소스에 접근 가능한 권한을 설정함
+                //여기부터 로그인 권한을 설정하는 공간
+                auth.requestMatchers(
+                        "/security/auth/login",
+                        "/signup/*",
+                        "/security/auth/fail",
+                        "/main",
+                        "/"
+                ).permitAll();
+                auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
+                auth.requestMatchers("/guest/*").hasAnyAuthority(UserRole.GUEST.getRole());
+                auth.anyRequest().authenticated();
 
 
+            })
+            .formLogin(login ->{
+                login.loginPage("/security/auth/login"); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
+
+                // 로그인 아이디로 회원 이메일을 받음
+                login.usernameParameter("userEmail");
+
+                // 로그인 비밀번호로 회원 비밀번호를 받음
+                login.passwordParameter("userPassword");
+
+                // 로그인 성공시 메인 페이지로 이동
+                login.defaultSuccessUrl("/main");
+
+                login.failureHandler(authFailHandler);
+            })
+            .logout(logout ->{
+
+                logout.logoutRequestMatcher(new AntPathRequestMatcher("/security/auth/logout"));
+                logout.deleteCookies("JSESSIONID");
+                logout.invalidateHttpSession(true);// 세션을 소멸하도록 허용하는 것
 
 
-
-            auth.anyRequest().authenticated();
-
-
-        }).formLogin(login ->{
-            login.loginPage("/security/auth/login"); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
-
-            // 로그인 아이디로 회원 이메일을 받음
-            login.usernameParameter("userEmail");
-
-            // 로그인 비밀번호로 회원 비밀번호를 받음
-            login.passwordParameter("userPassword");
-
-            // 로그인 성공시 메인 페이지로 이동
-            login.defaultSuccessUrl("/main");
-
-            login.failureHandler(authFailHandler);
-        }).logout(logout ->{
-
-            logout.logoutRequestMatcher(new AntPathRequestMatcher("/security/auth/logout"));
-            logout.deleteCookies("JSESSIONID");
-            logout.invalidateHttpSession(true);// 세션을 소멸하도록 허용하는 것
+                // 로그아웃시 메인 페이지로 이동
+                logout.logoutSuccessUrl("/main");
 
 
-            // 로그아웃시 메인 페이지로 이동
-            logout.logoutSuccessUrl("/main");
+            })
+            .sessionManagement(session ->{
+                // session의 허용 개수를 제한
+                session.maximumSessions(1);
 
+                // 세션만료시 메인 페이지로 이동
+                session.invalidSessionUrl("/main");
 
-        }).sessionManagement(session ->{
-            // session의 허용 개수를 제한
-            session.maximumSessions(1);
-
-            // 세션만료시 메인 페이지로 이동
-            session.invalidSessionUrl("/main");
-
-        }).csrf(csrf -> csrf.disable());
+            }).csrf(csrf -> csrf.disable());
 
         return http.build();
     }
-
-
-
-
 }

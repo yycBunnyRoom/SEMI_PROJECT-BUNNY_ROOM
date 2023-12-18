@@ -14,13 +14,11 @@
     </header>
 
     <h3>로그인 기능</h3>
-    <a href="/security/auth/login">로그인하기</a>
+
     <a href="/signup/signupMethod">회원가입</a>
 
 
-    <form th:action="@{/security/auth/logout}" th:method="post">
-        <button>로그아웃</button>
-    </form>
+
 
     <form th:action="@{/admin/adminpage}">
         <button>어드민페이지로 가기</button>
@@ -30,6 +28,15 @@
 <!--    <form th:action="@{/auth/logout}" th:method="post">-->
 <!--        <button>로그아웃</button>-->
 <!--    </form>-->
+
+    <div>
+        <h4>현재유저</h4>
+        <h5 th:text="| ${userAuth}  ${userNickname}  님 |"></h5>
+        <a href="/security/auth/login">로그인하기</a>
+        <form th:action="@{/security/auth/logout}" th:method="post">
+            <button>로그아웃</button>
+        </form>
+    </div>
 
 
 </body>
