@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.black.controller;
 
+import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
 import com.yyc.bunnyroom.black.model.dto.BlackDTO;
 import com.yyc.bunnyroom.black.service.BlackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,24 +51,35 @@ public class BlackController {
         }
     }
 
+    @PostMapping("/addBlacklist")
+    public String addBlackReason(@RequestParam(name = "userNo") String userNo,
+                                 @RequestParam(name = "email") String email,
+                                 @RequestParam(name = "nickname") String nickname,
+                                 @RequestParam(name = "phone") String phone, Model model){
+        // 해당회원의 정보 중 블랙리스트 정보에 들어갈 정보 뽑기
+        model.addAttribute("userNo", userNo);
+        model.addAttribute("email", email);
+        model.addAttribute("nickname", nickname);
+        model.addAttribute("phone", phone);
+
+        return "admin/addBlackReason";
+    }
+
     /**
      * 회원관리 페이지에서 해당 회원을 블랙리스트로 변경하고 블랙리스트 명단에 입력하는 메소드
      * */
-    @PostMapping("/addBlacklist")
-    public String addBlacklist(@RequestParam(name = "email") String email, Model model){
+    @PostMapping("/insertBlacklist")
+    public String addBlacklist(@RequestParam(name = "userNo") int userNo,
+                               @RequestParam(name = "email") String email,
+                               @RequestParam(name = "blackReason") String reason, Model model){
+        // 블랙리스트에 등재하기
+        int insert = blackService.addBlacklist(userNo, reason);
 
-        // 정상적으로 email이 전달되지 않았을 경우
-        if(Objects.isNull(email)){
-            System.out.println("탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
-            model.addAttribute("blacklist", "탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
-            return "admin/member";
-        }
-
-        // 블랙리스트로 상태를 변경
+        // 블랙리스트로 회원 권한을 변경
         System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
-        int result = blackService.addBlacklist(email);
+        int update = blackService.toBlacklist(email);
 
-        if(result > 0) {// 정상적인 블랙 처리
+        if(insert > 0 && update > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
             return "admin/member";
         }else {// 비정상적인 블랙 처리

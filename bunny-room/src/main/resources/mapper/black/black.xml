@@ -85,12 +85,30 @@
             B.USER_PHONE = #{str}
     </select>
 
-    <update id="addBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+    <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER
         SET
         USER_AUTH = 'BLACK'
         WHERE
         USER_EMAIL = #{email}
     </update>
+
+    <insert id="addBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        INSERT INTO TBL_BLACKLIST(
+            BLACK_NO,
+            USER_NO,
+            BLACK_REASON,
+            BLACK_REGIST_DATE,
+            BLACK_STATUS,
+            BLACK_SENTENCE_PERIOD
+        )VALUES(
+            NULL,
+            #{userNo},
+            #{reason},
+            #{registDate},
+            'active',
+            #{sentenceTime}
+        )
+    </insert>
 
 </mapper>
