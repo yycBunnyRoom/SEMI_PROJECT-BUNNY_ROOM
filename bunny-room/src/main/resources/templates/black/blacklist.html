@@ -28,10 +28,10 @@
                   <th>닉네임</th>
                   <th>연락처</th>
                   <th>블랙리스트 사유</th>
-                  <th>블랙리스트 등록일</th>
+                  <th>최초 등재일</th>
                   <th>블랙리스트 상태</th>
-                  <th>블랙리스트 정보 수정일</th>
-                  <th>블랙리스트 남은 기간</th>
+                  <th>정보 수정일</th>
+                  <th>남은 기간</th>
               </tr>
               <tr th:each="member : ${blacklist}">
                   <td th:text="${member.blackNo}"></td>
@@ -42,13 +42,8 @@
                   <td th:text="${member.blackReason}"></td>
                   <td th:text="${member.blackRegistDate}"></td>
                   <td th:text="${member.blackStatus}"></td>
+                  <td th:text="${member.blackUpdateDate}"></td>
                   <td th:text="${member.blackSentencePeriod}"></td>
-                  <td>
-                      <form action="/admin/withdraw" method="post">
-                          <input type="hidden" name="email" th:value="${member.email}">
-                          <button type="submit">탈퇴</button>
-                      </form>
-                  </td>
               </tr>
           </table>
       </div>

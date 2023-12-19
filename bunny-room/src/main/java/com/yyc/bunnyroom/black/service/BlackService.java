@@ -8,6 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -16,14 +19,14 @@ public class BlackService {
     @Autowired
     private BlackDAO blackDAO;
 
-    public List<BlackDTO> showAll() {
+    public List<BlackDTO> showAll() { // 전체검색
 
         List<BlackDTO> blacklist = blackDAO.showAll();
 
         return blacklist;
     }
 
-    public List<BlackDTO> showBlacklist(String str) {
+    public List<BlackDTO> showBlacklist(String str) { // 문자열 검색
         String param = "%" + str + "%";
         List<BlackDTO> blacklist;
 
@@ -36,7 +39,7 @@ public class BlackService {
         }
     }
 
-    public int toBlacklist(String email) {
+    public int toBlacklist(String email) { // 숫자 검색
 
         int result = blackDAO.toBlacklist(email);
 
@@ -65,9 +68,9 @@ public class BlackService {
      * */
     public int addBlacklist(int userNo, String reason) {
 
-        LocalDateTime registDate = LocalDateTime.now();
+        String registDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         // 3일의 블랙 기간
-        LocalDateTime sentenceTime = LocalDateTime.now().plusDays(3);
+        String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         blackTimeout();
 
         int result = blackDAO.addBlacklist(userNo, reason, registDate, sentenceTime);
@@ -85,5 +88,26 @@ public class BlackService {
     @Scheduled(fixedDelay = 3 * 24 * 60 * 60 * 1000)
     public void blackTimeout(){
 
+    }
+
+    /**
+     * 이미 블랙리스트에 오른 적이 있다면 기존 정보를 수정해 재등록하는 메소드
+     * */
+    public int modifyBlacklist(int userNo, String reason) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        blackTimeout();
+        int result = blackDAO.modifyBlacklist(userNo, reason, updateDate, sentenceTime);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
+    }
+
+    public Object searchBlackByEmail(String email) {
+        Object blackUser = blackDAO.searchBlackByEmail(email);
+        return blackUser;
     }
 }

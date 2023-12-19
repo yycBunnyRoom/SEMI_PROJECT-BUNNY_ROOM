@@ -1,12 +1,13 @@
 package com.yyc.bunnyroom.black.model.dto;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class BlackDTO {
 
     private int blackNo;
 
     private int userNo;
+
     private String email;
 
     private String nickname;
@@ -15,18 +16,18 @@ public class BlackDTO {
 
     private String blackReason;
 
-    private LocalDateTime blackRegistDate;
+    private ZonedDateTime blackRegistDate;
 
     private String blackStatus;
 
-    private LocalDateTime blackUpdateDate;
+    private ZonedDateTime blackUpdateDate;
 
-    private LocalDateTime blackSentencePeriod;
+    private ZonedDateTime blackSentencePeriod;
 
     public BlackDTO() {
     }
 
-    public BlackDTO(int blackNo, int userNo, String email, String nickname, String phone, String blackReason, LocalDateTime blackRegistDate, String blackStatus, LocalDateTime blackUpdateDate, LocalDateTime blackSentencePeriod) {
+    public BlackDTO(int blackNo, int userNo, String email, String nickname, String phone, String blackReason, ZonedDateTime blackRegistDate, String blackStatus, ZonedDateTime blackUpdateDate, ZonedDateTime blackSentencePeriod) {
         this.blackNo = blackNo;
         this.userNo = userNo;
         this.email = email;
@@ -87,11 +88,11 @@ public class BlackDTO {
         this.blackReason = blackReason;
     }
 
-    public LocalDateTime getBlackRegistDate() {
+    public ZonedDateTime getBlackRegistDate() {
         return blackRegistDate;
     }
 
-    public void setBlackRegistDate(LocalDateTime blackRegistDate) {
+    public void setBlackRegistDate(ZonedDateTime blackRegistDate) {
         this.blackRegistDate = blackRegistDate;
     }
 
@@ -103,19 +104,19 @@ public class BlackDTO {
         this.blackStatus = blackStatus;
     }
 
-    public LocalDateTime getBlackUpdateDate() {
+    public ZonedDateTime getBlackUpdateDate() {
         return blackUpdateDate;
     }
 
-    public void setBlackUpdateDate(LocalDateTime blackUpdateDate) {
+    public void setBlackUpdateDate(ZonedDateTime blackUpdateDate) {
         this.blackUpdateDate = blackUpdateDate;
     }
 
-    public LocalDateTime getBlackSentencePeriod() {
+    public ZonedDateTime getBlackSentencePeriod() {
         return blackSentencePeriod;
     }
 
-    public void setBlackSentencePeriod(LocalDateTime blackSentencePeriod) {
+    public void setBlackSentencePeriod(ZonedDateTime blackSentencePeriod) {
         this.blackSentencePeriod = blackSentencePeriod;
     }
 

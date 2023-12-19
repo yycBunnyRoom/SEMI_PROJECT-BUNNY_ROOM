@@ -1,6 +1,6 @@
 package com.yyc.bunnyroom.admin.model.dto;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class MemberDTO {
 
@@ -16,14 +16,14 @@ public class MemberDTO {
 
     private String auth;
 
-    private LocalDateTime userRegistDate;
+    private ZonedDateTime userRegistDate;
 
-    private LocalDateTime userUpdateDate;
+    private ZonedDateTime userUpdateDate;
 
     public MemberDTO() {
     }
 
-    public MemberDTO(int userNo, String email, String nickname, String phone, String status, String auth, LocalDateTime userRegistDate, LocalDateTime userUpdateDate) {
+    public MemberDTO(int userNo, String email, String nickname, String phone, String status, String auth, ZonedDateTime userRegistDate, ZonedDateTime userUpdateDate) {
         this.userNo = userNo;
         this.email = email;
         this.nickname = nickname;
@@ -82,19 +82,19 @@ public class MemberDTO {
         this.auth = auth;
     }
 
-    public LocalDateTime getUserRegistDate() {
+    public ZonedDateTime getUserRegistDate() {
         return userRegistDate;
     }
 
-    public void setUserRegistDate(LocalDateTime userRegistDate) {
+    public void setUserRegistDate(ZonedDateTime userRegistDate) {
         this.userRegistDate = userRegistDate;
     }
 
-    public LocalDateTime getUserUpdateDate() {
+    public ZonedDateTime getUserUpdateDate() {
         return userUpdateDate;
     }
 
-    public void setUserUpdateDate(LocalDateTime userUpdateDate) {
+    public void setUserUpdateDate(ZonedDateTime userUpdateDate) {
         this.userUpdateDate = userUpdateDate;
     }
 
