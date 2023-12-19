@@ -20,6 +20,8 @@
 
 
 
+
+
     <select id="findByUserEmail" resultMap="loginUser">
         SELECT
         USER_NO,
@@ -63,7 +65,11 @@
 
 
 
-
+    <select id="emailCheck" parameterType="com.yyc.bunnyroom.common.dto.UserDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_USER
+        WHERE USER_EMAIL = #{userEmail}
+    </select>
 
 
 

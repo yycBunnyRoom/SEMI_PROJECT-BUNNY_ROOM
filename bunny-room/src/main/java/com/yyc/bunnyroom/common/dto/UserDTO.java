@@ -1,4 +1,4 @@
-package com.yyc.bunnyroom.signup.model.dto;
+package com.yyc.bunnyroom.common.dto;
 
 import com.yyc.bunnyroom.common.UserRole;
 import jakarta.validation.constraints.Email;
@@ -8,7 +8,20 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
-public class SignupDTO {
+public class UserDTO {
+    /* DTO 필드 - DB 컬럼
+
+    * userNo - USER_NO
+    * userEmail - USER_EMAIL
+    * userPassword - USER_PASSWORD
+    * userNickname - USER_NICKNAME
+    * userPhone - USER_PHONE
+    * userAuth - USER_AUTH
+    * userStatus - USER_STATUS
+    * userRegistDate - USER_REGIST_DATE
+    * userUpdateDate - USER_UPDATE_DATE
+    * profileImageNo - PROFILE_IMAGE_NO
+    * */
 
     private int userNo;
 
@@ -35,10 +48,10 @@ public class SignupDTO {
     private LocalDateTime userUpdateDate;
     private int profileImageNo;
 
-    public SignupDTO() {
+    public UserDTO() {
     }
 
-    public SignupDTO(int userNo, String userEmail, String userPassword, String userNickname,
+    public UserDTO(int userNo, String userEmail, String userPassword, String userNickname,
                      String userPhone, UserRole userAuth, String userStatus, LocalDateTime userRegistDate, LocalDateTime userUpdateDate, int profileImageNo) {
         this.userNo = userNo;
         this.userEmail = userEmail;
@@ -134,7 +147,7 @@ public class SignupDTO {
 
     @Override
     public String toString() {
-        return "SignupDTO{" +
+        return "UserDTO{" +
                 "userNo=" + userNo +
                 ", userEmail='" + userEmail + '\'' +
                 ", userPassword='" + userPassword + '\'' +

@@ -10,4 +10,8 @@ public interface UserMapper {
     int registUser(SignupDTO signupDTO);
 
     LoginUserDTO findByUserEmail(String userEmail);
+
+    int emailCheck(String userEmail);
+
+
 }

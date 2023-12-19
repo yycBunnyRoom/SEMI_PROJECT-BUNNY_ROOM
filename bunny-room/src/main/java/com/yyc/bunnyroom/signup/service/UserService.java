@@ -52,4 +52,13 @@ public class UserService {
         }
         return validatorResult;
     }
+
+
+
+    // emailCheck
+    public int emailCheck(String userEmail){
+        int result = userMapper.emailCheck(userEmail);
+        return result;
+    }
+
 }

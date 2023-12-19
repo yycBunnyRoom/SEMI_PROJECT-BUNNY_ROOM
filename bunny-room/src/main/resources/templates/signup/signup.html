@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -11,25 +12,86 @@
     </header>
 
 
+
+
+    <h1>연습용 회원가입</h1>
+    <form action="/signup/signup" method="post">
+        <table>
+            <tr>
+                <th>
+                    <label for="userEmail">이메일</label>
+                </th>
+                <td>
+                    <input type="text" id="userEmail" name="email">
+                    <button class="emailCheck" type="button" id="emailCheck"
+                            onclick="fn_emailCheck();" value="N">중복확인</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <script>
+        function fn_emailCheck() {
+            $.ajax({
+                url : "/signup/emailCheck",
+                type : "POST",
+                dataType :"JSON",
+                data : {"userEmail" : $("#userEmail").val()},
+                success : function (data) {
+                    if(data == 1) {
+                        alert("중복된 이메일입니다.");
+                    } else if (data == 0) {
+                        $("#emailCheck").attr("value", "Y");
+                        alert("사용 가능한 이메일입니다.")
+                    }
+                }
+
+            })
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
     <h1>회원가입</h1>
     <form th:action="@{/signup/signup}" method="post" modelAttribute="signupDTO">
 
         <input type="hidden" th:value="${userAuth}" name="userAuth"/>
 
-        가입하실 이메일(ID) : <input type="text" name="userEmail"/><br>
-
-<!--        <div>-->
-<!--        <input type="text" name="userEmail" th:value="${signupDTO.userEmail}" placeholder="이메일을 입력해주세요. example@example.com"/>-->
-<!--        <span th:text="${valid_userEmail}"></span>-->
-<!--        </div>-->
-
-        비밀번호 : <input type="password" name="userPassword"/><br>
-        닉네임 : <input type="text" name="userNickname"/><br>
-        전화번호 : <input type="text" name="userPhone"/><br>
 
 
-        <br>
-        <button>가입하기</button>
+    <!--        <div>-->
+    가입하실 이메일(ID) : <input type="text" name="userEmail"/>
+    <!--        <input type="text" name="userEmail" th:value="${signupDTO.userEmail}" placeholder="이메일을 입력해주세요. example@example.com"/>-->
+    <!--        <span th:text="${valid_userEmail}"></span>-->
+    <!--        </div>-->
+
+    비밀번호 : <input type="password" name="userPassword"/><br>
+    닉네임 : <input type="text" name="userNickname"/><br>
+    전화번호 :
+    <label>
+        <select name="phone1">
+            <option value="010">010</option>
+            <option value="02">02</option>
+            <option value="031">031</option>
+            <option value="032">032</option>
+            <option value="033">033</option>
+            <option value="064">064</option>
+            <option value="062">062</option>
+        </select>
+    </label>
+    <input type="number" name="phone2"/>
+    <input type="number" name="phone3"/>
+
+
+    <br>
+    <button>가입하기</button>
 
 
 
