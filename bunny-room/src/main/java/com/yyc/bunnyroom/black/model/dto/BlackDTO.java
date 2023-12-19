@@ -8,6 +8,8 @@ public class BlackDTO {
 
     private int userNo;
 
+    private String auth;
+
     private String email;
 
     private String nickname;
@@ -27,9 +29,10 @@ public class BlackDTO {
     public BlackDTO() {
     }
 
-    public BlackDTO(int blackNo, int userNo, String email, String nickname, String phone, String blackReason, ZonedDateTime blackRegistDate, String blackStatus, ZonedDateTime blackUpdateDate, ZonedDateTime blackSentencePeriod) {
+    public BlackDTO(int blackNo, int userNo, String auth, String email, String nickname, String phone, String blackReason, ZonedDateTime blackRegistDate, String blackStatus, ZonedDateTime blackUpdateDate, ZonedDateTime blackSentencePeriod) {
         this.blackNo = blackNo;
         this.userNo = userNo;
+        this.auth = auth;
         this.email = email;
         this.nickname = nickname;
         this.phone = phone;
@@ -54,6 +57,14 @@ public class BlackDTO {
 
     public void setUserNo(int userNo) {
         this.userNo = userNo;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
     }
 
     public String getEmail() {
@@ -125,6 +136,7 @@ public class BlackDTO {
         return "BlackDTO{" +
                 "blackNo=" + blackNo +
                 ", userNo=" + userNo +
+                ", auth='" + auth + '\'' +
                 ", email='" + email + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", phone='" + phone + '\'' +

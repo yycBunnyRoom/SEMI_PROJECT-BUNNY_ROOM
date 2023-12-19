@@ -7,6 +7,7 @@
     <resultMap id="blacklist" type="com.yyc.bunnyroom.black.model.dto.BlackDTO">
         <id property="blackNo" column="BLACK_NO"/>
         <result property="userNo" column="USER_NO"/>
+        <result property="auth" column="BLACK_ORIGIN_AUTH"/>
         <result property="email" column="USER_EMAIL"/>
         <result property="nickname" column="USER_NICKNAME"/>
         <result property="phone" column="USER_PHONE"/>
@@ -21,6 +22,7 @@
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -47,6 +49,7 @@
         INSERT INTO TBL_BLACKLIST(
             BLACK_NO,
             USER_NO,
+            BLACK_ORIGIN_AUTH,
             BLACK_REASON,
             BLACK_REGIST_DATE,
             BLACK_STATUS,
@@ -54,6 +57,7 @@
         )VALUES(
             NULL,
             #{userNo},
+            #{auth},
             #{reason},
             #{registDate},
             'active',
@@ -67,7 +71,8 @@
             BLACK_REASON = #{reason},
             BLACK_UPDATE_DATE = #{updateDate},
             BLACK_STATUS = 'active',
-            BLACK_SENTENCE_PERIOD = #{sentenceTime}
+            BLACK_SENTENCE_PERIOD = #{sentenceTime},
+            BLACK_ORIGIN_AUTH = #{auth}
         WHERE
             USER_NO = #{userNo}
     </update>
@@ -76,6 +81,7 @@
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -96,6 +102,7 @@
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -116,6 +123,7 @@
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -136,6 +144,7 @@
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -151,4 +160,22 @@
         WHERE
             B.USER_PHONE LIKE #{param}
     </select>
+
+    <update id="restoreAuth" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_AUTH = #{auth}
+        WHERE
+            USER_EMAIL = #{email}
+    </update>
+
+    <update id="disableBlack" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        UPDATE TBL_BLACKLIST
+        SET
+            BLACK_STATUS = 'inactive',
+            BLACK_UPDATE_DATE = #{updateDate},
+            BLACK_SENTENCE_PERIOD = NULL
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 </mapper>
