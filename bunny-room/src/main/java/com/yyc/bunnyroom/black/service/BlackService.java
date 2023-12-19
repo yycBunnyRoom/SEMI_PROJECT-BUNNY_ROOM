@@ -26,20 +26,7 @@ public class BlackService {
         return blacklist;
     }
 
-    public List<BlackDTO> showBlacklist(String str) { // 문자열 검색
-        String param = "%" + str + "%";
-        List<BlackDTO> blacklist;
-
-        if(isNumeric(str)) {
-            blacklist = blackDAO.showBlacklistByInt(str);
-            return blacklist;
-        }else {
-            blacklist = blackDAO.showBlacklistByString(param);
-            return blacklist;
-        }
-    }
-
-    public int toBlacklist(String email) { // 숫자 검색
+    public int toBlacklist(String email) {
 
         int result = blackDAO.toBlacklist(email);
 
@@ -49,18 +36,6 @@ public class BlackService {
         }else {
             System.out.println("정상적으로 처리되지 않았습니다.");
             return 0;
-        }
-    }
-
-    /**
-     * 입력받은 문자열이 숫자인지 확인하는 메소드
-     * */
-    private boolean isNumeric(String str) {
-        try {
-            Integer.parseInt(str);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
         }
     }
 
@@ -109,5 +84,35 @@ public class BlackService {
     public Object searchBlackByEmail(String email) {
         Object blackUser = blackDAO.searchBlackByEmail(email);
         return blackUser;
+    }
+
+    public List<BlackDTO> showBlacklistByEmail(String str) {
+        String param = "%" + str + "%";
+        List<BlackDTO> blacklist = blackDAO.showBlacklistByEmail(param);
+        return blacklist;
+    }
+
+    public List<BlackDTO> showBlacklistByNickname(String str) {
+        String param = "%" + str + "%";
+        List<BlackDTO> blacklist = blackDAO.showBlacklistByNickname(param);
+        return blacklist;
+    }
+
+    public List<BlackDTO> showBlacklistByPhone(String str) {
+        String param = "%" + str + "%";
+        List<BlackDTO> blacklist = blackDAO.showBlacklistByPhone(param);
+        return blacklist;
+    }
+
+    /**
+     * 입력받은 문자열이 숫자인지 확인하는 메소드
+     * */
+    private boolean isNumeric(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

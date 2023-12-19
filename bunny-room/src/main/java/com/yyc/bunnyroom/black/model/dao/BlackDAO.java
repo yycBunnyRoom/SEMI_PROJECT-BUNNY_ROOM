@@ -13,13 +13,15 @@ public interface BlackDAO {
 
     List<BlackDTO> showAll();
 
-    List<BlackDTO> showBlacklistByString(String param);
-
-    List<BlackDTO> showBlacklistByInt(String str);
-
     int addBlacklist(int userNo, String reason, String registDate, String sentenceTime);
 
     int modifyBlacklist(int userNo, String reason, String updateDate, String sentenceTime);
 
     Object searchBlackByEmail(String email);
+
+    List<BlackDTO> showBlacklistByEmail(String param);
+
+    List<BlackDTO> showBlacklistByNickname(String param);
+
+    List<BlackDTO> showBlacklistByPhone(String param);
 }

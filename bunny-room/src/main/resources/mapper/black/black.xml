@@ -35,56 +35,6 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
     </select>
 
-    <select id="showBlacklistByString" resultMap="blacklist">
-        SELECT
-            A.BLACK_NO,
-            A.USER_NO,
-            B.USER_EMAIL,
-            B.USER_NICKNAME,
-            B.USER_PHONE,
-            A.BLACK_REASON,
-            A.BLACK_REGIST_DATE,
-            A.BLACK_STATUS,
-            A.BLACK_UPDATE_DATE,
-            A.BLACK_SENTENCE_PERIOD
-        FROM
-            TBL_BLACKLIST AS A
-        JOIN
-            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
-        WHERE
-            B.USER_EMAIL LIKE #{param}
-            OR
-            B.USER_NICKNAME LIKE #{param}
-            OR
-            A.BLACK_REASON LIKE #{param}
-            OR
-            A.BLACK_STATUS LIKE #{param}
-    </select>
-
-    <select id="showBlacklistByInt" resultMap="blacklist">
-        SELECT
-            A.BLACK_NO,
-            A.USER_NO,
-            B.USER_EMAIL,
-            B.USER_NICKNAME,
-            B.USER_PHONE,
-            A.BLACK_REASON,
-            A.BLACK_REGIST_DATE,
-            A.BLACK_STATUS,
-            A.BLACK_UPDATE_DATE,
-            A.BLACK_SENTENCE_PERIOD
-        FROM
-            TBL_BLACKLIST AS A
-        JOIN
-            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
-        WHERE
-            A.BLACK_NO = #{str}
-            OR
-            A.USER_NO = #{str}
-            OR
-            B.USER_PHONE = #{str}
-    </select>
-
     <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER
         SET
@@ -140,5 +90,65 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
             B.USER_EMAIL = #{email}
+    </select>
+
+    <select id="showBlacklistByEmail" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_EMAIL LIKE #{param}
+    </select>
+
+    <select id="showBlacklistByNickname" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_NICKNAME LIKE #{param}
+    </select>
+
+    <select id="showBlacklistByPhone" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_PHONE LIKE #{param}
     </select>
 </mapper>

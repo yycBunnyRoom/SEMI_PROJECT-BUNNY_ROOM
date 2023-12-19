@@ -34,20 +34,29 @@ public class BlackController {
      * 블랙리스트를 검색하는 요청을 수행하는 메소드
      * */
     @GetMapping("/showBlacklist")
-    public String showAllBlacklist(@RequestParam String str, Model model){
+    public String showAllBlacklist(@RequestParam(name = "mode")String mode, @RequestParam(name = "str") String str, Model model){
+        System.out.println(mode);
+        System.out.println(str);
 
-        if(str.isEmpty()){
+        if(str.isEmpty()) {
             // 블랙리스트 전체 검색
             List<BlackDTO> blacklist = blackService.showAll();
             model.addAttribute("blacklist", blacklist);
-            return "black/blacklist";
-
-        }else{
-            // 조건에 따른 검색
-            List<BlackDTO> blacklist = blackService.showBlacklist(str);
+        }else if(mode.equals("email")){
+            // 이메일로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByEmail(str);
             model.addAttribute("blacklist", blacklist);
-            return "black/blacklist";
+        }else if(mode.equals("nickname")) {
+            // 닉네임으로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByNickname(str);
+            model.addAttribute("blacklist", blacklist);
+        }else if(mode.equals("phone")){
+            // 연락처로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByPhone(str);
+            model.addAttribute("blacklist", blacklist);
         }
+
+        return "black/blacklist";
     }
 
     /**
@@ -87,7 +96,6 @@ public class BlackController {
             change = blackService.modifyBlacklist(userNo, reason);
         }
 
-
         // 블랙리스트로 회원 권한을 변경
         System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
         int update = blackService.toBlacklist(email);
@@ -101,4 +109,9 @@ public class BlackController {
             return "admin/member";
         }
     }
+
+//    @PostMapping("/restoreAuth")
+//    public String restoreAuth(){
+//
+//    }
 }

@@ -14,6 +14,11 @@
   <section>
       <div>
           <form action="/admin/black/showBlacklist" method="get">
+              <select name="mode">
+                  <option value="email">이메일</option>
+                  <option value="nickname">닉네임</option>
+                  <option value="phone">연락처</option>
+              </select>
               회원 정보 검색 : <input type="text" name="str"><button>검색</button>
           </form>
       </div>
@@ -44,6 +49,12 @@
                   <td th:text="${member.blackStatus}"></td>
                   <td th:text="${member.blackUpdateDate}"></td>
                   <td th:text="${member.blackSentencePeriod}"></td>
+                  <td>
+                      <form action="admin/black/restoreAuth" method="post">
+                          <input type="hidden" value=""/>
+                          <button type="submit">권한 복구</button>
+                      </form>
+                  </td>
               </tr>
           </table>
       </div>
