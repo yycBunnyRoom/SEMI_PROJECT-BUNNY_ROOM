@@ -9,9 +9,11 @@ import java.util.List;
 public interface AdminDAO {
     List<MemberDTO> searchAllMember();
 
-    List<MemberDTO> searchAllMemberByInt(int str);
-
-    List<MemberDTO> searchAllMemberByString(String param);
-
     int withdrawMember(String email);
+
+    List<MemberDTO> searchMemberByEmail(String param);
+
+    List<MemberDTO> searchMemberByNickname(String param);
+
+    List<MemberDTO> searchMemberByPhone(String param);
 }

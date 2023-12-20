@@ -21,8 +21,6 @@ public class BlackController {
     @Autowired
     private BlackService blackService;
 
-    private AdminService adminService = new AdminService();
-
     /**
      * 블랙리스트 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
