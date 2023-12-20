@@ -88,7 +88,7 @@ public class BlackController {
     public String addBlacklist(@RequestParam(name = "userNo") int userNo,
                                @RequestParam(name = "auth") String auth,
                                @RequestParam(name = "email") String email,
-                               @RequestParam(name = "blackReason") String reason, Model model){
+                               @RequestParam(name = "reason") String reason, Model model){
         int change = 0;
         if(Objects.isNull(blackService.searchBlackByEmail(email))){
             // 블랙리스트에 등재된 적이 없다면
