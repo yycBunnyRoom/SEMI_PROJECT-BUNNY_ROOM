@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
@@ -24,7 +24,18 @@
     </div>
 
 
+<!--    에러 메세지 출력-->
+<!--    span을 활용한 방법-->
+<!--    <span th:if="${error}" id="error" class="alert alert-danger" th:text="${exception}"></span>-->
 
+<!--    자바스크립트를 활용한 방법-->
+    <script th:inline="javascript">
+        const error = [[${error}]]
+        const exception = [[${exception}]]
+        if (error){
+            alert(exception);
+        }
+    </script>
 
 <!--비밀번호 찾기-->
 

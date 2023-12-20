@@ -7,19 +7,18 @@ import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
 import com.yyc.bunnyroom.signup.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
+
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDateTime;
+
+import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @RequestMapping("/signup")
@@ -88,7 +87,7 @@ public class SignupController {
         signupDTO.setUserStatus("active");
 
         // 사용자의 등록시간을 현재 시간으로 설정
-        LocalDateTime currentTime = LocalDateTime.now();
+        ZonedDateTime currentTime = ZonedDateTime.now();
         signupDTO.setUserRegistDate(currentTime);
 
         int result = userService.registUser(signupDTO);
@@ -115,6 +114,14 @@ public class SignupController {
         return result;
     }
 
+    // CheckPhone
+    @ResponseBody
+    @PostMapping("/phoneCheck")
+    public int phoneCheck(@RequestParam("userPhone") String userPhone){
+        int result = userService.phoneCheck(userPhone);
+        return result;
+    }
+
     // 비밀번호 찾기
     @GetMapping("/findPasswordMethod")
     public String findPasswordMethod(){
@@ -124,11 +131,11 @@ public class SignupController {
     @PostMapping("/findPasswordMethod")
     public ModelAndView findPasswordMethodPost(@RequestParam("method") String method, ModelAndView modelAndView){
         if (method.equals("userPhone")){
-            modelAndView.addObject("methodPhone", "methodPhone");
+            modelAndView.addObject("method", "userPhone");
             modelAndView.setViewName("/signup/findPassword/findPassword");
         }
         else if (method.equals("userEmail")){
-            modelAndView.addObject("methodUserEmail", "methodUserEmail");
+            modelAndView.addObject("method", "userEmail");
             modelAndView.setViewName("/signup/findPassword/findPassword");
         }
         else {
