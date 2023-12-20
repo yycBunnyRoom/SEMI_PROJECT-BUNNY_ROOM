@@ -83,10 +83,10 @@
 
 
 
-
 <!--    이메일 관련-->
 <script >
     let isSendingEmail = false;
+    let emailConfirmed = false;
 
 
     // 이메일 중복 확인
@@ -174,6 +174,7 @@
 
 
                     document.getElementById('userEmail').value = confirmedEmail;
+                    emailConfirmed =true;
 
                 } else if (data == 0) {
                     $("#emailCheck").attr("value", "Y");
@@ -182,20 +183,8 @@
             }
         })
     }
-</script>
-
-
-<!--자바스크립트: 에러 메세지-->
-<script th:inline="javascript">
-    const message = [[${message}]]
-    if (message){
-        alert(message);
-    }
-</script>
-
-
 <!--   자바스크립트: 동적으로 입력한 핸드폰 번호를 숨겨진 userPhone에 입력 -->
-<script>
+
     function updateUserPhone() {
         var phone1 = document.getElementById('phone1').value;
         var phone2 = document.getElementById('phone2').value;
@@ -217,12 +206,28 @@
     document.getElementById('phone2').addEventListener('input', updateUserPhone);
 
 
+
     document.getElementById('signupForm').addEventListener('submit', function(event) {
         // updateUserPhone 함수를 호출하여 userPhone 값을 업데이트
         updateUserPhone();
 
+        // 이메일 인증이 됐는지 먼저 확인
+
+        if (!emailConfirmed) {
+            alert("이메일 인증은 필수입니다");
+            event.preventDefault(); // 제출 이벤트 취소
+        }
+
     });
 
+</script>
+
+<!--자바스크립트: 에러 메세지-->
+<script th:inline="javascript">
+    const message = [[${message}]]
+    if (message){
+        alert(message);
+    }
 </script>
 
 </body>

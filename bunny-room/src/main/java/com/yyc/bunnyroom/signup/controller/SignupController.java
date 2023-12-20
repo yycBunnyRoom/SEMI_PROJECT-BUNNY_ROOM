@@ -115,6 +115,14 @@ public class SignupController {
         return result;
     }
 
+    // CheckPhone
+    @ResponseBody
+    @PostMapping("/phoneCheck")
+    public int phoneCheck(@RequestParam("userPhone") String userPhone){
+        int result = userService.phoneCheck(userPhone);
+        return result;
+    }
+
     // 비밀번호 찾기
     @GetMapping("/findPasswordMethod")
     public String findPasswordMethod(){
@@ -124,11 +132,11 @@ public class SignupController {
     @PostMapping("/findPasswordMethod")
     public ModelAndView findPasswordMethodPost(@RequestParam("method") String method, ModelAndView modelAndView){
         if (method.equals("userPhone")){
-            modelAndView.addObject("methodPhone", "methodPhone");
+            modelAndView.addObject("method", "userPhone");
             modelAndView.setViewName("/signup/findPassword/findPassword");
         }
         else if (method.equals("userEmail")){
-            modelAndView.addObject("methodUserEmail", "methodUserEmail");
+            modelAndView.addObject("method", "userEmail");
             modelAndView.setViewName("/signup/findPassword/findPassword");
         }
         else {

@@ -35,7 +35,7 @@
     <div>
         <h4>현재유저</h4>
         <h5 th:text="| ${userAuth}  ${userNickname}  님 |"></h5>
-        <a href="/security/auth/login">로그인하기</a>
+        <a href="/security/auth/login" id="btn_login" style="display: block">로그인하기</a>
         <form th:action="@{/security/auth/logout}" th:method="post">
             <button>로그아웃</button>
         </form>
@@ -46,6 +46,18 @@
         if ([[${message}]]){
             alert([[${message}]]);
         }
+    </script>
+
+<!--    로그인 버튼 관련 JS-->
+    <script>
+        if ([[${userNickname}]])
+        {
+            document.getElementById("btn_login").style.display = 'none';
+        }
+        if (![[${userNickname}]]){
+            document.getElementById("btn_login").style.display = 'block';
+        }
+
     </script>
 
 </body>
