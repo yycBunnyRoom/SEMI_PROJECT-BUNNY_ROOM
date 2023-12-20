@@ -71,6 +71,12 @@
         WHERE USER_EMAIL = #{userEmail}
     </select>
 
+    <update id="resetPassword" parameterType="com.yyc.bunnyroom.common.dto.UserDTO">
+        UPDATE TBL_USER
+        SET USER_PASSWORD = #{userPassword}
+        WHERE USER_EMAIL = #{userEmail}
+    </update>
+
 
 
 

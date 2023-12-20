@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.signup.service;
 
+import com.yyc.bunnyroom.common.dto.UserDTO;
 import com.yyc.bunnyroom.signup.dao.UserMapper;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
@@ -58,6 +59,12 @@ public class UserService {
     // emailCheck
     public int emailCheck(String userEmail){
         int result = userMapper.emailCheck(userEmail);
+        return result;
+    }
+
+    //reset password
+    public int resetPassword(LoginUserDTO loginUserDTO){
+        int result = userMapper.resetPassword(loginUserDTO);
         return result;
     }
 

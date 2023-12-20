@@ -22,15 +22,20 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 
-    implementation 'org.springframework.boot:spring-boot-starter-mail' /* 이메일 전송 */
     implementation 'org.springframework.boot:spring-boot-starter-validation' /* 유효성 체크 의존성 주입 */
 
 
     /* 이메일 인증을 위해서 의존성 추가 */
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
     implementation 'javax.mail:mail:1.4.7'
     // Spring Context Support
     implementation 'org.springframework:spring-context-support:5.3.9'
-  
+
+    /* Redis 추가 */
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    /* Lombok 추가 */
+    implementation 'org.projectlombok:lombok'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'

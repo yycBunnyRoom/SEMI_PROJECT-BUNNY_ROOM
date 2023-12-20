@@ -49,6 +49,12 @@ public class SecurityConfig {
                         "/signup/*",
                         "/security/auth/fail",
                         "/main",
+
+
+                        // 메일 인증을 위해
+                        "/mailSend",
+                        "/mailAuthCheck",
+
                         "/"
                 ).permitAll();
                 auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());

@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.signup.controller;
 
 
+import com.yyc.bunnyroom.common.dto.UserDTO;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import com.yyc.bunnyroom.signup.model.dto.SignupDTO;
 import com.yyc.bunnyroom.signup.service.UserService;
@@ -56,6 +57,9 @@ public class SignupController {
 
         modelAndView.addObject("userAuth", signupDTO.getUserAuth());
         System.out.println(signupDTO.getUserAuth());
+        System.out.println(signupDTO.getUserEmail());
+        System.out.println(signupDTO.getUserPhone());
+
 
 
         // 입력된 정보의 유효성 검사, 입력한 정보가 이상하면 alert 반환
@@ -109,6 +113,50 @@ public class SignupController {
     public int emailCheck(@RequestParam("userEmail") String userEmail){
         int result = userService.emailCheck(userEmail);
         return result;
+    }
+
+    // 비밀번호 찾기
+    @GetMapping("/findPasswordMethod")
+    public String findPasswordMethod(){
+        return "/signup/findPassword/findPasswordMethod";
+    }
+
+    @PostMapping("/findPasswordMethod")
+    public ModelAndView findPasswordMethodPost(@RequestParam("method") String method, ModelAndView modelAndView){
+        if (method.equals("userPhone")){
+            modelAndView.addObject("methodPhone", "methodPhone");
+            modelAndView.setViewName("/signup/findPassword/findPassword");
+        }
+        else if (method.equals("userEmail")){
+            modelAndView.addObject("methodUserEmail", "methodUserEmail");
+            modelAndView.setViewName("/signup/findPassword/findPassword");
+        }
+        else {
+            String errorMessage = "존재하지 않은 방법입니다.";
+            modelAndView.addObject("message",errorMessage);
+            modelAndView.setViewName("/signup/findPassword/findPasswordMethod");
+        }
+        return modelAndView;
+    }
+
+    //비밀번호 재설정
+    @PostMapping("/resetPassword")
+    public ModelAndView resetPassword(@ModelAttribute LoginUserDTO LoginUserDTO, ModelAndView modelAndView){
+        System.out.println(LoginUserDTO.getUserEmail());
+        System.out.println(LoginUserDTO.getUserPassword());
+
+        int result = userService.resetPassword(LoginUserDTO);
+
+        if (result == 1){
+            modelAndView.addObject("message","비빌번호 바꾸기 성공!!");
+            modelAndView.setViewName("/main");
+            return modelAndView;
+        }
+        else {
+            modelAndView.addObject("message","비빌번호 바꾸기 실패!!");
+            modelAndView.setViewName("/signup/findPassword/findPasswordMethod");
+            return modelAndView;
+        }
     }
 
 
