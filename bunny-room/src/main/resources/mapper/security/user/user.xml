@@ -71,6 +71,14 @@
         WHERE USER_EMAIL = #{userEmail}
     </select>
 
+    <select id="phoneCheck" parameterType="com.yyc.bunnyroom.common.dto.UserDTO" resultType="int">
+        SELECT COUNT(*)
+        FROM TBL_USER
+        WHERE USER_PHONE = #{userPhone}
+    </select>
+
+
+
     <update id="resetPassword" parameterType="com.yyc.bunnyroom.common.dto.UserDTO">
         UPDATE TBL_USER
         SET USER_PASSWORD = #{userPassword}

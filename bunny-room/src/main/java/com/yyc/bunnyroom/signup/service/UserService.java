@@ -62,10 +62,18 @@ public class UserService {
         return result;
     }
 
+    // phoneCheck
+    public int phoneCheck(String userPhone) {
+        int result = userMapper.phoneCheck(userPhone);
+        return result;
+    }
+
     //reset password
     public int resetPassword(LoginUserDTO loginUserDTO){
+        loginUserDTO.setUserPassword(passwordEncoder.encode(loginUserDTO.getUserPassword()));
         int result = userMapper.resetPassword(loginUserDTO);
         return result;
     }
+
 
 }

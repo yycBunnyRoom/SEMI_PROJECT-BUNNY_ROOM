@@ -33,6 +33,8 @@ public class SecurityConfig {
         return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
+
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
@@ -49,6 +51,9 @@ public class SecurityConfig {
                         "/signup/*",
                         "/security/auth/fail",
                         "/main",
+
+                        // roomRegister
+                        "/roomRegister/*",
 
 
                         // 메일 인증을 위해

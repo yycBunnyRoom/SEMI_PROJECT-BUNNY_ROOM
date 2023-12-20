@@ -14,6 +14,12 @@
   <section>
       <div>
         <form action="/admin/search" method="get">
+            <select name="mode">
+                <option value="email">이메일</option>
+                <option value="nickname">닉네임</option>
+                <option value="phone">연락처</option>
+                <option value="inactive">탈퇴처리된 회원</option>
+            </select>
             회원 정보 검색 : <input type="text" name="str"><button>검색</button>
         </form>
       </div>

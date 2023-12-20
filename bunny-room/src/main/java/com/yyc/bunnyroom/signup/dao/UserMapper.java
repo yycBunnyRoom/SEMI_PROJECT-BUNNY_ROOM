@@ -11,11 +11,14 @@ public interface UserMapper {
     int registUser(SignupDTO signupDTO);
 
     LoginUserDTO findByUserEmail(String userEmail);
-
+    // emailCheck
     int emailCheck(String userEmail);
+    // phoneCheck
+    int phoneCheck(String userPhone);
 
 
     // Reset Password
     int resetPassword(LoginUserDTO loginUserDTO);
+
 
 }
