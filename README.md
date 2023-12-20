@@ -11,3 +11,5 @@
 6. Spring dev tools
 7. Spring mail
 8. Spring validation
+9. Redis
+10. Lombok
