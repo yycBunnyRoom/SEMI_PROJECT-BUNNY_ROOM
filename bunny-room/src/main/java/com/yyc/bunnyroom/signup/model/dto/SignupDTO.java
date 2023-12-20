@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class SignupDTO {
 
@@ -31,15 +31,15 @@ public class SignupDTO {
     private String userPhone;
     private UserRole userAuth;
     private String userStatus;
-    private LocalDateTime userRegistDate;
-    private LocalDateTime userUpdateDate;
+    private ZonedDateTime userRegistDate;
+    private ZonedDateTime userUpdateDate;
     private int profileImageNo;
 
     public SignupDTO() {
     }
 
     public SignupDTO(int userNo, String userEmail, String userPassword, String userNickname,
-                     String userPhone, UserRole userAuth, String userStatus, LocalDateTime userRegistDate, LocalDateTime userUpdateDate, int profileImageNo) {
+                     String userPhone, UserRole userAuth, String userStatus, ZonedDateTime userRegistDate, ZonedDateTime userUpdateDate, int profileImageNo) {
         this.userNo = userNo;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
@@ -108,19 +108,19 @@ public class SignupDTO {
         this.userStatus = userStatus;
     }
 
-    public LocalDateTime getUserRegistDate() {
+    public ZonedDateTime getUserRegistDate() {
         return userRegistDate;
     }
 
-    public void setUserRegistDate(LocalDateTime userRegistDate) {
+    public void setUserRegistDate(ZonedDateTime userRegistDate) {
         this.userRegistDate = userRegistDate;
     }
 
-    public LocalDateTime getUserUpdateDate() {
+    public ZonedDateTime getUserUpdateDate() {
         return userUpdateDate;
     }
 
-    public void setUserUpdateDate(LocalDateTime userUpdateDate) {
+    public void setUserUpdateDate(ZonedDateTime userUpdateDate) {
         this.userUpdateDate = userUpdateDate;
     }
 

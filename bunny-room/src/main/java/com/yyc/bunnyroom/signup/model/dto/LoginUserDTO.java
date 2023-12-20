@@ -3,6 +3,7 @@ package com.yyc.bunnyroom.signup.model.dto;
 import com.yyc.bunnyroom.common.UserRole;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -31,10 +32,10 @@ public class LoginUserDTO {
     private String userStatus;
 
     // DATE - 회원등록일 - 언제 회원이 등록했는지
-    private LocalDateTime userRegistDate;
+    private ZonedDateTime userRegistDate;
 
     // DATE - 회원수정일 - 회원정보가 변화할 시 마지막 날짜 / 블랙리스트 등 회원정보 수정의 로직에 활용
-    private LocalDateTime userUpdateDate;
+    private ZonedDateTime userUpdateDate;
 
     // int - 회원프로필 이미지 테이블의 pk 값을 참조하는 번호
     private int profileImageNo;
@@ -45,7 +46,7 @@ public class LoginUserDTO {
     }
 
     public LoginUserDTO(int userNo, String userEmail, String userPassword, String userNickname, String userPhone,
-                        UserRole userAuth, String userStatus, LocalDateTime userRegistDate, LocalDateTime userUpdateDate, int profileImageNo) {
+                        UserRole userAuth, String userStatus, ZonedDateTime userRegistDate, ZonedDateTime userUpdateDate, int profileImageNo) {
         this.userNo = userNo;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
@@ -114,19 +115,19 @@ public class LoginUserDTO {
         this.userStatus = userStatus;
     }
 
-    public LocalDateTime getUserRegistDate() {
+    public ZonedDateTime getUserRegistDate() {
         return userRegistDate;
     }
 
-    public void setUserRegistDate(LocalDateTime userRegistDate) {
+    public void setUserRegistDate(ZonedDateTime userRegistDate) {
         this.userRegistDate = userRegistDate;
     }
 
-    public LocalDateTime getUserUpdateDate() {
+    public ZonedDateTime getUserUpdateDate() {
         return userUpdateDate;
     }
 
-    public void setUserUpdateDate(LocalDateTime userUpdateDate) {
+    public void setUserUpdateDate(ZonedDateTime userUpdateDate) {
         this.userUpdateDate = userUpdateDate;
     }
 
