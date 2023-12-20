@@ -5,22 +5,24 @@
 <mapper namespace="com.yyc.bunnyroom.black.model.dao.BlackDAO">
 
     <resultMap id="blacklist" type="com.yyc.bunnyroom.black.model.dto.BlackDTO">
-        <id property="blackNo" column="A.BLACK_NO"/>
-        <result property="userNo" column="A.USER_NO"/>
-        <result property="email" column="B.USER_EMAIL"/>
-        <result property="nickname" column="B.USER_NICKNAME"/>
-        <result property="phone" column="B.USER_PHONE"/>
-        <result property="blackReason" column="A.BLACK_REASON"/>
-        <result property="blackRegistDate" column="A.BLACK_REGIST_DATE"/>
-        <result property="blackStatus" column="A.BLACK_STATUS"/>
-        <result property="blackUpdateDate" column="A.BLACK_UPDATE_DATE"/>
-        <result property="blackSentencePeriod" column="A.BLACK_SENTENCE_PERIOD"/>
+        <id property="blackNo" column="BLACK_NO"/>
+        <result property="userNo" column="USER_NO"/>
+        <result property="auth" column="BLACK_ORIGIN_AUTH"/>
+        <result property="email" column="USER_EMAIL"/>
+        <result property="nickname" column="USER_NICKNAME"/>
+        <result property="phone" column="USER_PHONE"/>
+        <result property="blackReason" column="BLACK_REASON"/>
+        <result property="blackRegistDate" column="BLACK_REGIST_DATE"/>
+        <result property="blackStatus" column="BLACK_STATUS"/>
+        <result property="blackUpdateDate" column="BLACK_UPDATE_DATE"/>
+        <result property="blackSentencePeriod" column="BLACK_SENTENCE_PERIOD"/>
     </resultMap>
 
     <select id="showAll" resultMap="blacklist">
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -35,10 +37,72 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
     </select>
 
-    <select id="showBlacklistByString" resultMap="blacklist">
+    <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_AUTH = 'BLACK'
+        WHERE
+            USER_EMAIL = #{email}
+    </update>
+
+    <insert id="addBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        INSERT INTO TBL_BLACKLIST(
+            BLACK_NO,
+            USER_NO,
+            BLACK_ORIGIN_AUTH,
+            BLACK_REASON,
+            BLACK_REGIST_DATE,
+            BLACK_STATUS,
+            BLACK_SENTENCE_PERIOD
+        )VALUES(
+            NULL,
+            #{userNo},
+            #{auth},
+            #{reason},
+            #{registDate},
+            'active',
+            #{sentenceTime}
+        )
+    </insert>
+
+    <update id="modifyBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        UPDATE TBL_BLACKLIST
+        SET
+            BLACK_REASON = #{reason},
+            BLACK_UPDATE_DATE = #{updateDate},
+            BLACK_STATUS = 'active',
+            BLACK_SENTENCE_PERIOD = #{sentenceTime},
+            BLACK_ORIGIN_AUTH = #{auth}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
+
+    <select id="searchBlackByEmail" resultMap="blacklist">
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_EMAIL = #{email}
+    </select>
+
+    <select id="showBlacklistByEmail" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -53,18 +117,13 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
             B.USER_EMAIL LIKE #{param}
-            OR
-            B.USER_NICKNAME LIKE #{param}
-            OR
-            A.BLACK_REASON LIKE #{param}
-            OR
-            A.BLACK_STATUS LIKE #{param}
     </select>
 
-    <select id="showBlacklistByInt" resultMap="blacklist">
+    <select id="showBlacklistByNickname" resultMap="blacklist">
         SELECT
             A.BLACK_NO,
             A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
             B.USER_EMAIL,
             B.USER_NICKNAME,
             B.USER_PHONE,
@@ -78,37 +137,45 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
-            A.BLACK_NO = #{str}
-            OR
-            A.USER_NO = #{str}
-            OR
-            B.USER_PHONE = #{str}
+            B.USER_NICKNAME LIKE #{param}
     </select>
 
-    <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+    <select id="showBlacklistByPhone" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            B.USER_PHONE LIKE #{param}
+    </select>
+
+    <update id="restoreAuth" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER
         SET
-        USER_AUTH = 'BLACK'
+            USER_AUTH = #{auth}
         WHERE
-        USER_EMAIL = #{email}
+            USER_EMAIL = #{email}
     </update>
 
-    <insert id="addBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
-        INSERT INTO TBL_BLACKLIST(
-            BLACK_NO,
-            USER_NO,
-            BLACK_REASON,
-            BLACK_REGIST_DATE,
-            BLACK_STATUS,
-            BLACK_SENTENCE_PERIOD
-        )VALUES(
-            NULL,
-            #{userNo},
-            #{reason},
-            #{registDate},
-            'active',
-            #{sentenceTime}
-        )
-    </insert>
-
+    <update id="disableBlack" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
+        UPDATE TBL_BLACKLIST
+        SET
+            BLACK_STATUS = 'inactive',
+            BLACK_UPDATE_DATE = #{updateDate},
+            BLACK_SENTENCE_PERIOD = NULL
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 </mapper>

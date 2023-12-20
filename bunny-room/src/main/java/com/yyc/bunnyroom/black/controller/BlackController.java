@@ -1,6 +1,6 @@
 package com.yyc.bunnyroom.black.controller;
 
-import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
+import com.yyc.bunnyroom.admin.service.AdminService;
 import com.yyc.bunnyroom.black.model.dto.BlackDTO;
 import com.yyc.bunnyroom.black.service.BlackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,8 @@ public class BlackController {
     @Autowired
     private BlackService blackService;
 
+    private AdminService adminService = new AdminService();
+
     /**
      * 블랙리스트 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
@@ -28,41 +30,55 @@ public class BlackController {
     private String black(Model model){
         List<BlackDTO> blacklist = blackService.showAll();
         model.addAttribute("blacklist", blacklist);
-        return "admin/blacklist";
+        return "black/blacklist";
     }
 
     /**
      * 블랙리스트를 검색하는 요청을 수행하는 메소드
      * */
     @GetMapping("/showBlacklist")
-    public String showAllBlacklist(@RequestParam String str, Model model){
+    public String showAllBlacklist(@RequestParam(name = "mode")String mode, @RequestParam(name = "str") String str, Model model){
+        System.out.println(mode);
+        System.out.println(str);
 
-        if(str.isEmpty()){
+        if(str.isEmpty()) {
             // 블랙리스트 전체 검색
             List<BlackDTO> blacklist = blackService.showAll();
             model.addAttribute("blacklist", blacklist);
-            return "admin/blacklist";
-
-        }else{
-            // 조건에 따른 검색
-            List<BlackDTO> blacklist = blackService.showBlacklist(str);
+        }else if(mode.equals("email")){
+            // 이메일로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByEmail(str);
             model.addAttribute("blacklist", blacklist);
-            return "admin/blacklist";
+        }else if(mode.equals("nickname")) {
+            // 닉네임으로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByNickname(str);
+            model.addAttribute("blacklist", blacklist);
+        }else if(mode.equals("phone")){
+            // 연락처로 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByPhone(str);
+            model.addAttribute("blacklist", blacklist);
         }
+
+        return "black/blacklist";
     }
 
+    /**
+     * 해당 회워을 블랙리스트에 추가할지 확인하고 사유를 받도록 동작하는 메소드
+     * */
     @PostMapping("/addBlacklist")
     public String addBlackReason(@RequestParam(name = "userNo") String userNo,
+                                 @RequestParam(name = "auth") String auth,
                                  @RequestParam(name = "email") String email,
                                  @RequestParam(name = "nickname") String nickname,
                                  @RequestParam(name = "phone") String phone, Model model){
         // 해당회원의 정보 중 블랙리스트 정보에 들어갈 정보 뽑기
         model.addAttribute("userNo", userNo);
+        model.addAttribute("auth", auth);
         model.addAttribute("email", email);
         model.addAttribute("nickname", nickname);
         model.addAttribute("phone", phone);
 
-        return "admin/addBlackReason";
+        return "black/addBlackReason";
     }
 
     /**
@@ -70,16 +86,27 @@ public class BlackController {
      * */
     @PostMapping("/insertBlacklist")
     public String addBlacklist(@RequestParam(name = "userNo") int userNo,
+                               @RequestParam(name = "auth") String auth,
                                @RequestParam(name = "email") String email,
                                @RequestParam(name = "blackReason") String reason, Model model){
-        // 블랙리스트에 등재하기
-        int insert = blackService.addBlacklist(userNo, reason);
+        int change = 0;
+        if(Objects.isNull(blackService.searchBlackByEmail(email))){
+            // 블랙리스트에 등재된 적이 없다면
+            // 블랙리스트에 등재하기
+            System.out.println("insert");
+            change = blackService.addBlacklist(userNo, auth, reason);
+        }else {
+            // 블랙리스트에 등재된 적이 있다면
+            // 기존 정보에서 수정하기
+            System.out.println("update");
+            change = blackService.modifyBlacklist(userNo, auth, reason);
+        }
 
         // 블랙리스트로 회원 권한을 변경
         System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
         int update = blackService.toBlacklist(email);
 
-        if(insert > 0 && update > 0) {// 정상적인 블랙 처리
+        if(change > 0 && update > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
             return "admin/member";
         }else {// 비정상적인 블랙 처리
@@ -87,5 +114,28 @@ public class BlackController {
             model.addAttribute("blacklist", "블랙처리에 실패하였습니다.");
             return "admin/member";
         }
+    }
+
+    /**
+     * 블랙리스트 처리된 회원의 권한을 복구해줄 메소드
+     * */
+    @PostMapping("/restoreAuth")
+    public String restoreAuth(@RequestParam(name = "userNo") int userNo,
+                              @RequestParam(name = "email") String email,
+                              @RequestParam(name = "auth") String auth, Model model){
+
+        // 블랙리스트 명단에서 상태를 비활성화하고 수정 날짜 기록
+        int change = blackService.disableBlack(userNo);
+
+        // 블랙리스트 권한을 원 권한으로 변경
+        int restore = blackService.restoreAuth(email, auth);
+
+        if(change > 0 && restore > 0){
+            model.addAttribute("restore", "성공적으로 권한이 복구되었습니다.");
+        }else {
+            model.addAttribute("restore", "권한 복구에 실패하였습니다.");
+        }
+
+        return "black/blacklist";
     }
 }

@@ -3,7 +3,6 @@ package com.yyc.bunnyroom.black.model.dao;
 import com.yyc.bunnyroom.black.model.dto.BlackDTO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper
@@ -13,9 +12,19 @@ public interface BlackDAO {
 
     List<BlackDTO> showAll();
 
-    List<BlackDTO> showBlacklistByString(String param);
+    int addBlacklist(int userNo, String auth, String reason, String registDate, String sentenceTime);
 
-    List<BlackDTO> showBlacklistByInt(String str);
+    int modifyBlacklist(int userNo, String auth, String reason, String updateDate, String sentenceTime);
 
-    int addBlacklist(int userNo, String reason, LocalDateTime registDate, LocalDateTime sentenceTime);
+    Object searchBlackByEmail(String email);
+
+    List<BlackDTO> showBlacklistByEmail(String param);
+
+    List<BlackDTO> showBlacklistByNickname(String param);
+
+    List<BlackDTO> showBlacklistByPhone(String param);
+
+    int restoreAuth(String email, String auth);
+
+    int disableBlack(int userNo, String updateDate);
 }
