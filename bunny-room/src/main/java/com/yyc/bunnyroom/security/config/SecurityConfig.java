@@ -52,6 +52,9 @@ public class SecurityConfig {
                         "/security/auth/fail",
                         "/main",
 
+                        // roomRegister
+                        "/roomRegister/*",
+
 
                         // 메일 인증을 위해
                         "/mailSend",
