@@ -2,16 +2,25 @@ package com.yyc.bunnyroom.inquiry.service;
 
 import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
 import com.yyc.bunnyroom.inquiry.model.InquiryDAO;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.service.UserService;
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class InquiryService {
 
-    private InquiryDAO inquiryDAO;
 
+
+    private InquiryDAO inquiryDAO;
     public InquiryService(InquiryDAO inquiryDAO) {
         this.inquiryDAO = inquiryDAO;
     }
@@ -25,8 +34,8 @@ public class InquiryService {
         return list;
     }
 
-    public InquiryDTO searchInquiry(int code){
-        InquiryDTO contentslist = inquiryDAO.searchInquiry(code);
+    public InquiryDTO searchInquiry(int inquiryNo){
+        InquiryDTO contentslist = inquiryDAO.searchInquiry(inquiryNo);
 
         if(Objects.isNull(contentslist)){
             throw new NullPointerException();
@@ -36,6 +45,15 @@ public class InquiryService {
     }
 
     public int insertInquiry(InquiryDTO inquiryDTO){
+
+
+        inquiryDTO.setInquiryStatus("active");
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        inquiryDTO.setInquiryRegistDate(currentTime);
+
+        
+
         int result = inquiryDAO.insertInquiry(inquiryDTO);
 
         if(result <= 0){

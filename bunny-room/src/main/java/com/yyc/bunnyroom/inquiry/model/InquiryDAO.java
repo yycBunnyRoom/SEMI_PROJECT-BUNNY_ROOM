@@ -11,7 +11,7 @@ public interface InquiryDAO {
     List<InquiryDTO> showAllInquiry();
 
 
-    InquiryDTO searchInquiry(int code);
+    InquiryDTO searchInquiry(int inquiryNo);
 
     int insertInquiry(InquiryDTO inquiryDTO);
 

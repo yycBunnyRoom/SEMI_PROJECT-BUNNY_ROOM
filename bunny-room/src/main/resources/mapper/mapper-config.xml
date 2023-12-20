@@ -13,6 +13,7 @@
         <mapper resource="mapper/security/user/user.xml" />
         <mapper resource="mapper/admin/admin.xml" />
         <mapper resource="mapper/black/black.xml"/>
+        <mapper resource="mapper/inquiry/inquiryMapper.xml"/>
     </mappers>
 
 </configuration>

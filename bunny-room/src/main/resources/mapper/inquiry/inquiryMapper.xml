@@ -5,23 +5,14 @@
 <mapper namespace="com.yyc.bunnyroom.inquiry.model.InquiryDAO">
 
     <resultMap id="inquiryResult" type="com.yyc.bunnyroom.inquiry.dto.InquiryDTO">
-        <id property="code" column="INQUIRY_NO"/>
+        <id property="inquiryNo" column="INQUIRY_NO"/>
         <result property="userNo" column="USER_NO"/>
         <result property="inquiryTitle" column="INQUIRY_TITLE"/>
         <result property="inquiryRegistDate" column="INQUIRY_REGIST_DATE"/>
         <result property="inquiryContents" column="INQUIRY_CONTENTS"/>
         <result property="inquiryUpdateDate" column="INQUIRY_UPDATE_DATE"/>
         <result property="inquiryStatus" column="INQUIRY_STATUS"/>
-        <result property="email" column="USER_EMAIL"/>
-        <result property="password" column="USER_PASSWORD"/>
-        <result property="nickname" column="USER_NICKNAME"/>
-        <result property="phone" column="USER_PHONE"/>
-        <result property="sns" column="USER_SNS"/>
-        <result property="status" column="USER_STATUS"/>
-        <result property="auth" column="USER_AUTH"/>
-        <result property="registDate" column="USER_REGIST_DATE"/>
-        <result property="updateDate" column="USER_UPDATE_DATE"/>
-        <result property="imageNo" column="PROFILE_IMAGE_NO"/>
+        <result property="userNickname" column="USER_NICKNAME"/>
     </resultMap>
 
     <select id="showAllInquiry" resultMap="inquiryResult">
@@ -36,27 +27,17 @@
         SELECT
         *
         FROM TBL_INQUIRY
-        WHERE INQUIRY_NO = ${code}
+        WHERE INQUIRY_NO = ${inquiryNo}
     </select>
 
     <insert id="insertInquiry" parameterType="com.yyc.bunnyroom.inquiry.dto.InquiryDTO">
         INSERT INTO TBL_INQUIRY
         (
-        INQUIRY_NO,
-        USER_NO,
         INQUIRY_TITLE,
-        INQUIRY_REGIST_DATE,
-        INQUIRY_CONTENTS,
-        INQUIRY_UPDATE_DATE,
-        INQUIRY_STATUS
+        INQUIRY_CONTENTS
         )VALUES(
-        #{code},
-        #{userNo},
         #{inquiryTitle},
-        #{inquiryRegistDate},
-        #{inquiryContents},
-        #{inquiryUpdateDate},
-        #{inquiryStatus}
+        #{inquiryContents}
         )
     </insert>
 

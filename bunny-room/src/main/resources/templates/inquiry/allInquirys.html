@@ -8,22 +8,17 @@
 <table>
     <tr>
         <th>문의사항 번호</th>
-        <th>회원 번호</th>
+        <th>회원 닉네임</th>
         <th>문의사항 제목</th>
         <th>문의사항 등록일</th>
-        <th>문의사항 내용</th>
-        <th>문의사항 수정일</th>
-        <th>상태</th>
-
     </tr>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.code}"></td>
-        <td th:text="${user.email}"></td>
-        <td th:text="${user.password}"></td>
-        <td th:text="${user.nickname}"></td>
-        <td th:text="${user.phone}"></td>
-        <td th:text="${user.sns}"></td>
-        <td th:text="${user.status}"></td>
+    <tr th:each="inquiry : ${inquirys}">
+        <td th:text="${inquiry.inquiryNo}"></td>
+        <td th:text="${inquiry.userNickname}"></td>
+        <td>
+            <a th:text="${inquiry.inquiryTitle}" th:href="@{/inquirys/searchInquiry(inquiryNo=${inquiry.inquiryNo})}"></a>
+        </td>
+        <td th:text="${inquiry.inquiryRegistDate}"></td>
     </tr>
 </table>
 <button onclick="location.href='/'">인덱스</button>

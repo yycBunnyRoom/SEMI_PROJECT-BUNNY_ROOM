@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,10 +8,10 @@
 <tr th:each="inquiry : ${contentslist}">
     <h1 th:text ="${inquiry.inquiryTitle}">제목 입니다.</h1>
     <p th:text ="${inquiry.inquiryContents}">내용이 들어갈 부분입니다.</p>
-
-
-    <button onclick="location.href='/inquirys'">목록보기</button>
-    <button onclick="location.href='update_inquiry'">수정하기</button>
 </tr>
+
+
+<button onclick="location.href='/inquirys'">목록보기</button>
+<button onclick="location.href='update_inquiry'">수정하기</button>
 </body>
 </html>

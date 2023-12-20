@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -41,9 +42,9 @@ public class InquiryController {
 
 
     @GetMapping("/searchInquiry")
-    public ModelAndView searchInquiry(ModelAndView mv, @RequestParam int code){
+    public ModelAndView searchInquiry(ModelAndView mv, @RequestParam("inquiryNo") int inquiryNo){
 
-        InquiryDTO contentslist = inquiryService.searchInquiry(code);
+        InquiryDTO contentslist = inquiryService.searchInquiry(inquiryNo);
 
         if(Objects.isNull(contentslist)){
             throw new NullPointerException();
@@ -54,6 +55,8 @@ public class InquiryController {
 
         }
     }
+
+
 
     @GetMapping("/insert_inquiry")
     public String insertInquiry(){
@@ -66,6 +69,9 @@ public class InquiryController {
 
         return "redirect:/inquirys";
     }
+
+
+
 
     @GetMapping("/update_inquiry")
     public String updateInquiryView(){
