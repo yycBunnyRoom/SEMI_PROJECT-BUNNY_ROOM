@@ -52,20 +52,27 @@ public class AdminController {
 
         List<MemberDTO> members;
 
-        if(str.isEmpty()) {
+        if(str.isEmpty() && !mode.equals("inactive")) {
             // 회원 전체 검색
             members = adminService.searchAllMember();
-            // email 조건 검색
+            model.addAttribute("members", members);
         } else if (mode.equals("email")) {
+            // email 조건 검색
             members = adminService.searchMemberByEmail(str);
+            model.addAttribute("members", members);
         }else if(mode.equals("nickname")){
             // 닉네임 조건 검색
             members = adminService.searchMemberByNickname(str);
-        }else{
+            model.addAttribute("members", members);
+        }else if(mode.equals("phone")){
             // 연락처에 따른 검색
             members = adminService.searchMemberByPhone(str);
+            model.addAttribute("members", members);
+        }else if(mode.equals("inactive")){
+            members = adminService.searchMemberByInactive();
+            model.addAttribute("members", members);
         }
-        model.addAttribute("members", members);
+
         return "admin/member";
     }
 

@@ -16,4 +16,6 @@ public interface AdminDAO {
     List<MemberDTO> searchMemberByNickname(String param);
 
     List<MemberDTO> searchMemberByPhone(String param);
+
+    List<MemberDTO> searchMemberByInactive();
 }

@@ -30,6 +30,8 @@
         FROM
             TBL_USER
         WHERE
+            USER_STATUS = 'active'
+            AND
             USER_EMAIL LIKE #{param}
     </select>
 
@@ -39,6 +41,8 @@
         FROM
             TBL_USER
         WHERE
+            USER_STATUS = 'active'
+            AND
             USER_NICKNAME LIKE #{param}
     </select>
 
@@ -48,6 +52,8 @@
         FROM
             TBL_USER
         WHERE
+            USER_STATUS = 'active'
+            AND
             USER_PHONE LIKE #{param}
     </select>
 
@@ -59,4 +65,12 @@
             USER_EMAIL = #{email}
     </update>
 
+    <select id="searchMemberByInactive" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_STATUS = 'inactive'
+    </select>
 </mapper>

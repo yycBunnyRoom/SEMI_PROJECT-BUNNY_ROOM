@@ -74,4 +74,9 @@ public class AdminService {
         List<MemberDTO> members = adminDAO.searchMemberByPhone(param);
         return members;
     }
+
+    public List<MemberDTO> searchMemberByInactive() {
+        List<MemberDTO> members = adminDAO.searchMemberByInactive();
+        return members;
+    }
 }
