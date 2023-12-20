@@ -92,12 +92,12 @@ public class BlackController {
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
-            change = blackService.addBlacklist(userNo, auth, reason);
+            change = blackService.addBlacklist(userNo, email, auth, reason);
         }else {
             // 블랙리스트에 등재된 적이 있다면
             // 기존 정보에서 수정하기
             System.out.println("update");
-            change = blackService.modifyBlacklist(userNo, auth, reason);
+            change = blackService.modifyBlacklist(userNo, email, auth, reason);
         }
 
         // 블랙리스트로 회원 권한을 변경
@@ -120,9 +120,12 @@ public class BlackController {
     @PostMapping("/restoreAuth")
     public String restoreAuth(@RequestParam(name = "userNo") int userNo,
                               @RequestParam(name = "email") String email,
-                              @RequestParam(name = "auth") String auth, Model model){
+                              @RequestParam(name = "auth") String auth,
+                              @RequestParam(name = "status")String status,
+                              Model model){
+
         // 블랙리스트가 아닌 경우
-        if(!auth.equals("BLACK")){
+        if(!status.equals("active")){
             model.addAttribute("restore", "현재 블랙리스트에 등재되어 있지 않습니다.");
             return "black/blacklist";
         }

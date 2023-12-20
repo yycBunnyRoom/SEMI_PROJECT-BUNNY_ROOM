@@ -35,6 +35,8 @@
             TBL_BLACKLIST AS A
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            A.BLACK_STATUS = 'active'
     </select>
 
     <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
