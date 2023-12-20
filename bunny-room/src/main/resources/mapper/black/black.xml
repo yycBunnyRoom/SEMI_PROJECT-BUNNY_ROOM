@@ -209,4 +209,27 @@
         WHERE
             A.BLACK_STATUS = 'inactive'
     </select>
+
+    <select id="searchBlackByEmailInInactive" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            A.BLACK_STATUS = 'inactive'
+            AND
+            B.USER_EMAIL = #{email}
+    </select>
 </mapper>

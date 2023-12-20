@@ -30,4 +30,6 @@ public interface BlackDAO {
     int disableBlack(@Param("userNo") int userNo, @Param("updateDate") String updateDate);
 
     List<BlackDTO> showBlacklistByInactive();
+
+    List<BlackDTO> searchBlackByEmailInInactive(String email);
 }
