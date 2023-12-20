@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,10 +7,15 @@
 <body>
 <h1> 게시물 등록하기 </h1>
 
-<form action="/inquirys/insert" method="post">
-    제목 : <input type="text" name="inquiryTitle"/>
-    내용 : <input type="text" name="inquiryContents"/>
-    <button type="submit"> 등록하기 </button>
+
+<form th:action="@{/inquirys/insert}" th:object="${inquiryRegistDTO}" method="post">
+    <label for="inquiryTitle">Title:</label>
+    <input type="text" id="inquiryTitle" name="inquiryTitle" th:field="*{inquiryTitle}" required>
+
+    <label for="inquiryContents">Contents:</label>
+    <textarea id="inquiryContents" name="inquiryContents" th:field="*{inquiryContents}" required></textarea>
+
+    <button type="submit">등록</button>
 </form>
 </body>
 </html>

@@ -52,7 +52,7 @@ public class InquiryService {
         LocalDateTime currentTime = LocalDateTime.now();
         inquiryDTO.setInquiryRegistDate(currentTime);
 
-        
+
 
         int result = inquiryDAO.insertInquiry(inquiryDTO);
 

@@ -1,15 +1,15 @@
 package com.yyc.bunnyroom.inquiry.controller;
 
 import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryRegistDTO;
 import com.yyc.bunnyroom.inquiry.service.InquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -59,13 +59,25 @@ public class InquiryController {
 
 
     @GetMapping("/insert_inquiry")
-    public String insertInquiry(){
-        return "inquiry/inquiryInsert";
+    public ModelAndView insertInquiry(ModelAndView mv) {
+        mv.addObject("inquiryRegistDTO", new InquiryRegistDTO());
+        mv.setViewName("inquiry/inquiryInsert"); // 뷰 이름 설정
+        return mv;
     }
 
     @PostMapping("/insert")
-    public String insertInquiryPage(InquiryDTO inquiryDTO){
-        inquiryService.insertInquiry(inquiryDTO);
+    public String insertInquiryPage(@ModelAttribute("inquiryRegistDTO") InquiryRegistDTO inquiryRegistDTO, Principal principal){
+//        String loggedUser = principal.getName();
+//        int userNo = Integer.parseInt(loggedUser);
+
+        Object principals = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        InquiryDTO inquiry = new InquiryDTO();
+        inquiry.setUserNo(userNo);
+        inquiry.setInquiryTitle(inquiryRegistDTO.getInquiryTitle());
+        inquiry.setInquiryContents(inquiryRegistDTO.getInquiryContents());
+
+        inquiryService.insertInquiry(inquiry);
 
         return "redirect:/inquirys";
     }
