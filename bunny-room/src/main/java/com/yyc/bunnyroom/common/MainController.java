@@ -22,16 +22,16 @@ public class MainController {
 
         if (principal instanceof AuthDetails) {
            if (((AuthDetails)principal).getLoginUserDTO().getUserAuth() == UserRole.ADMIN){
-              userAuth ="관리자";
+              userAuth ="ADMIN";
            }else if (((AuthDetails)principal).getLoginUserDTO().getUserAuth() == UserRole.HOST){
-               userAuth ="호스트";
+               userAuth ="HOST";
            } else if (((AuthDetails)principal).getLoginUserDTO().getUserAuth() == UserRole.GUEST) {
-               userAuth ="게스트";
+               userAuth ="GUEST";
            }
            userNickname = ((AuthDetails)principal).getLoginUserDTO().getUserNickname();
         } else {
-            userAuth ="인증되지 않은";
-            userNickname="사용자";
+            userAuth = null;
+            userNickname= null;
         }
 
 
