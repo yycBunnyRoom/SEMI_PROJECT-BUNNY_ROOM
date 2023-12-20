@@ -28,4 +28,6 @@ public interface BlackDAO {
     int restoreAuth(@Param("email") String email, @Param("auth") String auth);
 
     int disableBlack(@Param("userNo") int userNo, @Param("updateDate") String updateDate);
+
+    List<BlackDTO> showBlacklistByInactive();
 }

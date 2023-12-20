@@ -38,7 +38,7 @@ public class BlackController {
         System.out.println(mode);
         System.out.println(str);
 
-        if(str.isEmpty()) {
+        if(str.isEmpty() && !mode.equals("inactive")) {
             // 블랙리스트 전체 검색
             List<BlackDTO> blacklist = blackService.showAll();
             model.addAttribute("blacklist", blacklist);
@@ -54,13 +54,17 @@ public class BlackController {
             // 연락처로 검색
             List<BlackDTO> blacklist = blackService.showBlacklistByPhone(str);
             model.addAttribute("blacklist", blacklist);
+        }else if(mode.equals("inactive")){
+            // 현재는 블랙리스트가 아닌 회원 검색
+            List<BlackDTO> blacklist = blackService.showBlacklistByInactive();
+            model.addAttribute("blacklist", blacklist);
         }
 
         return "black/blacklist";
     }
 
     /**
-     * 해당 회워을 블랙리스트에 추가할지 확인하고 사유를 받도록 동작하는 메소드
+     * 해당 회원을 블랙리스트에 추가할지 확인하고 사유를 받도록 동작하는 메소드
      * */
     @PostMapping("/addBlacklist")
     public String addBlackReason(@RequestParam(name = "userNo") String userNo,
@@ -92,12 +96,12 @@ public class BlackController {
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
-            change = blackService.addBlacklist(userNo, email, auth, reason);
+            change = blackService.addBlacklist(userNo, auth, email, reason);
         }else {
             // 블랙리스트에 등재된 적이 있다면
             // 기존 정보에서 수정하기
             System.out.println("update");
-            change = blackService.modifyBlacklist(userNo, email, auth, reason);
+            change = blackService.modifyBlacklist(userNo, auth, email, reason);
         }
 
         // 블랙리스트로 회원 권한을 변경

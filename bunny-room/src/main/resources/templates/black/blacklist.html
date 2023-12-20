@@ -18,6 +18,7 @@
                   <option value="email">이메일</option>
                   <option value="nickname">닉네임</option>
                   <option value="phone">연락처</option>
+                  <option value="inactive">이전 블랙리스트</option>
               </select>
               회원 정보 검색 : <input type="text" name="str"><button>검색</button>
           </form>
@@ -35,7 +36,7 @@
                   <th>연락처</th>
                   <th>블랙리스트 사유</th>
                   <th>최초 등재일</th>
-                  <th>블랙리스트 상태</th>
+                  <th>블랙리스트 등재여부</th>
                   <th>정보 수정일</th>
                   <th>남은 기간</th>
               </tr>
@@ -53,10 +54,10 @@
                   <td th:text="${member.blackSentencePeriod}"></td>
                   <td>
                       <form action="/admin/black/restoreAuth" method="post">
-                          <input type="hidden" name="userNo" th:value="${member.userNo}">
+                          <input type="hidden" name="userNo" th:value="${member.userNo}"/>
                           <input type="hidden" name="email" th:value="${member.email}"/>
-                          <input type="hidden" name="auth" th:value="${member.auth}">
-                          <input type="hidden" name="status" th:value="${member.blackStatus}">
+                          <input type="hidden" name="auth" th:value="${member.auth}"/>
+                          <input type="hidden" name="status" th:value="${member.blackStatus}"/>
                           <button type="submit">권한 복구</button>
                       </form>
                   </td>

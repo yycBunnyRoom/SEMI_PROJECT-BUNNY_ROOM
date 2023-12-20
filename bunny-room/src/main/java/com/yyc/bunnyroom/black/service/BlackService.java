@@ -58,7 +58,7 @@ public class BlackService {
     }
 
     /**
-     * 블랙 기간이 지났을 때 자동으로 풀어주는 메소드
+     * 블랙 기간이 지났을 때 (기본은 3일로 저장됨) 자동으로 풀어주는 메소드
      * */
     @Scheduled(fixedDelay = 3 * 24 * 60 * 60 * 1000)
     public void blackTimeout(String email, String auth){
@@ -142,5 +142,14 @@ public class BlackService {
         }else {
             return 0;
         }
+    }
+
+    /**
+     * 비활성화된 블랙리스트 명단을 조회하는 메소드
+     * */
+    public List<BlackDTO> showBlacklistByInactive() {
+        List<BlackDTO> blacklist = blackDAO.showBlacklistByInactive();
+
+        return blacklist;
     }
 }

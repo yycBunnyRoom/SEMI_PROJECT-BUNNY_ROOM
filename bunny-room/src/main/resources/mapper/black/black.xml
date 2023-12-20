@@ -51,19 +51,19 @@
         INSERT INTO TBL_BLACKLIST(
             BLACK_NO,
             USER_NO,
+            BLACK_ORIGIN_AUTH,
             BLACK_REASON,
             BLACK_REGIST_DATE,
             BLACK_STATUS,
-            BLACK_SENTENCE_PERIOD,
-            BLACK_ORIGIN_AUTH
+            BLACK_SENTENCE_PERIOD
         )VALUES(
             NULL,
             #{userNo},
+            #{auth},
             #{reason},
             #{registDate},
             'active',
-            #{sentenceTime},
-            #{auth}
+            #{sentenceTime}
         )
     </insert>
 
@@ -97,6 +97,8 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
+            A.BLACK_STATUS = 'active'
+            AND
             B.USER_EMAIL = #{email}
     </select>
 
@@ -118,6 +120,8 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
+            A.BLACK_STATUS = 'active'
+            AND
             B.USER_EMAIL LIKE #{param}
     </select>
 
@@ -139,6 +143,8 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
+            A.BLACK_STATUS = 'active'
+            AND
             B.USER_NICKNAME LIKE #{param}
     </select>
 
@@ -160,6 +166,8 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
+            A.BLACK_STATUS = 'active'
+            AND
             B.USER_PHONE LIKE #{param}
     </select>
 
@@ -180,4 +188,25 @@
         WHERE
             USER_NO = #{userNo}
     </update>
+
+    <select id="showBlacklistByInactive" resultMap="blacklist">
+        SELECT
+            A.BLACK_NO,
+            A.USER_NO,
+            A.BLACK_ORIGIN_AUTH,
+            B.USER_EMAIL,
+            B.USER_NICKNAME,
+            B.USER_PHONE,
+            A.BLACK_REASON,
+            A.BLACK_REGIST_DATE,
+            A.BLACK_STATUS,
+            A.BLACK_UPDATE_DATE,
+            A.BLACK_SENTENCE_PERIOD
+        FROM
+            TBL_BLACKLIST AS A
+        JOIN
+            TBL_USER AS B ON (A.USER_NO = B.USER_NO)
+        WHERE
+            A.BLACK_STATUS = 'inactive'
+    </select>
 </mapper>
