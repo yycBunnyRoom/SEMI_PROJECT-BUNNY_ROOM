@@ -2,35 +2,21 @@ package com.yyc.bunnyroom.admin.service;
 
 import com.yyc.bunnyroom.admin.model.dao.AdminDAO;
 import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class AdminService {
 
-    @Autowired
-    private AdminDAO adminDAO;
+    private final AdminDAO adminDAO;
 
     public List<MemberDTO> searchAllMember() {
         // 전체 회원 정보를 탐색
         List<MemberDTO> members =adminDAO.searchAllMember();
 
-        return members;
-    }
-
-    public List<MemberDTO> searchMember(String str) {
-        String param = "%" + str + "%";
-        List<MemberDTO> members;
-
-        if(isNumeric(str)){
-            // 입력값이 숫자인 경우
-            members = adminDAO.searchAllMemberByInt(Integer.parseInt(str));
-        }else {
-            // 입력값이 문자인 경우
-            members =adminDAO.searchAllMemberByString(param);
-        }
         return members;
     }
 
@@ -46,6 +32,9 @@ public class AdminService {
         }
     }
 
+    /**
+     * 해당회원의 탈퇴 요청을 수행하는 메소드
+     * */
     public int withdrawMember(String email) {
 
         int result = adminDAO.withdrawMember(email);
@@ -59,5 +48,30 @@ public class AdminService {
         }
     }
 
+    /**
+     * 이메일을 조건으로 회원을 조회하는 메소드
+     * */
+    public List<MemberDTO> searchMemberByEmail(String str) {
+        String param = "%" + str + "%";
+        List<MemberDTO> members = adminDAO.searchMemberByEmail(param);
+        return members;
+    }
 
+    /**
+     * 닉네임을 조건으로 회원을 조회하는 메소드
+     * */
+    public List<MemberDTO> searchMemberByNickname(String str) {
+        String param = "%" + str + "%";
+        List<MemberDTO> members = adminDAO.searchMemberByNickname(param);
+        return members;
+    }
+
+    /**
+     * 연락처를 조건으로 회원을 조회하는 메소드
+     * */
+    public List<MemberDTO> searchMemberByPhone(String str) {
+        String param = "%" + str + "%";
+        List<MemberDTO> members = adminDAO.searchMemberByPhone(param);
+        return members;
+    }
 }

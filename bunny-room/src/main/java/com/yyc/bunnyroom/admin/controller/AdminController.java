@@ -3,6 +3,7 @@ package com.yyc.bunnyroom.admin.controller;
 import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
 import com.yyc.bunnyroom.admin.service.AdminService;
 import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +17,11 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("admin")
+@RequiredArgsConstructor
 public class AdminController {
 
-    @Autowired
-    private AdminService adminService;
+
+    private final AdminService adminService;
 
     /**
      * 관리자 메인 페이지로 이동하는 요청을 수행하는 메소드
@@ -45,20 +47,26 @@ public class AdminController {
      * 회원을 검색하는 요청을 수행하는 메소드
      * */
     @GetMapping("/search")
-    public String searchMember(@RequestParam String str, Model model){
+    public String searchMember(@RequestParam(name = "str") String str,
+                               @RequestParam(name = "mode") String mode, Model model){
 
-        if(str.isEmpty()){
+        List<MemberDTO> members;
+
+        if(str.isEmpty()) {
             // 회원 전체 검색
-            List<MemberDTO> members = adminService.searchAllMember();
-            model.addAttribute("members", members);
-            return "admin/member";
-
+            members = adminService.searchAllMember();
+            // email 조건 검색
+        } else if (mode.equals("email")) {
+            members = adminService.searchMemberByEmail(str);
+        }else if(mode.equals("nickname")){
+            // 닉네임 조건 검색
+            members = adminService.searchMemberByNickname(str);
         }else{
-            // 조건에 따른 검색
-            List<MemberDTO> members = adminService.searchMember(str);
-            model.addAttribute("members", members);
-            return "admin/member";
+            // 연락처에 따른 검색
+            members = adminService.searchMemberByPhone(str);
         }
+        model.addAttribute("members", members);
+        return "admin/member";
     }
 
     /**

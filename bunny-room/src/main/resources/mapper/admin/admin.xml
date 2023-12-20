@@ -24,41 +24,31 @@
             USER_STATUS = 'active'
     </select>
 
-    <select id="searchAllMemberByInt" resultMap="memberResult">
+    <select id="searchMemberByEmail" resultMap="memberResult">
         SELECT
             *
         FROM
             TBL_USER
         WHERE
-            USER_STATUS = 'active'
-            AND
-            USER_NO = #{str}
-            OR
-            USER_NICKNAME = #{str}
-            OR
-            USER_PHONE = #{str}
-            OR
-            USER_REGIST_DATE = #{str}
-            OR
-            USER_UPDATE_DATE = #{str}
-
+            USER_EMAIL LIKE #{param}
     </select>
 
-    <select id="searchAllMemberByString" resultMap="memberResult">
+    <select id="searchMemberByNickname" resultMap="memberResult">
         SELECT
             *
         FROM
             TBL_USER
         WHERE
-            USER_STATUS = 'active'
-            AND
-            USER_EMAIL LIKE #{param}
-            OR
             USER_NICKNAME LIKE #{param}
-            OR
-            USER_AUTH LIKE #{param}
-            OR
-            USER_STATUS LIKE #{param}
+    </select>
+
+    <select id="searchMemberByPhone" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_PHONE LIKE #{param}
     </select>
 
     <update id="withdrawMember" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
