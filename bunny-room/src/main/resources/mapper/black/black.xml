@@ -49,19 +49,19 @@
         INSERT INTO TBL_BLACKLIST(
             BLACK_NO,
             USER_NO,
-            BLACK_ORIGIN_AUTH,
             BLACK_REASON,
             BLACK_REGIST_DATE,
             BLACK_STATUS,
-            BLACK_SENTENCE_PERIOD
+            BLACK_SENTENCE_PERIOD,
+            BLACK_ORIGIN_AUTH
         )VALUES(
             NULL,
             #{userNo},
-            #{auth},
             #{reason},
             #{registDate},
             'active',
-            #{sentenceTime}
+            #{sentenceTime},
+            #{auth}
         )
     </insert>
 

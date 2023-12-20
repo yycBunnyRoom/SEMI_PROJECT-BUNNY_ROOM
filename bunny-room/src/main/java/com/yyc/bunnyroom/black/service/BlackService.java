@@ -1,23 +1,20 @@
 package com.yyc.bunnyroom.black.service;
 
-import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
 import com.yyc.bunnyroom.black.model.dao.BlackDAO;
 import com.yyc.bunnyroom.black.model.dto.BlackDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BlackService {
 
-    @Autowired
-    private BlackDAO blackDAO;
+    private final BlackDAO blackDAO;
 
     public List<BlackDTO> showAll() { // 전체검색
 

@@ -1,9 +1,8 @@
 package com.yyc.bunnyroom.black.controller;
 
-import com.yyc.bunnyroom.admin.service.AdminService;
 import com.yyc.bunnyroom.black.model.dto.BlackDTO;
 import com.yyc.bunnyroom.black.service.BlackService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +15,10 @@ import java.util.Objects;
 
 @Controller
 @RequestMapping("admin/black")
+@RequiredArgsConstructor
 public class BlackController {
 
-    @Autowired
-    private BlackService blackService;
+    private final BlackService blackService;
 
     /**
      * 블랙리스트 관리 페이지로 이동하는 요청을 수행하는 메소드
@@ -35,7 +34,7 @@ public class BlackController {
      * 블랙리스트를 검색하는 요청을 수행하는 메소드
      * */
     @GetMapping("/showBlacklist")
-    public String showAllBlacklist(@RequestParam(name = "mode")String mode, @RequestParam(name = "str") String str, Model model){
+    public String showBlacklist(@RequestParam(name = "mode")String mode, @RequestParam(name = "str") String str, Model model){
         System.out.println(mode);
         System.out.println(str);
 
@@ -87,7 +86,8 @@ public class BlackController {
                                @RequestParam(name = "auth") String auth,
                                @RequestParam(name = "email") String email,
                                @RequestParam(name = "reason") String reason, Model model){
-        int change = 0;
+
+        int change;
         if(Objects.isNull(blackService.searchBlackByEmail(email))){
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
@@ -106,12 +106,12 @@ public class BlackController {
 
         if(change > 0 && update > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
-            return "admin/member";
         }else {// 비정상적인 블랙 처리
             System.out.println("정상적으로 동작되지 않았습니다.");
             model.addAttribute("blacklist", "블랙처리에 실패하였습니다.");
-            return "admin/member";
         }
+
+        return "admin/member";
     }
 
     /**
@@ -121,6 +121,11 @@ public class BlackController {
     public String restoreAuth(@RequestParam(name = "userNo") int userNo,
                               @RequestParam(name = "email") String email,
                               @RequestParam(name = "auth") String auth, Model model){
+        // 블랙리스트가 아닌 경우
+        if(!auth.equals("BLACK")){
+            model.addAttribute("restore", "현재 블랙리스트에 등재되어 있지 않습니다.");
+            return "black/blacklist";
+        }
 
         // 블랙리스트 명단에서 상태를 비활성화하고 수정 날짜 기록
         int change = blackService.disableBlack(userNo);
