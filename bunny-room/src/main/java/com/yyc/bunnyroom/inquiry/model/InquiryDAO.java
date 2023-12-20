@@ -9,4 +9,11 @@ import java.util.List;
 public interface InquiryDAO {
 
     List<InquiryDTO> showAllInquiry();
+
+
+    InquiryDTO searchInquiry(int code);
+
+    int insertInquiry(InquiryDTO inquiryDTO);
+
+    int updateInquiry(InquiryDTO inquiryDTO);
 }

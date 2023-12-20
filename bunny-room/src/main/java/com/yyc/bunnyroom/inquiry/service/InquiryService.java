@@ -17,11 +17,44 @@ public class InquiryService {
     }
 
     public List<InquiryDTO> showAllInquiry(){
-        List<InquiryDTO> inquiryList = inquiryDAO.showAllInquiry();
+        List<InquiryDTO> list = inquiryDAO.showAllInquiry();
 
-        if(Objects.isNull(inquiryList)){
+        if(Objects.isNull(list)){
             System.out.println("오류");
         }
-        return inquiryList;
+        return list;
+    }
+
+    public InquiryDTO searchInquiry(int code){
+        InquiryDTO contentslist = inquiryDAO.searchInquiry(code);
+
+        if(Objects.isNull(contentslist)){
+            throw new NullPointerException();
+        }else{
+            return contentslist;
+        }
+    }
+
+    public int insertInquiry(InquiryDTO inquiryDTO){
+        int result = inquiryDAO.insertInquiry(inquiryDTO);
+
+        if(result <= 0){
+            System.out.println("실패하였습니다.");
+        }else{
+            System.out.println("등록을 마쳤습니다.");
+        }
+        return result;
+    }
+
+
+    public int updateInquiry(InquiryDTO inquiryDTO){
+        int result = inquiryDAO.updateInquiry(inquiryDTO);
+
+        if(result <= 0){
+            System.out.println("수정에 실패하셨습니다.");
+        }else {
+            System.out.println("수정이 완료되었습니다.");
+        }
+        return result;
     }
 }
