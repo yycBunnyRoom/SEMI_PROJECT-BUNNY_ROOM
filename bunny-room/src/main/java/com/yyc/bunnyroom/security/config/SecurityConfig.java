@@ -33,6 +33,8 @@ public class SecurityConfig {
         return web -> web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
+
+
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
