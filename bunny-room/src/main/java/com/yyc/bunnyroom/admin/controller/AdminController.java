@@ -150,13 +150,4 @@ public class AdminController {
         // 관리자 문의사항 페이지로 이동
         return "admin/inquiry";
     }
-
-    /**
-     * 관리자 페이지 중 관리자 설정 페이지로 이동하는 요청을 수행하는 메소드
-     * */
-    @GetMapping("/setting")
-    public String setting(){
-        // 관리자 설정 페이지로 이동
-        return "admin/setting";
-    }
 }

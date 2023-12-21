@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.adminSetting.model.dao.CategoryDAO">
+
+    <resultMap id="categoryList" type="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        <id property="categoryNo" column="BUSINESS_CATEGORY_NO"/>
+        <result property="categoryName" column="BUSINESS_CATEGORY_NAME"/>
+        <result property="colorCode" column="BUSINESS_CATEGORY_COLOR_CODE"/>
+        <result property="categoryStatus" column="BUSINESS_CATEGORY_STATUS"/>
+    </resultMap>
+
+    <select id="showCategory" resultMap="categoryList">
+        SELECT
+            *
+        FROM
+            TBL_BUSINESS_CATEGORY
+    </select>
+
+    <update id="changeCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        UPDATE TBL_BUSINESS_CATEGORY
+        SET
+            BUSINESS_CATEGORY_NAME = #{categoryName},
+            BUSINESS_CATEGORY_COLOR_CODE = #{colorCode}
+        WHERE
+            BUSINESS_CATEGORY_NO = #{categoryNo}
+    </update>
+
+    <update id="offCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        UPDATE TBL_BUSINESS_CATEGORY
+        SET
+            BUSINESS_CATEGORY_STATUS = 'inactive'
+        WHERE
+            BUSINESS_CATEGORY_NO = #{categoryNo}
+    </update>
+</mapper>

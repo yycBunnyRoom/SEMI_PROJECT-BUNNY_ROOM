@@ -12,6 +12,7 @@
     <mappers>
         <mapper resource="mapper/signup/user.xml" />
         <mapper resource="mapper/admin/admin.xml" />
+        <mapper resource="mapper/admin/adminSetting.xml"/>
         <mapper resource="mapper/black/black.xml"/>
         <mapper resource="mapper/roomRegister/roomRegister.xml"/>
     </mappers>
