@@ -28,7 +28,7 @@
                 <button type="submit">변경</button>
             </form>
             <form action="/admin/setting/off" method="post">
-                <input type="text" name="categoryNo" th:value="${category.categoryNo}"/>
+                <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
                 <button type="submit">삭제</button>
             </form>
         </article>
