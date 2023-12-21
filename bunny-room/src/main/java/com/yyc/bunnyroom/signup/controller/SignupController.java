@@ -148,11 +148,9 @@ public class SignupController {
 
     //비밀번호 재설정
     @PostMapping("/resetPassword")
-    public ModelAndView resetPassword(@ModelAttribute LoginUserDTO LoginUserDTO, ModelAndView modelAndView){
-        System.out.println(LoginUserDTO.getUserEmail());
-        System.out.println(LoginUserDTO.getUserPassword());
+    public ModelAndView resetPassword(@ModelAttribute LoginUserDTO loginUserDTO, ModelAndView modelAndView){
 
-        int result = userService.resetPassword(LoginUserDTO);
+        int result = userService.resetPassword(loginUserDTO);
 
         if (result == 1){
             modelAndView.addObject("message","비빌번호 바꾸기 성공!!");
