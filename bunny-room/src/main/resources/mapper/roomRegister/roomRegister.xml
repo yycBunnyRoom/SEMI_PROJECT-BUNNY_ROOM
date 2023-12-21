@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper">
+
+
+    <!--BusinessDTO-->
+    <resultMap id="businessDTO" type="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
+        <id property="businessNo" column="BUSINESS_NO"/>
+        <result property="userNo" column="USER_NO"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="businessRegistNo" column="BUSINESS_REGIST_NO"/>
+        <result property="businessCategoryNo" column="BUSINESS_CATEGORY_NO"/>
+        <result property="businessAddressRoad" column="BUSINESS_ADDRESS_ROAD"/>
+        <result property="businessAddressDetail" column="BUSINESS_ADDRESS_DETAIL"/>
+        <result property="businessZipCode" column="BUSINESS_ZIP_CODE"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="businessRegistDate" column="BUSINESS_REGIST_DATE"/>
+        <result property="businessUpdateDate" column="BUSINESS_UPDATE_DATE"/>
+        <result property="businessStatus" column="BUSINESS_STATUS"/>
+    </resultMap>
+
+    <!--BusinessCategoryDTO-->
+    <resultMap id="businessCategoryDTO" type="com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO">
+        <id property="businessCategoryNo" column="BUSINESS_CATEGORY_NO"/>
+        <result property="businessCategoryName" column="BUSINESS_CATEGORY_NAME"/>
+        <result property="businessCategoryColorCode" column="BUSINESS_CATEGORY_COLOR_CODE"/>
+        <result property="businessCategoryStatus" column="BUSINESS_CATEGORY_STATUS"/>
+    </resultMap>
+
+    <!--HolidayDTO-->
+
+    <!--RoomDTO-->
+
+    <!--VacationDTO-->
+
+
+
+<!--    <select id="findByUserEmail" resultMap="businessCategoryDTO">-->
+<!--        SELECT-->
+<!--        USER_NO,-->
+<!--        USER_EMAIL,-->
+<!--        USER_PASSWORD,-->
+<!--        USER_NICKNAME,-->
+<!--        USER_PHONE,-->
+<!--        USER_AUTH,-->
+<!--        USER_STATUS,-->
+<!--        USER_REGIST_DATE,-->
+<!--        USER_UPDATE_DATE,-->
+<!--        PROFILE_IMAGE_NO-->
+<!--        FROM TBL_USER-->
+<!--        WHERE USER_EMAIL = #{userEmail}-->
+<!--    </select>-->
+
+
+
+
+    <!--모든 사업체 카테고리 가져옴 (active)-->
+    <select id="selectAllBusinessCategory" resultMap="businessCategoryDTO">
+        SELECT
+        BUSINESS_CATEGORY_NO,
+        BUSINESS_CATEGORY_NAME,
+        BUSINESS_CATEGORY_COLOR_CODE,
+        FROM TBL_BUSINESS_CATEGORY
+        WHERE BUSINESS_CATEGORY_STATUS = 'active'
+    </select>
+
+
+
+    <!--사업체 등록-->
+    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
+        INSERT INTO TBL_BUSINESS(
+        BUSINESS_NO,
+        USER_NO,
+        USINESS_REGIST_NO,
+        BUSINESS_NAME,
+        BUSINESS_CATEGORY_NO,
+        BUSINESS_ADDRESS_ROAD,
+        BUSINESS_ADDRESS_DETAIL,
+        BUSINESS_ZIP_CODE,
+        BUSINESS_PHONE,
+        BUSINESS_REGIST_DATE,
+        BUSINESS_UPDATE_DATE,
+        BUSINESS_STATUS
+        )VALUES(
+        NULL,
+        #{userNo},
+        #{businessRegistNo},
+        #{businessName},
+        #{businessCategoryNo},
+        #{businessAddressRoad},
+        #{businessAddressDetail},
+        #{businessZipCode},
+        #{businessPhone},
+        #{businessRegistDate},
+        #{businessUpdateDate},
+        #{businessStatus}
+        )
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

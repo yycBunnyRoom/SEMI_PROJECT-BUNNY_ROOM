@@ -23,8 +23,8 @@
         <button id="btn_adminPage" style="display: none">어드민페이지로 가기</button>
     </form>
 
-    <!--    업체등록-->
-    <a href="/roomRegister/businessRegisterView" id="btn_businessRegisterView" style="display: none">업체등록 페이지</a>
+    <!--    호스트페이지-->
+    <a href="/roomRegister/hostMainView" id="btn_hostMainView" style="display: none">호스트 페이지</a>
 
 
     <a href="/security/auth/login" id="btn_login" style="display: block">로그인하기</a>
@@ -80,10 +80,10 @@
 
             if (userAuth == "ADMIN"){
                 document.getElementById("btn_adminPage").style.display = 'block';
-                document.getElementById("btn_businessRegisterView").style.display = 'block';
+                document.getElementById("btn_hostMainView").style.display = 'block';
             }
             else if (userAuth == "HOST"){
-                document.getElementById("btn_businessRegisterView").style.display = 'block';
+                document.getElementById("btn_hostMainView").style.display = 'block';
             }
         }
 

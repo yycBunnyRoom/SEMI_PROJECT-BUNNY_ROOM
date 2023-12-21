@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
@@ -34,7 +35,6 @@ public class UserService {
         }
     }
 
-    @Transactional
     public int registUser(SignupDTO signupDTO){
 
         signupDTO.setUserPassword(passwordEncoder.encode(signupDTO.getUserPassword()));
