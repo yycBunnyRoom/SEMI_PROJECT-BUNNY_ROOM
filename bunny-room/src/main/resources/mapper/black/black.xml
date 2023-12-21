@@ -210,7 +210,7 @@
             A.BLACK_STATUS = 'inactive'
     </select>
 
-    <select id="searchBlackByEmailInInactive" resultMap="blacklist">
+    <select id="searchBlackByEmailInAny" resultMap="blacklist">
         SELECT
             A.BLACK_NO,
             A.USER_NO,
@@ -228,7 +228,9 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
-            A.BLACK_STATUS = 'inactive'
+            (A.BLACK_STATUS = 'inactive'
+            OR
+            A.BLACK_STATUS = 'active')
             AND
             B.USER_EMAIL = #{email}
     </select>

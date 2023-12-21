@@ -31,5 +31,5 @@ public interface BlackDAO {
 
     List<BlackDTO> showBlacklistByInactive();
 
-    List<BlackDTO> searchBlackByEmailInInactive(String email);
+    Object searchBlackByEmailInAny(@Param("email") String email);
 }

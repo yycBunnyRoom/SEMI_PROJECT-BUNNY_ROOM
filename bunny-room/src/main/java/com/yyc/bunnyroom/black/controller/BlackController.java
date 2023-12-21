@@ -92,7 +92,8 @@ public class BlackController {
                                @RequestParam(name = "reason") String reason, Model model){
 
         int change;
-        if(Objects.isNull(blackService.searchBlackByEmailInInactive(email))){
+
+        if(Objects.isNull(blackService.searchBlackByEmailInAny(email))){
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
@@ -104,9 +105,19 @@ public class BlackController {
             change = blackService.modifyBlacklist(userNo, auth, email, reason);
         }
 
-        // 블랙리스트로 회원 권한을 변경
-        System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
-        int update = blackService.toBlacklist(email);
+        boolean chance = false;
+
+        if(change > 0){
+            chance = true;
+        }
+
+        int update = 0;
+
+        if(chance){
+            // 블랙리스트로 회원 권한을 변경
+            System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
+            update = blackService.toBlacklist(email);
+        }
 
         if(change > 0 && update > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
