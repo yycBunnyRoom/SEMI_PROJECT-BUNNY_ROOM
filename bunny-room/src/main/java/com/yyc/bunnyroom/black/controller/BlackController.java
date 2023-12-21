@@ -23,7 +23,7 @@ public class BlackController {
     /**
      * 블랙리스트 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
-    @GetMapping
+    @GetMapping(value = {"", "/", "black"})
     private String black(Model model){
         List<BlackDTO> blacklist = blackService.showAll();
         model.addAttribute("blacklist", blacklist);
@@ -157,6 +157,6 @@ public class BlackController {
             model.addAttribute("restore", "권한 복구에 실패하였습니다.");
         }
 
-        return "black/blacklist";
+        return "redirect:/admin/black";
     }
 }
