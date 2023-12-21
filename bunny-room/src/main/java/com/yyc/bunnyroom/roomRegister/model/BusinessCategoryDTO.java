@@ -1,10 +1,14 @@
 package com.yyc.bunnyroom.roomRegister.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
 public class BusinessCategoryDTO {
 //    BUSINESS_CATEGORY_NO		INTEGER
 //    BUSINESS_CATEGORY_NAME		VARCHAR

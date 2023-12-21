@@ -1,7 +1,14 @@
 package com.yyc.bunnyroom.roomRegister.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.ZonedDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
 public class RoomDTO {
 
 //    방 번호	ROOM_NO		INTEGER

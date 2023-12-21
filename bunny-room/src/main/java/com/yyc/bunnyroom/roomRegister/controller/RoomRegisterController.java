@@ -38,7 +38,8 @@ public class RoomRegisterController {
 
         // DB 에 있는 카테고리를 가져와서 같이 보낸다
         List<BusinessCategoryDTO> businessCategoryList = roomRegisterService.selectAllBusinessCategory();
-        modelAndView.addObject(businessCategoryList);
+
+        modelAndView.addObject("businessCategoryList",businessCategoryList);
 
         modelAndView.setViewName("/roomRegister/form/businessRegisterForm");
 
@@ -46,7 +47,7 @@ public class RoomRegisterController {
     }
 
     @PostMapping("/businessRegister")
-    public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO){
+    public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO, ModelAndView modelAndView){
 
         /* businessDTO 에 사용자 번호 입력*/
         // 현재 사용중인 사용자를 지정
@@ -64,14 +65,34 @@ public class RoomRegisterController {
         ZonedDateTime currentTime = ZonedDateTime.now();
         businessDTO.setBusinessRegistDate(currentTime);
 
-        int result = roomRegisterService.businessRegister(businessDTO);
-
         /* businessDTO 상태 active*/
         businessDTO.setBusinessStatus("active");
 
 
-//        테스트용
-        return new ModelAndView();
+
+
+
+        /* test */
+        System.out.println(businessDTO.getBusinessCategoryNo());
+
+
+
+
+        /* 사업체를 등록시킨다 */
+        int result = roomRegisterService.businessRegister(businessDTO);
+
+        /* 등록 성공, 실패 controller */
+        String message ="";
+        if (result == 1){
+            message = "사업체를 성공적으로 등록하셨습니다.";
+            modelAndView.addObject("message", message);
+        }else {
+            message = "사업체를 등록 실패했습니다";
+            modelAndView.addObject("message", message);
+        }
+
+        modelAndView.setViewName("/roomRegister/view/hostMainView");
+        return modelAndView;
 
     }
 

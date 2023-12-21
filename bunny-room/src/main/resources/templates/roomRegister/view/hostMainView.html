@@ -11,7 +11,7 @@
 </header>
 
 <a href="/roomRegister/businessRegisterForm">업체등록하기</a>
-
+<br><br><br><br><br>
 
 
 
@@ -315,6 +315,16 @@
                 }
             }
         }).open();
+    }
+</script>
+
+
+
+<!--메세지 출력-->
+<script th:inline="javascript">
+    const message = [[${message}]]
+    if (message){
+        alert(message);
     }
 </script>
 </body>

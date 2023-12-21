@@ -37,33 +37,17 @@
 
 
 
-<!--    <select id="findByUserEmail" resultMap="businessCategoryDTO">-->
-<!--        SELECT-->
-<!--        USER_NO,-->
-<!--        USER_EMAIL,-->
-<!--        USER_PASSWORD,-->
-<!--        USER_NICKNAME,-->
-<!--        USER_PHONE,-->
-<!--        USER_AUTH,-->
-<!--        USER_STATUS,-->
-<!--        USER_REGIST_DATE,-->
-<!--        USER_UPDATE_DATE,-->
-<!--        PROFILE_IMAGE_NO-->
-<!--        FROM TBL_USER-->
-<!--        WHERE USER_EMAIL = #{userEmail}-->
-<!--    </select>-->
-
 
 
 
     <!--모든 사업체 카테고리 가져옴 (active)-->
     <select id="selectAllBusinessCategory" resultMap="businessCategoryDTO">
         SELECT
-        BUSINESS_CATEGORY_NO,
-        BUSINESS_CATEGORY_NAME,
-        BUSINESS_CATEGORY_COLOR_CODE,
-        FROM TBL_BUSINESS_CATEGORY
-        WHERE BUSINESS_CATEGORY_STATUS = 'active'
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_CATEGORY_NAME,
+            BUSINESS_CATEGORY_COLOR_CODE
+          FROM TBL_BUSINESS_CATEGORY
+         WHERE BUSINESS_CATEGORY_STATUS = 'active'
     </select>
 
 
@@ -71,31 +55,31 @@
     <!--사업체 등록-->
     <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
         INSERT INTO TBL_BUSINESS(
-        BUSINESS_NO,
-        USER_NO,
-        USINESS_REGIST_NO,
-        BUSINESS_NAME,
-        BUSINESS_CATEGORY_NO,
-        BUSINESS_ADDRESS_ROAD,
-        BUSINESS_ADDRESS_DETAIL,
-        BUSINESS_ZIP_CODE,
-        BUSINESS_PHONE,
-        BUSINESS_REGIST_DATE,
-        BUSINESS_UPDATE_DATE,
-        BUSINESS_STATUS
+            BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
         )VALUES(
-        NULL,
-        #{userNo},
-        #{businessRegistNo},
-        #{businessName},
-        #{businessCategoryNo},
-        #{businessAddressRoad},
-        #{businessAddressDetail},
-        #{businessZipCode},
-        #{businessPhone},
-        #{businessRegistDate},
-        #{businessUpdateDate},
-        #{businessStatus}
+            NULL,
+            #{userNo},
+            #{businessRegistNo},
+            #{businessName},
+            #{businessCategoryNo},
+            #{businessAddressRoad},
+            #{businessAddressDetail},
+            #{businessZipCode},
+            #{businessPhone},
+            #{businessRegistDate},
+            #{businessUpdateDate},
+            #{businessStatus}
         )
     </insert>
 
