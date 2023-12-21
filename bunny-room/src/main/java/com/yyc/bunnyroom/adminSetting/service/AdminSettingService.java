@@ -42,4 +42,14 @@ public class AdminSettingService {
 
         return result;
     }
+
+    public int newCategory(String categoryName, String colorCode) {
+        int result = categoryDAO.newCategory(categoryName, colorCode);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
+    }
 }
