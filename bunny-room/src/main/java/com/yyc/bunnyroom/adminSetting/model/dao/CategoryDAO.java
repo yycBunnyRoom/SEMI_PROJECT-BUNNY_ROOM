@@ -11,4 +11,6 @@ public interface CategoryDAO {
     List<CategoryDTO> showCategory();
 
     int changeCategory(@Param("categoryNo") int categoryNo, @Param("categoryName") String categoryName, @Param("colorCode") String colorCode);
+
+    int offCategory(@Param("categoryNo") int categoryNo);
 }

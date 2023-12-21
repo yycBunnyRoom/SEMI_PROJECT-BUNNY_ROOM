@@ -36,4 +36,10 @@ public class AdminSettingService {
             return 0;
         }
     }
+
+    public int offCategory(int categoryNo) {
+        int result= categoryDAO.offCategory(categoryNo);
+
+        return result;
+    }
 }

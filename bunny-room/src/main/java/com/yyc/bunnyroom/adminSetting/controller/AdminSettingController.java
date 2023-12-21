@@ -63,7 +63,19 @@ public class AdminSettingController{
 
         int result = adminSettingService.changeCategory(categoryNo, categoryName, colorCode);
 
-        if(result < 0){
+        if(result <= 0){
+            System.out.println("스탑");
+        }
+
+        return "redirect:/admin/setting";
+    }
+
+    @PostMapping("/off")
+    private String offCategory(@RequestParam(name = "categoryNo")int categoryNo){
+
+        int result = adminSettingService.offCategory(categoryNo);
+
+        if(result <= 0){
             System.out.println("스탑");
         }
 

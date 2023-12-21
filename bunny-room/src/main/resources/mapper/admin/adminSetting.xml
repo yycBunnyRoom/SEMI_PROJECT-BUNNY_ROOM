@@ -27,4 +27,11 @@
             BUSINESS_CATEGORY_NO = #{categoryNo}
     </update>
 
+    <update id="offCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        UPDATE TBL_BUSINESS_CATEGORY
+        SET
+            BUSINESS_CATEGORY_STATUS = 'inactive'
+        WHERE
+            BUSINESS_CATEGORY_NO = #{categoryNo}
+    </update>
 </mapper>

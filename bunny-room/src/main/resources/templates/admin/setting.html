@@ -29,8 +29,13 @@
             </form>
             <form action="/admin/setting/off" method="post">
                 <input type="text" name="categoryNo" th:value="${category.categoryNo}"/>
-                <input type="text" name="categoryStatus" th:value="${category.categoryStatus}"/>
                 <button type="submit">삭제</button>
+            </form>
+        </article>
+
+        <article>
+            <form action="/admin/setting/newCategory" method="post">
+                <button type="button">카테고리 추가</button>
             </form>
         </article>
     </section>
