@@ -37,6 +37,8 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
             A.BLACK_STATUS = 'active'
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
     <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
@@ -100,6 +102,8 @@
             A.BLACK_STATUS = 'active'
             AND
             B.USER_EMAIL = #{email}
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
     <select id="showBlacklistByEmail" resultMap="blacklist">
@@ -123,6 +127,8 @@
             A.BLACK_STATUS = 'active'
             AND
             B.USER_EMAIL LIKE #{param}
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
     <select id="showBlacklistByNickname" resultMap="blacklist">
@@ -146,6 +152,8 @@
             A.BLACK_STATUS = 'active'
             AND
             B.USER_NICKNAME LIKE #{param}
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
     <select id="showBlacklistByPhone" resultMap="blacklist">
@@ -169,6 +177,8 @@
             A.BLACK_STATUS = 'active'
             AND
             B.USER_PHONE LIKE #{param}
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
     <update id="restoreAuth" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
@@ -208,9 +218,11 @@
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
             A.BLACK_STATUS = 'inactive'
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 
-    <select id="searchBlackByEmailInInactive" resultMap="blacklist">
+    <select id="searchBlackByEmailInAny" resultMap="blacklist">
         SELECT
             A.BLACK_NO,
             A.USER_NO,
@@ -228,8 +240,12 @@
         JOIN
             TBL_USER AS B ON (A.USER_NO = B.USER_NO)
         WHERE
-            A.BLACK_STATUS = 'inactive'
+            (A.BLACK_STATUS = 'inactive'
+            OR
+            A.BLACK_STATUS = 'active')
             AND
             B.USER_EMAIL = #{email}
+        ORDER BY
+            A.BLACK_NO DESC;
     </select>
 </mapper>

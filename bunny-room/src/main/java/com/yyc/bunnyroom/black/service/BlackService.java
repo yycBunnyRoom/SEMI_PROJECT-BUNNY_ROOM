@@ -156,8 +156,8 @@ public class BlackService {
     /**
      * 비활성화된 블랙리스트 명단을 이메일을 조건으로 조회하는 메소드
      * */
-    public Object searchBlackByEmailInInactive(String email) {
-        List<BlackDTO> blacklist = blackDAO.searchBlackByEmailInInactive(email);
+    public Object searchBlackByEmailInAny(String email) {
+        Object blacklist = blackDAO.searchBlackByEmailInAny(email);
 
         return blacklist;
     }
