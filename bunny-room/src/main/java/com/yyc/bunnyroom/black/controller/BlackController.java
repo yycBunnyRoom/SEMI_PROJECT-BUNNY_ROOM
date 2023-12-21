@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +25,7 @@ public class BlackController {
     /**
      * 블랙리스트 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
-    @GetMapping
+    @GetMapping(value = {"", "/", "black"})
     private String black(Model model){
         List<BlackDTO> blacklist = blackService.showAll();
         model.addAttribute("blacklist", blacklist);
@@ -72,6 +74,19 @@ public class BlackController {
                                  @RequestParam(name = "email") String email,
                                  @RequestParam(name = "nickname") String nickname,
                                  @RequestParam(name = "phone") String phone, Model model){
+
+        if(auth.equals("BLACK")){
+            String message = "이미 이 회원은 블랙리스트에 등재되어 있습니다.";
+
+            try {
+                // UTF-8로 인코딩
+                message = URLEncoder.encode(message, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+
+            return "redirect:/admin/member?message=" + message;
+        }
         // 해당회원의 정보 중 블랙리스트 정보에 들어갈 정보 뽑기
         model.addAttribute("userNo", userNo);
         model.addAttribute("auth", auth);
@@ -92,7 +107,8 @@ public class BlackController {
                                @RequestParam(name = "reason") String reason, Model model){
 
         int change;
-        if(Objects.isNull(blackService.searchBlackByEmailInInactive(email))){
+
+        if(Objects.isNull(blackService.searchBlackByEmailInAny(email))){
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
@@ -104,9 +120,19 @@ public class BlackController {
             change = blackService.modifyBlacklist(userNo, auth, email, reason);
         }
 
-        // 블랙리스트로 회원 권한을 변경
-        System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
-        int update = blackService.toBlacklist(email);
+        boolean chance = false;
+
+        if(change > 0){
+            chance = true;
+        }
+
+        int update = 0;
+
+        if(chance){
+            // 블랙리스트로 회원 권한을 변경
+            System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
+            update = blackService.toBlacklist(email);
+        }
 
         if(change > 0 && update > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
@@ -146,6 +172,6 @@ public class BlackController {
             model.addAttribute("restore", "권한 복구에 실패하였습니다.");
         }
 
-        return "black/blacklist";
+        return "redirect:/admin/black";
     }
 }
