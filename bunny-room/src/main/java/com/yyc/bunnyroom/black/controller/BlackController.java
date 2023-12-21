@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,6 +74,19 @@ public class BlackController {
                                  @RequestParam(name = "email") String email,
                                  @RequestParam(name = "nickname") String nickname,
                                  @RequestParam(name = "phone") String phone, Model model){
+
+        if(auth.equals("BLACK")){
+            String message = "이미 이 회원은 블랙리스트에 등재되어 있습니다.";
+
+            try {
+                // UTF-8로 인코딩
+                message = URLEncoder.encode(message, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                throw new RuntimeException(e);
+            }
+
+            return "redirect:/admin/member?message=" + message;
+        }
         // 해당회원의 정보 중 블랙리스트 정보에 들어갈 정보 뽑기
         model.addAttribute("userNo", userNo);
         model.addAttribute("auth", auth);
