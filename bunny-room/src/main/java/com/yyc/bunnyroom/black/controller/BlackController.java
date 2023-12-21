@@ -92,7 +92,7 @@ public class BlackController {
                                @RequestParam(name = "reason") String reason, Model model){
 
         int change;
-        if(Objects.isNull(blackService.searchBlackByEmail(email))){
+        if(Objects.isNull(blackService.searchBlackByEmailInInactive(email))){
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");

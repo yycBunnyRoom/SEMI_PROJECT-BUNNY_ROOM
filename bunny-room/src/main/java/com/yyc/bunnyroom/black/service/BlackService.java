@@ -152,4 +152,13 @@ public class BlackService {
 
         return blacklist;
     }
+
+    /**
+     * 비활성화된 블랙리스트 명단을 이메일을 조건으로 조회하는 메소드
+     * */
+    public Object searchBlackByEmailInInactive(String email) {
+        List<BlackDTO> blacklist = blackDAO.searchBlackByEmailInInactive(email);
+
+        return blacklist;
+    }
 }
