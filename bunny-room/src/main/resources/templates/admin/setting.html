@@ -19,7 +19,6 @@
             <p th:text="${category.categoryNo}"></p>
             <p th:text="${category.categoryName}"></p>
             <p th:text="${category.colorCode}"></p>
-            <p th:text="${category.categoryStatus}"></p>
 
             <form action="/admin/setting/callChanger" method="post">
                 <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
