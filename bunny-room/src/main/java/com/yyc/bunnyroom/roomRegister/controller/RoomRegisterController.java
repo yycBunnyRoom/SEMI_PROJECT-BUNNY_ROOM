@@ -46,6 +46,8 @@ public class RoomRegisterController {
         return modelAndView;
     }
 
+
+    /* 업체 등록 */
     @PostMapping("/businessRegister")
     public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO, ModelAndView modelAndView){
 
@@ -68,16 +70,6 @@ public class RoomRegisterController {
         /* businessDTO 상태 active*/
         businessDTO.setBusinessStatus("active");
 
-
-
-
-
-        /* test */
-        System.out.println(businessDTO.getBusinessCategoryNo());
-
-
-
-
         /* 사업체를 등록시킨다 */
         int result = roomRegisterService.businessRegister(businessDTO);
 
@@ -95,6 +87,20 @@ public class RoomRegisterController {
         return modelAndView;
 
     }
+
+
+    /* 휴무 등록 페이지 */
+    @GetMapping("/dayOffRegisterForm")
+    public String dayOffRegisterForm(){
+        return "/roomRegister/form/dayOffRegisterForm";
+    }
+
+    /* 방 등록 페이지 */
+    @GetMapping("/roomRegisterForm")
+    public String roomRegisterForm(){
+        return "/roomRegister/form/roomRegisterForm";
+    }
+
 
 
 }
