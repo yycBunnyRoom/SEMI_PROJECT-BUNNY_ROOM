@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 변경</title>
+</head>
+<body>
+<section>
+  <h2>카테고리를 변경해주세요.</h2>
+  <form action="/admin/setting/change" method="post">
+    <input type="hidden" name="categoryNo" th:value="${categoryNo}"/>
+    <p>카테고리 이름 : </p><input type="text" name="categoryName" th:placeholder="${categoryName}" th:value="${categoryName}"/>
+    <p>카테고리 색상 : </p><input type="text" name="colorCode" th:placeholder="${colorCode}" th:value="${colorCode}"/>
+    <button type="submit">변경하기</button>
+  </form>
+</section>
+
+</body>
+</html>

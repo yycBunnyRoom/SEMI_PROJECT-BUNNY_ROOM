@@ -18,5 +18,13 @@
             TBL_BUSINESS_CATEGORY
     </select>
 
+    <update id="changeCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        UPDATE TBL_BUSINESS_CATEGORY
+        SET
+            BUSINESS_CATEGORY_NAME = #{categoryName},
+            BUSINESS_CATEGORY_COLOR_CODE = #{colorCode}
+        WHERE
+            BUSINESS_CATEGORY_NO = #{categoryNo}
+    </update>
 
 </mapper>
