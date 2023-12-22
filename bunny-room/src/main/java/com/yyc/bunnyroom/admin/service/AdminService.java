@@ -5,7 +5,10 @@ import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,9 +38,9 @@ public class AdminService {
     /**
      * 해당회원의 탈퇴 요청을 수행하는 메소드
      * */
-    public int withdrawMember(String email) {
-
-        int result = adminDAO.withdrawMember(email);
+    public int withdrawMember(String email, String reason) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = adminDAO.withdrawMember(email, reason, updateDate);
 
         if(result > 0){
             System.out.println("정상적으로 탈퇴처리되었습니다.");
@@ -75,8 +78,23 @@ public class AdminService {
         return members;
     }
 
+    /**
+     * 탈퇴된 회원 정보를 조회하는 메소드
+     * */
     public List<MemberDTO> searchMemberByInactive() {
         List<MemberDTO> members = adminDAO.searchMemberByInactive();
         return members;
+    }
+
+    /** 탈퇴한 회원 중 이메일을 조건으로 조회하는 메소드*/
+    public List<MemberDTO> searchMemberByInactiveFor(String email) {
+        List<MemberDTO> member = adminDAO.searchMemberByInactiveFor(email);
+        return member;
+    }
+
+    public MemberDTO searchAllConditionByEmail(String email) {
+        MemberDTO member = adminDAO.searchAllConditionByEmail(email);
+
+        return member;
     }
 }

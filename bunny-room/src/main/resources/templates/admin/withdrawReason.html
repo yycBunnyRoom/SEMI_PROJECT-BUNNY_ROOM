@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>탈퇴 사유</title>
+</head>
+<body>
+  <h3>탈퇴 사유를 작성해주세요</h3>
+  <form action="/admin/withdraw" method="post">
+    <input type="hidden" name="email" th:value="${email}">
+      <p>사유 : </p><input type="text" name="reason"/>
+      <button type="submit">탈퇴</button>
+  </form>
+</body>
+</html>
