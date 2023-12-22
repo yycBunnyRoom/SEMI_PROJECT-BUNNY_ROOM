@@ -48,4 +48,9 @@ public class MainController {
         modelAndView.setViewName("main");
         return modelAndView;
     }
+
+    @GetMapping("/test2")
+    public String test2(){
+        return "/test2";
+    }
 }

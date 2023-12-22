@@ -60,6 +60,7 @@ public class SecurityConfig {
                         "/mailSend",
                         "/mailAuthCheck",
 
+                        "/main/test2",
                         "/"
                 ).permitAll();
                 auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
