@@ -71,7 +71,7 @@ public class AdminSettingController{
     }
 
     @PostMapping("/off")
-    private String offCategory(@RequestParam(name = "categoryNo")int categoryNo){
+    public String offCategory(@RequestParam(name = "categoryNo")int categoryNo){
 
         int result = adminSettingService.offCategory(categoryNo);
 
@@ -80,5 +80,30 @@ public class AdminSettingController{
         }
 
         return "redirect:/admin/setting";
+    }
+
+    @GetMapping("toNewCategory")
+    public String toNewCategory(){
+        return "/admin/setting/categoryMaker";
+    }
+
+    @PostMapping("/newCategory")
+    public String newCategory(@RequestParam(name = "categoryName")String categoryName,
+                              @RequestParam(name = "colorCode")String colorCode, Model model){
+
+        if(categoryName.isEmpty() || colorCode.isEmpty()){
+            model.addAttribute("message", "값이 입력되지 않았습니다.");
+            return "/admin/setting/categoryMaker";
+        }
+
+        int result = adminSettingService.newCategory(categoryName, colorCode);
+
+        if(result > 0){
+            model.addAttribute("message", "카테고리가 추가되었습니다.");
+            return "redirect:/admin/setting";
+        }else {
+            model.addAttribute("message", "카테고리 추가에 실패했습니다.");
+        }
+        return "/admin/setting";
     }
 }

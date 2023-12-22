@@ -16,10 +16,8 @@
         <h2>카테고리 관리</h2>
         <h3>현재 카테고리</h3>
         <article th:each="category: ${categorylist}">
-            <p th:text="${category.categoryNo}"></p>
             <p th:text="${category.categoryName}"></p>
             <p th:text="${category.colorCode}"></p>
-            <p th:text="${category.categoryStatus}"></p>
 
             <form action="/admin/setting/callChanger" method="post">
                 <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
@@ -28,16 +26,26 @@
                 <button type="submit">변경</button>
             </form>
             <form action="/admin/setting/off" method="post">
-                <input type="text" name="categoryNo" th:value="${category.categoryNo}"/>
+                <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
                 <button type="submit">삭제</button>
             </form>
         </article>
 
         <article>
-            <form action="/admin/setting/newCategory" method="post">
-                <button type="button">카테고리 추가</button>
+            <form action="/admin/setting/toNewCategory" method="Get">
+                <button type="submit">카테고리 추가</button>
             </form>
         </article>
     </section>
+
+    <th:block th:if="${message}">
+        <script th:inline="javascript">
+            window.onload =function (){
+                let message = `[[${message}]]`;
+                alert(message);
+            }
+        </script>
+    </th:block>
+
 </body>
 </html>
