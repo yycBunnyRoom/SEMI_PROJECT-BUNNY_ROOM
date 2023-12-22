@@ -13,4 +13,6 @@ public interface CategoryDAO {
     int changeCategory(@Param("categoryNo") int categoryNo, @Param("categoryName") String categoryName, @Param("colorCode") String colorCode);
 
     int offCategory(@Param("categoryNo") int categoryNo);
+
+    int newCategory(@Param("categoryName")String categoryName, @Param("colorCode")String colorCode);
 }

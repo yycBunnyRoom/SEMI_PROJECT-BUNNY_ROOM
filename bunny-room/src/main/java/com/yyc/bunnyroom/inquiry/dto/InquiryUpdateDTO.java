@@ -1,39 +1,30 @@
 package com.yyc.bunnyroom.inquiry.dto;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
-public class InquiryDTO {
+public class InquiryUpdateDTO {
 
-    private int inquiryNo;
+
     private int userNo;
     private String inquiryTitle;
-    private LocalDateTime inquiryRegistDate;
-    private String inquiryContents;
-    private LocalDateTime inquiryUpdateDate;
-    private String inquiryStatus;
-    private String userNickname;
 
-    public InquiryDTO() {
+
+    private String inquiryContents;
+
+    private LocalDateTime inquiryUpdateDate;
+
+    private String inquiryStatus;
+
+
+    public InquiryUpdateDTO() {
     }
 
-    public InquiryDTO(int inquiryNo, int userNo, String inquiryTitle, LocalDateTime inquiryRegistDate, String inquiryContents, LocalDateTime inquiryUpdateDate, String inquiryStatus, String userNickname) {
-        this.inquiryNo = inquiryNo;
+    public InquiryUpdateDTO(int userNo, String inquiryTitle, String inquiryContents, LocalDateTime inquiryUpdateDate, String inquiryStatus) {
         this.userNo = userNo;
         this.inquiryTitle = inquiryTitle;
-        this.inquiryRegistDate = inquiryRegistDate;
         this.inquiryContents = inquiryContents;
         this.inquiryUpdateDate = inquiryUpdateDate;
         this.inquiryStatus = inquiryStatus;
-        this.userNickname = userNickname;
-    }
-
-    public int getInquiryNo() {
-        return inquiryNo;
-    }
-
-    public void setInquiryNo(int inquiryNo) {
-        this.inquiryNo = inquiryNo;
     }
 
     public int getUserNo() {
@@ -50,14 +41,6 @@ public class InquiryDTO {
 
     public void setInquiryTitle(String inquiryTitle) {
         this.inquiryTitle = inquiryTitle;
-    }
-
-    public LocalDateTime getInquiryRegistDate() {
-        return inquiryRegistDate;
-    }
-
-    public void setInquiryRegistDate(LocalDateTime inquiryRegistDate) {
-        this.inquiryRegistDate = inquiryRegistDate;
     }
 
     public String getInquiryContents() {
@@ -84,25 +67,14 @@ public class InquiryDTO {
         this.inquiryStatus = inquiryStatus;
     }
 
-    public String getUserNickname() {
-        return userNickname;
-    }
-
-    public void setUserNickname(String userNickname) {
-        this.userNickname = userNickname;
-    }
-
     @Override
     public String toString() {
-        return "InquiryDTO{" +
-                "inquiryNo=" + inquiryNo +
-                ", userNo=" + userNo +
+        return "InquiryUpdateDTO{" +
+                "userNo=" + userNo +
                 ", inquiryTitle='" + inquiryTitle + '\'' +
-                ", inquiryRegistDate=" + inquiryRegistDate +
                 ", inquiryContents='" + inquiryContents + '\'' +
                 ", inquiryUpdateDate=" + inquiryUpdateDate +
                 ", inquiryStatus='" + inquiryStatus + '\'' +
-                ", userNickname='" + userNickname + '\'' +
                 '}';
     }
 }

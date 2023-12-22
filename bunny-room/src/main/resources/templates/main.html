@@ -27,6 +27,10 @@
         <button id="btn_logout" style="display: block">로그아웃</button>
     </form>
 
+    <button onclick="location.href='inquirys'">문의사항 게시판</button>
+
+
+
     <script th:inline="javascript">
         if ([[${message}]]){
             alert([[${message}]]);
@@ -40,15 +44,7 @@
         let userAuth = [[${userAuth}]]
         let userNickname = [[${userNickname}]]
     </script>
-
-
-
-
-
-
-
-
-
+    
     <a href="/main/test2">test2</a>
 
 </body>

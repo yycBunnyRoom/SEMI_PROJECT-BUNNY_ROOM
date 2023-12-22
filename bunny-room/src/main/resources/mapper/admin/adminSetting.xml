@@ -16,6 +16,8 @@
             *
         FROM
             TBL_BUSINESS_CATEGORY
+        WHERE
+            BUSINESS_CATEGORY_STATUS = 'active'
     </select>
 
     <update id="changeCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
@@ -34,4 +36,18 @@
         WHERE
             BUSINESS_CATEGORY_NO = #{categoryNo}
     </update>
+
+    <insert id="newCategory" parameterType="com.yyc.bunnyroom.adminSetting.model.dto.CategoryDTO">
+        INSERT INTO TBL_BUSINESS_CATEGORY(
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_CATEGORY_NAME,
+            BUSINESS_CATEGORY_COLOR_CODE,
+            BUSINESS_CATEGORY_STATUS
+            )VALUES(
+            NULL,
+            #{categoryName},
+            #{colorCode},
+            'active'
+            )
+    </insert>
 </mapper>
