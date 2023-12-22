@@ -19,9 +19,6 @@
     </resultMap>
 
 
-
-
-
     <select id="findByUserEmail" resultMap="loginUser">
         SELECT
         USER_NO,
@@ -38,59 +35,11 @@
         WHERE USER_EMAIL = #{userEmail}
     </select>
 
-
-
-
-    <insert id="registUser" parameterType="com.yyc.bunnyroom.signup.model.dto.SignupDTO">
-        INSERT INTO TBL_USER(
-        USER_NO,
-        USER_EMAIL,
-        USER_PASSWORD,
-        USER_NICKNAME,
-        USER_PHONE,
-        USER_AUTH,
-        USER_STATUS,
-        USER_REGIST_DATE
-        )VALUES(
-        NULL,
-        #{userEmail},
-        #{userPassword},
-        #{userNickname},
-        #{userPhone},
-        #{userAuth},
-        #{userStatus},
-        #{userRegistDate}
-        )
-    </insert>
-
-
-
-    <select id="emailCheck" parameterType="com.yyc.bunnyroom.common.dto.UserDTO" resultType="int">
-        SELECT COUNT(*)
-        FROM TBL_USER
-        WHERE USER_EMAIL = #{userEmail}
-    </select>
-
-    <select id="phoneCheck" parameterType="com.yyc.bunnyroom.common.dto.UserDTO" resultType="int">
-        SELECT COUNT(*)
-        FROM TBL_USER
-        WHERE USER_PHONE = #{userPhone}
-    </select>
-
-
-
-    <update id="resetPassword" parameterType="com.yyc.bunnyroom.common.dto.UserDTO">
+    <update id="updateUserPassword" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
         UPDATE TBL_USER
         SET USER_PASSWORD = #{userPassword}
         WHERE USER_EMAIL = #{userEmail}
     </update>
-
-
-
-
-
-
-
 
 
 
