@@ -1,17 +1,11 @@
 package com.yyc.bunnyroom.common;
 
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
-import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.time.ZonedDateTime;
 
 @Controller
 @RequestMapping(value = {"/", "/main"})
@@ -51,6 +45,6 @@ public class MainController {
 
     @GetMapping("/test2")
     public String test2(){
-        return "/test2";
+        return "/test/test2";
     }
 }
