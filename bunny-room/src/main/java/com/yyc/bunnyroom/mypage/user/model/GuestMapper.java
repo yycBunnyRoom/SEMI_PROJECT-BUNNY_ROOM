@@ -5,10 +5,14 @@ import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface GuestMapper {
 
-    UserDTO findByUserEmail(String userEmail);
+    //UserDTO findByUserEmail(String userEmail);
+
+    List<LoginUserDTO> findByAllUserEmail();
 
     int updateUserPassword(LoginUserDTO loginUserDTO);
 }

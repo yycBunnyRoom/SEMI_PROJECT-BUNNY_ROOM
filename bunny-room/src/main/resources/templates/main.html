@@ -30,6 +30,12 @@
     <button onclick="location.href='inquirys'">문의사항 게시판</button>
 
 
+    <div sec:authorize="hasAnyAuthority('GUEST')">
+        <button onclick="location.href='mypages'">마이페이지</button>
+    </div>
+
+
+
 
     <script th:inline="javascript">
         if ([[${message}]]){

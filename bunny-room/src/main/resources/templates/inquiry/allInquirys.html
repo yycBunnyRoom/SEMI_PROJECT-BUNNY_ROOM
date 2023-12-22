@@ -16,7 +16,7 @@
         <th>문의사항 등록일</th>
     </tr>
     <tr th:each="inquiry : ${inquirys}">
-        <td th:text="${inquiry.inquiryNo}"></td>
+        <td th:text="${inquiry.userEmail}"></td>
         <td th:text="${inquiry.userNickname}"></td>
         <td>
             <a th:text="${inquiry.inquiryTitle}" th:href="@{/inquirys/searchInquiry(inquiryNo=${inquiry.inquiryNo})}"></a>

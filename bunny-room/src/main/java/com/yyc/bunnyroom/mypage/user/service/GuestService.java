@@ -6,6 +6,7 @@ import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -18,17 +19,28 @@ public class GuestService {
     }
 
 
-    public UserDTO findByUserEmail(String userEmail){
-        UserDTO user = guestMapper.findByUserEmail(userEmail);
 
+    public List<LoginUserDTO> findByAllUserEmail(){
+        List<LoginUserDTO> mypage= guestMapper.findByAllUserEmail();
 
-
-        if(Objects.isNull(user)){
-            throw new NullPointerException();
-        }else {
-            return user;
+        if(Objects.isNull(mypage)){
+            System.out.println("오류");
         }
+        return mypage;
     }
+
+
+//    public UserDTO findByUserEmail(String userEmail){
+//        UserDTO user = guestMapper.findByUserEmail(userEmail);
+//
+//
+//
+//        if(Objects.isNull(user)){
+//            throw new NullPointerException();
+//        }else {
+//            return user;
+//        }
+//    }
 
 //    @Transactional
 //    public boolean changePassword(String userEmail, String currentPassword, String newPassword, String confirmPassword) {
