@@ -232,4 +232,31 @@
         ORDER BY
             A.BLACK_NO DESC;
     </select>
+
+    <select id="searchBlacklistByUserNo" resultMap="blacklist">
+        SELECT
+            *
+        FROM
+            TBL_BLACKLIST
+        WHERE
+            USER_NO = #{userNo}
+    </select>
+
+    <update id="changeUserStatus" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'black',
+            USER_UPDATE_DATE = #{updateDate}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
+
+    <update id="restoreUserStatus" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+        USER_STATUS = 'active',
+        USER_UPDATE_DATE = #{updateDate}
+        WHERE
+        USER_NO = #{userNo}
+    </update>
 </mapper>

@@ -105,7 +105,8 @@ public class BlackController {
 
         int change;
 
-        if(Objects.isNull(blackService.searchBlackByEmailInAny(email))){
+        // 블랙리스트에 있는지 한번이라도 등재된 적이 있는지 확인
+        if(Objects.isNull(blackService.searchBlacklistByUserNo(userNo))){
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
@@ -116,6 +117,9 @@ public class BlackController {
             System.out.println("update");
             change = blackService.modifyBlacklist(userNo, reason);
         }
+
+        // 유저 테이블에서 조회시 유저가 블랙상태인지 확인하기 위해 블랙상태로 변경하기
+        int changeStatus = blackService.changeUserStatus(userNo);
 
         if(change > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
@@ -144,7 +148,10 @@ public class BlackController {
         // 블랙리스트 명단에서 상태를 비활성화하고 수정 날짜 기록
         int change = blackService.disableBlack(userNo);
 
-        if(change > 0){
+        // 유저 테이블의 상태 원 복구
+        int userStatus = blackService.restoreStatus(userNo);
+
+        if(change > 0 && userStatus > 0){
             model.addAttribute("restore", "성공적으로 권한이 복구되었습니다.");
         }else {
             model.addAttribute("restore", "권한 복구에 실패하였습니다.");

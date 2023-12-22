@@ -131,4 +131,33 @@ public class BlackService {
 
         return blacklist;
     }
+
+    /**
+     * 블랙리스트 DB에 등재된 정보가 있는지 확인하는 메소드
+     * */
+    public Object searchBlacklistByUserNo(int userNo) {
+        Object user = blackDAO.searchBlacklistByUserNo(userNo);
+
+        return user;
+    }
+
+    /**
+     * 유저 테이블의 상태를 블랙으로 변경하는 메소드
+     * */
+    public int changeUserStatus(int userNo) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int changeUserStatus = blackDAO.changeUserStatus(userNo, updateDate);
+
+        return changeUserStatus;
+    }
+
+    /**
+     * 유저 테이블의 상태가 블랙인 경우 다시 active로 돌리는 메소드
+     * */
+    public int restoreStatus(int userNo) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int changeUserStatus = blackDAO.restoreUserStatus(userNo, updateDate);
+
+        return changeUserStatus;
+    }
 }

@@ -30,4 +30,10 @@ public interface BlackDAO {
     List<BlackDTO> showBlacklistByInactive();
 
     Object searchBlackByEmailInAny(@Param("email") String email);
+
+    Object searchBlacklistByUserNo(int userNo);
+
+    int changeUserStatus(@Param("userNo") int userNo, @Param("updateDate") String updateDate);
+
+    int restoreUserStatus(@Param("userNo") int userNo, @Param("updateDate") String updateDate);
 }
