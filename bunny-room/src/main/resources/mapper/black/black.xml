@@ -40,14 +40,7 @@
         ORDER BY
             A.BLACK_NO DESC;
     </select>
-
-    <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
-        UPDATE TBL_USER
-        SET
-            USER_AUTH = 'BLACK'
-        WHERE
-            USER_EMAIL = #{email}
-    </update>
+    
 
     <insert id="addBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
         INSERT INTO TBL_BLACKLIST(
@@ -75,8 +68,7 @@
             BLACK_REASON = #{reason},
             BLACK_UPDATE_DATE = #{updateDate},
             BLACK_STATUS = 'active',
-            BLACK_SENTENCE_PERIOD = #{sentenceTime},
-            BLACK_ORIGIN_AUTH = #{auth}
+            BLACK_SENTENCE_PERIOD = #{sentenceTime}
         WHERE
             USER_NO = #{userNo}
     </update>
@@ -180,14 +172,6 @@
         ORDER BY
             A.BLACK_NO DESC;
     </select>
-
-    <update id="restoreAuth" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
-        UPDATE TBL_USER
-        SET
-            USER_AUTH = #{auth}
-        WHERE
-            USER_EMAIL = #{email}
-    </update>
 
     <update id="disableBlack" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
         UPDATE TBL_BLACKLIST

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -73,26 +74,22 @@ public class BlackController {
                                  @RequestParam(name = "auth") String auth,
                                  @RequestParam(name = "email") String email,
                                  @RequestParam(name = "nickname") String nickname,
-                                 @RequestParam(name = "phone") String phone, Model model){
+                                 @RequestParam(name = "phone") String phone,
+                                 @RequestParam(name = "status") String status, Model model, RedirectAttributes redirectAttributes){
 
-        if(auth.equals("BLACK")){
-            String message = "이미 이 회원은 블랙리스트에 등재되어 있습니다.";
-
-            try {
-                // UTF-8로 인코딩
-                message = URLEncoder.encode(message, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                throw new RuntimeException(e);
-            }
-
-            return "redirect:/admin/member?message=" + message;
+        // 만약 이미 블랙리스트에 있다면?
+        if(!Objects.isNull(blackService.searchBlackByEmail(email))){
+            redirectAttributes.addFlashAttribute("blacklist", "이미 블랙리스트에 있는 회원입니다.");
+            return "redirect:/admin/member";
         }
+
         // 해당회원의 정보 중 블랙리스트 정보에 들어갈 정보 뽑기
         model.addAttribute("userNo", userNo);
-        model.addAttribute("auth", auth);
+        model.addAttribute("status", status);
         model.addAttribute("email", email);
         model.addAttribute("nickname", nickname);
         model.addAttribute("phone", phone);
+        model.addAttribute("auth", auth);
 
         return "black/addBlackReason";
     }
@@ -112,29 +109,15 @@ public class BlackController {
             // 블랙리스트에 등재된 적이 없다면
             // 블랙리스트에 등재하기
             System.out.println("insert");
-            change = blackService.addBlacklist(userNo, auth, email, reason);
+            change = blackService.addBlacklist(userNo, auth, reason);
         }else {
             // 블랙리스트에 등재된 적이 있다면
             // 기존 정보에서 수정하기
             System.out.println("update");
-            change = blackService.modifyBlacklist(userNo, auth, email, reason);
+            change = blackService.modifyBlacklist(userNo, reason);
         }
 
-        boolean chance = false;
-
-        if(change > 0){
-            chance = true;
-        }
-
-        int update = 0;
-
-        if(chance){
-            // 블랙리스트로 회원 권한을 변경
-            System.out.println("메일이 " + email + "인 회원을 블랙리스트 상태로 변경합니다.");
-            update = blackService.toBlacklist(email);
-        }
-
-        if(change > 0 && update > 0) {// 정상적인 블랙 처리
+        if(change > 0) {// 정상적인 블랙 처리
             model.addAttribute("blacklist", email + "회원이 블랙처리되었습니다.");
         }else {// 비정상적인 블랙 처리
             System.out.println("정상적으로 동작되지 않았습니다.");
@@ -149,8 +132,6 @@ public class BlackController {
      * */
     @PostMapping("/restoreAuth")
     public String restoreAuth(@RequestParam(name = "userNo") int userNo,
-                              @RequestParam(name = "email") String email,
-                              @RequestParam(name = "auth") String auth,
                               @RequestParam(name = "status")String status,
                               Model model){
 
@@ -163,10 +144,7 @@ public class BlackController {
         // 블랙리스트 명단에서 상태를 비활성화하고 수정 날짜 기록
         int change = blackService.disableBlack(userNo);
 
-        // 블랙리스트 권한을 원 권한으로 변경
-        int restore = blackService.restoreAuth(email, auth);
-
-        if(change > 0 && restore > 0){
+        if(change > 0){
             model.addAttribute("restore", "성공적으로 권한이 복구되었습니다.");
         }else {
             model.addAttribute("restore", "권한 복구에 실패하였습니다.");

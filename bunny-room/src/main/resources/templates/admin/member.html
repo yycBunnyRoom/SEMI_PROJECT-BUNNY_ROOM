@@ -49,10 +49,11 @@
                   <td>
                       <form action="/admin/black/addBlacklist" method="post">
                           <input type="hidden" name="userNo" th:value="${member.userNo}">
-                          <input type="hidden" name="auth" th:value="${member.auth}">
+                          <input type="hidden" name="status" th:value="${member.status}">
                           <input type="hidden" name="email" th:value="${member.email}">
                           <input type="hidden" name="nickname" th:value="${member.nickname}">
                           <input type="hidden" name="phone" th:value="${member.phone}">
+                          <input type="hidden" name="auth" th:value="${member.auth}">
                           <button type="submit">블랙리스트에 추가</button>
                       </form>
                   </td>

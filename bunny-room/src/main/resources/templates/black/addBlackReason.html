@@ -10,8 +10,9 @@
     <form action="/admin/black/insertBlacklist" method="post">
         <input type="text" name="reason" placeholder="사유를 작성해주세요.(500자 제한)">
         <input type="hidden" name="userNo" th:value="${userNo}">
-        <input type="hidden" name="auth" th:value="${auth}">
+        <input type="hidden" name="status" th:value="${status}">
         <input type="hidden" name="email" th:value="${email}">
+        <input type="hidden" name="auth" th:value="${auth}">
         <button type="submit">블랙리스트에 추가</button>
     </form>
 
