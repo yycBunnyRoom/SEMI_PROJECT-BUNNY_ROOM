@@ -60,7 +60,9 @@
     <update id="withdrawMember" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
         UPDATE TBL_USER
         SET
-            USER_STATUS = 'inactive'
+            USER_STATUS = 'inactive',
+            USER_UPDATE_DATE = #{updateDate},
+            USER_WITHDRAW_REASON = #{reason}
         WHERE
             USER_EMAIL = #{email}
     </update>
@@ -72,5 +74,25 @@
             TBL_USER
         WHERE
             USER_STATUS = 'inactive'
+    </select>
+
+    <select id="searchMemberByInactiveFor" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_STATUS = 'inactive'
+        AND
+            USER_EMAIL = #{email}
+    </select>
+
+    <select id="searchAllConditionByEmail" resultMap="memberResult">
+        SELECT
+            *
+        FROM
+            TBL_USER
+        WHERE
+            USER_EMAIL = #{email}
     </select>
 </mapper>
