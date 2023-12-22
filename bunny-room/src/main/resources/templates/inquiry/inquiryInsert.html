@@ -8,7 +8,7 @@
 <h1> 게시물 등록하기 </h1>
 
 
-<form th:action="@{/inquirys/insert}" th:object="${inquiryRegistDTO}" method="post">
+<form th:action="@{/inquirys/insert}" th:object="${inquiryDTO}" method="post">
     <label for="inquiryTitle">Title:</label>
     <input type="text" id="inquiryTitle" name="inquiryTitle" th:field="*{inquiryTitle}" required>
 

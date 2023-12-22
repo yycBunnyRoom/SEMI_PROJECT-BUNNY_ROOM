@@ -1,22 +1,36 @@
 package com.yyc.bunnyroom.inquiry.controller;
 
+import ch.qos.logback.classic.Logger;
 import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
 import com.yyc.bunnyroom.inquiry.dto.InquiryRegistDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryUpdateDTO;
 import com.yyc.bunnyroom.inquiry.service.InquiryService;
+import com.yyc.bunnyroom.security.auth.model.AuthDetails;
+import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 @Controller
 @RequestMapping("inquirys")
 public class InquiryController {
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private InquiryService inquiryService;
@@ -60,27 +74,35 @@ public class InquiryController {
 
     @GetMapping("/insert_inquiry")
     public ModelAndView insertInquiry(ModelAndView mv) {
-        mv.addObject("inquiryRegistDTO", new InquiryRegistDTO());
+        mv.addObject("inquiryDTO", new InquiryDTO());
         mv.setViewName("inquiry/inquiryInsert"); // 뷰 이름 설정
         return mv;
     }
 
     @PostMapping("/insert")
-    public String insertInquiryPage(@ModelAttribute("inquiryRegistDTO") InquiryRegistDTO inquiryRegistDTO, Principal principal){
+    public String insertInquiryPage(@ModelAttribute InquiryDTO inquiryDTO){
 //        String loggedUser = principal.getName();
 //        int userNo = Integer.parseInt(loggedUser);
 
-        Object principals = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //회원테이블과 대조해서 거기서 userNo 가져오는 방향으로
 
-        InquiryDTO inquiry = new InquiryDTO();
-        inquiry.setUserNo(userNo);
-        inquiry.setInquiryTitle(inquiryRegistDTO.getInquiryTitle());
-        inquiry.setInquiryContents(inquiryRegistDTO.getInquiryContents());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        inquiryService.insertInquiry(inquiry);
+        if (authentication != null && authentication.isAuthenticated()) {
+            AuthDetails userDetails = (AuthDetails) authentication.getPrincipal();
 
+
+            InquiryDTO inquiry = new InquiryDTO();
+            inquiry.setUserNo(userDetails.getLoginUserDTO().getUserNo());
+            inquiry.setInquiryTitle(inquiryDTO.getInquiryTitle());
+            inquiry.setInquiryContents(inquiryDTO.getInquiryContents());
+
+            inquiryService.insertInquiry(inquiry);
+
+        }
         return "redirect:/inquirys";
     }
+
 
 
 
@@ -96,4 +118,7 @@ public class InquiryController {
 
         return "redirect:/inquirys";
     }
+
+
+
 }

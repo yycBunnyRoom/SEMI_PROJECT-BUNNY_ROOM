@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.inquiry.service;
 
 import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryUpdateDTO;
 import com.yyc.bunnyroom.inquiry.model.InquiryDAO;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import com.yyc.bunnyroom.signup.service.UserService;
@@ -17,6 +18,9 @@ import java.util.Objects;
 
 @Service
 public class InquiryService {
+
+
+
 
 
 
@@ -66,6 +70,13 @@ public class InquiryService {
 
 
     public int updateInquiry(InquiryDTO inquiryDTO){
+
+
+        inquiryDTO.setInquiryStatus("active");
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        inquiryDTO.setInquiryUpdateDate(currentTime);
+
         int result = inquiryDAO.updateInquiry(inquiryDTO);
 
         if(result <= 0){

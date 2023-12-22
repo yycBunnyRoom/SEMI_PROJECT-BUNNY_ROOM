@@ -1,10 +1,14 @@
 package com.yyc.bunnyroom.inquiry.dto;
 
+import java.time.LocalDateTime;
+
 public class InquiryRegistDTO {
 
     private String inquiryTitle;
 
     private String inquiryContents;
+
+
 
     public InquiryRegistDTO() {
     }

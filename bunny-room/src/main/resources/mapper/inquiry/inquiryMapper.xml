@@ -21,6 +21,7 @@
         PI.USER_NICKNAME
         FROM TBL_INQUIRY U
         JOIN TBL_USER PI ON U.USER_NO=PI.USER_NO
+        ORDER BY INQUIRY_NO
     </select>
 
     <select id="searchInquiry" resultMap="inquiryResult">
@@ -33,11 +34,17 @@
     <insert id="insertInquiry" parameterType="com.yyc.bunnyroom.inquiry.dto.InquiryDTO">
         INSERT INTO TBL_INQUIRY
         (
+        USER_NO,
         INQUIRY_TITLE,
-        INQUIRY_CONTENTS
+        INQUIRY_REGIST_DATE,
+        INQUIRY_CONTENTS,
+        INQUIRY_STATUS
         )VALUES(
+        #{userNo},
         #{inquiryTitle},
-        #{inquiryContents}
+        #{inquiryRegistDate},
+        #{inquiryContents},
+        #{inquiryStatus}
         )
     </insert>
 
@@ -45,8 +52,10 @@
         UPDATE TBL_INQUIRY
         SET
         INQUIRY_TITLE = #{inquiryTitle},
-        INQUIRY_CONTENTS = #{inquiryContents}
-        WHERE INQUIRY_TITLE= #{inquiryTitle}
+        INQUIRY_CONTENTS = #{inquiryContents},
+        INQUIRY_UPDATE_DATE = #{inquiryUpdateDate},
+        INQUIRY_STATUS = #{inquiryStatus}
+        WHERE USER_NO= #{userNo}
     </update>
 
 

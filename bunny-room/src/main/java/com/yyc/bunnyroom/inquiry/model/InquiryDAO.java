@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.inquiry.model;
 
 import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryUpdateDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
