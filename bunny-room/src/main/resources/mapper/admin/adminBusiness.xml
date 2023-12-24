@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.adminBusiness.model.dao.AdminBusinessDAO">
+    <resultMap id="businessList" type="com.yyc.bunnyroom.adminBusiness.model.dto.AdminBusinessDTO">
+        <id property="businessNo" column="BUSINESS_NO"/>
+        <result property="categoryName" column="BUSINESS_CATEGORY_NAME"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="businessRegistNo" column="BUSINESS_REGIST_NO"/>
+        <result property="email" column="USER_EMAIL"/>
+        <result property="nickname" column="USER_NICKNAME"/>
+        <result property="zipCode" column="BUSINESS_ZIP_CODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="phone" column="BUSINESS_PHONE"/>
+        <result property="registDate" column="BUSINESS_REGIST_DATE"/>
+        <result property="updateDate" column="BUSINESS_UPDATE_DATE"/>
+        <result property="status" column="BUSINESS_STATUS"/>
+    </resultMap>
+    <select id="allSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+    </select>
+</mapper>

@@ -16,6 +16,7 @@
         <mapper resource="mapper/black/black.xml"/>
         <mapper resource="mapper/roomRegister/roomRegister.xml"/>
         <mapper resource="mapper/inquiry/inquiryMapper.xml"/>
+        <mapper resource="mapper/admin/adminBusiness.xml"/>
     </mappers>
 
 </configuration>

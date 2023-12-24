@@ -121,17 +121,6 @@ public class AdminController {
     }
 
 
-
-
-    /**
-     * 관리자 페이지 중 업체 관리 페이지로 이동하는 요청을 수행하는 메소드
-     * */
-    @GetMapping("/business")
-    public String business(){
-        // 관리자 업체 관리 페이지로 이동
-        return "admin/business";
-    }
-
     /**
      * 관리자 페이지 중 공간 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
