@@ -34,34 +34,34 @@ public class AdminBusinessController {
 
         List<AdminBusinessDTO> BusinessList;
 
-//        if(mode.equals("businessName")){
-//            // 업체명 검색
-//            BusinessList = adminBusinessService.nameSearcher(target);
-//        }else if(mode.equals("category")){
-//            // 카테고리 검색
-//            BusinessList = adminBusinessService.categorySearcher(target);
-//        }else if(mode.equals("RegistNo")) {
-//            // 등록증 번호 검색
-//            BusinessList = adminBusinessService.RegistNoSearcher(target);
-//        } else if(mode.equals("email")) {
-//            // 이메일 검색
-//            BusinessList = adminBusinessService.emailSearcher(target);
-//        }else if(mode.equals("nickname")) {
-//            // 닉네임 검색
-//            BusinessList = adminBusinessService.nicknameSearcher(target);
-//        }else if(mode.equals("address")){
-//            // 주소 검색
-//            BusinessList = adminBusinessService.addressSearcher(target);
-//        }else if(mode.equals("phone")) {
-//            // 연락처 검색
-//            BusinessList = adminBusinessService.phoneSearcher(target);
-//        }else if(mode.equals("inactive")){
-//            // 삭제된 내용 검색
-//            BusinessList = adminBusinessService.inactiveSearcher();
-//        }else {
+        if(mode.equals("businessName")){
+            // 업체명 검색
+            BusinessList = adminBusinessService.nameSearcher(target);
+        }else if(mode.equals("category")){
+            // 카테고리 검색
+            BusinessList = adminBusinessService.categorySearcher(target);
+        }else if(mode.equals("RegistNo")) {
+            // 등록증 번호 검색
+            BusinessList = adminBusinessService.registNoSearcher(target);
+        } else if(mode.equals("email")) {
+            // 이메일 검색
+            BusinessList = adminBusinessService.emailSearcher(target);
+        }else if(mode.equals("nickname")) {
+            // 닉네임 검색
+            BusinessList = adminBusinessService.nicknameSearcher(target);
+        }else if(mode.equals("address")){
+            // 주소 검색
+            BusinessList = adminBusinessService.addressSearcher(target);
+        }else if(mode.equals("phone")) {
+            // 연락처 검색
+            BusinessList = adminBusinessService.phoneSearcher(target);
+        }else if(mode.equals("inactive")){
+            // 삭제된 내용 검색
+            BusinessList = adminBusinessService.inactiveSearcher();
+        }else {
             // 전체 검색
             BusinessList = adminBusinessService.allSearcher();
-//            }
+            }
 
         model.addAttribute("BusinessList", BusinessList);
 

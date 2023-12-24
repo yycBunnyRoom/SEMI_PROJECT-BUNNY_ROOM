@@ -38,4 +38,194 @@
         JOIN
             TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
     </select>
+
+    <select id="nameSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            B.BUSINESS_NAME LIKE #{param}
+    </select>
+
+    <select id="categorySearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            C.BUSINESS_CATEGORY_NAME LIKE #{param}
+    </select>
+
+    <select id="registNoSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            B.BUSINESS_REGIST_NO = #{param}
+    </select>
+
+    <select id="emailSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            U.USER_EMAIL LIKE #{param}
+    </select>
+
+    <select id="nicknameSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            U.USER_NICKNAME LIKE #{param}
+    </select>
+
+    <select id="addressSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) LIKE #{param}
+    </select>
+
+    <select id="phoneSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            B.BUSINESS_PHONE LIKE #{param}
+    </select>
+
+    <select id="inactiveSearcher" resultMap="businessList">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_NAME,
+            B.BUSINESS_REGIST_NO,
+            U.USER_EMAIL,
+            U.USER_NICKNAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', B.BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE,
+            B.BUSINESS_STATUS = 'inactive'
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+    </select>
 </mapper>
