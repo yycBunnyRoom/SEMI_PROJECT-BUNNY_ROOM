@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>카테고리 변경</title>
+    <!-- coloris 라이브러리 추가 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 </head>
 <body>
 <section>
@@ -10,7 +13,7 @@
   <form action="/admin/setting/change" method="post">
     <input type="hidden" name="categoryNo" th:value="${categoryNo}"/>
     <p>카테고리 이름 : </p><input type="text" name="categoryName" th:placeholder="${categoryName}" th:value="${categoryName}"/>
-    <p>카테고리 색상 : </p><input type="text" name="colorCode" th:placeholder="${colorCode}" th:value="${colorCode}"/>
+    <p>카테고리 색상 : </p><input type="text" name="colorCode" th:placeholder="${colorCode}" th:value="${colorCode}" data-coloris/>
     <button type="submit">변경하기</button>
   </form>
 </section>
