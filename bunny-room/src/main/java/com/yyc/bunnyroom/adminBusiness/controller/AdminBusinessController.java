@@ -70,13 +70,23 @@ public class AdminBusinessController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam(name = "businessNo") int businessNo, Model model){
+    public String delete(@RequestParam(name = "businessNo") int businessNo,
+                         @RequestParam(name = "status") String status, Model model, RedirectAttributes redirectAttributes){
+
+        if(status.equals("inactive")){
+            redirectAttributes.addFlashAttribute("message", "이미 삭제 처리된 업체입니다.");
+            return "redirect:/admin/business/search?mode=inactive&target=";
+        }
+
         model.addAttribute("businessNo", businessNo);
+        model.addAttribute("status", status);
         return "admin/business/deleteReason";
     }
 
     @PostMapping("/deleteReason")
-    public String deleteReason(@RequestParam(name = "businessNo")int businessNo, @RequestParam(name = "reason")String reason, RedirectAttributes redirectAttributes){
+    public String deleteReason(@RequestParam(name = "businessNo")int businessNo,
+                               @RequestParam(name = "reason")String reason, RedirectAttributes redirectAttributes){
+
         int result = adminBusinessService.delete(businessNo, reason);
 
         if(result > 0){

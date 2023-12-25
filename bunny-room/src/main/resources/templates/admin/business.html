@@ -63,6 +63,7 @@
                     <td>
                         <form action="/admin/business/delete" method="post">
                             <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
+                            <input type="hidden" name="status" th:value="${business.status}">
                             <button type="submit">업체 삭제</button>
                         </form>
                     </td>
