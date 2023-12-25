@@ -3,12 +3,11 @@ package com.yyc.bunnyroom.adminBusiness.controller;
 import com.yyc.bunnyroom.adminBusiness.model.dto.AdminBusinessDTO;
 import com.yyc.bunnyroom.adminBusiness.service.AdminBusinessService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -66,5 +65,26 @@ public class AdminBusinessController {
         model.addAttribute("BusinessList", BusinessList);
 
         return "admin/business";
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam(name = "businessNo") int businessNo, Model model){
+        model.addAttribute("businessNo", businessNo);
+        return "admin/business/deleteReason";
+    }
+
+    @PostMapping("/deleteReason")
+    public String deleteReason(@RequestParam(name = "businessNo")int businessNo, @RequestParam(name = "reason")String reason, RedirectAttributes redirectAttributes){
+        int result = adminBusinessService.delete(businessNo, reason);
+
+        if(result > 0){
+            System.out.println("정상적으로 삭제되었습니다.");
+            redirectAttributes.addFlashAttribute("message", "업체가 정삭적으로 삭제되었습니다.");
+        }else {
+            System.out.println("삭제 실패");
+            redirectAttributes.addFlashAttribute("message", "삭제에 실패하셨습니다.");
+        }
+
+        return "redirect:/admin/business";
     }
 }

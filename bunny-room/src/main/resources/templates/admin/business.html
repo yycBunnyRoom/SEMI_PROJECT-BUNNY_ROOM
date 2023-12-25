@@ -60,10 +60,25 @@
                     <td th:text="${business.registDate}"></td>
                     <td th:text="${business.updateDate}"></td>
                     <td th:text="${business.status}"></td>
+                    <td>
+                        <form action="/admin/business/delete" method="post">
+                            <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
+                            <button type="submit">업체 삭제</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
         </article>
     </section>
+
+    <th:block th:if="${message}">
+        <script th:inline="javascript">
+            window.onload =function (){
+                let message = `[[${message}]]`;
+                alert(message);
+            }
+        </script>
+    </th:block>
 
 </body>
 </html>

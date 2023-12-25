@@ -5,6 +5,8 @@ import com.yyc.bunnyroom.adminBusiness.model.dto.AdminBusinessDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -89,5 +91,20 @@ public class AdminBusinessService {
     public List<AdminBusinessDTO> inactiveSearcher() {
         List<AdminBusinessDTO> businessList = adminBusinessDAO.inactiveSearcher();
         return businessList;
+    }
+
+    /**
+     * 업체를 삭제처리하는 메소드
+     * */
+    public int delete(int businessNo, String reason) {
+        String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = adminBusinessDAO.delete(businessNo, reason, update);
+
+        if(result > 0){
+            System.out.println("정상적으로 DB에서 삭제되었습니다.");
+            return result;
+        }else {
+            return 0;
+        }
     }
 }
