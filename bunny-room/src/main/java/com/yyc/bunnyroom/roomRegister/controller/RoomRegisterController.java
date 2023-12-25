@@ -1,9 +1,12 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
 import com.yyc.bunnyroom.common.UserRole;
+import com.yyc.bunnyroom.common.eNum.WeekDay;
 import com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper;
 import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
+import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
+import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,10 +40,10 @@ public class RoomRegisterController {
     @GetMapping("/businessRegisterForm")
     public ModelAndView businessRegisterForm(ModelAndView modelAndView){
 
-        // DB 에 있는 카테고리를 가져와서 같이 보낸다
-        List<BusinessCategoryDTO> businessCategoryList = roomRegisterService.selectAllBusinessCategory();
-
-        modelAndView.addObject("businessCategoryList",businessCategoryList);
+//        // DB 에 있는 카테고리를 가져와서 같이 보낸다
+//        List<BusinessCategoryDTO> businessCategoryList = roomRegisterService.selectAllBusinessCategory();
+//
+//        modelAndView.addObject("businessCategoryList",businessCategoryList);
 
         modelAndView.setViewName("/roomRegister/form/businessRegisterForm");
 
@@ -91,14 +95,59 @@ public class RoomRegisterController {
 
     /* 휴무 등록 페이지 */
     @GetMapping("/dayOffRegisterForm")
-    public String dayOffRegisterForm(){
+    public String dayOffRegisterForm(ModelAndView modelAndView){
+        ClosedDayDTO closedDayDTO = new ClosedDayDTO();
+        HolidayDTO holiday = new HolidayDTO();
+
+        modelAndView.addObject("closedDayDTO",closedDayDTO);
+        modelAndView.addObject("holiday",holiday);
+
+
         return "/roomRegister/form/dayOffRegisterForm";
+    }
+
+    // 지정 휴무 등록
+    @PostMapping("/addHolidays")
+    public String addHolidays(){
+
+    // 현재 사용하고 있는 HOST의 userNo를 holidayDTO에 추가한다
+
+
+    // 추가한 날짜 (현재 날짜)를 registDate 에 추가한다
+
+
+    // 현재 상태를 active으로 추가
+
+        return "";
+
+    }
+
+
+
+    // 정기 휴무 등록
+    @PostMapping("/closedDayForm")
+    public String closedDayForm(){
+        return null;
     }
 
     /* 방 등록 페이지 */
     @GetMapping("/roomRegisterForm")
     public String roomRegisterForm(){
         return "/roomRegister/form/roomRegisterForm";
+    }
+
+
+
+    /* Model Attributes */
+    @ModelAttribute("categories")
+    public List<BusinessCategoryDTO> categories(){
+        // DB 에 있는 카테고리를 가져와서 같이 보낸다
+        return roomRegisterService.selectAllBusinessCategory();
+    }
+
+    @ModelAttribute("weekDays")
+    public WeekDay[] weekDays(){
+        return WeekDay.values();
     }
 
 
