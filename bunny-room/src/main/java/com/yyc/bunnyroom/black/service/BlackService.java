@@ -23,30 +23,14 @@ public class BlackService {
         return blacklist;
     }
 
-    /**
-     * 회원의 권한을 블랙리스트로 변경하는 메소드
-     * */
-    public int toBlacklist(String email) {
-
-        int result = blackDAO.toBlacklist(email);
-
-        if(result > 0){
-            System.out.println("정상적으로 블랙처리되었습니다.");
-            return result;
-        }else {
-            System.out.println("정상적으로 처리되지 않았습니다.");
-            return 0;
-        }
-    }
-
     /** 입력받은 회원 정보에서 필요한 정보를 추출하여 블랙리스트 정보에 담는 메소드
      * */
-    public int addBlacklist(int userNo, String auth, String email, String reason) {
+    public int addBlacklist(int userNo, String auth, String reason) {
 
         String registDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         // 3일의 블랙 기간
         String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        blackTimeout(email, auth);
+        blackTimeout(userNo);
 
         int result = blackDAO.addBlacklist(userNo, auth, reason, registDate, sentenceTime);
 
@@ -61,18 +45,18 @@ public class BlackService {
      * 블랙 기간이 지났을 때 (기본은 3일로 저장됨) 자동으로 풀어주는 메소드
      * */
     @Scheduled(fixedDelay = 3 * 24 * 60 * 60 * 1000)
-    public void blackTimeout(String email, String auth){
-        restoreAuth(email, auth);
+    public void blackTimeout(int userNo){
+        disableBlack(userNo);
     }
 
     /**
      * 이미 블랙리스트에 오른 적이 있다면 기존 정보를 수정해 재등록하는 메소드
      * */
-    public int modifyBlacklist(int userNo, String auth, String email, String reason) {
+    public int modifyBlacklist(int userNo, String reason) {
         String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        blackTimeout(email, auth);
-        int result = blackDAO.modifyBlacklist(userNo, auth, reason, updateDate, sentenceTime);
+        blackTimeout(userNo);
+        int result = blackDAO.modifyBlacklist(userNo, reason, updateDate, sentenceTime);
 
         if(result > 0){
             return result;
@@ -117,20 +101,6 @@ public class BlackService {
     }
 
     /**
-     * 블랙리스트 권한을 원상복구하는 요청을 수행하는 메소드
-     * */
-    public int restoreAuth(String email, String auth) {
-        int result = blackDAO.restoreAuth(email, auth);
-
-
-        if(result > 0){
-            return result;
-        }else {
-            return 0;
-        }
-    }
-
-    /**
      * 블랙리스트 명단에서 비활성화시키는 메소드
      * */
     public int disableBlack(int userNo) {
@@ -160,5 +130,34 @@ public class BlackService {
         Object blacklist = blackDAO.searchBlackByEmailInAny(email);
 
         return blacklist;
+    }
+
+    /**
+     * 블랙리스트 DB에 등재된 정보가 있는지 확인하는 메소드
+     * */
+    public Object searchBlacklistByUserNo(int userNo) {
+        Object user = blackDAO.searchBlacklistByUserNo(userNo);
+
+        return user;
+    }
+
+    /**
+     * 유저 테이블의 상태를 블랙으로 변경하는 메소드
+     * */
+    public int changeUserStatus(int userNo) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int changeUserStatus = blackDAO.changeUserStatus(userNo, updateDate);
+
+        return changeUserStatus;
+    }
+
+    /**
+     * 유저 테이블의 상태가 블랙인 경우 다시 active로 돌리는 메소드
+     * */
+    public int restoreStatus(int userNo) {
+        String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int changeUserStatus = blackDAO.restoreUserStatus(userNo, updateDate);
+
+        return changeUserStatus;
     }
 }

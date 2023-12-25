@@ -2,6 +2,7 @@ package com.yyc.bunnyroom.admin.model.dao;
 
 import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public interface AdminDAO {
     List<MemberDTO> searchAllMember();
 
-    int withdrawMember(String email);
+    int withdrawMember(@Param("email") String email, @Param("reason")String reason, @Param("updateDate")String updateDate);
 
     List<MemberDTO> searchMemberByEmail(String param);
 
@@ -18,4 +19,8 @@ public interface AdminDAO {
     List<MemberDTO> searchMemberByPhone(String param);
 
     List<MemberDTO> searchMemberByInactive();
+
+    List<MemberDTO> searchMemberByInactiveFor(String email);
+
+    MemberDTO searchAllConditionByEmail(String email);
 }

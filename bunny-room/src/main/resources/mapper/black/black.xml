@@ -40,14 +40,7 @@
         ORDER BY
             A.BLACK_NO DESC;
     </select>
-
-    <update id="toBlacklist" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
-        UPDATE TBL_USER
-        SET
-            USER_AUTH = 'BLACK'
-        WHERE
-            USER_EMAIL = #{email}
-    </update>
+    
 
     <insert id="addBlacklist" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
         INSERT INTO TBL_BLACKLIST(
@@ -75,8 +68,7 @@
             BLACK_REASON = #{reason},
             BLACK_UPDATE_DATE = #{updateDate},
             BLACK_STATUS = 'active',
-            BLACK_SENTENCE_PERIOD = #{sentenceTime},
-            BLACK_ORIGIN_AUTH = #{auth}
+            BLACK_SENTENCE_PERIOD = #{sentenceTime}
         WHERE
             USER_NO = #{userNo}
     </update>
@@ -181,14 +173,6 @@
             A.BLACK_NO DESC;
     </select>
 
-    <update id="restoreAuth" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
-        UPDATE TBL_USER
-        SET
-            USER_AUTH = #{auth}
-        WHERE
-            USER_EMAIL = #{email}
-    </update>
-
     <update id="disableBlack" parameterType="com.yyc.bunnyroom.black.model.dto.BlackDTO">
         UPDATE TBL_BLACKLIST
         SET
@@ -248,4 +232,31 @@
         ORDER BY
             A.BLACK_NO DESC;
     </select>
+
+    <select id="searchBlacklistByUserNo" resultMap="blacklist">
+        SELECT
+            *
+        FROM
+            TBL_BLACKLIST
+        WHERE
+            USER_NO = #{userNo}
+    </select>
+
+    <update id="changeUserStatus" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'black',
+            USER_UPDATE_DATE = #{updateDate}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
+
+    <update id="restoreUserStatus" parameterType="com.yyc.bunnyroom.admin.model.dto.MemberDTO">
+        UPDATE TBL_USER
+        SET
+        USER_STATUS = 'active',
+        USER_UPDATE_DATE = #{updateDate}
+        WHERE
+        USER_NO = #{userNo}
+    </update>
 </mapper>
