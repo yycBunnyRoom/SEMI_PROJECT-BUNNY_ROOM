@@ -22,8 +22,10 @@ public class AdminBusinessController {
      * 관리자 페이지 중 업체 관리 페이지로 이동하는 요청을 수행하는 메소드
      * */
     @GetMapping(value = {"","/"})
-    public String business(){
+    public String business(Model model){
         // 관리자 업체 관리 페이지로 이동
+        List<AdminBusinessDTO> BusinessList = adminBusinessService.allSearcher();
+        model.addAttribute("BusinessList", BusinessList);
         return "admin/business";
     }
 
