@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.common.imgUploader.model.dao.ImageDAO">
+
+    <resultMap id="profile" type="com.yyc.bunnyroom.common.imgUploader.model.dto.ImageDTO">
+        <id property="originalName" column="PROFILE_IMAGE_ORIGINAL_NAME"/>
+        <result property="changedName" column="PROFILE_IMAGE_CHANGED_NAME"/>
+        <result property="ext" column="PROFILE_IMAGE_EXT"/>
+        <result property="path" column="PROFILE_IMAGE_PATH"/>
+        <result property="register" column="PROFILE_IMAGE_REGIST_DATE"/>
+        <result property="update" column="PROFILE_IMAGE_UPDATE_DATE"/>
+        <result property="status" column="PROFILE_IMAGE_STATUS"/>
+    </resultMap>
+
+    <insert id="inputProfileImage" parameterType="com.yyc.bunnyroom.common.imgUploader.model.dto.ImageDTO">
+        INSERT INTO TBL_PROFILE_IMAGE(
+            PROFILE_IMAGE_NO,
+            PROFILE_IMAGE_ORIGINAL_NAME,
+            PROFILE_IMAGE_CHANGED_NAME,
+            PROFILE_IMAGE_EXT,
+            PROFILE_IMAGE_PATH,
+            PROFILE_IMAGE_REGIST_DATE,
+            PROFILE_IMAGE_UPDATE_DATE,
+            PROFILE_IMAGE_STATUS
+        )VALUES(
+            NULL,
+            #{originalName},
+            #{changedName},
+            #{ext},
+            #{path},
+            #{register},
+            NULL,
+            'active'
+        )
+    </insert>
+
+    <select id="getProfileImage" resultMap="profile">
+        SELECT
+            *
+        FROM
+            TBL_PROFILE_IMAGE
+        WHERE
+            PROFILE_IMAGE_NO = #{imageNo}
+    </select>
+</mapper>
