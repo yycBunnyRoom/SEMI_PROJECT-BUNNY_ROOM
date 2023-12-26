@@ -1,6 +1,8 @@
 package com.yyc.bunnyroom.common.imgUploader.controller;
 
-import com.yyc.bunnyroom.common.imgUploader.dto.ImageDTO;
+import com.yyc.bunnyroom.common.imgUploader.model.dto.ImageDTO;
+import com.yyc.bunnyroom.common.imgUploader.service.ImageService;
+import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -13,12 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Controller
 public class ImageUploaderController {
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private ResourceLoader resourceLoader;
@@ -28,151 +31,58 @@ public class ImageUploaderController {
         return "/test/imgTest/image";
     }
 
-    @PostMapping("/imageUpload")
-    public String imageUploader(@RequestParam(name = "img") List<MultipartFile> images, @RequestParam(name = "mode") String mode, Model model) throws IOException {
-        // 이미지가 저장된 경로를 탐색
-        // 프로필 이미지
-        Resource profile = resourceLoader.getResource("classpath:static/img/profile");
-        String profilePath;
+    @PostMapping("/profileImage")
+    public String profileImageUploader(@RequestParam(name = "img") MultipartFile profileImage, Model model) throws IOException{
+        // 정적 리소스 디렉토리
+        String staticPath = "classpath:static/";
 
-        // 공지사항 이미지
-        Resource announcement = resourceLoader.getResource("classpath:static/img/announcement");
-        String announcementPath;
+        // 프로필 이미지 저장 디렉토리
+        String profilePath = "img/profile/";
 
-        // 문의사항 이미지
-        Resource inquiry = resourceLoader.getResource("classpath:static/img/inquiry");
-        String inquiryPath;
+        // Resource를 통해 클래스패스 리소스를 가져옴
+        Resource resource = resourceLoader.getResource(staticPath);
 
-        // 리뷰 이미지
-        Resource review = resourceLoader.getResource("classpath:static/img/review");
-        String reviewPath;
+        // 저장 경로
+        String fullPath = resource.getFile().getAbsolutePath() + File.separator + profilePath;
 
-        // 방 이미지
-        Resource room = resourceLoader.getResource("classpath:static/img/room");
-        String roomPath;
-
-        // 경로가 없다면 경로를 생성
-        // 프로필
-        if(!profile.exists()){
-            String root = "src/main/resources/static/img/profile";
-            File file = new File(root);
-            file.mkdirs();
-
-            profilePath = file.getAbsolutePath();
-        }else {
-            profilePath = resourceLoader.getResource("classpath:static/img/profile").getFile().getAbsolutePath();
+        // 저장 위치가 존재하지 않으면 생성
+        File directory = new File(fullPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
 
-        // 공지사항
-        if(!announcement.exists()){
-            String root = "src/main/resources/static/img/announcement";
-            File file = new File(root);
-            file.mkdirs();
+        // 프로필 이미지명 변경
+        String originalName = profileImage.getOriginalFilename();
+        String ext = originalName.substring(originalName.lastIndexOf("."));
+        String changedName = UUID.randomUUID().toString().replace("-", "");
+        String savedName = changedName + ext;
 
-            announcementPath = file.getAbsolutePath();
-        }else {
-            announcementPath = resourceLoader.getResource("classpath:static/img/announcement").getFile().getAbsolutePath();
+        // 프로필 이미지 저장
+        File imageFile = new File(fullPath + savedName);
+        profileImage.transferTo(imageFile);
+
+        int register = imageService.inputProfileImage(originalName, changedName, ext, profilePath + savedName);
+
+        if (register > 0) {
+            System.out.println("이미지 등록");
+            model.addAttribute("message", "프로필 이미지가 등록되었습니다.");
+        } else {
+            System.out.println("실패");
+            model.addAttribute("message", "프로필 이미지가 등록에 실패했습니다.");
         }
 
-        // 문의사항
-        if(!inquiry.exists()){
-            String root = "src/main/resources/static/img/inquiry";
-            File file = new File(root);
-            file.mkdirs();
-
-            inquiryPath = file.getAbsolutePath();
-        }else {
-            inquiryPath = resourceLoader.getResource("classpath:static/img/inquiry").getFile().getAbsolutePath();
-        }
-
-        // 리뷰
-        if(!review.exists()){
-            String root = "src/main/resources/static/img/review";
-            File file = new File(root);
-            file.mkdirs();
-
-            reviewPath = file.getAbsolutePath();
-        }else {
-            reviewPath = resourceLoader.getResource("classpath:static/img/review").getFile().getAbsolutePath();
-        }
-
-        // 방
-        if(!room.exists()){
-            String root = "src/main/resources/static/img/room";
-            File file = new File(root);
-            file.mkdirs();
-
-            roomPath = file.getAbsolutePath();
-        }else {
-            roomPath = resourceLoader.getResource("classpath:static/img/room").getFile().getAbsolutePath();
-        }
-
-        // 위까지가 경로 만들기, 아래부터 파일 저장
-
-        List<ImageDTO> imageList = new ArrayList<>();
-
-        // 임시로 출력할 이미지의 경로를 담음
-        List<String> savedList = new ArrayList<>();
-
-        try {
-            for(MultipartFile image : images){
-                // 이미지명 변경
-                String originalName = image.getOriginalFilename();
-                String ext = originalName.substring(originalName.lastIndexOf("."));
-                String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
-
-                // 이미지에 관한 정보 추출 후 보관과 저장
-                // 프로필
-                if(mode.equals("profile")) {
-                    // 보관
-                    imageList.add(new ImageDTO(originalName, savedName, profilePath));
-                    // 저장
-                    image.transferTo(new File(profilePath + "/" + savedName));
-                    savedList.add("static/img/profile/" + savedName);
-
-                } else if(mode.equals("announcement")){
-                    // 보관
-                    imageList.add(new ImageDTO(originalName, savedName, announcementPath));
-                    // 저장
-                    image.transferTo(new File(announcementPath + "/" + savedName));
-                    savedList.add("static/img/announcement/" + savedName);
-                } else if(mode.equals("inquiry")){
-                    // 보관
-                    imageList.add(new ImageDTO(originalName, savedName, inquiryPath));
-                    // 저장
-                    image.transferTo(new File(inquiryPath + "/" + savedName));
-                    savedList.add("static/img/inquiry/" + savedName);
-                }else if(mode.equals("review")){
-                    // 보관
-                    imageList.add(new ImageDTO(originalName, savedName, reviewPath));
-                    // 저장
-                    image.transferTo(new File(reviewPath + "/" + savedName));
-                    savedList.add("static/img/review/" + savedName);
-                }else if(mode.equals("room")){
-                    // 보관
-                    imageList.add(new ImageDTO(originalName, savedName, roomPath));
-                    // 저장
-                    image.transferTo(new File(roomPath + "/" + savedName));
-                    savedList.add("static/img/room/" + savedName);
-                }
-            }
-
-            model.addAttribute("message", "파일 업로드");
-            model.addAttribute("img", savedList);
-        }catch (Exception e){
-
-            e.printStackTrace();
-
-            // 실패시 삭제
-            for(ImageDTO image : imageList){
-                if(mode.equals("profile")){
-                    new File(profilePath + "/" + image.getSavedName()).delete();
-                }
-            }
-            model.addAttribute("message", "실패!");
-
-        }
-        
         return "/test/imgTest/image";
     }
+
+    @GetMapping("/profileImage")
+    public String profileImage(@RequestParam(name = "imageNo") int imageNo, Model model){
+
+        ImageDTO image = imageService.getProfileImage(imageNo);
+
+        String path = image.getPath();
+        model.addAttribute("path", path);
+
+        return "/test/imgTest/image";
+    }
+
 }
