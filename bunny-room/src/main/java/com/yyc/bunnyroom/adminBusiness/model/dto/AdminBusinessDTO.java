@@ -29,5 +29,7 @@ public class AdminBusinessDTO {
 
     private ZonedDateTime updateDate;
 
+    private String reason;
+
     private String status;
 }

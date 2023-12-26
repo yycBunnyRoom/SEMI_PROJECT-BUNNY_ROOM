@@ -45,6 +45,7 @@
                     <th>업체 연락처</th>
                     <th>업체 등록일</th>
                     <th>업체 정보 수정일</th>
+                    <th>업체 삭제 사유</th>
                     <th>업체 상태</th>
                 </tr>
                 <tr th:each="business : ${BusinessList}">
@@ -59,6 +60,7 @@
                     <td th:text="${business.phone}"></td>
                     <td th:text="${business.registDate}"></td>
                     <td th:text="${business.updateDate}"></td>
+                    <td th:text="${business.reason}"></td>
                     <td th:text="${business.status}"></td>
                     <td>
                         <form action="/admin/business/delete" method="post">
