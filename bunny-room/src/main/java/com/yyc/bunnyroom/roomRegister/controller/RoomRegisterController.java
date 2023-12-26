@@ -97,14 +97,17 @@ public class RoomRegisterController {
     @GetMapping("/dayOffRegisterForm")
     public String dayOffRegisterForm(ModelAndView modelAndView){
         ClosedDayDTO closedDayDTO = new ClosedDayDTO();
-        HolidayDTO holiday = new HolidayDTO();
+//        HolidayDTO holiday = new HolidayDTO();
 
         modelAndView.addObject("closedDayDTO",closedDayDTO);
-        modelAndView.addObject("holiday",holiday);
+//        modelAndView.addObject("holiday",holiday);
 
 
         return "/roomRegister/form/dayOffRegisterForm";
     }
+
+    // 정기 휴무 등록
+//    @PostMapping("/addClosedDays")
 
     // 지정 휴무 등록
     @PostMapping("/addHolidays")
