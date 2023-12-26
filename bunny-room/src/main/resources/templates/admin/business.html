@@ -63,10 +63,16 @@
                     <td th:text="${business.reason}"></td>
                     <td th:text="${business.status}"></td>
                     <td>
-                        <form action="/admin/business/delete" method="post">
+                        <form action="/admin/business/delete" method="post" th:if="${business.status eq 'active'}">
                             <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
                             <input type="hidden" name="status" th:value="${business.status}">
                             <button type="submit">업체 삭제</button>
+                        </form>
+                        <form action="/admin/business/restore" method="post" th:if="${business.status eq 'inactive'}">
+                            <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
+                            <input type="hidden" name="status" th:value="${business.status}"/>
+                            <input type="hidden" name="reason" th:value="${business.reason}">
+                            <button type="submit">업체 복구</button>
                         </form>
                     </td>
                 </tr>

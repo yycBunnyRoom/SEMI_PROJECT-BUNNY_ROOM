@@ -266,4 +266,14 @@
         WHERE
             BUSINESS_NO = #{businessNo}
     </update>
+
+    <update id="restore" parameterType="com.yyc.bunnyroom.adminBusiness.model.dto.AdminBusinessDTO">
+        UPDATE TBL_BUSINESS
+        SET
+        BUSINESS_DELETE_REASON = #{reason},
+        BUSINESS_UPDATE_DATE = #{update},
+        BUSINESS_STATUS = 'active'
+        WHERE
+        BUSINESS_NO = #{businessNo}
+    </update>
 </mapper>

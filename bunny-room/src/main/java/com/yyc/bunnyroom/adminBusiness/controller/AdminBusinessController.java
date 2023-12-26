@@ -72,7 +72,7 @@ public class AdminBusinessController {
     @PostMapping("/delete")
     public String delete(@RequestParam(name = "businessNo") int businessNo,
                          @RequestParam(name = "status") String status, Model model, RedirectAttributes redirectAttributes){
-
+        // 만약 이미 삭제된 업체라면?
         if(status.equals("inactive")){
             redirectAttributes.addFlashAttribute("message", "이미 삭제 처리된 업체입니다.");
             return "redirect:/admin/business/search?mode=inactive&target=";
@@ -95,6 +95,41 @@ public class AdminBusinessController {
         }else {
             System.out.println("삭제 실패");
             redirectAttributes.addFlashAttribute("message", "삭제에 실패하셨습니다.");
+        }
+
+        return "redirect:/admin/business";
+    }
+
+    @PostMapping("/restore")
+    public String restore(@RequestParam(name = "businessNo") int businessNo,
+                          @RequestParam(name = "status") String status,
+                          @RequestParam(name = "reason") String reason, Model model, RedirectAttributes redirectAttributes){
+        // 만약 이미 복구되거나 삭제되지 않은 업체라면
+        if(status.equals("active")){
+            redirectAttributes.addFlashAttribute("message", "삭제된 업체가 아닙니다.");
+            return "redirect:/admin/business";
+        }
+
+        model.addAttribute("businessNo", businessNo);
+        model.addAttribute("status", status);
+        model.addAttribute("reason", reason);
+
+        return "admin/business/restoreReason";
+    }
+
+    @PostMapping("/restoreReason")
+    public String restoreReason(@RequestParam(name = "businessNo") int businessNo,
+                                @RequestParam(name = "deleteReason") String deleteReason,
+                                @RequestParam(name = "restoreReason") String restoreReason, RedirectAttributes redirectAttributes){
+        String reason = "삭제사유는 '" + deleteReason + "' 였으며, 복구 사유는 '" + restoreReason + "' 입니다.";
+        int result = adminBusinessService.restore(businessNo, reason);
+
+        if(result > 0){
+            System.out.println("정상적으로 복구되었습니다.");
+            redirectAttributes.addFlashAttribute("message", "업체가 정삭적으로 복구되었습니다.");
+        }else {
+            System.out.println("복구 실패");
+            redirectAttributes.addFlashAttribute("message", "복구에 실패하셨습니다.");
         }
 
         return "redirect:/admin/business";

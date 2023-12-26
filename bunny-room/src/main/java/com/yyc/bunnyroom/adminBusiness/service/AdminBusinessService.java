@@ -107,4 +107,19 @@ public class AdminBusinessService {
             return 0;
         }
     }
+
+    /**
+     * 업체를 복구시키는 메소드
+     * */
+    public int restore(int businessNo, String reason) {
+        String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = adminBusinessDAO.restore(businessNo, update, reason);
+
+        if(result > 0){
+            System.out.println("정상적으로 DB에서 복구되었습니다.");
+            return result;
+        }else {
+            return 0;
+        }
+    }
 }
