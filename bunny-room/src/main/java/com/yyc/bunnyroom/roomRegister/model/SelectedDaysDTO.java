@@ -1,12 +1,14 @@
 package com.yyc.bunnyroom.roomRegister.model;
 
-
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
-public class VacationDTO {
+public class SelectedDaysDTO {
+    private List<String> selectedDays;
+
+
 }

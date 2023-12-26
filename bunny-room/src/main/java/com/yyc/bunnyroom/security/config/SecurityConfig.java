@@ -54,6 +54,7 @@ public class SecurityConfig {
 
                         // roomRegister
                         "/roomRegister/*",
+                        "/dayOff/*",
 
 
                         // 메일 인증을 위해

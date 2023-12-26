@@ -31,6 +31,63 @@
 
     <!--HolidayDTO-->
 
+    <!--closedDaysRegister-->
+    <insert id="closedDaysRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
+        INSERT INTO TBL_CLOSED_DAY
+        (
+            CLOSED_DAY_NO,
+            CLOSED_DAY,
+            BUSINESS_NO
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+            NULL,
+            #{item.closedDay},
+            #{item.businessNo}
+        )
+        </foreach>
+    </insert>
+
+
+    <!-- holidaysRegister -->
+    <insert id="holidaysRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.HolidayDTO">
+        INSERT INTO TBL_HOLIDAY
+        (
+            HOLIDAY_NO,
+            BUSINESS_NO,
+            HOLIDAY_NAME,
+            HOLIDAY_REASON,
+            HOLIDAY_START_DATE,
+            HOLIDAY_END_DATE,
+            HOLIDAY_REGIST_DATE,
+            HOLIDAY_STATUS
+        )
+        VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        (
+           NULL,
+            #{item.businessNo},
+            #{item.holidayName},
+            #{item.reason},
+            #{item.startDate},
+            #{item.endDate},
+            #{item.registDate},
+            #{item.activeStatus}
+        )
+        </foreach>
+    </insert>
+
+
+
+
+
+
+
+
+
+
+
     <!--RoomDTO-->
 
     <!--VacationDTO-->

@@ -28,7 +28,7 @@
         <label for="businessCategoryNo">카테고리</label>
         <select id="businessCategoryNo" name="businessCategoryNo">
             <option
-                    th:each="category : ${businessCategoryList}"
+                    th:each="category : ${categories}"
                     th:value="${category.businessCategoryNo}"
                     th:text="${category.businessCategoryName}">
             </option>

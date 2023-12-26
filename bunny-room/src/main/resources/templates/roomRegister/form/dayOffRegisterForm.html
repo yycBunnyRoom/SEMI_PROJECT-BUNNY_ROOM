@@ -4,56 +4,72 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <!--부트스트랩 CDN-->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <script defer th:src="@{/js/roomRegister/form/dayOffRegisterForm.js}"></script>
-    <link rel="stylesheet" th:href="@{/css/roomRegister/form/dayOffRegisterForm.css}"/>
+    <link rel="stylesheet" href="/css/roomRegister/form/dayOffRegisterForm.css">
+
+
 </head>
 <body>
 <header th:replace="~{/common/header :: headerFragment}">
     <h1>나는 header</h1>
 </header>
 
-<div class="container-fluid px-1 px-sm-4 py-5 mx-auto">
-    <div class="row d-flex justify-content-center">
-        <div class="col-md-10 col-lg-9 col-xl-8">
-            <div class="card border-0">
-                <div class="row px-3">
-                    <div class="col-sm-2"> <label class="text-grey mt-1 mb-3">휴무일</label> </div>
-                    <div class="col-sm-10 list">
-                        <div class="mb-2 row justify-content-between px-3">
-                            <select class="mb-2 mob">
-                                <option value="opt1">Mon-Fri</option>
-                                <option value="opt2">Sat-Sun</option>
-                            </select>
-                            <div class="mob"> <label class="text-grey mr-1">From</label> <input class="ml-1" type="time" name="from"> </div>
-                            <div class="mob mb-2"> <label class="text-grey mr-4">To</label> <input class="ml-1" type="time" name="to"> </div>
-                            <div class="mt-1 cancel fa fa-times text-danger"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row px-3 mt-3">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-10">
-                        <div class="row px-3">
-                            <div class="fa fa-plus-circle text-success add"></div>
-                            <p class="text-success ml-3 add">Add</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row px-3 mt-3 justify-content-center"> <button class="btn exit mr-2">Cancel</button> <button class="btn btn-success ml-2">Done</button> </div>
-            </div>
-        </div>
+<!-- 정기 휴가 -->
+<h1>정기 휴무</h1>
+<button id="MONDAY" onclick="selectDay('MONDAY')">월</button>
+<button id="TUESDAY" onclick="selectDay('TUESDAY')">화</button>
+<button id="WEDNESDAY" onclick="selectDay('WEDNESDAY')">수</button>
+<button id="THURSDAY" onclick="selectDay('THURSDAY')">목</button>
+<button id="FRIDAY" onclick="selectDay('FRIDAY')">금</button>
+<button id="SATURDAY" onclick="selectDay('SATURDAY')">토</button>
+<button id="SUNDAY" onclick="selectDay('SUNDAY')">일</button>
+
+<p id="selectedDays">선택된 요일: </p>
+
+<button onclick="addClosedDays()">확인</button>
+
+
+
+<h1>지정 휴무</h1>
+
+<div id="forms">
+    <!-- 초기 휴가 신청 폼 -->
+    <div class="holiday-form" id="holidayForm1">
+        <label for="holidayName1">휴가 이름:</label>
+        <input type="text" id="holidayName1"><br><br>
+
+        <label for="reason1">휴가 사유:</label>
+        <textarea id="reason1" rows="4" cols="50"></textarea><br><br>
+
+        <label for="startDate1">휴가 시작일:</label>
+        <input type="date" id="startDate1"><br><br>
+
+        <label for="endDate1">휴가 종료일:</label>
+        <input type="date" id="endDate1"><br><br>
+
+        <button onclick="removeHolidayForm(1)">취소</button>
     </div>
 </div>
 
+<button onclick="addHolidayForm()">신규 휴가 추가</button>
+<button onclick="addHolidays()">확인</button>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="/js/roomRegister/form/dayOffRegisterForm.js"></script>
 
 </body>
 </html>
