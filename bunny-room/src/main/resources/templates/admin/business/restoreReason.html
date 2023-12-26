@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>업체 복구 사유</title>
+</head>
+<body>
+  <h2>업체 복구 사유를 입력해주세요.</h2>
+  <form action="/admin/business/restoreReason" method="post">
+    <input type="hidden" name="businessNo" th:value="${businessNo}">
+    <input type="hidden" name="deleteReason" th:value="${reason}">
+    <input type="text" name="restoreReason" placeholder="복구 사유를 작성해주세요.">
+    <button type="submit">업체 복구</button>
+  </form>
+</body>
+</html>
