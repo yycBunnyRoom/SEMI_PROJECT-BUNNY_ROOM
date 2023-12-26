@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class AdminSettingController{
     @PostMapping("/change")
     public String change(@RequestParam(name = "categoryNo")int categoryNo,
                          @RequestParam(name = "categoryName")String categoryName,
-                         @RequestParam(name = "colorCode")String colorCode){
+                         @RequestParam(name = "colorCode")String colorCode, RedirectAttributes redirectAttributes){
 
         int result = adminSettingService.changeCategory(categoryNo, categoryName, colorCode);
 
@@ -67,6 +68,7 @@ public class AdminSettingController{
             System.out.println("스탑");
         }
 
+        redirectAttributes.addFlashAttribute("message", "카테고리의 색이 변경되었습니다.");
         return "redirect:/admin/setting";
     }
 

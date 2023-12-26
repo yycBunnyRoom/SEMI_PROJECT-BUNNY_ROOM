@@ -15,7 +15,7 @@
     <section>
         <h2>카테고리 관리</h2>
         <h3>현재 카테고리</h3>
-        <article th:each="category: ${categorylist}">
+        <article th:each="category: ${categorylist}" th:style="'background-color: ' + ${category.colorCode} + '; width: 300px; height: 300;'">
             <p th:text="${category.categoryName}"></p>
             <p th:text="${category.colorCode}"></p>
 
@@ -25,7 +25,7 @@
                 <input type="hidden" name="colorCode" th:value="${category.colorCode}"/>
                 <button type="submit">변경</button>
             </form>
-            <form action="/admin/setting/off" method="post">
+            <form action="/admin/setting/off" method="post" onsubmit="return confirm('정말로 이 카테고리를 삭제하시겠습니까?')">
                 <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
                 <button type="submit">삭제</button>
             </form>
