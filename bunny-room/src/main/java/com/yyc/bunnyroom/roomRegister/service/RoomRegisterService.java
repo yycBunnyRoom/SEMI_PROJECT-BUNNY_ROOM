@@ -1,10 +1,7 @@
 package com.yyc.bunnyroom.roomRegister.service;
 
 import com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper;
-import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
-import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
-import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
-import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
+import com.yyc.bunnyroom.roomRegister.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +30,11 @@ public class RoomRegisterService {
 
     public int holidaysRegister(List<HolidayDTO> holidayList) {
         return roomRegisterMapper.holidaysRegister(holidayList);
+    }
+
+
+    // DB에 있는 방 옵션 전체를 불러온다
+    public List<RoomOptionDTO> selectAllRoomOptions() {
+        return roomRegisterMapper.selectAllRoomOptions();
     }
 }

@@ -1,0 +1,29 @@
+/*!* CSS *!
+.selected-option {
+    !* 선택된 옵션에 대한 스타일링 *!
+    font-weight: bold;
+    color: green;
+    !* 선택 및 취소 시 트랜지션 효과 *!
+    transition: all 0.3s ease-in-out;
+}
+
+!* 선택된 옵션을 취소할 때 효과 *!
+.selected-option.removed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}*/
+
+
+/* CSS */
+button {
+    /* 기본 버튼 스타일링 */
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button.selected {
+    /* 선택된 버튼에 대한 스타일링 */
+    background-color: lightblue;
+}

@@ -1,9 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.dao;
 
-import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
-import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
-import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
-import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
+import com.yyc.bunnyroom.roomRegister.model.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,4 +14,6 @@ public interface RoomRegisterMapper {
     int closedDaysRegister(List<ClosedDayDTO> list);
 
     int holidaysRegister(List<HolidayDTO> holidayList);
+
+    List<RoomOptionDTO> selectAllRoomOptions();
 }

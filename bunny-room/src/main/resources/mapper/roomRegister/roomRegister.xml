@@ -29,6 +29,15 @@
         <result property="businessCategoryStatus" column="BUSINESS_CATEGORY_STATUS"/>
     </resultMap>
 
+    <!--RoomOptionDTO-->
+    <resultMap id="roomOptionDTO" type="com.yyc.bunnyroom.roomRegister.model.RoomOptionDTO">
+        <id property="optionIdx" column="OPTION_NO"/>
+        <result property="optionName" column="OPTION_NAME"/>
+    </resultMap>
+
+
+
+
     <!--HolidayDTO-->
 
     <!--closedDaysRegister-->
@@ -106,6 +115,17 @@
           FROM TBL_BUSINESS_CATEGORY
          WHERE BUSINESS_CATEGORY_STATUS = 'active'
     </select>
+
+    <!--모든 방 옵션을 가져옴-->
+    <select id="selectAllRoomOptions" resultMap="roomOptionDTO">
+        SELECT
+        OPTION_NO,
+        OPTION_NAME
+        FROM TBL_ROOM_OPTION
+    </select>
+
+
+
 
 
 

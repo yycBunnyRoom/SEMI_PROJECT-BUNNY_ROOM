@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
+    <link rel="stylesheet" href="/css/roomRegister/form/roomRegisterForm.css">
+    <script src="/js/roomRegister/form/roomRegisterForm.js"></script>
+
 </head>
 <body>
 <header th:replace="~{/common/header :: headerFragment}">
@@ -46,28 +51,58 @@
     <label for="price">방 가격을 입력해주세요:</label>
     <input type="number" id="price" name="price"/><br>
 
+
+
+
+
+    <button type="submit" id="btn_roomRegister">방 등록하기</button>
+</form>
+
+
 <!-- 원하는 방 옵션을 선택해주세요-->
+<!--thymeleaf 활용해서 변수 JS 변수 선언-->
+<script th:inline="javascript">
+    let roomOptions = [[${roomOptions}]]
+</script>
 
 
+<!-- 버튼이 추가될 곳 -->
+<div id="optionButtons"></div>
+
+<!--선택된 옵션을 보여주는 곳-->
+<p id="selectedOptions">선택된 옵션: </p>
+
+<!-- 값 저장 후 전송할 버튼 -->
+<button onclick="saveValues()">확인</button>
 
 
 
     <!--        카테고리 테이블에 있는 데이터를 가져와서 동적으로 select할 수 있게 하는 메소드 -->
 
 
-    <label for="businessCategoryNo">카테고리</label>
-    <select id="businessCategoryNo" name="businessCategoryNo">
+    <label for="roomOptions">카테고리</label>
+    <select id="roomOptions" name="roomOptions">
         <option
-                th:each="category : ${categories}"
-                th:value="${category.businessCategoryNo}"
-                th:text="${category.businessCategoryName}">
+                th:each="roomOption : ${roomOptions}"
+                th:value="${roomOption.optionIdx}"
+                th:text="${roomOption.optionName}">
         </option>
     </select><br>
 
 
 
 
-- Controller
+
+
+
+
+
+
+
+
+
+
+<!-- - Controller
 
 사업체 번호	BUSINESS_NO - 사업체 번호를 가져와서 입력함
 
@@ -81,7 +116,7 @@
 
 방 번호	ROOM_NO - 쿼리에서 autoIncrement (NULL 입력)
 
-수정일	ROOM_UPDATE_DATE - 건들지 않음
+수정일	ROOM_UPDATE_DATE - 건들지 않음-->
 
 
 

@@ -3,10 +3,7 @@ package com.yyc.bunnyroom.roomRegister.controller;
 import com.yyc.bunnyroom.common.UserRole;
 import com.yyc.bunnyroom.common.eNum.WeekDay;
 import com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper;
-import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
-import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
-import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
-import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
+import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,9 +67,10 @@ public class RoomRegisterController {
 
     /* 방 등록 페이지 */
     @GetMapping("/roomRegisterForm")
-    public String roomRegisterForm(){
+    public ModelAndView roomRegisterForm(ModelAndView modelAndView){
 
-        return "/roomRegister/form/roomRegisterForm";
+        modelAndView.setViewName("/roomRegister/form/roomRegisterForm");
+        return modelAndView;
     }
 
 
@@ -98,6 +96,12 @@ public class RoomRegisterController {
     @ModelAttribute("weekDays")
     public WeekDay[] weekDays(){
         return WeekDay.values();
+    }
+
+    @ModelAttribute("roomOptions")
+    public List<RoomOptionDTO> roomOptions(){
+        // DB 에 있는 카테고리를 가져와서 같이 보낸다
+        return roomRegisterService.selectAllRoomOptions();
     }
 
 
