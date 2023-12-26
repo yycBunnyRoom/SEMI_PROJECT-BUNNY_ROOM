@@ -40,4 +40,6 @@ public class RoomDTO {
     private ZonedDateTime getRoomUpdateDate;
     private String roomStatus;
 
+    private int price;
+
 }

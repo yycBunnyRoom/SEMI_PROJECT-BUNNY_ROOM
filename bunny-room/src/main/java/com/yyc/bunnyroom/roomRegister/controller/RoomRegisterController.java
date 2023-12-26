@@ -31,12 +31,17 @@ public class RoomRegisterController {
     RoomRegisterService roomRegisterService;
 
 
-    // 업체등록 페이지로 이동하는 컨드롤러
+
+
+    /*          VIEWS           */
+
+
     @GetMapping("/hostMainView")
     public String hostMainView(){
         return "/roomRegister/view/hostMainView";
     }
 
+    /* 업체등록 페이지 */
     @GetMapping("/businessRegisterForm")
     public ModelAndView businessRegisterForm(ModelAndView modelAndView){
 
@@ -49,49 +54,6 @@ public class RoomRegisterController {
 
         return modelAndView;
     }
-
-
-    /* 업체 등록 */
-    @PostMapping("/businessRegister")
-    public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO, ModelAndView modelAndView){
-
-        /* businessDTO 에 사용자 번호 입력*/
-        // 현재 사용중인 사용자를 지정
-        Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        // 로그인 되어있는 SecurityContextHolder 안에 있는 AuthDetails 정보를 가져옴
-        // AuthDetails 안에 있는 userNo 정보를 가져옴
-        int ownerNo;
-        ownerNo = ((AuthDetails)currentUser).getLoginUserDTO().getUserNo();
-
-        // businessDTO 에 가져온 userNo 를 저장
-        businessDTO.setUserNo(ownerNo);
-
-        /* businessDTO 에 businessRegistDate 입력*/
-        ZonedDateTime currentTime = ZonedDateTime.now();
-        businessDTO.setBusinessRegistDate(currentTime);
-
-        /* businessDTO 상태 active*/
-        businessDTO.setBusinessStatus("active");
-
-        /* 사업체를 등록시킨다 */
-        int result = roomRegisterService.businessRegister(businessDTO);
-
-        /* 등록 성공, 실패 controller */
-        String message ="";
-        if (result == 1){
-            message = "사업체를 성공적으로 등록하셨습니다.";
-            modelAndView.addObject("message", message);
-        }else {
-            message = "사업체를 등록 실패했습니다";
-            modelAndView.addObject("message", message);
-        }
-
-        modelAndView.setViewName("/roomRegister/view/hostMainView");
-        return modelAndView;
-
-    }
-
 
     /* 휴무 등록 페이지 */
     @GetMapping("/dayOffRegisterForm")
@@ -106,42 +68,27 @@ public class RoomRegisterController {
         return "/roomRegister/form/dayOffRegisterForm";
     }
 
-    // 정기 휴무 등록
-//    @PostMapping("/addClosedDays")
-
-    // 지정 휴무 등록
-    @PostMapping("/addHolidays")
-    public String addHolidays(){
-
-    // 현재 사용하고 있는 HOST의 userNo를 holidayDTO에 추가한다
-
-
-    // 추가한 날짜 (현재 날짜)를 registDate 에 추가한다
-
-
-    // 현재 상태를 active으로 추가
-
-        return "";
-
-    }
-
-
-
-    // 정기 휴무 등록
-    @PostMapping("/closedDayForm")
-    public String closedDayForm(){
-        return null;
-    }
-
     /* 방 등록 페이지 */
     @GetMapping("/roomRegisterForm")
     public String roomRegisterForm(){
+
         return "/roomRegister/form/roomRegisterForm";
     }
 
 
 
-    /* Model Attributes */
+
+
+
+
+
+
+
+
+
+
+
+    /*          Model Attributes            */
     @ModelAttribute("categories")
     public List<BusinessCategoryDTO> categories(){
         // DB 에 있는 카테고리를 가져와서 같이 보낸다

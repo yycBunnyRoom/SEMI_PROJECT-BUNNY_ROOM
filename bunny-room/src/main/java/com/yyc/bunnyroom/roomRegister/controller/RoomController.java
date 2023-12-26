@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
+import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.ZonedDateTime;
 
+
 @Controller
-@RequestMapping("/roomRegister/business")
-public class BusinessController {
+@RequestMapping("/roomRegister/room")
+public class RoomController {
+
     @Autowired
     RoomRegisterService roomRegisterService;
 
+    @PostMapping("/register")
+    public ModelAndView roomRegister(@ModelAttribute RoomDTO roomDTO, ModelAndView modelAndView){
 
-    /* 업체 등록 */
+
+        return null;
+    }
+
+
+
+
+
+
+
+
     @PostMapping("/register")
     public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO, ModelAndView modelAndView){
 
@@ -60,6 +75,5 @@ public class BusinessController {
         return modelAndView;
 
     }
-
 
 }
