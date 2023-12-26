@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/imageUpload" method="post"enctype="multipart/form-data">
+        이미지 : <input type="file" name="img" multiple><br>
+        저장 요청 위치 :
+        <select name="mode">
+            <option value="profile">프로필</option>
+            <option value="announcement">공지사항</option>
+            <option value="inquiry">문의사항</option>
+            <option value="review">리뷰</option>
+            <option value="room">방</option>
+        </select>
+        <button type="submit">이미지 저장</button>
+    </form>
+
+
+    <h1 th:text="${ message }"></h1>
+
+        <div th:each="img : ${img}">
+            <img th:src="@{'${img}'}" width="300" height="300"/>
+        </div>
+
+</body>
+</html>
