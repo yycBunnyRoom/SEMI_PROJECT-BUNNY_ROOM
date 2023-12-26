@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>업체 삭제 사유</title>
+</head>
+<body>
+  <h2>업체 삭제 사유</h2>
+  <section>
+    <article>
+      <h3>업체를 삭제하는 사유를 작성해주세요.</h3>
+      <form action="/admin/business/deleteReason" method="post">
+        <input type="hidden" name="businessNo" th:value="${businessNo}"/>
+        <input type="text" name="reason" placeholder="업체를 사유하려는 이유를 작성해주세요..."/>
+        <button type="submit">업체 삭제</button>
+      </form>
+    </article>
+  </section>
+</body>
+</html>
