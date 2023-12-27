@@ -27,18 +27,7 @@ public class ClosedDaysController {
 
         int businessNo = requestData.getBusinessNo();
 
-        /* businessDTO 에 사용자 번호 입력*//*
-        // 현재 사용중인 사용자를 지정
-        Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        // 로그인 되어있는 SecurityContextHolder 안에 있는 AuthDetails 정보를 가져옴
-        // AuthDetails 안에 있는 userNo 정보를 가져옴
-        int ownerNo;
-        ownerNo = ((AuthDetails)currentUser).getLoginUserDTO().getUserNo();*/
-
-
         System.out.println("휴무관리하는 사업체"+businessNo);
-
 
         // ClosedDayDTO를 list로 가져서 forEach 문으로 하나씩 등록
         List<ClosedDayDTO> list = new ArrayList<>();
@@ -63,7 +52,6 @@ public class ClosedDaysController {
             closedDayDTO.setBusinessNo(businessNo);
             list.add(closedDayDTO);
         }
-
 
         // 위에서 작성한 dto list를 가져가서 등록함
         int result = roomRegisterService.closedDaysRegister(list);
