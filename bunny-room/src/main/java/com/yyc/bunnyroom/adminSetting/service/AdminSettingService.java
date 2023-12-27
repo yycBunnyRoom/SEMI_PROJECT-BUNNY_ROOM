@@ -70,4 +70,17 @@ public class AdminSettingService {
         List<RoomOptionDTO> optionList = roomOptionDAO.showOption();
         return optionList;
     }
+
+    /**
+     * 방 옵션명을 변경하는 서비스 메소드
+     * */
+    public int changeOptionName(int optionNo, String newName) {
+        int result = roomOptionDAO.changeOptionName(optionNo, newName);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
+    }
 }

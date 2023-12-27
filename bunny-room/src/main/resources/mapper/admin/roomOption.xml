@@ -15,4 +15,12 @@
         FROM
             TBL_ROOM_OPTION
     </select>
+
+    <update id="changeOptionName" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomOptionDTO">
+        UPDATE TBL_ROOM_OPTION
+        SET
+            OPTION_NAME = #{newName}
+        WHERE
+            OPTION_NO = #{optionNo}
+    </update>
 </mapper>

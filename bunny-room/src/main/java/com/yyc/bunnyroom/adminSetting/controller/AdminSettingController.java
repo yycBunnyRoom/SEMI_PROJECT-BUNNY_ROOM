@@ -30,7 +30,7 @@ public class AdminSettingController{
     public String setting(Model model){
         // 관리자 설정 페이지로 이동
         showCategory(model);
-        roomOptionController.showOption(model);
+        model.addAttribute("optionList", roomOptionController.showOption());
         return "admin/setting";
     }
     /**
