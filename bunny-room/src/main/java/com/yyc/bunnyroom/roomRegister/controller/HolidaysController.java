@@ -29,7 +29,6 @@ public class HolidaysController {
         for (HolidayDTO holiday :
                 holidayList) {
             System.out.println("지정 휴가: "+holiday);
-            holiday.setBusinessNo(6);
 
             // register하는 현재 시간을 입력
             ZonedDateTime currentTime = ZonedDateTime.now();
