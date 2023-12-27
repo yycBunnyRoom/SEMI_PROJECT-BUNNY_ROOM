@@ -5,6 +5,21 @@
     <title>Title</title>
 </head>
 <body>
+<table>
+    <tr>
+        <th>닉네임</th>
+        <th>이메일</th>
+        <th>연락처</th>
+        <th>권한</th>
 
+    </tr>
+    <tr th:each="mypage : ${mypages}">
+        <td th:text="${mypage.userNickname}"></td>
+        <td th:text="${mypage.userPassword}"></td>
+        <td th:text="${mypage.userPhone}"></td>
+        <td th:text="${mypage.userAuth}"></td>
+    </tr>
+</table>
+<button onclick="location.href='/'">인덱스</button>
 </body>
 </html>

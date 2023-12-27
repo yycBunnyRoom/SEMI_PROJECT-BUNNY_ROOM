@@ -108,17 +108,34 @@ public class InquiryController {
 
 
     @GetMapping("/update_inquiry")
-    public String updateInquiryView(){
-        return "inquiry/inquiryUpdate";
+    public ModelAndView updateInquiryView(ModelAndView mv){
+        mv.addObject("inquiryDTO", new InquiryDTO());
+        mv.setViewName("inquiry/inquiryUpdate");
+
+        return mv;
     }
 
+
+
+
     @PostMapping("/updateInquiry")
-    public String updateInquiry(InquiryDTO inquiryDTO){
-        inquiryService.updateInquiry(inquiryDTO);
+    public String updateInquiry(@RequestParam("inquiryNo") int inquiryNo, InquiryDTO inquiryDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            AuthDetails userDetails = (AuthDetails) authentication.getPrincipal();
+
+            System.out.println(inquiryNo);
+
+            InquiryDTO inquiry = new InquiryDTO();
+            inquiry.setUserNo(userDetails.getLoginUserDTO().getUserNo());
+            inquiry.setInquiryTitle(inquiryDTO.getInquiryTitle());
+            inquiry.setInquiryContents(inquiryDTO.getInquiryContents());
+            inquiry.setInquiryNo(inquiryDTO.getInquiryNo());
+
+            inquiryService.updateInquiry(inquiry);
+        }
 
         return "redirect:/inquirys";
     }
-
-
-
 }
