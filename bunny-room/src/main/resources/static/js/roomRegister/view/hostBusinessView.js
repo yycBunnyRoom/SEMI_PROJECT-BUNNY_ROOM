@@ -9,17 +9,27 @@ function getBusinessList() {
             return response.json();
         })
         .then(data => {
+            const businessListContainer = document.getElementById('businessList');
+
             if (data.length === 0) {
-                document.getElementById('businessList').innerHTML = '<p>등록된 방이 없습니다.</p>';
+                businessListContainer.innerHTML = '<p>등록된 방이 없습니다.</p>';
                 document.getElementById('addBusinessButton').style.display = 'block';
             } else {
                 data.forEach(business => {
+                    // 새로운 div 생성
                     const businessDiv = document.createElement('div');
-                    document.getElementById('businessList').innerHTML += `<div>${business.businessName} - ${business.businessNo}</div>`;
+                    businessDiv.textContent = `${business.businessName} - ${business.businessNo}`;
+                    // 클래스 추가
+                    businessDiv.classList.add('business-item');
+                    // 데이터 속성 추가
+                    businessDiv.dataset.businessNo = business.businessNo;
+                    businessListContainer.appendChild(businessDiv);
+
+                    // 클릭 이벤트를 새로운 div에 추가
                     businessDiv.addEventListener('click', function () {
                         goToBusinessPage(business.businessNo);
                     });
-                    document.getElementById('businessList').appendChild(businessDiv);
+                    businessListContainer.appendChild(businessDiv);
                 });
             }
         })
