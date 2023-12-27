@@ -1,4 +1,4 @@
-function submitForm() {
+function submitBusinessRegisterForm() {
     const businessRegistNo = document.getElementById('businessRegistNo').value;
     const businessName = document.getElementById('businessName').value;
     const businessCategoryNo = document.getElementById('businessCategoryNo').value;

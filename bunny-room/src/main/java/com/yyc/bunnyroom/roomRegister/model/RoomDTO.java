@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Data
 public class RoomDTO {
@@ -23,22 +24,24 @@ public class RoomDTO {
 //    등록일	ROOM_REGIST_DATE		TIMESTAMP
 //    수정일	ROOM_UPDATE_DATE		TIMESTAMP
 //    상태	ROOM_STATUS		VARCHAR
+    // ROOM_PRICE
 
 
     private int roomNo;
     private int businessNo;
     private String roomName;
     private String roomIntro;
-    private String roomDetailInfo;
+    private String roomDetail;
     private String roomAvailableStatus;
     private int roomMinPeople;
     private int roomMaxPeople;
     private String roomFacilityInfo;
     private String roomNotice;
     private ZonedDateTime roomRegistDate;
-    private ZonedDateTime getRoomUpdateDate;
+    private ZonedDateTime roomUpdateDate;
     private String roomStatus;
-
     private int price;
+
+    private int [] appliedOptions;
 
 }

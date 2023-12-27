@@ -12,8 +12,7 @@ function getBusinessList() {
             const businessListContainer = document.getElementById('businessList');
 
             if (data.length === 0) {
-                businessListContainer.innerHTML = '<p>등록된 방이 없습니다.</p>';
-                document.getElementById('addBusinessButton').style.display = 'block';
+                businessListContainer.innerHTML = '<p>등록된 사업체가 없습니다.</p>';
             } else {
                 data.forEach(business => {
                     // 새로운 div 생성

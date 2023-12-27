@@ -1,86 +1,123 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
+import com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO;
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomOptionDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping("/roomRegister/room")
 public class RoomController {
 
     @Autowired
     RoomRegisterService roomRegisterService;
 
-    @PostMapping("/register")
-    public ModelAndView roomRegister(@ModelAttribute RoomDTO roomDTO,
-                                     @ModelAttribute("appliedOptions") List<RoomOptionDTO> appliedOptions,
-                                     ModelAndView modelAndView ){
-
-        System.out.println(appliedOptions);
 
 
-        modelAndView.setViewName("/roomRegister/view/hostMainView");
+    /* 모든 방을 가져오는 메소드 */
+    @GetMapping("/getAllRooms/{businessNo}")
+    public List<RoomDTO> getAllRooms(@PathVariable("businessNo") int businessNo) {
+
+        System.out.println(businessNo);
+
         return null;
+//        return roomRegisterService.getAllRooms(businessNo);
     }
 
 
 
-
-
-
-
-
-//    @PostMapping("/register")
-//    public ModelAndView businessRegister(@ModelAttribute BusinessDTO businessDTO, ModelAndView modelAndView){
+//    /* 사업체 상세 페이지로 이동 */
+//    @GetMapping("/businessDetail/{businessNo}")
+//    public ModelAndView getBusinessDetails(@PathVariable("businessNo") int businessNo) {
+//        ModelAndView modelAndView = new ModelAndView();
 //
-//        /* businessDTO 에 사용자 번호 입력*/
-//        // 현재 사용중인 사용자를 지정
-//        Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        System.out.println("이동할 상세페이지의 사업체번호: "+businessNo);
+//        BusinessDTO businessDetails =roomRegisterService.getBusinessDetails(businessNo);
 //
-//        // 로그인 되어있는 SecurityContextHolder 안에 있는 AuthDetails 정보를 가져옴
-//        // AuthDetails 안에 있는 userNo 정보를 가져옴
-//        int ownerNo;
-//        ownerNo = ((AuthDetails)currentUser).getLoginUserDTO().getUserNo();
 //
-//        // businessDTO 에 가져온 userNo 를 저장
-//        businessDTO.setUserNo(ownerNo);
-//
-//        /* businessDTO 에 businessRegistDate 입력*/
-//        ZonedDateTime currentTime = ZonedDateTime.now();
-//        businessDTO.setBusinessRegistDate(currentTime);
-//
-//        /* businessDTO 상태 active*/
-//        businessDTO.setBusinessStatus("active");
-//
-//        /* 사업체를 등록시킨다 */
-//        int result = roomRegisterService.businessRegister(businessDTO);
-//
-//        /* 등록 성공, 실패 controller */
-//        String message ="";
-//        if (result == 1){
-//            message = "사업체를 성공적으로 등록하셨습니다.";
-//            modelAndView.addObject("message", message);
-//        }else {
-//            message = "사업체를 등록 실패했습니다";
-//            modelAndView.addObject("message", message);
-//        }
-//
-//        modelAndView.setViewName("/roomRegister/view/hostMainView");
+//        modelAndView.setViewName("/roomRegister/detail/businessDetail");
+//        modelAndView.addObject("businessDetails",businessDetails);
 //        return modelAndView;
-//
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @PostMapping("/register")
+    public ResponseEntity<Integer> roomRegister(@RequestBody RoomDTO newRoom ){
+
+        /* newRoom 에 roomRegistDate 입력*/
+        ZonedDateTime currentTime = ZonedDateTime.now();
+        newRoom.setRoomRegistDate(currentTime);
+
+        /* newRoom 의 roomAvailableStatus 를 Y로 설정*/
+        newRoom.setRoomAvailableStatus("Y");
+
+        /* newRoom 상태 active*/
+       newRoom.setRoomStatus("active");
+
+
+        /* 사업체를 등록시킨다 */
+        Integer result = roomRegisterService.roomRegister(newRoom);
+
+        if (result != null && result > 0) {
+            // 성공적으로 등록됨
+            System.out.println("마지막으로 등록된 방번호: "+result);
+
+            /*등록 성공했다면 방옵션을 등록*/
+
+            List<AppliedOptionDTO> appliedOptions = new ArrayList<>();
+            int[] optionList = newRoom.getAppliedOptions();
+
+            for (int i = 0; i < optionList.length; i++) {
+                AppliedOptionDTO appliedOption = new AppliedOptionDTO();
+                appliedOption.setAppliedOption(optionList[i]);
+                appliedOption.setRoomNo(result);
+                appliedOptions.add(appliedOption);
+            }
+
+            System.out.println("적용되는 appliedOptions: "+appliedOptions);
+
+            Integer result2 = roomRegisterService.appliedOptionsRegister(appliedOptions);
+
+            if (result2 != null && result2 > 0){
+                return ResponseEntity.ok(1);
+            }
+            else {
+                // 등록 실패를 나타내는 0 반환
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);
+            }
+        } else {
+            // 등록 실패를 나타내는 0 반환
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);
+        }
+
+    }
+
+
 
 }

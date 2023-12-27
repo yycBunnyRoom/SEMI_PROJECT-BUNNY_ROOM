@@ -7,17 +7,32 @@ import java.util.List;
 
 @Mapper
 public interface RoomRegisterMapper {
+
+    //Register
     Integer businessRegister(BusinessDTO businessDTO);
 
-    List<BusinessCategoryDTO> selectAllBusinessCategory();
+    Integer roomRegister(RoomDTO newRoom);
 
     int closedDaysRegister(List<ClosedDayDTO> list);
 
     int holidaysRegister(List<HolidayDTO> holidayList);
 
+    Integer appliedOptionsRegister(List<AppliedOptionDTO> appliedOptions);
+
+
+    //SelectAll
     List<RoomOptionDTO> selectAllRoomOptions();
 
     List<BusinessDTO> getAllBusiness(int ownerNo);
 
+    List<RoomDTO> getAllRooms(int businessIdx);
+
+    List<BusinessCategoryDTO> selectAllBusinessCategory();
+
+
+    //Select
     BusinessDTO getBusinessDetails(int businessNo);
+
+
+
 }

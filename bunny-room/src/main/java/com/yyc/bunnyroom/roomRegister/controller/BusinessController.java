@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
+import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,11 +86,26 @@ public class BusinessController {
 
         System.out.println("이동할 상세페이지의 사업체번호: "+businessNo);
         BusinessDTO businessDetails =roomRegisterService.getBusinessDetails(businessNo);
+        modelAndView.addObject("businessDetails",businessDetails);
 
+
+        System.out.println("room 찾기전 확인"+businessNo);
+        // businessNo에 상응하는 Room을 가져간다
+        List<RoomDTO> roomList = getAllRooms(businessNo);
+        System.out.println("roomList 유무 확인: "+roomList);
+        modelAndView.addObject("roomList", roomList);
+
+        /*if (roomList != null){
+            modelAndView.addObject("roomList", roomList);
+        }*/
 
         modelAndView.setViewName("/roomRegister/detail/businessDetail");
-        modelAndView.addObject("businessDetails",businessDetails);
         return modelAndView;
+    }
+
+    /* Detail 페이지 가기 전에 상응하는 방을 찾아서 간다*/
+    public List<RoomDTO> getAllRooms(int businessNo){
+        return roomRegisterService.getAllRooms(businessNo);
     }
 
 

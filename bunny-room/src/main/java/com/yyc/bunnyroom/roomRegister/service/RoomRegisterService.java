@@ -15,22 +15,48 @@ public class RoomRegisterService {
     @Autowired
     RoomRegisterMapper roomRegisterMapper;
 
-    // 사업체 등록
+
+
+
+    //Register
     public Integer businessRegister(BusinessDTO businessDTO) {
         return roomRegisterMapper.businessRegister(businessDTO);
     }
-
-    public List<BusinessCategoryDTO> selectAllBusinessCategory() {
-        return roomRegisterMapper.selectAllBusinessCategory();
-    }
-
     public int closedDaysRegister(List<ClosedDayDTO> list) {
         return roomRegisterMapper.closedDaysRegister(list);
+    }
+
+    public Integer roomRegister(RoomDTO newRoom) {
+        return roomRegisterMapper.roomRegister(newRoom);
     }
 
     public int holidaysRegister(List<HolidayDTO> holidayList) {
         return roomRegisterMapper.holidaysRegister(holidayList);
     }
+
+    public Integer appliedOptionsRegister(List<AppliedOptionDTO> appliedOptions) {
+        return roomRegisterMapper.appliedOptionsRegister(appliedOptions);
+    }
+
+
+
+
+    //SelectAll
+    public List<BusinessCategoryDTO> selectAllBusinessCategory() {
+        return roomRegisterMapper.selectAllBusinessCategory();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // DB에 있는 방 옵션 전체를 불러온다
@@ -47,4 +73,14 @@ public class RoomRegisterService {
     public BusinessDTO getBusinessDetails(int businessNo) {
         return roomRegisterMapper.getBusinessDetails(businessNo);
     }
+
+
+    /* 사업체에 상응하는 방을 검색하고 반환한다 */
+    public List<RoomDTO> getAllRooms(int businessNo) {
+        System.out.println("service : "+businessNo);
+        return roomRegisterMapper.getAllRooms(businessNo);
+    }
+
+
+
 }
