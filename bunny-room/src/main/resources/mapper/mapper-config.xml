@@ -18,6 +18,7 @@
         <mapper resource="mapper/inquiry/inquiryMapper.xml"/>
         <mapper resource="mapper/admin/adminBusiness.xml"/>
         <mapper resource="mapper/common/image.xml"/>
+        <mapper resource="mapper/admin/roomOption.xml"/>
     </mappers>
 
 </configuration>

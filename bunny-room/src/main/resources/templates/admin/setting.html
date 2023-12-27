@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 설정</title>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
 
@@ -12,6 +15,7 @@
 
 <nav th:replace="admin/adminNav :: nav"></nav>
 
+    <!-- 카테고리 관련 -->
     <section>
         <h2>카테고리 관리</h2>
         <h3>현재 카테고리</h3>
@@ -38,6 +42,49 @@
         </article>
     </section>
 
+    <!-- 방 옵션 관련 -->
+    <section>
+        <h2>방 옵션 관리</h2>
+        <h3>현재 방 옵션</h3>
+        <article>
+            <table>
+                <tr>
+                    <th>옵션명</th>
+                    <th>기능</th>
+                </tr>
+                <tr th:each="option : ${optionList}">
+                    <td th:text="${option.optionName}"></td>
+                    <td>
+                        <button type="button" id="giveNo" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" th:attr="data-option-idx=${option.optionIdx}" onclick="fn_giveNo(this)">
+                            옵션명 변경
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </article>
+    </section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">새로운 옵션명을 입력해주세요.</h1>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="getNo" name="optionNo" value=""/>
+                <input type="text" id="getNewName" name="optionName" placeholder=""/>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" id="submitOptionNo" class="btn btn-primary" onclick="submitOptionNo()" data-bs-dismiss="modal">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
     <th:block th:if="${message}">
         <script th:inline="javascript">
             window.onload =function (){
@@ -47,5 +94,59 @@
         </script>
     </th:block>
 
+<script>
+    /* 방 옵션에서 프라이머리키 받아오기 */
+    function fn_giveNo(button){
+        let valueNo = button.getAttribute('data-option-idx');
+       document.getElementById('getNo').value = valueNo;
+        console.log(valueNo);
+    }
+
+    function submitOptionNo() {
+        let optionIdx = document.getElementById('getNo').value;
+        let newOptionName = document.getElementById('getNewName').value;
+
+        // FormData 객체를 생성해서 그 안에 값을 담기
+        let jsonData = {
+            optionIdx: optionIdx,
+            optionName: newOptionName
+        }
+
+        // Fetch 사용해서 보내기
+        fetch('/admin/setting/changeOptionName',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(jsonData)
+        })
+            .then(response => {
+                if(!response.ok){
+                    throw new Error("`HTTP error! Status: ${response.status}`");
+                }
+                return response.text();
+            })
+            .then(data => {
+                // 서버 응답 처리
+                console.log(data);
+
+                // 모달 닫기
+                $('#staticBackdrop').modal('hide');
+
+                // 테이블에서 해당 행 찾아서 업데이트
+                let tableRow = $('button[data-option-idx="' + optionIdx + '"]').closest('tr');
+                tableRow.find('td:first-child').text(newOptionName);
+            })
+            .catch(error => {
+                // 에러 처리
+                console.error('Fetch error', error);
+            })
+    }
+</script>
+
+
+<!-- 부트스트랩 JS 및 Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 </body>
 </html>
