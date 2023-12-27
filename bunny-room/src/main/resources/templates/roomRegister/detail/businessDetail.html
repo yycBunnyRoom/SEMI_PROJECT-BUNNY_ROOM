@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>사업체 상세 페이지</title>
 
-<!--    <script src="/js/roomRegister/detail/businessDetail.js"></script>-->
+    <link rel="stylesheet" href="/css/roomRegister/detail/businessDetail.css">
 </head>
 <body>
 <header th:replace="~{/common/header :: headerFragment}">
@@ -20,13 +20,16 @@
     <!-- 다른 필드들에 대한 정보를 추가 -->
 </div>
 
-<a href="/roomRegister/dayOffRegisterForm">휴무 관리</a>
-
-<div id="businessDayOff">
-    휴무관리
-</div>
+<!-- 휴무 관리 버튼 -->
+<div class="button" id="dayOffButton">휴무 관리</div>
 
 
 
+<script th:inline="javascript">
+    // businessNo를 JavaScript 변수로 저장
+    let businessNo = [[${businessDetails.businessNo}]]
+</script>
+
+<script src="/js/roomRegister/detail/businessDetail.js"></script>
 </body>
 </html>

@@ -25,6 +25,48 @@ function fn_emailCheck() {
 
     })
 }
+
+
+
+
+
+
+// const emailCheck = () => {
+//     const email = document.getElementById("userEmail").value; // 입력값을 가져오는 내용
+//     const checkResult = document.getElementById("check-result1"); // <p id="check-result"></p> 이거 가져오는 요소
+//     console.log("입력한 이메일",email); // 확인용 콘솔
+//     $.ajax({
+//         //요청방식 post,url: "email-check",데이터: 이메일
+//         type: "post", //post방식으로
+//         url: "/user/email-check", //이주소에 보내겠다
+//         data: {
+//             "memberEmail": email //보내고자하는 데이터의 내용 memberEmail이 파라미터이름 email은 사용자가 입력한 이메일 값
+//         },
+//         success: function (res){ //요청 성공시
+//             console.log("요청성공", res); //콘솔 확잉용
+//             if (res === 1){
+//                 console.log("사용가능한 이메일");
+//                 checkResult.style.color = "green";
+//                 checkResult.innerHTML = "사용 가능한 이메일입니다.";
+//             } else {
+//                 console.log("이미 사용중인 이메일");
+//                 checkResult.style.color = "red";
+//                 checkResult.innerHTML = "사용 중인 이메일입니다."
+//             }
+//         },
+//         error: function (err){
+//             console.log("에러발생", err);
+//         }
+//     })
+// }
+
+
+
+
+
+
+
+
 // 인증 이메일 보내기
 function fn_sendAuthEmail(){
 

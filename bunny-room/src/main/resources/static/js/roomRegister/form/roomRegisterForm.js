@@ -1,5 +1,4 @@
 
-
 /*          Room Options             */
 
 let appliedOptions = []; // 선택된 값을 저장할 배열
