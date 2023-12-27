@@ -53,17 +53,11 @@
 <button onclick="addHolidays()">확인</button>
 
 
-
-
-
-
-
-
-
-
-
-
-
+<!--Thymeleaf 를 활용 해서 해당 휴가가 대응 하는 기업 번호를 JS 변수에 저장-->
+<script th:inline="javascript">
+    let businessNo = [[${businessNo}]]
+    console.log(businessNo)
+</script>
 
 
 

@@ -9,6 +9,7 @@ import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -58,15 +59,13 @@ public class RoomRegisterController {
 
     /* 휴무 등록 페이지 */
     @GetMapping("/dayOffRegisterForm")
-    public String dayOffRegisterForm(ModelAndView modelAndView){
-        ClosedDayDTO closedDayDTO = new ClosedDayDTO();
-//        HolidayDTO holiday = new HolidayDTO();
+    public ModelAndView dayOffRegisterForm(@RequestParam(value = "businessNo", required = false) int businessNo,
+                                     ModelAndView modelAndView){
 
-        modelAndView.addObject("closedDayDTO",closedDayDTO);
-//        modelAndView.addObject("holiday",holiday);
+        modelAndView.addObject("businessNo",businessNo);
+        modelAndView.setViewName("/roomRegister/form/dayOffRegisterForm");
 
-
-        return "/roomRegister/form/dayOffRegisterForm";
+        return modelAndView;
     }
 
     /* 방 등록 페이지 */
@@ -74,11 +73,22 @@ public class RoomRegisterController {
     public ModelAndView roomRegisterForm(ModelAndView modelAndView){
 
         modelAndView.setViewName("/roomRegister/form/roomRegisterForm");
+
         return modelAndView;
     }
 
 
 
+
+
+    @GetMapping("/login")
+    public String loginForm(@RequestParam(value = "error", required = false) String error,
+                            @RequestParam(value = "exception", required = false) String exception,
+                            Model model) {
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+        return "/security/auth/login";
+    }
 
 
 

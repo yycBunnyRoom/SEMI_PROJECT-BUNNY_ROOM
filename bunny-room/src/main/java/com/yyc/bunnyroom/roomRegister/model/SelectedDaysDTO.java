@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 public class SelectedDaysDTO {
     private List<String> selectedDays;
+    private int businessNo;
 
 
 }

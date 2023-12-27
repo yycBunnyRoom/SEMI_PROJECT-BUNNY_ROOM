@@ -83,10 +83,8 @@ public class BusinessController {
     public ModelAndView getBusinessDetails(@PathVariable("businessNo") int businessNo) {
         ModelAndView modelAndView = new ModelAndView();
 
-        System.out.println(businessNo);
+        System.out.println("이동할 상세페이지의 사업체번호: "+businessNo);
         BusinessDTO businessDetails =roomRegisterService.getBusinessDetails(businessNo);
-
-        System.out.println(businessDetails);
 
 
         modelAndView.setViewName("/roomRegister/detail/businessDetail");

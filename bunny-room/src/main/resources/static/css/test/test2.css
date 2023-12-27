@@ -1,226 +1,36 @@
-
-/* datepicker 크기 조정 */
-#datePicker {
-    width: 150px; /* 너비 조정 */
-    height: 30px; /* 높이 조정 */
-    /* 그 외의 스타일링을 원하시는 경우 추가 가능 */
+/* 모달 스타일 */
+.modal {
+    display: none; /* 초기에는 숨김 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* 배경 어둡게 */
 }
 
-#datePicker2 {
-    width: 150px; /* 너비 조정 */
-    height: 30px; /* 높이 조정 */
-    /* 그 외의 스타일링을 원하시는 경우 추가 가능 */
+/* 모달 내용 스타일 */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
 }
 
-
-/* 입력 상자를 옆으로 정렬 */
-.form-control {
-    display: inline-block; /* 인라인 블록 요소로 변경하여 옆으로 정렬 */
-    width: calc(50% - 5px); /* 각각의 너비를 조정하여 50%로 설정 (여백 고려) */
-    margin-right: 10px; /* 각 입력 상자 사이의 간격을 위한 마진 설정 */
-    box-sizing: border-box; /* 너비 계산을 위한 border-box 모델 적용 */
+/* 닫기 버튼 스타일 */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*body {*/
-/*    color: #fff;*/
-/*    overflow-x: hidden;*/
-/*    height: 100%;*/
-/*    background-color: #000000;*/
-/*    background-repeat: no-repeat*/
-/*}*/
-
-/*.container-fluid {*/
-/*    margin-top: 80px;*/
-/*    margin-bottom: 80px*/
-/*}*/
-
-/*.card {*/
-/*    background-color: #424242;*/
-/*    padding: 40px 10px*/
-/*}*/
-
-/*.text-grey {*/
-/*    color: #9E9E9E*/
-/*}*/
-
-/*.fa {*/
-/*    font-size: 25px;*/
-/*    cursor: pointer*/
-/*}*/
-
-/*input,*/
-/*select {*/
-/*    padding: 2px 6px;*/
-/*    border: none;*/
-/*    border-bottom: 1px solid #fff;*/
-/*    border-radius: none;*/
-/*    box-sizing: border-box;*/
-/*    color: #fff;*/
-/*    background-color: transparent;*/
-/*    font-size: 14px;*/
-/*    letter-spacing: 1px;*/
-/*    text-align: center !important*/
-/*}*/
-
-/*input:focus,*/
-/*select:focus {*/
-/*    -moz-box-shadow: none !important;*/
-/*    -webkit-box-shadow: none !important;*/
-/*    box-shadow: none !important;*/
-/*    border-bottom: 1px solid #00C853;*/
-/*    outline-width: 0*/
-/*}*/
-
-/*select option {*/
-/*    background-color: #616161*/
-/*}*/
-
-/*select option:focus {*/
-/*    background-color: #00C853 !important*/
-/*}*/
-
-/*::placeholder {*/
-/*    color: #fff;*/
-/*    opacity: 1*/
-/*}*/
-
-/*:-ms-input-placeholder {*/
-/*    color: #fff*/
-/*}*/
-
-/*::-ms-input-placeholder {*/
-/*    color: #fff*/
-/*}*/
-
-/*button:focus {*/
-/*    -moz-box-shadow: none !important;*/
-/*    -webkit-box-shadow: none !important;*/
-/*    box-shadow: none !important;*/
-/*    outline-width: 0*/
-/*}*/
-
-/*.btn {*/
-/*    border-radius: 50px;*/
-/*    width: 120px*/
-/*}*/
-
-/*.exit {*/
-/*    border: 1px solid #9E9E9E;*/
-/*    color: #9E9E9E;*/
-/*    background-color: transparent*/
-/*}*/
-
-/*.exit:hover {*/
-/*    border: 1px solid #9E9E9E;*/
-/*    color: #000 !important;*/
-/*    background-color: #9E9E9E*/
-/*}*/
-
-/*@media screen and (max-width: 768px) {*/
-/*    .mob {*/
-/*        width: 70%*/
-/*    }*/
-
-/*    select.mob {*/
-/*        width: 50%*/
-/*    }*/
-/*}*/
-
-/*.datepicker {*/
-/*    background-color: #fff;*/
-/*    border: none;*/
-/*    border-radius: 0 !important;*/
-/*}*/
-
-/*.datepicker-dropdown {*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*}*/
-
-/*.datepicker table tr td.today, span.focused {*/
-/*    border-radius: 50% !important;*/
-/*    background-image: linear-gradient(#FFF3E0, #FFE0B2);*/
-/*}*/
-
-/*.datepicker table tr td.today.range {*/
-/*    background-image: linear-gradient(#eeeeee, #eeeeee) !important;*/
-/*    border-radius: 0 !important;*/
-/*}*/
-
-/*!*Weekday title*!*/
-/*thead tr:nth-child(3) th {*/
-/*    font-weight: bold !important;*/
-/*    padding-top: 10px;*/
-/*    padding-bottom: 10px;*/
-/*}*/
-
-/*.dow, .old-day, .day, .new-day {*/
-/*    width: 40px !important;*/
-/*    height: 40px !important;*/
-/*    border-radius: 0px !important;*/
-/*}*/
-
-/*.old-day:hover, .day:hover, .new-day:hover, .month:hover, .year:hover, .decade:hover, .century:hover {*/
-/*    border-radius: 50% !important;*/
-/*    background-color: #eee;*/
-/*}*/
-
-/*.active {*/
-/*    border-radius: 50% !important;*/
-/*    background-image: linear-gradient(#90CAF9, #64B5F6) !important;*/
-/*    color: #fff !important;*/
-/*}*/
-
-/*.range-start, .range-end {*/
-/*    border-radius: 50% !important;*/
-/*    background-image: linear-gradient(#FFA726, #FFA726) !important;*/
-/*}*/
-
-/*.prev, .next, .datepicker-switch {*/
-/*    border-radius: 0 !important;*/
-/*    padding: 10px 10px 10px 10px !important;*/
-/*    text-transform: uppercase;*/
-/*    font-size: 14px;*/
-/*    opacity: 0.8;*/
-/*}*/
-
-/*.prev:hover, .next:hover, .datepicker-switch:hover {*/
-/*    background-color: inherit !important;*/
-/*    opacity: 1;*/
-/*}*/
-
-/*.btn-black {*/
-/*    background-color: #37474F !important;*/
-/*    color: #fff !important;*/
-/*    width: 100%;*/
-/*}*/
-
-/*.btn-black:hover {*/
-/*    color: #fff !important;*/
-/*    background-color: #000 !important;*/
-/*}*/
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

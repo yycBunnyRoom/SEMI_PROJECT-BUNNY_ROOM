@@ -1,9 +1,13 @@
 
 /* 정기 휴무 */
+
+
+// 선택한 요일을 담을 변수를 선언
 let selectedDays = [];
 
 function selectDay(day) {
-    console.log("선택된 요일:", day); // day 변수의 값을 콘솔에 출력합니다.
+    // 선택한 날(day) 의 값을 콘솔에 출력 - 확인용
+    console.log("선택된 요일:", day);
 
     const btn = document.getElementById(day);
     if (!selectedDays.includes(day)) {
@@ -26,6 +30,7 @@ function addClosedDays() {
     // 예를 들어 AJAX 또는 fetch를 사용하여 Spring Boot의 컨트롤러로 전송할 수 있습니다.
 
     const requestData = {
+        businessNo : businessNo,
         selectedDays: selectedDays // 선택된 요일 데이터
         // 다른 필요한 데이터도 추가 가능
     };
@@ -48,7 +53,7 @@ function addClosedDays() {
             console.log('서버로부터 받은 데이터:', data);
 
            if (data === "성공"){
-               alert("등록 성공!")
+               alert("등록 "+data+"!")
            }
         })
         .catch(error => {
