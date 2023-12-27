@@ -1,12 +1,31 @@
-document.getElementById('businessRegisterForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // 기본 폼 제출 동작을 막음
+function submitForm() {
+    const businessRegistNo = document.getElementById('businessRegistNo').value;
+    const businessName = document.getElementById('businessName').value;
+    const businessCategoryNo = document.getElementById('businessCategoryNo').value;
 
-    // 폼 데이터 가져오기
-    const formData = new FormData(document.getElementById('businessRegisterForm'));
+    const businessAddressRoad = document.getElementById('businessAddressRoad').value;
+    const businessAddressDetail = document.getElementById('businessAddressDetail').value;
+    const businessZipCode = document.getElementById('businessZipCode').value;
+    const businessPhone = document.getElementById('businessPhone').value;
+
+
+    const data = {
+        businessRegistNo: businessRegistNo,
+        businessName: businessName,
+        businessCategoryNo: businessCategoryNo,
+
+        businessAddressRoad: businessAddressRoad,
+        businessAddressDetail: businessAddressDetail,
+        businessZipCode: businessZipCode,
+        businessPhone: businessPhone
+    };
 
     fetch('/roomRegister/business/register', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
+        },
+        body: JSON.stringify(data)
     })
         .then(response => {
             if (!response.ok) {
@@ -15,18 +34,19 @@ document.getElementById('businessRegisterForm').addEventListener('submit', funct
             return response.json();
         })
         .then(data => {
-            // 서버 응답에 대한 처리
             console.log('Success:', data);
-            // 원하는 동작 수행
+            if (data === 1) {
+                alert('사업체를 성공적으로 등록하셨습니다.');
+                window.location.href = '/roomRegister/hostMainView';
+            } else {
+                alert('사업체를 등록 실패했습니다.');
+            }
         })
         .catch(error => {
             console.error('Error:', error);
-            // 에러 처리
+            alert('네트워크 오류가 발생했습니다.');
         });
-});
-
-
-
+}
 
 <!--    핸드폰 관련-->
 // 자동으로 businessPhone 을 update
@@ -43,22 +63,6 @@ function updateBusinessPhone() {
 document.getElementById('phone1').addEventListener('change', updateBusinessPhone);
 document.getElementById('phone2').addEventListener('input', updateBusinessPhone);
 document.getElementById('phone3').addEventListener('input', updateBusinessPhone);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 우편 코드 */

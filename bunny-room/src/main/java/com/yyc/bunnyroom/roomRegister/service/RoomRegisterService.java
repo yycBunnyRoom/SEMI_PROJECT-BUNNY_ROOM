@@ -16,7 +16,7 @@ public class RoomRegisterService {
     RoomRegisterMapper roomRegisterMapper;
 
     // 사업체 등록
-    public int businessRegister(BusinessDTO businessDTO) {
+    public Integer businessRegister(BusinessDTO businessDTO) {
         return roomRegisterMapper.businessRegister(businessDTO);
     }
 

@@ -161,7 +161,7 @@
             BUSINESS_UPDATE_DATE,
             BUSINESS_STATUS
         FROM TBL_BUSINESS
-        WHERE USER_NO = #{businessNo}
+        WHERE BUSINESS_NO = #{businessNo}
     </select>
 
 

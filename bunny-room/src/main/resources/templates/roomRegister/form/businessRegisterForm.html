@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title>사업체 등록</title>
 
-
-    <script src="/js/roomRegister/form/businessRegisterForm.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 
@@ -14,7 +13,6 @@
 </header>
 
 
-    <form  id="businessRegisterForm">
 
 <!--        사업자 번호를 입력받음-->
         <label for="businessRegistNo">사업자번호를 입력하세요:</label>
@@ -74,10 +72,10 @@
         <!--        자바 스크립트를 활용해서 동적으로 값을 숨겨진 userPhone 저장-->
         <input type="hidden" id="businessPhone" name="businessPhone"/>
 
-        <button type="submit">업체등록하기</button>
-    </form>
+        <input type="button" onclick="submitForm()" value="업체등록하기">
 
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script src="/js/roomRegister/form/businessRegisterForm.js"></script>
 </body>
 </html>

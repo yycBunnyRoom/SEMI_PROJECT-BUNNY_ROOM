@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface RoomRegisterMapper {
-    int businessRegister(BusinessDTO businessDTO);
+    Integer businessRegister(BusinessDTO businessDTO);
 
     List<BusinessCategoryDTO> selectAllBusinessCategory();
 
