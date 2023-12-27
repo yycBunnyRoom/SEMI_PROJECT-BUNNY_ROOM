@@ -35,36 +35,7 @@ public class RoomController {
         System.out.println(businessNo);
 
         return null;
-//        return roomRegisterService.getAllRooms(businessNo);
     }
-
-
-
-//    /* 사업체 상세 페이지로 이동 */
-//    @GetMapping("/businessDetail/{businessNo}")
-//    public ModelAndView getBusinessDetails(@PathVariable("businessNo") int businessNo) {
-//        ModelAndView modelAndView = new ModelAndView();
-//
-//        System.out.println("이동할 상세페이지의 사업체번호: "+businessNo);
-//        BusinessDTO businessDetails =roomRegisterService.getBusinessDetails(businessNo);
-//
-//
-//        modelAndView.setViewName("/roomRegister/detail/businessDetail");
-//        modelAndView.addObject("businessDetails",businessDetails);
-//        return modelAndView;
-//    }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @PostMapping("/register")
@@ -86,7 +57,8 @@ public class RoomController {
 
         if (result != null && result > 0) {
             // 성공적으로 등록됨
-            System.out.println("마지막으로 등록된 방번호: "+result);
+
+            System.out.println("마지막으로 등록된 방번호: newRoom: "+newRoom.getRoomNo());
 
             /*등록 성공했다면 방옵션을 등록*/
 
@@ -96,7 +68,7 @@ public class RoomController {
             for (int i = 0; i < optionList.length; i++) {
                 AppliedOptionDTO appliedOption = new AppliedOptionDTO();
                 appliedOption.setAppliedOption(optionList[i]);
-                appliedOption.setRoomNo(result);
+                appliedOption.setRoomNo(newRoom.getRoomNo());
                 appliedOptions.add(appliedOption);
             }
 
@@ -116,6 +88,30 @@ public class RoomController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);
         }
 
+    }
+
+
+        /* 사업체 상세 페이지로 이동 */
+    @GetMapping("/roomDetail/{roomNo}")
+    public ModelAndView getBusinessDetails(@PathVariable("roomNo") int roomNo) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        System.out.println("이동할 상세페이지의 방번호: "+roomNo);
+        RoomDTO roomDetails = roomRegisterService.getRoomDetails(roomNo);
+
+        System.out.println("roomDTO 정보가 들어왔는지 확인: "+roomDetails);
+
+
+        // 선택한 appliedOptions를 같이 보냄
+        List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(roomNo);
+
+        System.out.println(roomNo+"번방의 옵션들: "+appliedOptions);
+
+
+        modelAndView.setViewName("/roomRegister/detail/roomDetail");
+        modelAndView.addObject("appliedOptions",appliedOptions);
+        modelAndView.addObject("roomDetails",roomDetails);
+        return modelAndView;
     }
 
 

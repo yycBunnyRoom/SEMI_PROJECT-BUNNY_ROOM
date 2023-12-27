@@ -27,7 +27,9 @@ public class RoomRegisterService {
     }
 
     public Integer roomRegister(RoomDTO newRoom) {
-        return roomRegisterMapper.roomRegister(newRoom);
+        Integer generatedRoomNo = roomRegisterMapper.roomRegister(newRoom);
+        System.out.println("새로 생성된 방번호: "+generatedRoomNo);
+        return generatedRoomNo;
     }
 
     public int holidaysRegister(List<HolidayDTO> holidayList) {
@@ -46,41 +48,35 @@ public class RoomRegisterService {
         return roomRegisterMapper.selectAllBusinessCategory();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // DB에 있는 방 옵션 전체를 불러온다
     public List<RoomOptionDTO> selectAllRoomOptions() {
         return roomRegisterMapper.selectAllRoomOptions();
     }
 
-    // DB에 있는 회원의 사업체 전체를 불러온다
     public List<BusinessDTO> getAllBusiness(int ownerNo) {
         return roomRegisterMapper.getAllBusiness(ownerNo);
     }
 
-    // 개별 사업체 상세내역을 보여주는 페이지
-    public BusinessDTO getBusinessDetails(int businessNo) {
-        return roomRegisterMapper.getBusinessDetails(businessNo);
-    }
 
 
-    /* 사업체에 상응하는 방을 검색하고 반환한다 */
+
+
+    //Select
     public List<RoomDTO> getAllRooms(int businessNo) {
         System.out.println("service : "+businessNo);
         return roomRegisterMapper.getAllRooms(businessNo);
     }
 
+    public List<AppliedOptionDTO> getAppliedOptions(int roomNo) {
+        return roomRegisterMapper.getAppliedOptions(roomNo);
+    }
+
+    public BusinessDTO getBusinessDetails(int businessNo) {
+        return roomRegisterMapper.getBusinessDetails(businessNo);
+    }
+
+    public RoomDTO getRoomDetails(int roomNo) {
+        return roomRegisterMapper.getRoomDetails(roomNo);
+    }
 
 
 }

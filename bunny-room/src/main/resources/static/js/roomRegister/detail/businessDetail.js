@@ -18,11 +18,15 @@ else{
         roomListContainer.appendChild(roomDiv);
 
         // 클릭 이벤트를 새로운 div에 추가
-        // roomDiv.addEventListener('click', function () {
-        //     goToRoomPage(room.roomNo);
-        // });
+        roomDiv.addEventListener('click', function () {
+            goToRoomPage(room.roomNo);
+        });
         roomListContainer.appendChild(roomDiv);
     })
+}
+
+function goToRoomPage(roomNo) {
+    window.location.href = `/roomRegister/room/roomDetail/${roomNo}`;
 }
 
 
@@ -74,9 +78,7 @@ else{
 // }
 //
 //
-// function goToRoomPage(roomNo) {
-//     window.location.href = `/roomRegister/room/roomDetail/${roomNo}`;
-// }
+
 //
 //
 //

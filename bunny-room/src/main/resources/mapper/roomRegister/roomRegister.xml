@@ -55,6 +55,12 @@
         <result property="price" column="ROOM_PRICE"/>
     </resultMap>
 
+    <!--AppliedOption DTO-->
+    <resultMap id="appliedOptionDTO" type="com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO">
+        <result property="RoomNo" column="ROOM_NO"/>
+        <result property="appliedOption" column="APPLIED_OPTION_NO"/>
+        <result property="appliedOptionDescription" column="OPTION_NAME"/>
+    </resultMap>
 
 
 
@@ -99,10 +105,7 @@
     </insert>
 
     <!--roomRegister-->
-    <insert id="roomRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
-        <selectKey keyProperty="roomNo" order="AFTER" resultType="java.lang.Integer">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="roomRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO" useGeneratedKeys="true" keyProperty="roomNo">
         INSERT INTO TBL_ROOM(
             ROOM_NO,
             BUSINESS_NO,
@@ -206,7 +209,7 @@
 
 
 
-    <!--SELECT-->
+    <!--SELECT ALL-->
 
     <!--selectAllBusinessCategory-->
     <select id="selectAllBusinessCategory" resultMap="businessCategoryDTO">
@@ -246,27 +249,6 @@
           AND BUSINESS_STATUS = 'active'
     </select>
 
-
-    <!--getBusinessDetails-->
-    <select id="getBusinessDetails" resultMap="businessDTO">
-        SELECT
-            BUSINESS_NO,
-            USER_NO,
-            BUSINESS_REGIST_NO,
-            BUSINESS_NAME,
-            BUSINESS_CATEGORY_NO,
-            BUSINESS_ADDRESS_ROAD,
-            BUSINESS_ADDRESS_DETAIL,
-            BUSINESS_ZIP_CODE,
-            BUSINESS_PHONE,
-            BUSINESS_REGIST_DATE,
-            BUSINESS_UPDATE_DATE,
-            BUSINESS_STATUS
-        FROM TBL_BUSINESS
-        WHERE BUSINESS_NO = #{businessNo}
-    </select>
-
-
     <!--getAllRooms-->
     <select id="getAllRooms" resultMap="roomDTO">
         SELECT
@@ -289,30 +271,65 @@
         AND ROOM_STATUS = 'active'
     </select>
 
+    <!--getAllRooms-->
+    <select id="getAppliedOptions" resultMap="appliedOptionDTO">
+        SELECT
+            A.ROOM_NO,
+            A.APPLIED_OPTION_NO,
+            B.OPTION_NAME
+        FROM
+            TBL_APPLIED_OPTION AS A
+        JOIN
+            TBL_ROOM_OPTION AS B ON (A.APPLIED_OPTION_NO = B.OPTION_NO)
+        WHERE
+            ROOM_NO = #{roomNo}
+    </select>
 
 
 
 
 
+    <!--SELECT-->
 
+    <!--getBusinessDetails-->
+    <select id="getBusinessDetails" resultMap="businessDTO">
+        SELECT
+        BUSINESS_NO,
+        USER_NO,
+        BUSINESS_REGIST_NO,
+        BUSINESS_NAME,
+        BUSINESS_CATEGORY_NO,
+        BUSINESS_ADDRESS_ROAD,
+        BUSINESS_ADDRESS_DETAIL,
+        BUSINESS_ZIP_CODE,
+        BUSINESS_PHONE,
+        BUSINESS_REGIST_DATE,
+        BUSINESS_UPDATE_DATE,
+        BUSINESS_STATUS
+        FROM TBL_BUSINESS
+        WHERE BUSINESS_NO = #{businessNo}
+    </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <!--getRoomDetails-->
+    <select id="getRoomDetails" resultMap="roomDTO">
+        SELECT
+            ROOM_NO,
+            BUSINESS_NO,
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+        FROM TBL_ROOM
+        WHERE ROOM_NO = #{roomNo}
+        AND ROOM_STATUS = 'active'
+    </select>
 
 
 

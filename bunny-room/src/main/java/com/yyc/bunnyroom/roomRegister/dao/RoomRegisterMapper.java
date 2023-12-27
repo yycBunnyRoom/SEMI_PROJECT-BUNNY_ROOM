@@ -1,7 +1,9 @@
 package com.yyc.bunnyroom.roomRegister.dao;
 
 import com.yyc.bunnyroom.roomRegister.model.*;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
 
@@ -29,10 +31,13 @@ public interface RoomRegisterMapper {
 
     List<BusinessCategoryDTO> selectAllBusinessCategory();
 
+    List<AppliedOptionDTO> getAppliedOptions(int roomNo);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);
 
+    RoomDTO getRoomDetails(int roomNo);
 
 
 }
