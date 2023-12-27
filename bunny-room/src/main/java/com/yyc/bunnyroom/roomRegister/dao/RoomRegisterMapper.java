@@ -16,4 +16,8 @@ public interface RoomRegisterMapper {
     int holidaysRegister(List<HolidayDTO> holidayList);
 
     List<RoomOptionDTO> selectAllRoomOptions();
+
+    List<BusinessDTO> getAllBusiness(int ownerNo);
+
+    BusinessDTO getBusinessDetails(int businessNo);
 }

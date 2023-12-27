@@ -37,4 +37,14 @@ public class RoomRegisterService {
     public List<RoomOptionDTO> selectAllRoomOptions() {
         return roomRegisterMapper.selectAllRoomOptions();
     }
+
+    // DB에 있는 회원의 사업체 전체를 불러온다
+    public List<BusinessDTO> getAllBusiness(int ownerNo) {
+        return roomRegisterMapper.getAllBusiness(ownerNo);
+    }
+
+    // 개별 사업체 상세내역을 보여주는 페이지
+    public BusinessDTO getBusinessDetails(int businessNo) {
+        return roomRegisterMapper.getBusinessDetails(businessNo);
+    }
 }

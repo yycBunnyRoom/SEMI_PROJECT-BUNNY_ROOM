@@ -119,10 +119,60 @@
     <!--모든 방 옵션을 가져옴-->
     <select id="selectAllRoomOptions" resultMap="roomOptionDTO">
         SELECT
-        OPTION_NO,
-        OPTION_NAME
+            OPTION_NO,
+            OPTION_NAME
         FROM TBL_ROOM_OPTION
     </select>
+
+    <!--getAllBusiness (모든 사업체를 가져옴)-->
+    <select id="getAllBusiness" resultMap="businessDTO">
+        SELECT
+            BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
+        FROM TBL_BUSINESS
+        WHERE USER_NO = #{ownerNo}
+          AND BUSINESS_STATUS = 'active'
+    </select>
+
+
+    <!--getBusinessDetails (사업번호를 이용해서 사업체 상세 내역을 가져옴)-->
+    <select id="getBusinessDetails" resultMap="businessDTO">
+        SELECT
+            BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
+        FROM TBL_BUSINESS
+        WHERE USER_NO = #{businessNo}
+    </select>
+
+
+
+
+
+
+
+
+
+
 
 
 

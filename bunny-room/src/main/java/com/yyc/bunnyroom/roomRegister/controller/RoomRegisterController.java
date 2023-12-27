@@ -38,6 +38,13 @@ public class RoomRegisterController {
         return "/roomRegister/view/hostMainView";
     }
 
+    /* 사업체 관리 페이지*/
+    @GetMapping("/hostBusinessView")
+    public String hostBusinessView(){
+        return "/roomRegister/view/hostBusinessView";
+    }
+
+
     /* 업체등록 페이지 */
     @GetMapping("/businessRegisterForm")
     public ModelAndView businessRegisterForm(ModelAndView modelAndView){
