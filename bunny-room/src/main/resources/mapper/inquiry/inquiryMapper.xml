@@ -53,9 +53,8 @@
         SET
         INQUIRY_TITLE = #{inquiryTitle},
         INQUIRY_CONTENTS = #{inquiryContents},
-        INQUIRY_UPDATE_DATE = #{inquiryUpdateDate},
-        INQUIRY_STATUS = #{inquiryStatus}
-        WHERE USER_NO= #{userNo}
+        INQUIRY_UPDATE_DATE = #{inquiryUpdateDate}
+        WHERE USER_NO = #{userNo}
     </update>
 
 
