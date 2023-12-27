@@ -20,6 +20,9 @@ import java.util.List;
 public class AdminSettingController{
 
     private final AdminSettingService adminSettingService;
+
+    private final RoomOptionController roomOptionController;
+
     /**
      * 관리자 페이지 중 관리자 설정 페이지로 이동하는 요청을 수행하는 메소드
      * */
@@ -27,6 +30,7 @@ public class AdminSettingController{
     public String setting(Model model){
         // 관리자 설정 페이지로 이동
         showCategory(model);
+        roomOptionController.showOption(model);
         return "admin/setting";
     }
     /**

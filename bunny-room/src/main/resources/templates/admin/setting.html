@@ -38,6 +38,27 @@
         </article>
     </section>
 
+    <section>
+        <h2>방 옵션 관리</h2>
+        <h3>현재 방 옵션</h3>
+        <article>
+            <table>
+                <tr>
+                    <th>옵션명</th>
+                    <th>기능</th>
+                </tr>
+                <tr th:each="option : ${optionList}">
+                    <td th:text="${option.optionName}"></td>
+                    <td>
+                        <form action="/admin/setting/deleteOption" method="post">
+                            <input type="hidden" name="optionName" th:value="${option.optionIdx}"/>
+                            <button type="submit">삭제</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </article>
+    </section>
     <th:block th:if="${message}">
         <script th:inline="javascript">
             window.onload =function (){
