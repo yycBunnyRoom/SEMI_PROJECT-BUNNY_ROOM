@@ -75,6 +75,18 @@ public class RoomRegisterController {
         return modelAndView;
     }
 
+    /* 예약 시간 관리 페이지로 이동 */
+    @GetMapping("/timeSchedule")
+    public ModelAndView goToTimeSchedule(@RequestParam(value = "businessNo", required = false) int businessNo,
+                                         ModelAndView modelAndView){
+
+        System.out.println("Time schedule arrived");
+
+        modelAndView.addObject("businessNo",businessNo);
+        modelAndView.setViewName("/roomRegister/form/timeScheduleForm");
+        return modelAndView;
+    }
+
 
 
 
@@ -83,6 +95,11 @@ public class RoomRegisterController {
     public String loginForm(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "exception", required = false) String exception,
                             Model model) {
+
+        if (error == null){
+            return "/main";
+        }
+
         model.addAttribute("error", error);
         model.addAttribute("exception", exception);
         return "/security/auth/login";

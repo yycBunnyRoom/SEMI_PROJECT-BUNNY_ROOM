@@ -40,6 +40,10 @@ public class RoomRegisterService {
         return roomRegisterMapper.appliedOptionsRegister(appliedOptions);
     }
 
+    public Integer addTimeSchedule(List<TimeUnitScheduleDTO> timeUnitScheduleList) {
+        return roomRegisterMapper.addTimeSchedule(timeUnitScheduleList);
+    }
+
 
 
 
@@ -77,6 +81,7 @@ public class RoomRegisterService {
     public RoomDTO getRoomDetails(int roomNo) {
         return roomRegisterMapper.getRoomDetails(roomNo);
     }
+
 
 
 }

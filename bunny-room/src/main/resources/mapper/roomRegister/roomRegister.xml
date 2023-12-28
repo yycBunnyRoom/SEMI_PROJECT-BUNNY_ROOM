@@ -74,7 +74,7 @@
     <!--REGISTER-->
 
     <!--businessRegister-->
-    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
+    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO" useGeneratedKeys="true" keyProperty="businessNo">
         INSERT INTO TBL_BUSINESS(
             BUSINESS_NO,
             USER_NO,
@@ -197,6 +197,26 @@
             (
             #{option.RoomNo},
             #{option.appliedOption}
+            )
+        </foreach>
+    </insert>
+
+    <!-- addTimeSchedule -->
+    <insert id="addTimeSchedule" parameterType="com.yyc.bunnyroom.roomRegister.model.TimeUnitScheduleDTO">
+        INSERT INTO TBL_TIME_UNIT_SCHEDULE
+        (
+        TIME_UNIT_SCHEDULE_NO,
+        BUSINESS_NO,
+        START_TIME_IDX,
+        END_TIME_IDX
+        )
+        VALUES
+        <foreach collection="list" item="timeUnit" index="index" separator=",">
+            (
+            NULL,
+            #{timeUnit.businessNo},
+            #{timeUnit.startTime},
+            #{timeUnit.endTime}
             )
         </foreach>
     </insert>

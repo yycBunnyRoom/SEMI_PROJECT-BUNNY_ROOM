@@ -72,7 +72,41 @@
         <!--        자바 스크립트를 활용해서 동적으로 값을 숨겨진 userPhone 저장-->
         <input type="hidden" id="businessPhone" name="businessPhone"/>
 
+
+
+        <!--영업시간 필수 등록-->
+<!--시작시간<0100 - 1200 (1hr)>-->
+    <label for="operatingTime">영업시간</label>
+    <div id="operatingTime">
+        <label for="startTime">시작시간</label>
+        <select id="startTime" name="startTime"></select>
+
+        <br><br>
+
+        <!--최소 예약 시간 <select1~12>-->
+        <label for="minRsvTime">최소 예약시간</label>
+        <select id="minRsvTime" name="minRsvTime"></select>
+
+        <br><br>
+
+        <!--종료시간(동적으로 옵션 생기게)<select before24>-->
+        <label for="endTime">종료시간</label>
+        <select id="endTime" name="endTime"></select>
+    </div>
+
+
+        <br><br><br>
+
+
+
+
+
+
+
+
         <input type="button" onclick="submitBusinessRegisterForm()" value="업체등록하기">
+
+
 
 
 
