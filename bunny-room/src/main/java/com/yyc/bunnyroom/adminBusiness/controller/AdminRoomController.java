@@ -6,11 +6,10 @@ import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
 import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +20,9 @@ public class AdminRoomController {
 
     private final AdminRoomService adminRoomService;
 
+    /**
+     * 해당 업체의 상세페이지를 요청하는 메소드
+     * */
     @GetMapping("{businessNo}")
     public String businessDetail(@PathVariable("businessNo") int businessNo, Model model){
         // 해당 방 사업체 정보 가져오기
@@ -38,4 +40,10 @@ public class AdminRoomController {
 
         return "admin/business/detail/businessDetail";
     }
+
+//    @PostMapping("/roomDelete")
+//    @ResponseBody
+//    public ResponseEntity<String> deleteRoom(){
+//
+//    }
 }

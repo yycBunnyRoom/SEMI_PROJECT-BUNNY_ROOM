@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자용 사업자 상세 페이지</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
     <header th:replace="~{/common/header :: headerFragment}">
@@ -55,6 +57,66 @@
 
     <section>
         <h3>방 정보</h3>
+        <table>
+            <tr>
+                <th>방 이름</th>
+                <th>한 줄 소개</th>
+                <th>상세 소개</th>
+                <th>사용가능 여부</th>
+                <th>최소 인원</th>
+                <th>최대 인원</th>
+                <th>시설안내</th>
+                <th>유의사항</th>
+                <th>등록일</th>
+                <th>수정일</th>
+                <th>상태</th>
+                <th>관리 기능</th>
+            </tr>
+            <tr th:each="room : ${room}">
+                <td th:text="${room.roomName}"></td>
+                <td th:text="${room.roomIntro}"></td>
+                <td th:text="${room.roomDetail}"></td>
+                <td th:text="${room.roomAvailableStatus}"></td>
+                <td th:text="${room.roomMinPeople}"></td>
+                <td th:text="${room.roomMaxPeople}"></td>
+                <td th:text="${room.roomFacilityInfo}"></td>
+                <td th:text="${room.roomNotice}"></td>
+                <td th:text="${room.roomRegistDate}"></td>
+                <td th:text="${room.roomUpdateDate}"></td>
+                <td th:text="${room.roomStatus}"></td>
+                <td>
+                    <button type="button" id="deleteRoom" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="staticBackdrop" th:data1="${room.roomNo}" th:data2="${room.roomStatus}" onclick="getRoomInfo(this)">삭제</button>
+                </td>
+            </tr>
+            <tr></tr>
+        </table>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">방 삭제 사유를 입력해주세요.</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="getNo" name="RoomNo" value=""/>
+                    <input type="hidden" id="getStatus" name="RoomStaus" value="">
+                    <input type="text" id="getReason" name="reason" placeholder=""/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button type="button" id="submitOptionNo" class="btn btn-primary" onclick="submitOptionNo()" data-bs-dismiss="modal">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모달 동작 js-->
+    <script src="/js/admin/business/businessDetail/businessDetail.js"/>
+    <!-- 부트스트랩 JS 및 Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
 </body>
 </html>
