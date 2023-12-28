@@ -23,24 +23,10 @@ function toggleOption(option, button) {
         button.classList.add('selected'); // 선택 시 클래스 추가
     }
     console.log('선택된 값:', appliedOptions);
-    updateSelectedOptions();
-}
-
-function updateSelectedOptions() {
-    const selectedOptionsElement = document.getElementById('selectedOptions');
-    selectedOptionsElement.textContent = '선택된 옵션: ';
-
-    appliedOptions.forEach(option => {
-        const optionText = document.createElement('span');
-        optionText.textContent = option.optionName + ', ';
-        optionText.classList.add('selected-option');
-        selectedOptionsElement.appendChild(optionText);
-    });
 }
 
 window.onload = () => {
     createButtons();
-    updateSelectedOptions();
 };
 
 function submitRoomRegisterForm() {
@@ -85,7 +71,7 @@ function submitRoomRegisterForm() {
             console.log('Success:', data);
             if (data === 1) {
                 alert('방 등록 성공');
-                window.location.href = '/roomRegister/hostMainView';
+                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
             } else {
                 alert('방 등록 실패');
             }

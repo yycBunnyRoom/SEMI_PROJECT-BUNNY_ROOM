@@ -160,7 +160,8 @@ function sendDataToServer(formData) {
             console.log('서버로부터 받은 데이터:', data);
 
             if (data === "성공"){
-                alert("등록 성공!")
+                alert("휴무 등록 성공!")
+                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
             }
         })
         .catch(error => {
@@ -171,4 +172,6 @@ function sendDataToServer(formData) {
 // 초기화
 document.getElementById('addFormBtn').addEventListener('click', addHolidayForm);
 document.getElementById('confirmBtn').addEventListener('click', addHolidays);
+
+
 
