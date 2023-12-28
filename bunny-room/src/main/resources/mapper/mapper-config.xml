@@ -19,6 +19,7 @@
         <mapper resource="mapper/admin/adminBusiness.xml"/>
         <mapper resource="mapper/common/image.xml"/>
         <mapper resource="mapper/admin/roomOption.xml"/>
+        <mapper resource="mapper/admin/room.xml"/>
     </mappers>
 
 </configuration>
