@@ -56,6 +56,13 @@ public class RoomRegisterController {
     @GetMapping("/dayOffRegisterForm")
     public ModelAndView dayOffRegisterForm(@RequestParam(value = "businessNo", required = false) int businessNo,
                                      ModelAndView modelAndView){
+        System.out.println("DO로 이동");
+
+        // 해당하는 사업체의 휴무값을 조회해서 가져감
+        List<ClosedDayDTO> closedDays = getAllClosedDays(businessNo);
+        modelAndView.addObject("closedDays", closedDays);
+
+        System.out.println("조회한 값: "+closedDays);
 
         modelAndView.addObject("businessNo",businessNo);
         modelAndView.setViewName("/roomRegister/form/dayOffRegisterForm");
@@ -68,7 +75,6 @@ public class RoomRegisterController {
     public ModelAndView roomRegisterForm(@RequestParam(value = "businessNo", required = false) int businessNo,
                                          ModelAndView modelAndView){
 
-        System.out.println("roomRegisterFrom 진입전: "+businessNo);
         modelAndView.addObject("businessNo",businessNo);
         modelAndView.setViewName("/roomRegister/form/roomRegisterForm");
 
@@ -79,8 +85,6 @@ public class RoomRegisterController {
     @GetMapping("/timeSchedule")
     public ModelAndView goToTimeSchedule(@RequestParam(value = "businessNo", required = false) int businessNo,
                                          ModelAndView modelAndView){
-
-        System.out.println("Time schedule arrived");
 
         modelAndView.addObject("businessNo",businessNo);
         modelAndView.setViewName("/roomRegister/form/timeScheduleForm");
@@ -133,6 +137,14 @@ public class RoomRegisterController {
         // DB 에 있는 카테고리를 가져와서 같이 보낸다
         return roomRegisterService.selectAllRoomOptions();
     }
+
+
+    /* Detail 페이지 가기 전에 상응하는 CLOSED_DAY / HOLIDAYS 을 찾아서 간다*/
+    public List<ClosedDayDTO> getAllClosedDays(int businessNo){
+        return roomRegisterService.getAllClosedDays(businessNo);
+    }
+
+    /* Detail 페이지 가기 전에 상응하는 TIME_SCHEDULE 을 찾아서 간다*/
 
 
 

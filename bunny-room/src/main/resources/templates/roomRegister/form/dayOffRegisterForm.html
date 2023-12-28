@@ -20,7 +20,7 @@
 
 <p id="selectedDays">선택된 요일: </p>
 
-<button onclick="addClosedDays()">확인</button>
+<button id="btn_addClosedDays" onclick="addClosedDays()" style="display: none">확인</button>
 
 
 
@@ -68,6 +68,7 @@
 <script th:inline="javascript">
     let businessNo = [[${businessNo}]]
     let weekDays = [[${weekDays}]]
+    let closedDays = [[${closedDays}]]
 </script>
 
 

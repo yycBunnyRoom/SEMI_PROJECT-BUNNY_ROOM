@@ -3,25 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
+    <link rel="stylesheet" href="/css/security/auth/login.css">
 </head>
 <body>
+
     <header th:replace="~{/common/header :: headerFragment}">
         <h1>나는 header</h1>
     </header>
 
-    <h1>회원 로그인</h1>
 
-    <div>
-    <!--    auth/controller 에 있는 /auth/login 호출-->
-        <form th:action="@{/security/auth/login}" th:method="POST">
-            <!--회원의 이메일을 로그인 아이디로 받는 버튼-->
-            EMAIL <input type="text" name="userEmail"/><br>
-            <!--회원의 비밀번호를 받는 버튼-->
-            password<input type="password" name="userPassword"/>
+<!--    <div>-->
+<!--        <h1>회원 로그인</h1>-->
 
-            <div><button>로그인</button></div>
+<!--        <div>-->
+<!--            &lt;!&ndash;    auth/controller 에 있는 /auth/login 호출&ndash;&gt;-->
+<!--            <form th:action="@{/security/auth/login}" th:method="POST">-->
+<!--                &lt;!&ndash;회원의 이메일을 로그인 아이디로 받는 버튼&ndash;&gt;-->
+<!--                EMAIL <input type="text" name="userEmail"/><br>-->
+<!--                &lt;!&ndash;회원의 비밀번호를 받는 버튼&ndash;&gt;-->
+<!--                password<input type="password" name="userPassword"/>-->
+
+<!--                <div><button>로그인</button></div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            &lt;!&ndash;비밀번호 찾기&ndash;&gt;-->
+<!--            <a href="/signup/findPasswordMethod">비밀번호 찾기</a>-->
+<!--            &lt;!&ndash;회원가입&ndash;&gt;-->
+<!--            <a href="/signup/signupMethod">회원가입</a>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <div class="login-container">
+        <h1>회원 로그인</h1>
+        <form action="/security/auth/login" method="POST">
+            <label for="userEmail">이메일:</label>
+            <input type="text" id="userEmail" name="userEmail" required><br>
+            <label for="userPassword">비밀번호:</label>
+            <input type="password" id="userPassword" name="userPassword" required><br>
+            <button>로그인</button>
         </form>
+        <div>
+            <a href="/signup/findPasswordMethod">비밀번호 찾기</a>
+            <a href="/signup/signupMethod">회원가입</a>
+        </div>
     </div>
+
 
 
 <!--    에러 메세지 출력-->
@@ -38,10 +66,7 @@
     </script>
 
 
-    <!--비밀번호 찾기-->
-    <a href="/signup/findPasswordMethod">비밀번호 찾기</a>
-    <!--회원가입-->
-    <a href="/signup/signupMethod">회원가입</a>
+
 
 
 </body>

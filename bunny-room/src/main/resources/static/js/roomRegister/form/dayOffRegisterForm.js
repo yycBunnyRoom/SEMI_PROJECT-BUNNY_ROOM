@@ -1,12 +1,21 @@
-/* weekDays 버튼을 생성하는 */
 
+/* weekDays 버튼을 생성하는 */
+console.log(closedDays)
 function createWeekDaysButtons() {
     const buttonsContainer = document.getElementById('weekDaysButtons');
     weekDays.forEach(weekday => {
         const button = document.createElement('button');
         button.textContent = weekday;
         button.id = weekday; // 각 버튼에 요일에 해당하는 ID 부여
-        button.addEventListener('click', () => selectDay(weekday)); // 클릭 이벤트에 selectDay 함수 추가
+
+        // closedDays에 해당 요일이 있는 경우 버튼을 비활성화
+        if (closedDays.some(closedDay => closedDay.closedDay === weekday)) {
+            button.disabled = true;
+            button.classList.add('closed-day');
+        } else {
+            button.addEventListener('click', () => selectDay(weekday)); // 클릭 이벤트에 selectDay 함수 추가
+        }
+
         buttonsContainer.appendChild(button);
     });
 }
@@ -14,10 +23,68 @@ function createWeekDaysButtons() {
 window.onload = () => {
     createWeekDaysButtons();
     updateSelectedDays(); // 선택된 요일 표시를 초기화 시킴
-};
+    if (closedDays.length > 0) {
+        closedDays.forEach(closedDay => {
+            selectDay(closedDay.closedDay);
+        })
+    }
+    else {
+    }
+}
 
 // 선택한 요일을 담을 변수를 선언
 let selectedDays = [];
+
+
+if (closedDays.length > 0) {
+    // 배열 안에 값이 존재합니다.
+
+} else {
+    // 배열이 비어있습니다.
+
+    function addClosedDays() {
+        const requestData = {
+            businessNo: businessNo,
+            selectedDays: selectedDays
+        };
+
+        sendRequestToServer('/roomRegister/closedDays/register', requestData);
+    }
+
+    function sendRequestToServer(url, data) {
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('서버로부터 받은 데이터:', data);
+                if (data === "성공") {
+                    alert("등록 " + data + "!")
+                }
+            })
+            .catch(error => {
+                console.error('에러 발생:', error);
+            })
+            .finally(() => {
+                // 요청 후에 선택된 요일 초기화
+                selectedDays = [];
+                updateSelectedDays(); // 선택된 요일 표시를 초기화합니다.
+            });
+    }
+
+    document.getElementById('btn_addClosedDays').style.display = 'block';
+
+}
+
 
 function selectDay(day) {
     // 선택한 날(day) 의 값을 콘솔에 출력 - 확인용
@@ -42,44 +109,9 @@ function updateSelectedDays() {
 
 
 
-function addClosedDays() {
-    const requestData = {
-        businessNo: businessNo,
-        selectedDays: selectedDays
-    };
 
-    sendRequestToServer('/roomRegister/closedDays/register', requestData);
-}
 
-function sendRequestToServer(url, data) {
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.text();
-        })
-        .then(data => {
-            console.log('서버로부터 받은 데이터:', data);
-            if (data === "성공") {
-                alert("등록 " + data + "!")
-            }
-        })
-        .catch(error => {
-            console.error('에러 발생:', error);
-        })
-        .finally(() => {
-            // 요청 후에 선택된 요일 초기화
-            selectedDays = [];
-            updateSelectedDays(); // 선택된 요일 표시를 초기화합니다.
-        });
-}
+
 
 
 

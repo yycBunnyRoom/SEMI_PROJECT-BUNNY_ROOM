@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{thymeleaf/layout/default}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>메인 페이지</title>
     <script defer th:src="@{/js/main.js}"></script>
+
+    <script th:inline="javascript">
+        let userAuth = [[${userAuth}]]
+        let userNickname = [[${userNickname}]]
+        let message = [[${message}]]
+    </script>
+
+    <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
 
@@ -14,20 +20,32 @@
         <h1>나는 header</h1>
     </header>
 
-    <form th:action="@{/admin/adminPage}" >
-        <button id="btn_adminPage" style="display: none">어드민페이지로 가기</button>
-    </form>
+    <div class="room-search">
+        <form action="https://www.google.com/search" method="GET" target="_blank">
+            <input type="text" name="q" placeholder="방 이름 검색" required>
+            <button type="submit">검색</button>
+        </form>
+    </div>
 
-    <!--    호스트페이지-->
-    <a href="/roomRegister/hostMainView" id="btn_hostMainView" style="display: none">호스트 페이지</a>
+    <!--로그인 버튼-->
+    <div class="button" id="btn_login" style="display: none">로그인</div>
 
-
-    <a href="/security/auth/login" id="btn_login" style="display: block">로그인하기</a>
     <form th:action="@{/security/auth/logout}" th:method="post">
         <button id="btn_logout" style="display: block">로그아웃</button>
     </form>
 
-    <button onclick="location.href='inquirys'">문의사항 게시판</button>
+<!--    <form th:action="@{/admin/adminPage}" >-->
+<!--        <button id="btn_adminPage" style="display: none">어드민페이지로 가기</button>-->
+<!--    </form>-->
+
+    <!--어드민 페이지로 가는 버튼-->
+    <div class="button" id="btn_goToAdmin" style="display: none">어드민 페이지</div>
+
+    <!--호스트 페이지로 가는 버튼-->
+    <div class="button" id="btn_goToHost" style="display: none">호스트 페이지</div>
+
+    <!--문의사항-->
+    <button onclick="location.href='inquirys'" class="circular-button">문의사항 게시판</button>
 
 
     <div sec:authorize="hasAnyAuthority('GUEST')">
@@ -37,21 +55,29 @@
 
 
 
-    <script th:inline="javascript">
-        if ([[${message}]]){
-            alert([[${message}]]);
-        }
-    </script>
+<!--    <script th:inline="javascript">-->
+<!--        if ([[${message}]]){-->
+<!--            alert([[${message}]]);-->
+<!--        }-->
+<!--    </script>-->
 
 <!--    로그인 버튼 관련 JS-->
     <p id="output"></p>
 
-    <script th:inline="javascript">
-        let userAuth = [[${userAuth}]]
-        let userNickname = [[${userNickname}]]
-    </script>
-    
-    <a href="/main/test2">test2</a>
+
+
+<!--    <a href="/main/test2">test2</a>-->
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

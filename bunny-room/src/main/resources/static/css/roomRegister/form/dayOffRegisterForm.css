@@ -1,7 +1,10 @@
 /* styles.css */
 /* 선택된 버튼의 스타일 */
-button.selected {
-    background-color: #4CAF50; /* 색상을 원하는 색으로 변경해주세요 */
+button.selected , button.start-selected {
+    background-color: #007bff; /* 원하는 배경색으로 변경 */
+    color: #fff; /* 텍스트 색상 변경 */
+    font-weight: bold; /* 폰트 굵기 변경 */
+    /* 다른 스타일을 추가하셔도 됩니다. */
 }
 
 /* 마우스 클릭 시 효과 */
