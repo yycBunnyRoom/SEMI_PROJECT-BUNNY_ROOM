@@ -1,14 +1,13 @@
 package com.yyc.bunnyroom.roomRegister.model;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class BusinessDTO {
 //    BUSINESS_NO		INTEGER
 //    USER_NO		INTEGER
@@ -36,6 +35,10 @@ public class BusinessDTO {
     private ZonedDateTime businessUpdateDate;
     private String businessStatus;
 
+
+    private int startTime;
+    private int minRsvTime;
+    private int endTime;
 
 
 

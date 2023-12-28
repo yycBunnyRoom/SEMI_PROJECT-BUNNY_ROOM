@@ -1,6 +1,20 @@
+/* weekDays 버튼을 생성하는 */
 
-/* 정기 휴무 */
+function createWeekDaysButtons() {
+    const buttonsContainer = document.getElementById('weekDaysButtons');
+    weekDays.forEach(weekday => {
+        const button = document.createElement('button');
+        button.textContent = weekday;
+        button.id = weekday; // 각 버튼에 요일에 해당하는 ID 부여
+        button.addEventListener('click', () => selectDay(weekday)); // 클릭 이벤트에 selectDay 함수 추가
+        buttonsContainer.appendChild(button);
+    });
+}
 
+window.onload = () => {
+    createWeekDaysButtons();
+    updateSelectedDays(); // 선택된 요일 표시를 초기화 시킴
+};
 
 // 선택한 요일을 담을 변수를 선언
 let selectedDays = [];
@@ -13,59 +27,58 @@ function selectDay(day) {
     if (!selectedDays.includes(day)) {
         selectedDays.push(day);
         btn.classList.add("selected");
-        updateSelectedDays();
     } else {
         selectedDays = selectedDays.filter(item => item !== day);
         btn.classList.remove("selected");
-        updateSelectedDays();
     }
+    updateSelectedDays();
 }
 
 function updateSelectedDays() {
     document.getElementById("selectedDays").innerText = "선택된 요일: " + selectedDays.join(", ");
+    console.log(selectedDays)
 }
 
-function addClosedDays() {
-    // 여기에 선택된 요일을 서버로 전송하는 코드를 추가할 수 있습니다.
-    // 예를 들어 AJAX 또는 fetch를 사용하여 Spring Boot의 컨트롤러로 전송할 수 있습니다.
 
+
+
+function addClosedDays() {
     const requestData = {
-        businessNo : businessNo,
-        selectedDays: selectedDays // 선택된 요일 데이터
-        // 다른 필요한 데이터도 추가 가능
+        businessNo: businessNo,
+        selectedDays: selectedDays
     };
 
-    fetch('/roomRegister/closedDays/register', {
-        method: 'POST', // POST 요청 설정
+    sendRequestToServer('/roomRegister/closedDays/register', requestData);
+}
+
+function sendRequestToServer(url, data) {
+    fetch(url, {
+        method: 'POST',
         headers: {
-            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestData) // 데이터를 JSON 형태로 변환하여 전송
+        body: JSON.stringify(data)
     })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.text(); // 응답을 텍스트로 반환
-            // return response.json(); // 서버로부터의 응답을 JSON 형태로 반환
+            return response.text();
         })
         .then(data => {
             console.log('서버로부터 받은 데이터:', data);
-
-           if (data === "성공"){
-               alert("등록 "+data+"!")
-           }
+            if (data === "성공") {
+                alert("등록 " + data + "!")
+            }
         })
         .catch(error => {
             console.error('에러 발생:', error);
-            // 에러 처리
+        })
+        .finally(() => {
+            // 요청 후에 선택된 요일 초기화
+            selectedDays = [];
+            updateSelectedDays(); // 선택된 요일 표시를 초기화합니다.
         });
-
-
-    console.log("DB로 전송: ", selectedDays);
-    // 선택된 요일을 초기화할 수도 있습니다.
-    selectedDays = [];
-    updateSelectedDays(); // 선택된 요일 표시를 초기화합니다.
 }
 
 
@@ -160,7 +173,8 @@ function sendDataToServer(formData) {
             console.log('서버로부터 받은 데이터:', data);
 
             if (data === "성공"){
-                alert("등록 성공!")
+                alert("휴무 등록 성공!")
+                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
             }
         })
         .catch(error => {
@@ -171,4 +185,6 @@ function sendDataToServer(formData) {
 // 초기화
 document.getElementById('addFormBtn').addEventListener('click', addHolidayForm);
 document.getElementById('confirmBtn').addEventListener('click', addHolidays);
+
+
 

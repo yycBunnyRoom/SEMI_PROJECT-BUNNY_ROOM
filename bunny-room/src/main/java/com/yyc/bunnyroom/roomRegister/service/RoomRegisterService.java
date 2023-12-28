@@ -40,6 +40,10 @@ public class RoomRegisterService {
         return roomRegisterMapper.appliedOptionsRegister(appliedOptions);
     }
 
+    public Integer addTimeSchedule(List<TimeUnitScheduleDTO> timeUnitScheduleList) {
+        return roomRegisterMapper.addTimeSchedule(timeUnitScheduleList);
+    }
+
 
 
 
@@ -56,20 +60,22 @@ public class RoomRegisterService {
         return roomRegisterMapper.getAllBusiness(ownerNo);
     }
 
+    public List<AppliedOptionDTO> getAppliedOptions(int roomNo) {
+        return roomRegisterMapper.getAppliedOptions(roomNo);
+    }
+
+    public List<RoomDTO> getAllRooms(int businessNo) {
+        return roomRegisterMapper.getAllRooms(businessNo);
+    }
+
+    public List<ClosedDayDTO> getAllClosedDays(int businessNo) {
+        return roomRegisterMapper.getAllClosedDays(businessNo);
+    }
 
 
 
 
     //Select
-    public List<RoomDTO> getAllRooms(int businessNo) {
-        System.out.println("service : "+businessNo);
-        return roomRegisterMapper.getAllRooms(businessNo);
-    }
-
-    public List<AppliedOptionDTO> getAppliedOptions(int roomNo) {
-        return roomRegisterMapper.getAppliedOptions(roomNo);
-    }
-
     public BusinessDTO getBusinessDetails(int businessNo) {
         return roomRegisterMapper.getBusinessDetails(businessNo);
     }
@@ -77,6 +83,7 @@ public class RoomRegisterService {
     public RoomDTO getRoomDetails(int roomNo) {
         return roomRegisterMapper.getRoomDetails(roomNo);
     }
+
 
 
 }

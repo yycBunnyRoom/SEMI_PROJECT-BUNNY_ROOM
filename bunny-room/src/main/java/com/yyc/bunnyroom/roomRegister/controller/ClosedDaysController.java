@@ -45,8 +45,7 @@ public class ClosedDaysController {
             /*제공된 string 값을 WeekDay enum으로 변환*/
 
             // 각 선택한 day를 weekDay enum으로 변환
-            WeekDay weekday = WeekDay.valueOf(day);
-            closedDayDTO.setClosedDay(weekday);
+            closedDayDTO.setClosedDay(day);
 
             // 각 dto에 휴가에 대응하는 사업체를 업력
             closedDayDTO.setBusinessNo(businessNo);

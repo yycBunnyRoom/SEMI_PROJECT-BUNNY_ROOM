@@ -62,6 +62,13 @@
         <result property="appliedOptionDescription" column="OPTION_NAME"/>
     </resultMap>
 
+    <!--ClosedDayDTO-->
+    <resultMap id="closedDayDTO" type="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
+        <result property="CLOSED_DAY_NO" column="closedDayIdx"/>
+        <result property="BUSINESS_NO" column="businessNo"/>
+        <result property="CLOSED_DAY" column="closedDay"/>
+    </resultMap>
+
 
 
 
@@ -74,7 +81,7 @@
     <!--REGISTER-->
 
     <!--businessRegister-->
-    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
+    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO" useGeneratedKeys="true" keyProperty="businessNo">
         INSERT INTO TBL_BUSINESS(
             BUSINESS_NO,
             USER_NO,
@@ -201,6 +208,26 @@
         </foreach>
     </insert>
 
+    <!-- addTimeSchedule -->
+    <insert id="addTimeSchedule" parameterType="com.yyc.bunnyroom.roomRegister.model.TimeUnitScheduleDTO">
+        INSERT INTO TBL_TIME_UNIT_SCHEDULE
+        (
+        TIME_UNIT_SCHEDULE_NO,
+        BUSINESS_NO,
+        START_TIME_IDX,
+        END_TIME_IDX
+        )
+        VALUES
+        <foreach collection="list" item="timeUnit" index="index" separator=",">
+            (
+            NULL,
+            #{timeUnit.businessNo},
+            #{timeUnit.startTime},
+            #{timeUnit.endTime}
+            )
+        </foreach>
+    </insert>
+
 
 
 
@@ -283,6 +310,16 @@
             TBL_ROOM_OPTION AS B ON (A.APPLIED_OPTION_NO = B.OPTION_NO)
         WHERE
             ROOM_NO = #{roomNo}
+    </select>
+
+    <!--getAllClosedDays-->
+    <select id="getAllClosedDays" resultMap="closedDayDTO">
+        SELECT
+            CLOSED_DAY_NO,
+            BUSINESS_NO,
+            CLOSED_DAY
+        FROM TBL_CLOSED_DAY
+        WHERE BUSINESS_NO = #{businessNo}
     </select>
 
 

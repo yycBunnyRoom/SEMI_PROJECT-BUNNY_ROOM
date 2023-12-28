@@ -1,7 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
-import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
-import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
+import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -64,9 +64,17 @@ public class BusinessController {
         businessDTO.setBusinessStatus("active");
 
         /* 사업체를 등록시킨다 */
-        Integer result = roomRegisterService.businessRegister(businessDTO);
+        roomRegisterService.businessRegister(businessDTO);
 
-        if (result != null && result > 0) {
+        TimeScheduleDTO timeSchedule = new TimeScheduleDTO();
+        timeSchedule.setBusinessNo(businessDTO.getBusinessNo());
+        timeSchedule.setStartTime(businessDTO.getStartTime());
+        timeSchedule.setEndTime(businessDTO.getEndTime());
+        timeSchedule.setMinRsvTime(businessDTO.getMinRsvTime());
+
+        Integer result = registTimeSchedule(timeSchedule);
+
+        if (result > 0) {
             // 성공적으로 등록됨을 나타내는 1 반환
             return ResponseEntity.ok(1);
         } else {
@@ -81,32 +89,73 @@ public class BusinessController {
 
     /* 사업체 상세 페이지로 이동 */
     @GetMapping("/businessDetail/{businessNo}")
-    public ModelAndView getBusinessDetails(@PathVariable("businessNo") int businessNo) {
+    public ModelAndView goToBusinessDetail(@PathVariable("businessNo") int businessNo) {
         ModelAndView modelAndView = new ModelAndView();
 
-        System.out.println("이동할 상세페이지의 사업체번호: "+businessNo);
         BusinessDTO businessDetails =roomRegisterService.getBusinessDetails(businessNo);
         modelAndView.addObject("businessDetails",businessDetails);
 
-
-        System.out.println("room 찾기전 확인"+businessNo);
         // businessNo에 상응하는 Room을 가져간다
         List<RoomDTO> roomList = getAllRooms(businessNo);
-        System.out.println("roomList 유무 확인: "+roomList);
-        modelAndView.addObject("roomList", roomList);
 
-        /*if (roomList != null){
-            modelAndView.addObject("roomList", roomList);
-        }*/
+        modelAndView.addObject("roomList", roomList);
 
         modelAndView.setViewName("/roomRegister/detail/businessDetail");
         return modelAndView;
     }
 
-    /* Detail 페이지 가기 전에 상응하는 방을 찾아서 간다*/
+    /* Detail 페이지 가기 전에 상응하는 ROOM을 찾아서 간다*/
     public List<RoomDTO> getAllRooms(int businessNo){
         return roomRegisterService.getAllRooms(businessNo);
     }
+
+    /* Detail 페이지 가기 전에 상응하는 CLOSED_DAY / HOLIDAYS 을 찾아서 간다*/
+    public List<ClosedDayDTO> getAllClosedDays(int businessNo){
+        return roomRegisterService.getAllClosedDays(businessNo);
+    }
+
+    /* Detail 페이지 가기 전에 상응하는 TIME_SCHEDULE 을 찾아서 간다*/
+
+
+
+    /* 예약 가능 시간 등록 */
+    @PostMapping("/addTimeSchedule")
+    public ResponseEntity<Integer> addTimeSchedule(@RequestBody TimeScheduleDTO timeScheduleForm){
+
+        Integer result = registTimeSchedule(timeScheduleForm);
+
+        if (result > 0 ){
+            // 성공
+            return ResponseEntity.ok(1);
+        } else {
+            // 실패
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);
+        }
+
+    }
+
+    public Integer registTimeSchedule(TimeScheduleDTO timeSchedule){
+        List<TimeUnitScheduleDTO> timeUnitScheduleList = new ArrayList<>();
+
+        int startTime = timeSchedule.getStartTime();
+        int endTime = timeSchedule.getEndTime();
+        int minRsvTime = timeSchedule.getMinRsvTime();
+        int businessNo = timeSchedule.getBusinessNo();
+
+
+        for (int i = startTime; i <= (endTime - minRsvTime); i += minRsvTime) {
+            TimeUnitScheduleDTO timeUnit = new TimeUnitScheduleDTO();
+            timeUnit.setBusinessNo(businessNo);
+            timeUnit.setStartTime(i);
+            timeUnit.setEndTime(i+minRsvTime);
+
+            timeUnitScheduleList.add(timeUnit);
+        }
+
+        return roomRegisterService.addTimeSchedule(timeUnitScheduleList);
+    }
+
+
 
 
 

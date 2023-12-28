@@ -21,6 +21,8 @@ public interface RoomRegisterMapper {
 
     Integer appliedOptionsRegister(List<AppliedOptionDTO> appliedOptions);
 
+    Integer addTimeSchedule(List<TimeUnitScheduleDTO> timeUnitScheduleList);
+
 
     //SelectAll
     List<RoomOptionDTO> selectAllRoomOptions();
@@ -33,11 +35,14 @@ public interface RoomRegisterMapper {
 
     List<AppliedOptionDTO> getAppliedOptions(int roomNo);
 
+    List<ClosedDayDTO> getAllClosedDays(int businessNo);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);
 
     RoomDTO getRoomDetails(int roomNo);
+
 
 
 }
