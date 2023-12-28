@@ -25,11 +25,10 @@ public class HolidaysController {
     public ResponseEntity<String> registerVacations(@RequestBody List<HolidayDTO> holidayList) {
         System.out.println("받은 데이터: " + holidayList);
 
-        // 받은 데이터를 처리하는 로직을 여기에 추가합니다.
+        // forEach list -> dto 연계 사업체 입력, 현재 시간 입력
         for (HolidayDTO holiday :
                 holidayList) {
             System.out.println("지정 휴가: "+holiday);
-            holiday.setBusinessNo(6);
 
             // register하는 현재 시간을 입력
             ZonedDateTime currentTime = ZonedDateTime.now();

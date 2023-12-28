@@ -118,7 +118,7 @@ function removeHolidayForm(id) {
 
 function addHolidays() {
     const allForms = document.getElementsByClassName('holiday-form');
-    const formData = [];
+    const holidayList = [];
 
     for (let i = 0; i < allForms.length; i++) {
         const holidayName = document.getElementById(`holidayName${i + 1}`).value;
@@ -126,16 +126,17 @@ function addHolidays() {
         const startDate = document.getElementById(`startDate${i + 1}`).value;
         const endDate = document.getElementById(`endDate${i + 1}`).value;
 
-        formData.push({
+        holidayList.push({
             holidayName,
             reason,
             startDate,
-            endDate
+            endDate,
+            businessNo
         });
     }
 
     // 데이터 전송
-    sendDataToServer(formData);
+    sendDataToServer(holidayList);
 }
 
 function sendDataToServer(formData) {

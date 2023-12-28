@@ -9,4 +9,5 @@ public class AppliedOptionDTO {
 
     private int RoomNo;
     private int appliedOption;
+    private String appliedOptionDescription;
 }

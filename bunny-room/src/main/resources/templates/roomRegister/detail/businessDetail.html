@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>사업체 상세 페이지</title>
+
+    <script th:inline="javascript">
+        // businessNo를 JavaScript 변수로 저장
+        let businessNo = [[${businessDetails.businessNo}]]
+        let roomList = [[${roomList}]]
+    </script>
 
     <link rel="stylesheet" href="/css/roomRegister/detail/businessDetail.css">
 </head>
@@ -10,6 +17,8 @@
 <header th:replace="~{/common/header :: headerFragment}">
     <h1>나는 header</h1>
 </header>
+
+
 <h1>상세 페이지</h1>
 
 <!-- 비즈니스 상세 정보가 표시될 부분 -->
@@ -23,12 +32,17 @@
 <!-- 휴무 관리 버튼 -->
 <div class="button" id="dayOffButton">휴무 관리</div>
 
+<br><br><br><br>
+
+<div id="roomList">
+    <!-- 여기에 결과가 표시될 부분 -->
+</div>
+
+<div class="button" id="addRoomButton">방 추가</div>
 
 
-<script th:inline="javascript">
-    // businessNo를 JavaScript 변수로 저장
-    let businessNo = [[${businessDetails.businessNo}]]
-</script>
+
+
 
 <script src="/js/roomRegister/detail/businessDetail.js"></script>
 </body>

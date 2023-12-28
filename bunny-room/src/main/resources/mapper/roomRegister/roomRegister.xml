@@ -5,6 +5,8 @@
 <mapper namespace="com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper">
 
 
+    <!--DTO ResultMap-->
+
     <!--BusinessDTO-->
     <resultMap id="businessDTO" type="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
         <id property="businessNo" column="BUSINESS_NO"/>
@@ -35,10 +37,106 @@
         <result property="optionName" column="OPTION_NAME"/>
     </resultMap>
 
+    <!--RoomDTO-->
+    <resultMap id="roomDTO" type="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        <id property="roomNo" column="ROOM_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="roomName" column="ROOM_NAME"/>
+        <result property="roomIntro" column="ROOM_INTRO"/>
+        <result property="roomDetail" column="ROOM_DETAIL"/>
+        <result property="roomAvailableStatus" column="ROOM_AVAILABLE_STATUS"/>
+        <result property="roomMinPeople" column="ROOM_MIN_PEOPLE"/>
+        <result property="roomMaxPeople" column="ROOM_MAX_PEOPLE"/>
+        <result property="roomFacilityInfo" column="ROOM_FACILITY_INFO"/>
+        <result property="roomNotice" column="ROOM_NOTICE"/>
+        <result property="roomRegistDate" column="ROOM_REGIST_DATE"/>
+        <result property="roomUpdateDate" column="ROOM_UPDATE_DATE"/>
+        <result property="roomStatus" column="ROOM_STATUS"/>
+        <result property="price" column="ROOM_PRICE"/>
+    </resultMap>
+
+    <!--AppliedOption DTO-->
+    <resultMap id="appliedOptionDTO" type="com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO">
+        <result property="RoomNo" column="ROOM_NO"/>
+        <result property="appliedOption" column="APPLIED_OPTION_NO"/>
+        <result property="appliedOptionDescription" column="OPTION_NAME"/>
+    </resultMap>
 
 
 
-    <!--HolidayDTO-->
+
+
+
+
+
+
+
+    <!--REGISTER-->
+
+    <!--businessRegister-->
+    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
+        INSERT INTO TBL_BUSINESS(
+            BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
+        )VALUES(
+            NULL,
+            #{userNo},
+            #{businessRegistNo},
+            #{businessName},
+            #{businessCategoryNo},
+            #{businessAddressRoad},
+            #{businessAddressDetail},
+            #{businessZipCode},
+            #{businessPhone},
+            #{businessRegistDate},
+            #{businessUpdateDate},
+            #{businessStatus}
+        )
+    </insert>
+
+    <!--roomRegister-->
+    <insert id="roomRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO" useGeneratedKeys="true" keyProperty="roomNo">
+        INSERT INTO TBL_ROOM(
+            ROOM_NO,
+            BUSINESS_NO,
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+        )VALUES(
+            NULL,
+            #{businessNo},
+            #{roomName},
+            #{roomIntro},
+            #{roomDetail},
+            #{roomAvailableStatus},
+            #{roomMinPeople},
+            #{roomMaxPeople},
+            #{roomFacilityInfo},
+            #{roomNotice},
+            #{roomRegistDate},
+            #{roomStatus},
+            #{price}
+        )
+    </insert>
+
 
     <!--closedDaysRegister-->
     <insert id="closedDaysRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
@@ -74,7 +172,7 @@
         )
         VALUES
         <foreach collection="list" item="item" index="index" separator=",">
-        (
+            (
            NULL,
             #{item.businessNo},
             #{item.holidayName},
@@ -83,7 +181,23 @@
             #{item.endDate},
             #{item.registDate},
             #{item.activeStatus}
+            )
+        </foreach>
+    </insert>
+
+    <!-- appliedOptionsRegister -->
+    <insert id="appliedOptionsRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO">
+        INSERT INTO TBL_APPLIED_OPTION
+        (
+        ROOM_NO,
+        APPLIED_OPTION_NO
         )
+        VALUES
+        <foreach collection="list" item="option" index="index" separator=",">
+            (
+            #{option.RoomNo},
+            #{option.appliedOption}
+            )
         </foreach>
     </insert>
 
@@ -95,18 +209,9 @@
 
 
 
+    <!--SELECT ALL-->
 
-
-    <!--RoomDTO-->
-
-    <!--VacationDTO-->
-
-
-
-
-
-
-    <!--모든 사업체 카테고리 가져옴 (active)-->
+    <!--selectAllBusinessCategory-->
     <select id="selectAllBusinessCategory" resultMap="businessCategoryDTO">
         SELECT
             BUSINESS_CATEGORY_NO,
@@ -116,7 +221,7 @@
          WHERE BUSINESS_CATEGORY_STATUS = 'active'
     </select>
 
-    <!--모든 방 옵션을 가져옴-->
+    <!--selectAllRoomOptions-->
     <select id="selectAllRoomOptions" resultMap="roomOptionDTO">
         SELECT
             OPTION_NO,
@@ -124,7 +229,7 @@
         FROM TBL_ROOM_OPTION
     </select>
 
-    <!--getAllBusiness (모든 사업체를 가져옴)-->
+    <!--getAllBusiness-->
     <select id="getAllBusiness" resultMap="businessDTO">
         SELECT
             BUSINESS_NO,
@@ -144,79 +249,87 @@
           AND BUSINESS_STATUS = 'active'
     </select>
 
-
-    <!--getBusinessDetails (사업번호를 이용해서 사업체 상세 내역을 가져옴)-->
-    <select id="getBusinessDetails" resultMap="businessDTO">
+    <!--getAllRooms-->
+    <select id="getAllRooms" resultMap="roomDTO">
         SELECT
+            ROOM_NO,
             BUSINESS_NO,
-            USER_NO,
-            BUSINESS_REGIST_NO,
-            BUSINESS_NAME,
-            BUSINESS_CATEGORY_NO,
-            BUSINESS_ADDRESS_ROAD,
-            BUSINESS_ADDRESS_DETAIL,
-            BUSINESS_ZIP_CODE,
-            BUSINESS_PHONE,
-            BUSINESS_REGIST_DATE,
-            BUSINESS_UPDATE_DATE,
-            BUSINESS_STATUS
-        FROM TBL_BUSINESS
-        WHERE BUSINESS_NO = #{businessNo}
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_UPDATE_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+         FROM TBL_ROOM
+        WHERE BUSINESS_NO = #{businessIdx}
+        AND ROOM_STATUS = 'active'
+    </select>
+
+    <!--getAllRooms-->
+    <select id="getAppliedOptions" resultMap="appliedOptionDTO">
+        SELECT
+            A.ROOM_NO,
+            A.APPLIED_OPTION_NO,
+            B.OPTION_NAME
+        FROM
+            TBL_APPLIED_OPTION AS A
+        JOIN
+            TBL_ROOM_OPTION AS B ON (A.APPLIED_OPTION_NO = B.OPTION_NO)
+        WHERE
+            ROOM_NO = #{roomNo}
     </select>
 
 
 
 
 
+    <!--SELECT-->
 
+    <!--getBusinessDetails-->
+    <select id="getBusinessDetails" resultMap="businessDTO">
+        SELECT
+        BUSINESS_NO,
+        USER_NO,
+        BUSINESS_REGIST_NO,
+        BUSINESS_NAME,
+        BUSINESS_CATEGORY_NO,
+        BUSINESS_ADDRESS_ROAD,
+        BUSINESS_ADDRESS_DETAIL,
+        BUSINESS_ZIP_CODE,
+        BUSINESS_PHONE,
+        BUSINESS_REGIST_DATE,
+        BUSINESS_UPDATE_DATE,
+        BUSINESS_STATUS
+        FROM TBL_BUSINESS
+        WHERE BUSINESS_NO = #{businessNo}
+    </select>
 
-
-
-
-
-
-
-
-
-
-    <!--사업체 등록-->
-    <insert id="businessRegister" parameterType="com.yyc.bunnyroom.roomRegister.model.BusinessDTO">
-        INSERT INTO TBL_BUSINESS(
+    <!--getRoomDetails-->
+    <select id="getRoomDetails" resultMap="roomDTO">
+        SELECT
+            ROOM_NO,
             BUSINESS_NO,
-            USER_NO,
-            BUSINESS_REGIST_NO,
-            BUSINESS_NAME,
-            BUSINESS_CATEGORY_NO,
-            BUSINESS_ADDRESS_ROAD,
-            BUSINESS_ADDRESS_DETAIL,
-            BUSINESS_ZIP_CODE,
-            BUSINESS_PHONE,
-            BUSINESS_REGIST_DATE,
-            BUSINESS_UPDATE_DATE,
-            BUSINESS_STATUS
-        )VALUES(
-            NULL,
-            #{userNo},
-            #{businessRegistNo},
-            #{businessName},
-            #{businessCategoryNo},
-            #{businessAddressRoad},
-            #{businessAddressDetail},
-            #{businessZipCode},
-            #{businessPhone},
-            #{businessRegistDate},
-            #{businessUpdateDate},
-            #{businessStatus}
-        )
-    </insert>
-
-
-
-
-
-
-
-
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+        FROM TBL_ROOM
+        WHERE ROOM_NO = #{roomNo}
+        AND ROOM_STATUS = 'active'
+    </select>
 
 
 

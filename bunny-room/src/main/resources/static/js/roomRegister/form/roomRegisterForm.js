@@ -19,29 +19,11 @@ function toggleOption(option, button) {
         appliedOptions.splice(index, 1);
         button.classList.remove('selected'); // 선택 해제 시 클래스 제거
     } else {
-        appliedOptions.push(option);
+        appliedOptions.push(option.optionIdx);
         button.classList.add('selected'); // 선택 시 클래스 추가
     }
     console.log('선택된 값:', appliedOptions);
     updateSelectedOptions();
-}
-
-function saveValues() {
-    console.log('DB로 전송할 값:', appliedOptions); // DB로 전송할 값 콘솔에 출력 (확인용)
-    // 여기에 DB로 값을 전송하는 코드 작성
-    // 예시: fetch('/your-endpoint', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify(appliedOptions)
-    //     })
-    //     .then(response => {
-    //         // 처리 결과에 따른 로직 작성
-    //     })
-    //     .catch(error => {
-    //         console.error('에러 발생:', error);
-    //     });
 }
 
 function updateSelectedOptions() {
@@ -56,19 +38,60 @@ function updateSelectedOptions() {
     });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 window.onload = () => {
     createButtons();
     updateSelectedOptions();
 };
 
+function submitRoomRegisterForm() {
+    const roomName = document.getElementById('roomName').value;
+    const roomIntro = document.getElementById('roomIntro').value;
+    const roomDetail = document.getElementById('roomDetail').value;
+
+    const roomMinPeople = document.getElementById('roomMinPeople').value;
+    const roomMaxPeople = document.getElementById('roomMaxPeople').value;
+    const roomFacilityInfo = document.getElementById('roomFacilityInfo').value;
+    const roomNotice = document.getElementById('roomNotice').value;
+    const price = document.getElementById('price').value;
+
+
+    const data = {
+        businessNo: businessNo,
+        roomName: roomName,
+        roomIntro: roomIntro,
+        roomDetail: roomDetail,
+        roomMinPeople: roomMinPeople,
+        roomMaxPeople: roomMaxPeople,
+        roomFacilityInfo: roomFacilityInfo,
+        roomNotice: roomNotice,
+        price: price,
+        appliedOptions: appliedOptions
+    };
+
+    fetch('/roomRegister/room/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            if (data === 1) {
+                alert('방 등록 성공');
+                window.location.href = '/roomRegister/hostMainView';
+            } else {
+                alert('방 등록 실패');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('네트워크 오류가 발생했습니다.');
+        });
+}
