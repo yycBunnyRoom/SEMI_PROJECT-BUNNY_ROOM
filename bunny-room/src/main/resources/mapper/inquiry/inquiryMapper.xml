@@ -51,10 +51,12 @@
     <update id="updateInquiry" parameterType="com.yyc.bunnyroom.inquiry.dto.InquiryDTO">
         UPDATE TBL_INQUIRY
         SET
+        USER_NO = #{userNo},
         INQUIRY_TITLE = #{inquiryTitle},
         INQUIRY_CONTENTS = #{inquiryContents},
-        INQUIRY_UPDATE_DATE = #{inquiryUpdateDate}
-        WHERE USER_NO = #{userNo}
+        INQUIRY_UPDATE_DATE = CURRENT_TIMESTAMP
+        WHERE
+        INQUIRY_NO = #{inquiryNo}
     </update>
 
 

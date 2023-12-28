@@ -15,11 +15,12 @@
     </tr>
     <tr th:each="mypage : ${mypages}">
         <td th:text="${mypage.userNickname}"></td>
-        <td th:text="${mypage.userPassword}"></td>
+        <td th:text="${mypage.userEmail}"></td>
         <td th:text="${mypage.userPhone}"></td>
         <td th:text="${mypage.userAuth}"></td>
     </tr>
 </table>
+<button onclick="location.href='/'">인덱스</button>
 <button onclick="location.href='/'">인덱스</button>
 </body>
 </html>

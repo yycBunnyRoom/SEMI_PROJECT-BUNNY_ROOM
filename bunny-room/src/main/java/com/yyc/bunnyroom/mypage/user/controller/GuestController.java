@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.mypage.user.controller;
 
 import com.yyc.bunnyroom.common.dto.UserDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
 import com.yyc.bunnyroom.mypage.user.dto.ChangePasswordDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
@@ -26,40 +27,23 @@ public class GuestController {
 
 
 
-    @GetMapping
-    public ModelAndView findByAllUserEmail(ModelAndView mv){
-        List<LoginUserDTO> mypage = guestService.findByAllUserEmail();
+    @GetMapping("/search")
+    public ModelAndView selectByUserEmail(ModelAndView mv, @RequestParam("userEmail") String userEmail){
 
-        if(Objects.isNull(mypage)){
-            System.out.println("안보여");
+        UserDTO user = guestService.selectByUserEmail(userEmail);
+
+        if(Objects.isNull(user)){
+            throw new NullPointerException();
+        }else{
+            mv.addObject("mypages", user);
+            mv.setViewName("mypage/guestSearch");
+            return mv;
+
         }
-        mv.addObject("mypages", mypage);
-        mv.setViewName("mypage/guestSearch");
-        return mv;
     }
 
 
-//    @GetMapping("/search")
-//    public ModelAndView findByUserEmail(ModelAndView mv, @RequestParam String userEmail){
-//
-//        if(userEmail == null){
-//            System.out.println("메일 주소는 필수 입니다.");
-//            mv.addObject("message", "메일 주소는 필수 입니다.");
-//            mv.setViewName("mypage/errorPage");
-//            return mv;
-//        }
-//
-//        UserDTO user = guestService.findByUserEmail(userEmail);
-//
-//        if(Objects.isNull(user)){
-//            throw new NullPointerException();
-//        }else{
-//            mv.addObject("mypages", user);
-//            mv.setViewName("mypage/guestSearch");
-//            return mv;
-//
-//        }
-//    }
+
 
     @GetMapping("/mypage")
     public String mypage(@AuthenticationPrincipal Principal principal, Model model){

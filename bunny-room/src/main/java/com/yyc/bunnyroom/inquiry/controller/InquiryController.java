@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,11 +38,11 @@ public class InquiryController {
     private InquiryService inquiryService;
 
     @GetMapping
-    public ModelAndView showAllInquiry(ModelAndView mv){
+    public ModelAndView showAllInquiry(ModelAndView mv) {
 
         List<InquiryDTO> list = inquiryService.showAllInquiry();
 
-        if(Objects.isNull(list)){
+        if (Objects.isNull(list)) {
             System.out.println("안보여");
         }
         mv.addObject("inquirys", list);
@@ -56,20 +58,19 @@ public class InquiryController {
 
 
     @GetMapping("/searchInquiry")
-    public ModelAndView searchInquiry(ModelAndView mv, @RequestParam("inquiryNo") int inquiryNo){
+    public ModelAndView searchInquiry(ModelAndView mv, @RequestParam("inquiryNo") int inquiryNo) {
 
         InquiryDTO contentslist = inquiryService.searchInquiry(inquiryNo);
 
-        if(Objects.isNull(contentslist)){
+        if (Objects.isNull(contentslist)) {
             throw new NullPointerException();
-        }else{
+        } else {
             mv.addObject("contentslist", contentslist);
             mv.setViewName("inquiry/allinquirysContent");
             return mv;
 
         }
     }
-
 
 
     @GetMapping("/insert_inquiry")
@@ -80,7 +81,7 @@ public class InquiryController {
     }
 
     @PostMapping("/insert")
-    public String insertInquiryPage(@ModelAttribute InquiryDTO inquiryDTO){
+    public String insertInquiryPage(@ModelAttribute InquiryDTO inquiryDTO) {
 //        String loggedUser = principal.getName();
 //        int userNo = Integer.parseInt(loggedUser);
 
@@ -105,18 +106,44 @@ public class InquiryController {
 
 
 
+//    @GetMapping("/searchInquiry")
+//    public ModelAndView updateInquiryView(ModelAndView mv, @RequestParam("inquiryNo") int inquiryNo) {
+//
+//        InquiryDTO updatelist = inquiryService.searchInquiry(inquiryNo);
+//
+//        if (Objects.isNull(updatelist)) {
+//            throw new NullPointerException();
+//        } else {
+//            mv.addObject("updatelist", updatelist);
+//            mv.setViewName("inquiry/allinquirysContent");
+//            return mv;
+//
+//        }
+//    }
+
+
+//    @GetMapping("/update_inquiry")
+//    public ModelAndView updateInquiryView(ModelAndView mv){
+//        mv.addObject("inquiryDTO", new InquiryDTO());
+//        mv.setViewName("inquiry/inquiryUpdate");
+//
+//        return mv;
+//    }
+
+
 
 
     @GetMapping("/update_inquiry")
-    public ModelAndView updateInquiryView(ModelAndView mv){
-        mv.addObject("inquiryDTO", new InquiryDTO());
+    public ModelAndView updateInquiryView(ModelAndView mv, @RequestParam("inquiryNo") int inquiryNo) {
+        // inquiryNo를 사용하여 해당 번호의 문의사항을 가져옴
+        InquiryDTO inquiryDTO = inquiryService.searchInquiry(inquiryNo);
+
+        // 가져온 정보를 폼에 전달
+        mv.addObject("inquiryDTO", inquiryDTO);
         mv.setViewName("inquiry/inquiryUpdate");
 
         return mv;
     }
-
-
-
 
     @PostMapping("/updateInquiry")
     public String updateInquiry(@RequestParam("inquiryNo") int inquiryNo, InquiryDTO inquiryDTO) {
@@ -138,4 +165,5 @@ public class InquiryController {
 
         return "redirect:/inquirys";
     }
+
 }

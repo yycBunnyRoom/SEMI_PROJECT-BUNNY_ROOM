@@ -19,7 +19,7 @@
     </resultMap>
 
 
-    <select id="findByAllUserEmail" resultMap="loginUser">
+    <select id="selectByUserEmail" resultMap="loginUser">
         SELECT
         USER_NO,
         USER_EMAIL,
