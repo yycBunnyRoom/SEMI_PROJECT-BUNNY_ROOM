@@ -113,4 +113,14 @@
             AND
             HOLIDAY_STATUS = 'active'
     </select>
+
+    <update id="deleteRoom" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        UPDATE TBL_ROOM
+        SET
+            ROOM_STATUS = 'inactive',
+            ROOM_UPDATE_DATE = #{update}
+        WHERE
+            ROOM_NO = #{roomNo}
+
+    </update>
 </mapper>

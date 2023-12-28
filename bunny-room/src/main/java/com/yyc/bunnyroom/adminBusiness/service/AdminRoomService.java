@@ -6,6 +6,7 @@ import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
 import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,5 +47,18 @@ public class AdminRoomService {
     public List<HolidayDTO> searchHolidayInBusiness(int businessNo) {
         List<HolidayDTO> holidayInBusinessInfo = adminRoomDAO.searchHolidayInBusiness(businessNo);
         return holidayInBusinessInfo;
+    }
+
+    /**
+     * 방 번호를 조건으로 해당 방을 삭제(비활성화)하는 메소드
+     * */
+    public int deleteRoom(int roomNo, String update) {
+        int result = adminRoomDAO.deleteRoom(roomNo, update);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
     }
 }

@@ -6,11 +6,14 @@ import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
 import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -41,9 +44,26 @@ public class AdminRoomController {
         return "admin/business/detail/businessDetail";
     }
 
-//    @PostMapping("/roomDelete")
-//    @ResponseBody
-//    public ResponseEntity<String> deleteRoom(){
-//
-//    }
+    /**
+     * 업체에 소속된 방을 삭제하는 메소드
+     * */
+    @PostMapping("/roomDelete")
+    @ResponseBody
+    public ResponseEntity<String> deleteRoom(@RequestParam("roomNo")int roomNo, @RequestParam("roomStatus")String roomStatus){
+
+        if(roomStatus.equals("inactive")){
+            System.out.println("이미 삭제됨");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Update failed. ");
+        }
+        String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = adminRoomService.deleteRoom(roomNo, update);
+
+        if(result > 0){
+            return ResponseEntity.ok("Update successful");
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Update failed. ");
+        }
+    }
 }

@@ -86,7 +86,7 @@
                 <td th:text="${room.roomStatus}"></td>
                 <td>
                     <button type="button" id="deleteRoom" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="staticBackdrop" th:data1="${room.roomNo}" th:data2="${room.roomStatus}" onclick="getRoomInfo(this)">삭제</button>
+                            data-bs-target="#staticBackdrop" th:data1="${room.roomNo}" th:data2="${room.roomStatus}" onclick="getRoomInfo(this)" th:if="${room.roomStatus} eq 'active'">삭제</button>
                 </td>
             </tr>
             <tr></tr>
@@ -98,16 +98,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">방 삭제 사유를 입력해주세요.</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">정말로 방을 삭제하시겠습니까?</h1>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="getNo" name="RoomNo" value=""/>
-                    <input type="hidden" id="getStatus" name="RoomStaus" value="">
-                    <input type="text" id="getReason" name="reason" placeholder=""/>
+                    <input type="hidden" id="getStatus" name="RoomStatus" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                    <button type="button" id="submitOptionNo" class="btn btn-primary" onclick="submitOptionNo()" data-bs-dismiss="modal">삭제</button>
+                    <button type="button" id="submitRoomInfo" class="btn btn-primary" onclick="submitRoomInfo()" data-bs-dismiss="modal">삭제</button>
                 </div>
             </div>
         </div>

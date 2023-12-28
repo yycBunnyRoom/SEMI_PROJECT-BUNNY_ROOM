@@ -5,6 +5,7 @@ import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
 import com.yyc.bunnyroom.roomRegister.model.HolidayDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface AdminRoomDAO {
     List<ClosedDayDTO> searchClosedDayInBusiness(int businessNo);
 
     List<HolidayDTO> searchHolidayInBusiness(int businessNo);
+
+    int deleteRoom(@Param("roomNo") int roomNo,@Param("update") String update);
 }
