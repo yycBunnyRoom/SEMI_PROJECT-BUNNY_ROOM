@@ -15,36 +15,68 @@ public class RoomRegisterService {
     @Autowired
     RoomRegisterMapper roomRegisterMapper;
 
-    // 사업체 등록
+
+
+
+    //Register
     public Integer businessRegister(BusinessDTO businessDTO) {
         return roomRegisterMapper.businessRegister(businessDTO);
     }
-
-    public List<BusinessCategoryDTO> selectAllBusinessCategory() {
-        return roomRegisterMapper.selectAllBusinessCategory();
-    }
-
     public int closedDaysRegister(List<ClosedDayDTO> list) {
         return roomRegisterMapper.closedDaysRegister(list);
+    }
+
+    public Integer roomRegister(RoomDTO newRoom) {
+        Integer generatedRoomNo = roomRegisterMapper.roomRegister(newRoom);
+        System.out.println("새로 생성된 방번호: "+generatedRoomNo);
+        return generatedRoomNo;
     }
 
     public int holidaysRegister(List<HolidayDTO> holidayList) {
         return roomRegisterMapper.holidaysRegister(holidayList);
     }
 
+    public Integer appliedOptionsRegister(List<AppliedOptionDTO> appliedOptions) {
+        return roomRegisterMapper.appliedOptionsRegister(appliedOptions);
+    }
 
-    // DB에 있는 방 옵션 전체를 불러온다
+
+
+
+    //SelectAll
+    public List<BusinessCategoryDTO> selectAllBusinessCategory() {
+        return roomRegisterMapper.selectAllBusinessCategory();
+    }
+
     public List<RoomOptionDTO> selectAllRoomOptions() {
         return roomRegisterMapper.selectAllRoomOptions();
     }
 
-    // DB에 있는 회원의 사업체 전체를 불러온다
     public List<BusinessDTO> getAllBusiness(int ownerNo) {
         return roomRegisterMapper.getAllBusiness(ownerNo);
     }
 
-    // 개별 사업체 상세내역을 보여주는 페이지
+
+
+
+
+    //Select
+    public List<RoomDTO> getAllRooms(int businessNo) {
+        System.out.println("service : "+businessNo);
+        return roomRegisterMapper.getAllRooms(businessNo);
+    }
+
+    public List<AppliedOptionDTO> getAppliedOptions(int roomNo) {
+        return roomRegisterMapper.getAppliedOptions(roomNo);
+    }
+
     public BusinessDTO getBusinessDetails(int businessNo) {
         return roomRegisterMapper.getBusinessDetails(businessNo);
     }
+
+    public RoomDTO getRoomDetails(int roomNo) {
+        return roomRegisterMapper.getRoomDetails(roomNo);
+    }
+
+
 }

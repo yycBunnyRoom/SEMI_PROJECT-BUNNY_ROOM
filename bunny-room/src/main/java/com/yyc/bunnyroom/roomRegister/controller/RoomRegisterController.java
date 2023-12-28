@@ -47,11 +47,6 @@ public class RoomRegisterController {
     @GetMapping("/businessRegisterForm")
     public ModelAndView businessRegisterForm(ModelAndView modelAndView){
 
-//        // DB 에 있는 카테고리를 가져와서 같이 보낸다
-//        List<BusinessCategoryDTO> businessCategoryList = roomRegisterService.selectAllBusinessCategory();
-//
-//        modelAndView.addObject("businessCategoryList",businessCategoryList);
-
         modelAndView.setViewName("/roomRegister/form/businessRegisterForm");
 
         return modelAndView;
@@ -70,8 +65,11 @@ public class RoomRegisterController {
 
     /* 방 등록 페이지 */
     @GetMapping("/roomRegisterForm")
-    public ModelAndView roomRegisterForm(ModelAndView modelAndView){
+    public ModelAndView roomRegisterForm(@RequestParam(value = "businessNo", required = false) int businessNo,
+                                         ModelAndView modelAndView){
 
+        System.out.println("roomRegisterFrom 진입전: "+businessNo);
+        modelAndView.addObject("businessNo",businessNo);
         modelAndView.setViewName("/roomRegister/form/roomRegisterForm");
 
         return modelAndView;
