@@ -62,6 +62,13 @@
         <result property="appliedOptionDescription" column="OPTION_NAME"/>
     </resultMap>
 
+    <!--ClosedDayDTO-->
+    <resultMap id="closedDayDTO" type="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
+        <result property="CLOSED_DAY_NO" column="closedDayIdx"/>
+        <result property="BUSINESS_NO" column="businessNo"/>
+        <result property="CLOSED_DAY" column="closedDay"/>
+    </resultMap>
+
 
 
 
@@ -303,6 +310,16 @@
             TBL_ROOM_OPTION AS B ON (A.APPLIED_OPTION_NO = B.OPTION_NO)
         WHERE
             ROOM_NO = #{roomNo}
+    </select>
+
+    <!--getAllClosedDays-->
+    <select id="getAllClosedDays" resultMap="closedDayDTO">
+        SELECT
+            CLOSED_DAY_NO,
+            BUSINESS_NO,
+            CLOSED_DAY
+        FROM TBL_CLOSED_DAY
+        WHERE BUSINESS_NO = #{businessNo}
     </select>
 
 

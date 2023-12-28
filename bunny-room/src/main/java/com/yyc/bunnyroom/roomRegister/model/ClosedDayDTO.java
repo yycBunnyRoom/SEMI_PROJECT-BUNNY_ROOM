@@ -12,16 +12,6 @@ public class ClosedDayDTO {
 
     private int closedDayIdx;
     private int businessNo;
-    private WeekDay closedDay;
+    private String closedDay;
 
-
-
-    public ClosedDayDTO() {
-    }
-
-    public ClosedDayDTO(int closedDayIdx, int businessNo, WeekDay closedDay) {
-        this.closedDayIdx = closedDayIdx;
-        this.businessNo = businessNo;
-        this.closedDay = closedDay;
-    }
 }

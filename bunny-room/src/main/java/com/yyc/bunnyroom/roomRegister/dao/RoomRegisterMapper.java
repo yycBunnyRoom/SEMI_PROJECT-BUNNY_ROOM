@@ -35,6 +35,8 @@ public interface RoomRegisterMapper {
 
     List<AppliedOptionDTO> getAppliedOptions(int roomNo);
 
+    List<ClosedDayDTO> getAllClosedDays(int businessNo);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);

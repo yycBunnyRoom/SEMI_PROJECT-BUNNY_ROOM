@@ -12,19 +12,30 @@
     <h1>나는 header</h1>
 </header>
 
-<!-- 정기 휴가 -->
 <h1>정기 휴무</h1>
-<button id="MONDAY" onclick="selectDay('MONDAY')">월</button>
-<button id="TUESDAY" onclick="selectDay('TUESDAY')">화</button>
-<button id="WEDNESDAY" onclick="selectDay('WEDNESDAY')">수</button>
-<button id="THURSDAY" onclick="selectDay('THURSDAY')">목</button>
-<button id="FRIDAY" onclick="selectDay('FRIDAY')">금</button>
-<button id="SATURDAY" onclick="selectDay('SATURDAY')">토</button>
-<button id="SUNDAY" onclick="selectDay('SUNDAY')">일</button>
+
+<label for="weekDaysButtons"></label>
+<!--weekDays 버튼이 생성되는 곳-->
+<div id="weekDaysButtons"></div>
 
 <p id="selectedDays">선택된 요일: </p>
 
 <button onclick="addClosedDays()">확인</button>
+
+
+
+
+<!-- 정기 휴가 -->
+
+<!--<button id="MONDAY" onclick="selectDay('MONDAY')">월</button>-->
+<!--<button id="TUESDAY" onclick="selectDay('TUESDAY')">화</button>-->
+<!--<button id="WEDNESDAY" onclick="selectDay('WEDNESDAY')">수</button>-->
+<!--<button id="THURSDAY" onclick="selectDay('THURSDAY')">목</button>-->
+<!--<button id="FRIDAY" onclick="selectDay('FRIDAY')">금</button>-->
+<!--<button id="SATURDAY" onclick="selectDay('SATURDAY')">토</button>-->
+<!--<button id="SUNDAY" onclick="selectDay('SUNDAY')">일</button>-->
+
+
 
 
 
@@ -56,7 +67,7 @@
 <!--Thymeleaf 를 활용 해서 해당 휴가가 대응 하는 기업 번호를 JS 변수에 저장-->
 <script th:inline="javascript">
     let businessNo = [[${businessNo}]]
-    console.log(businessNo)
+    let weekDays = [[${weekDays}]]
 </script>
 
 

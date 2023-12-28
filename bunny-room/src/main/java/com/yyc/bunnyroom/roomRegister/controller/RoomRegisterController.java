@@ -115,9 +115,18 @@ public class RoomRegisterController {
     }
 
     @ModelAttribute("weekDays")
-    public WeekDay[] weekDays(){
-        return WeekDay.values();
+    public String[] weekDays(){
+        WeekDay[] weekDayList = WeekDay.values();
+        String[] weekdays = new String[weekDayList.length];
+
+        for (int i = 0; i < weekDayList.length; i++) {
+            weekdays[i] = weekDayList[i].getDescription();
+        }
+        return weekdays;
     }
+
+//    @ModelAttribute("weekDays")
+//    public WeekDay[]weekDays(){return WeekDay.values();}
 
     @ModelAttribute("roomOptions")
     public List<RoomOptionDTO> roomOptions(){
