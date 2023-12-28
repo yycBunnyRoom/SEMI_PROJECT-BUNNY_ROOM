@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자용 사업자 상세 페이지</title>
+</head>
+<body>
+    <header th:replace="~{/common/header :: headerFragment}">
+        <h1>나는 header</h1>
+    </header>
+
+    <nav th:replace="admin/adminNav :: nav"></nav>
+
+    <section>
+        <h5 th:text="${business.categoryName}"></h5>
+        <h1 th:text="${business.businessName}"></h1>
+
+        <article>
+            <h4>사업자 정보</h4>
+            <p th:text="'사업자 등록 번호 : ' + ${business.registerNo}"></p>
+            <p th:text="'사업자 닉네임 : ' + ${business.owner}"></p>
+            <p th:text="'사업자 EMAIL : ' + ${business.email}"></p>
+            <p th:text="'사업자 연락처 : ' + ${business.ownerPhone}"></p>
+        </article>
+
+        <article>
+            <h4>업체 정보</h4>
+            <p th:text="'우편번호 : ' + ${business.zipCode}"></p>
+            <p th:text="'주소 : ' + ${business.address}"></p>
+            <p th:text="'업체 연락처 : ' + ${business.businessPhone}"></p>
+            <p th:text="'영업시간 : ' + ${business.startTime + ':00 ~ ' + business.endTime} + ':00'"></p>
+        </article>
+
+        <article>
+            <p th:text="'최초 등록일 : ' + ${business.businessRegisterDate}"></p>
+            <p th:text="'최종 정보 수정일 : ' + ${business.businessUpdateDate}"></p>
+        </article>
+
+        <article>
+            <h4>정기 휴일</h4>
+            <table>
+                <tr th:each="day : ${closedDay}">
+                    <td th:text="${day.closedDay}"></td>
+                </tr>
+            </table>
+        </article>
+
+        <h4>비정기 휴일</h4>
+        <article th:each="holiday : ${holiday}" th:if="${holiday.activeStatus} eq 'active'">
+            <p th:text="${holiday.holidayName}"></p>
+            <p th:text="${#dates.format(holiday.startDate, 'yy-MM-dd') + ' ~ ' + #dates.format(holiday.endDate, 'yy-MM-dd')}"></p>
+            <p th:text="${holiday.reason}"></p>
+        </article>
+    </section>
+
+    <section>
+        <h3>방 정보</h3>
+    </section>
+</body>
+</html>

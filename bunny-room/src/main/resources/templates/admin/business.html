@@ -48,7 +48,7 @@
                     <th>업체 삭제 사유</th>
                     <th>업체 상태</th>
                 </tr>
-                <tr th:each="business : ${BusinessList}">
+                <tr th:each="business : ${BusinessList}" th:attr="data-url=@{/admin/business/{businessNo}(businessNo=${business.businessNo})}" onclick="navigateToBusinessDetail(this)">
                     <td th:text="${business.businessNo}"></td>
                     <td th:text="${business.categoryName}"></td>
                     <td th:text="${business.businessName}"></td>
@@ -63,16 +63,16 @@
                     <td th:text="${business.reason}"></td>
                     <td th:text="${business.status}"></td>
                     <td>
-                        <form action="/admin/business/delete" method="post" th:if="${business.status eq 'active'}">
+                        <form id="deleteForm_${business.businessNo}" action="/admin/business/delete" method="post" th:if="${business.status eq 'active'}">
                             <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
                             <input type="hidden" name="status" th:value="${business.status}">
-                            <button type="submit">업체 삭제</button>
+                            <button type="submit" onclick="deleteBusiness(Event,'deleteForm_${business.businessNo}')">업체 삭제</button>
                         </form>
-                        <form action="/admin/business/restore" method="post" th:if="${business.status eq 'inactive'}">
+                        <form id="restoreForm_${business.businessNo}" action="/admin/business/restore" method="post" th:if="${business.status eq 'inactive'}">
                             <input type="hidden" name="businessNo" th:value="${business.businessNo}"/>
                             <input type="hidden" name="status" th:value="${business.status}"/>
                             <input type="hidden" name="reason" th:value="${business.reason}">
-                            <button type="submit">업체 복구</button>
+                            <button type="submit" onclick="restoreBusiness(Event, 'restoreForm_${business.businessNo}')">업체 복구</button>
                         </form>
                     </td>
                 </tr>
@@ -89,5 +89,27 @@
         </script>
     </th:block>
 
+<script>
+    // 해당페이지로 이동하는 함수
+    function navigateToBusinessDetail(element){
+        let url = element.getAttribute('data-url');
+        window.location.href=url;
+    }
+
+    function deleteBusiness(Event, formId){
+        Event.stopPropagation();
+
+        let form = document.getElementById(formId);
+        form.submit();
+    }
+
+    function restoreBusiness(Event, formId){
+        Event.stopPropagation();
+
+        let form = document.getElementById(formId);
+        form.submit();
+    }
+
+</script>
 </body>
 </html>

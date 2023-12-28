@@ -4,5 +4,113 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yyc.bunnyroom.adminBusiness.model.dao.AdminRoomDAO">
 
+    <resultMap id="businessInfo" type="com.yyc.bunnyroom.adminBusiness.model.dto.BusinessAllInfoDTO">
+        <id property="businessNo" column="BUSINESS_NO"/>
+        <result property="categoryName" column="BUSINESS_CATEGORY_NAME"/>
+        <result property="registerNo" column="BUSINESS_REGIST_NO"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="zipCode" column="BUSINESS_ZIP_CODE"/>
+        <!-- ADDRESS는 CONCAT(BUSINESS_ADDRESS_ROAD, ' ', BUSINESS_ADDRESS_DETAIL) -->
+        <result property="address" column="ADDRESS"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="startTime" column="START"/>
+        <result property="endTime" column="END"/>
+        <result property="owner" column="USER_NICKNAME"/>
+        <result property="email" column="USER_EMAIL"/>
+        <result property="ownerPhone" column="USER_PHONE"/>
+        <result property="businessRegisterDate" column="BUSINESS_REGIST_DATE"/>
+        <result property="businessUpdateDate" column="BUSINESS_UPDATE_DATE"/>
+    </resultMap>
 
+    <resultMap id="roomDTO" type="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        <id property="roomNo" column="ROOM_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="roomName" column="ROOM_NAME"/>
+        <result property="roomIntro" column="ROOM_INTRO"/>
+        <result property="roomDetail" column="ROOM_DETAIL"/>
+        <result property="roomAvailableStatus" column="ROOM_AVAILABLE_STATUS"/>
+        <result property="roomMinPeople" column="ROOM_MIN_PEOPLE"/>
+        <result property="roomMaxPeople" column="ROOM_MAX_PEOPLE"/>
+        <result property="roomFacilityInfo" column="ROOM_FACILITY_INFO"/>
+        <result property="roomNotice" column="ROOM_NOTICE"/>
+        <result property="roomRegistDate" column="ROOM_REGIST_DATE"/>
+        <result property="roomUpdateDate" column="ROOM_UPDATE_DATE"/>
+        <result property="roomStatus" column="ROOM_STATUS"/>
+        <result property="price" column="ROOM_PRICE"/>
+    </resultMap>
+
+    <resultMap id="closedDay" type="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
+        <id property="closedDayIdx" column="CLOSED_DAY_NO"/>
+        <result property="closedDay" column="CLOSED_DAY"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+    </resultMap>
+
+    <resultMap id="holiday" type="com.yyc.bunnyroom.roomRegister.model.HolidayDTO">
+        <id property="holidayIdx" column="HOLIDAY_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="holidayName" column="HOLIDAY_NAME"/>
+        <result property="reason" column="HOLIDAY_REASON"/>
+        <result property="startDate" column="HOLIDAY_START_DATE"/>
+        <result property="endDate" column="HOLIDAY_END_DATE"/>
+        <result property="registDate" column="HOLIDAY_REGIST_DATE"/>
+        <result property="updateDate" column="HOLIDAY_UPDATE_DATE"/>
+        <result property="activeStatus" column="HOLIDAY_STATUS"/>
+    </resultMap>
+
+    <select id="searchBusinessInfo" resultMap="businessInfo">
+        SELECT
+            B.BUSINESS_NO,
+            C.BUSINESS_CATEGORY_NAME,
+            B.BUSINESS_REGIST_NO,
+            B.BUSINESS_NAME,
+            B.BUSINESS_ZIP_CODE,
+            CONCAT(B.BUSINESS_ADDRESS_ROAD, ' ', BUSINESS_ADDRESS_DETAIL) AS ADDRESS,
+            B.BUSINESS_PHONE,
+            MIN(T.START_TIME_IDX) AS START,
+            MAX(T.END_TIME_IDX) AS END,
+            U.USER_NICKNAME,
+            U.USER_EMAIL,
+            U.USER_PHONE,
+            B.BUSINESS_REGIST_DATE,
+            B.BUSINESS_UPDATE_DATE
+        FROM
+            TBL_BUSINESS AS B
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        JOIN
+            TBL_USER AS U ON (B.USER_NO = U.USER_NO)
+        JOIN
+            TBL_TIME_UNIT_SCHEDULE AS T ON (B.BUSINESS_NO = T.BUSINESS_NO)
+        WHERE
+            B.BUSINESS_NO = #{businessNo}
+    </select>
+
+    <select id="searchRoomInBusiness" resultMap="roomDTO">
+        SELECT
+            *
+        FROM
+            TBL_ROOM
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </select>
+    
+    <select id="searchClosedDayInBusiness" resultMap="closedDay">
+        SELECT
+            *
+        FROM
+            TBL_CLOSED_DAY
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </select>
+
+    <select id="searchHolidayInBusiness" resultMap="holiday">
+        SELECT
+            *
+        FROM
+            TBL_HOLIDAY
+        WHERE
+            BUSINESS_NO = #{businessNo}
+            AND
+            HOLIDAY_STATUS = 'active'
+    </select>
 </mapper>
