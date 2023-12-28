@@ -94,56 +94,8 @@
         </script>
     </th:block>
 
-<script>
-    /* 방 옵션에서 프라이머리키 받아오기 */
-    function fn_giveNo(button){
-        let valueNo = button.getAttribute('data-option-idx');
-       document.getElementById('getNo').value = valueNo;
-        console.log(valueNo);
-    }
-
-    function submitOptionNo() {
-        let optionIdx = document.getElementById('getNo').value;
-        let newOptionName = document.getElementById('getNewName').value;
-
-        // FormData 객체를 생성해서 그 안에 값을 담기
-        let jsonData = {
-            optionIdx: optionIdx,
-            optionName: newOptionName
-        }
-
-        // Fetch 사용해서 보내기
-        fetch('/admin/setting/changeOptionName',{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jsonData)
-        })
-            .then(response => {
-                if(!response.ok){
-                    throw new Error("`HTTP error! Status: ${response.status}`");
-                }
-                return response.text();
-            })
-            .then(data => {
-                // 서버 응답 처리
-                console.log(data);
-
-                // 모달 닫기
-                $('#staticBackdrop').modal('hide');
-
-                // 테이블에서 해당 행 찾아서 업데이트
-                let tableRow = $('button[data-option-idx="' + optionIdx + '"]').closest('tr');
-                tableRow.find('td:first-child').text(newOptionName);
-            })
-            .catch(error => {
-                // 에러 처리
-                console.error('Fetch error', error);
-            })
-    }
-</script>
-
+<!-- 모달창 동작에 대한 js -->
+<script src="/js/admin/setting/setting.js"/>
 
 <!-- 부트스트랩 JS 및 Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
