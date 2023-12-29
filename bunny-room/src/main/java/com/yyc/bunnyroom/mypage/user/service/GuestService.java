@@ -22,8 +22,8 @@ public class GuestService {
 
 
 
-    public UserDTO selectByUserEmail(String userEmail){
-        UserDTO user = guestMapper.selectByUserEmail(userEmail);
+    public LoginUserDTO selectByUserEmail(String userEmail){
+        LoginUserDTO user = guestMapper.selectByUserEmail(userEmail);
 
 
         if(Objects.isNull(user)){

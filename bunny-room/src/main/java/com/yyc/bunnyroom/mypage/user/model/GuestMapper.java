@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface GuestMapper {
 
-    UserDTO selectByUserEmail(String userEmail);
+    LoginUserDTO selectByUserEmail(String userEmail);
 
 
     int updateUserPassword(LoginUserDTO loginUserDTO);

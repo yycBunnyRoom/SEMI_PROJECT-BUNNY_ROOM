@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
+<header th:replace="~{/common/header :: headerFragment}">
+    <h1>나는 header</h1>
+</header>
+
 <table>
     <tr>
         <th>닉네임</th>
@@ -13,14 +17,13 @@
         <th>권한</th>
 
     </tr>
-    <tr th:each="mypage : ${mypages}">
-        <td th:text="${mypage.userNickname}"></td>
-        <td th:text="${mypage.userEmail}"></td>
-        <td th:text="${mypage.userPhone}"></td>
-        <td th:text="${mypage.userAuth}"></td>
+    <tr>
+        <td th:text="${mypages.userNickname}"></td>
+        <td th:text="${mypages.userEmail}"></td>
+        <td th:text="${mypages.userPhone}"></td>
+        <td th:text="${mypages.userAuth}"></td>
     </tr>
 </table>
-<button onclick="location.href='/'">인덱스</button>
-<button onclick="location.href='/'">인덱스</button>
+<button onclick="location.href='/'">홈</button>
 </body>
 </html>
