@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
+    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,6 +74,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.BunnyRoomApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/dev/10_spring_boot/Digestion/understand2",
     "list.type.of.created.stylesheet": "CSS",
@@ -145,7 +149,8 @@
       <workItem from="1703549587785" duration="30839000" />
       <workItem from="1703636708848" duration="54100000" />
       <workItem from="1703723786006" duration="32521000" />
-      <workItem from="1703778910301" duration="19071000" />
+      <workItem from="1703778910301" duration="19222000" />
+      <workItem from="1703843571661" duration="607000" />
     </task>
     <servers />
   </component>
