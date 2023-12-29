@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<header th:replace="~{/common/header :: headerFragment}"></header>
+<header th:insert="~{/common/header :: headerFragment}"></header>
 
     <h1>관리자 설정 페이지</h1>
 
-<nav th:replace="~{admin/adminNav :: nav}"></nav>
+<nav th:insert="~{admin/adminNav :: nav}"></nav>
 
     <!-- 카테고리 관련 -->
     <section>
