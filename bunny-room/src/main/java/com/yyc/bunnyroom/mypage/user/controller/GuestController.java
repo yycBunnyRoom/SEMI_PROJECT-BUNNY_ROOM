@@ -54,7 +54,7 @@ public class GuestController {
 
 
 
-    @GetMapping("/mypage")
+    @GetMapping("/mypageview")
     public String mypage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
         model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
         return "mypage/guestUpdatePassword";
