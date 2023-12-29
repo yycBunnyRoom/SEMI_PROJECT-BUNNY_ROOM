@@ -6,11 +6,11 @@
 </head>
 <body>
 
-  <header th:replace="~{/common/header :: headerFragment}"></header>
+  <div th:include="~{/common/header :: headerFragment}"></div>
 
   <h1>공지사항</h1>
 
-  <nav th:replace="admin/adminNav :: nav"></nav>
+  <div th:include="~{admin/adminNav :: nav}"></div>
 
 </body>
 </html>

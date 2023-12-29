@@ -16,9 +16,7 @@
 </head>
 <body>
 
-    <header th:replace="~{/common/header :: headerFragment}">
-        <h1>나는 header</h1>
-    </header>
+    <div th:include="~{/common/header :: headerFragment}"></div>
 
     <div class="room-search">
         <form action="https://www.google.com/search" method="GET" target="_blank">
