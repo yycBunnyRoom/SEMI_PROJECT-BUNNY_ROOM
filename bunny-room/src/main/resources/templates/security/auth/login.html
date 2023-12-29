@@ -56,9 +56,8 @@
 
 <!--    자바스크립트를 활용한 방법-->
     <script th:inline="javascript">
-        const error = [[${error}]]
         const exception = [[${exception}]]
-        if (error){
+        if (exception){
             alert(exception);
         }
     </script>

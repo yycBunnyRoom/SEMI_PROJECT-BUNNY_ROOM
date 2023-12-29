@@ -5,11 +5,11 @@
     <title>관리자 메인 페이지</title>
 </head>
 <body>
-    <div th:replace="~{common/header :: headerFragment}"></div>
+    <div th:insert="~{common/header :: headerFragment}"></div>
 
         <h1>관리자 메인</h1>
 
-    <div th:insert="~{admin/adminNav :: nav}"></div>
+    <div th:include="~{admin/adminNav :: nav}"></div>
 
 </body>
 </html>

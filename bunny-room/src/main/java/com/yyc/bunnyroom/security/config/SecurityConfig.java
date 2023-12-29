@@ -47,9 +47,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> { // 서버의 리소스에 접근 가능한 권한을 설정함
                 //여기부터 로그인 권한을 설정하는 공간
                 auth.requestMatchers(
-                        "/security/auth/login",
+                        "/security/auth/*",
                         "/signup/*",
-                        "/security/auth/fail",
+//                        "/security/auth/fail",
                         "/main",
 
                         // roomRegister
