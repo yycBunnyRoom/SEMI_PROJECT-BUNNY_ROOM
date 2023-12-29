@@ -1,0 +1,64 @@
+body {
+    font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
+    background-color: #ffb545;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+header {
+    /* 원래 색상이 없으므로 색상을 직접 지정합니다. */
+    color: #FF7300F4; /* 헤더 텍스트 색상 변경 */
+}
+
+.login-container {
+    margin-top: 50px; /* 헤더 높이만큼 아래로 밀어줌 */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+h1 {
+    color: #FFB545;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 8px;
+    margin-bottom: 10px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 8px 20px;
+    background-color: #FFB545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d18f00;
+}
+
+a {
+    text-decoration: none;
+    color: #FFB545;
+    margin-right: 10px;
+}

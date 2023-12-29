@@ -64,12 +64,10 @@
 
     <!--ClosedDayDTO-->
     <resultMap id="closedDayDTO" type="com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO">
-        <result property="CLOSED_DAY_NO" column="closedDayIdx"/>
-        <result property="BUSINESS_NO" column="businessNo"/>
-        <result property="CLOSED_DAY" column="closedDay"/>
+        <id property="closedDayIdx" column="CLOSED_DAY_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="closedDay" column="CLOSED_DAY"/>
     </resultMap>
-
-
 
 
 
@@ -253,7 +251,8 @@
         SELECT
             OPTION_NO,
             OPTION_NAME
-        FROM TBL_ROOM_OPTION
+        FROM
+            TBL_ROOM_OPTION
     </select>
 
     <!--getAllBusiness-->
@@ -271,9 +270,12 @@
             BUSINESS_REGIST_DATE,
             BUSINESS_UPDATE_DATE,
             BUSINESS_STATUS
-        FROM TBL_BUSINESS
-        WHERE USER_NO = #{ownerNo}
-          AND BUSINESS_STATUS = 'active'
+        FROM
+            TBL_BUSINESS
+        WHERE
+            USER_NO = #{ownerNo}
+          AND
+            BUSINESS_STATUS = 'active'
     </select>
 
     <!--getAllRooms-->
@@ -293,9 +295,12 @@
             ROOM_UPDATE_DATE,
             ROOM_STATUS,
             ROOM_PRICE
-         FROM TBL_ROOM
-        WHERE BUSINESS_NO = #{businessIdx}
-        AND ROOM_STATUS = 'active'
+         FROM
+            TBL_ROOM
+        WHERE
+            BUSINESS_NO = #{businessIdx}
+        AND
+            ROOM_STATUS = 'active'
     </select>
 
     <!--getAllRooms-->
@@ -318,8 +323,10 @@
             CLOSED_DAY_NO,
             BUSINESS_NO,
             CLOSED_DAY
-        FROM TBL_CLOSED_DAY
-        WHERE BUSINESS_NO = #{businessNo}
+        FROM
+            TBL_CLOSED_DAY
+        WHERE
+            BUSINESS_NO = #{businessNo}
     </select>
 
 
