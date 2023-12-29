@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/bunny-room">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="Class" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="kj" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ZYk60ToBd3QipQoFTKSAtmZLnz" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showVisibilityIcons" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.BunnyRoomApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/dev/10_spring_boot/Digestion/understand2",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "build.tools",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\SEMI_PROJECT-BUNNY_ROOM\SEMI_PROJECT-BUNNY_ROOM\bunny-room\src\main\resources\static\css\test" />
+      <recent name="C:\dev\SEMI_PROJECT-BUNNY_ROOM\SEMI_PROJECT-BUNNY_ROOM\bunny-room\src\main\resources\static\js\test" />
+      <recent name="C:\dev\SEMI_PROJECT-BUNNY_ROOM\SEMI_PROJECT-BUNNY_ROOM\bunny-room\src\main\resources\static\js" />
+      <recent name="C:\dev\SEMI_PROJECT-BUNNY_ROOM\SEMI_PROJECT-BUNNY_ROOM\bunny-room\src\main\resources\static\test" />
+      <recent name="C:\dev\SEMI_PROJECT-BUNNY_ROOM\SEMI_PROJECT-BUNNY_ROOM\bunny-room\src\main\resources\templates\test" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BunnyRoomApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="bunny-room.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.yyc.bunnyroom.BunnyRoomApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.9-corretto-17.0.9-249ae16d76d6-98297cd8" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
+      <created>1702606223653</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702606223653</updated>
+      <workItem from="1702606226492" duration="529000" />
+      <workItem from="1702606769790" duration="26922000" />
+      <workItem from="1702859754541" duration="30352000" />
+      <workItem from="1702945365712" duration="3795000" />
+      <workItem from="1702952385804" duration="20147000" />
+      <workItem from="1702984664219" duration="23859000" />
+      <workItem from="1703032130599" duration="25808000" />
+      <workItem from="1703072596297" duration="11743000" />
+      <workItem from="1703117700228" duration="35728000" />
+      <workItem from="1703204282341" duration="22567000" />
+      <workItem from="1703509217285" duration="4009000" />
+      <workItem from="1703516794564" duration="264000" />
+      <workItem from="1703517074508" duration="1088000" />
+      <workItem from="1703518176316" duration="14000" />
+      <workItem from="1703518489454" duration="491000" />
+      <workItem from="1703519004707" duration="527000" />
+      <workItem from="1703519714629" duration="42000" />
+      <workItem from="1703542377219" duration="335000" />
+      <workItem from="1703542722009" duration="149000" />
+      <workItem from="1703542884988" duration="2891000" />
+      <workItem from="1703549587785" duration="30839000" />
+      <workItem from="1703636708848" duration="54100000" />
+      <workItem from="1703723786006" duration="32521000" />
+      <workItem from="1703778910301" duration="16819000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
