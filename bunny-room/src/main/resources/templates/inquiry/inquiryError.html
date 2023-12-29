@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<div>
+    <h1>Error</h1>
+    <p th:text="${errorMessage}"></p>
+    <!-- 원하는 에러 메시지를 출력하는 부분입니다. -->
+    <a th:href="@{/}">홈 페이지로 돌아가기</a>
+    <!-- 사용자가 홈 페이지로 돌아갈 수 있는 링크를 제공합니다. -->
+</div>
 </body>
 </html>

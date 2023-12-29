@@ -1,13 +1,17 @@
 package com.yyc.bunnyroom.mypage.user.controller;
 
 import com.yyc.bunnyroom.common.dto.UserDTO;
+import com.yyc.bunnyroom.inquiry.dto.InquiryDTO;
 import com.yyc.bunnyroom.mypage.user.dto.ChangePasswordDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
+import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,45 +30,34 @@ public class GuestController {
 
 
 
-    @GetMapping
-    public ModelAndView findByAllUserEmail(ModelAndView mv){
-        List<LoginUserDTO> mypage = guestService.findByAllUserEmail();
+    @GetMapping("/search")
+    public ModelAndView selectByUserEmail(ModelAndView mv){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if(Objects.isNull(mypage)){
-            System.out.println("안보여");
+        if (authentication != null && authentication.isAuthenticated()) {
+            AuthDetails userDetails = (AuthDetails) authentication.getPrincipal();
+
+            String userEmail = userDetails.getLoginUserDTO().getUserEmail();
+
+            LoginUserDTO user = guestService.selectByUserEmail(userEmail);
+
+            if(Objects.isNull(user)){
+                throw new NullPointerException();
+            }else{
+                mv.addObject("mypages", user);
+                mv.setViewName("mypage/guestSearch");
+            }
         }
-        mv.addObject("mypages", mypage);
-        mv.setViewName("mypage/guestSearch");
         return mv;
     }
 
 
-//    @GetMapping("/search")
-//    public ModelAndView findByUserEmail(ModelAndView mv, @RequestParam String userEmail){
-//
-//        if(userEmail == null){
-//            System.out.println("메일 주소는 필수 입니다.");
-//            mv.addObject("message", "메일 주소는 필수 입니다.");
-//            mv.setViewName("mypage/errorPage");
-//            return mv;
-//        }
-//
-//        UserDTO user = guestService.findByUserEmail(userEmail);
-//
-//        if(Objects.isNull(user)){
-//            throw new NullPointerException();
-//        }else{
-//            mv.addObject("mypages", user);
-//            mv.setViewName("mypage/guestSearch");
-//            return mv;
-//
-//        }
-//    }
+
 
     @GetMapping("/mypage")
-    public String mypage(@AuthenticationPrincipal Principal principal, Model model){
-        model.addAttribute("user", principal.getName());
-        return "mypage/guest";
+    public String mypage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
+        model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
+        return "mypage/guestUpdatePassword";
     }
 
 
@@ -87,7 +80,7 @@ public class GuestController {
 
             if (result == 1) {
                 modelAndView.addObject("message2", "비밀번호 변경 성공!!");
-                modelAndView.setViewName("/main");
+                modelAndView.setViewName("/mypage/guestSearch");
             } else {
                 modelAndView.addObject("message2", "비밀번호 변경 실패!!");
                 modelAndView.setViewName("/mypage/guestUpdatePassword");
@@ -99,5 +92,7 @@ public class GuestController {
 
         return modelAndView;
     }
+
+
 }
 

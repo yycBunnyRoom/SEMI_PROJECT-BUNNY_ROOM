@@ -20,6 +20,7 @@
         <mapper resource="mapper/common/image.xml"/>
         <mapper resource="mapper/admin/roomOption.xml"/>
         <mapper resource="mapper/admin/room.xml"/>
+        <mapper resource="mapper/mypage/user/GuestMyPage.xml"/>
     </mappers>
 
 </configuration>

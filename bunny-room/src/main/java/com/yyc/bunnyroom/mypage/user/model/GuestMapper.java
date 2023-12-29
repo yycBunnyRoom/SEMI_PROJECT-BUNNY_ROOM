@@ -10,9 +10,8 @@ import java.util.List;
 @Mapper
 public interface GuestMapper {
 
-    //UserDTO findByUserEmail(String userEmail);
+    LoginUserDTO selectByUserEmail(String userEmail);
 
-    List<LoginUserDTO> findByAllUserEmail();
 
     int updateUserPassword(LoginUserDTO loginUserDTO);
 }

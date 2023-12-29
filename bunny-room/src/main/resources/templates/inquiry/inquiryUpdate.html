@@ -7,8 +7,7 @@
 <body>
 <form th:action="@{/inquirys/updateInquiry}" th:object="${inquiryDTO}" method="post">
 
-    <input type="hidden" id="inquiryNo" name="inquiryNo" th:field="*{inquiryNo}" />
-
+    <input type="hidden" th:field="*{inquiryNo}" />
     <label for="inquiryTitle">제목:</label>
     <input type="text" id="inquiryTitle" name="inquiryTitle" th:field="*{inquiryTitle}" required>
 
@@ -18,17 +17,6 @@
     <button type="submit">수정하기</button>
 </form>
 
-
-<!--<form action="/updateInquiry" method="post" th:object="${inquiryDTO}">-->
-<!--    <input type="hidden" th:field="*{inquiryNo}">-->
-<!--    <label for="inquiryTitle">Inquiry Title:</label>-->
-<!--    <input type="text" id="inquiryTitle" th:field="*{inquiryTitle}">-->
-
-<!--    <label for="inquiryContents">Inquiry Contents:</label>-->
-<!--    <textarea id="inquiryContents" th:field="*{inquiryContents}"></textarea>-->
-
-<!--    <input type="submit" value="Submit">-->
-<!--</form>-->
 
 </body>
 </html>
