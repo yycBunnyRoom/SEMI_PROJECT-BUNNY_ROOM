@@ -8,9 +8,7 @@
 </head>
 <body>
 
-<header th:replace="~{/common/header :: headerFragment}">
-    <h1>나는 header</h1>
-</header>
+<div th:insert="~{common/header :: headerFragment}"></div>
 
     <h1>회원가입</h1>
     <form th:action="@{/signup/signup}" method="post" modelAttribute="signupDTO" id="signupForm">

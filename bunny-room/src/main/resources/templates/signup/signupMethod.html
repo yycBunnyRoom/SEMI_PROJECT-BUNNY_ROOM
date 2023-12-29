@@ -5,9 +5,7 @@
     <title>회원가입 종류</title>
 </head>
 <body>
-    <header th:replace="~{/common/header :: headerFragment}">
-        <h1>나는 header</h1>
-    </header>
+    <div th:insert="~{common/header :: headerFragment}"></div>
 
     <form action="/signup/signupMethod" method="post">
         <button type="submit" name="userAuth" value="HOST">호스트 버니 가입</button>

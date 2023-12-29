@@ -7,9 +7,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13c9741586ee1ef04079d7c79c9ca27b&libraries=services"></script>
 </head>
 <body>
-<header th:replace="~{/common/header :: headerFragment}">
-    <h1>나는 header</h1>
-</header>
+<div th:insert="~{common/header :: headerFragment}"></div>
 
 <a href="/roomRegister/hostBusinessView">사업체 관리 페이지</a>
 <br>
