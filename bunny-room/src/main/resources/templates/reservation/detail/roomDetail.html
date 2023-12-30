@@ -29,7 +29,7 @@
 <div id="roomDetails">
     <h1 th:text="${roomDetails.roomName}"></h1>
     <p><strong>한 줄 소개:</strong> <span th:text="${roomDetails.roomIntro}"></span></p>
-    <p><strong>주소:</strong> <span th:text="|${relatedBusinessInfo.businessAddressRoad}  ${relatedBusinessInfo.businessAddressDetail}|"></span></p>
+
     <p><strong>연락처:</strong> <span th:text="${relatedBusinessInfo.businessPhone}"></span></p>
     <p><strong>상세 소개:</strong> <span th:text="${roomDetails.roomDetail}"></span></p>
     <p><strong>최소 수용 인원:</strong> <span th:text="${roomDetails.roomMinPeople}"></span></p>
@@ -42,6 +42,7 @@
 <div id="appliedOptionsButtons"></div>
 
 <!-- 지도를 표시할 div -->
+<p><strong>주소:</strong> <span th:text="|${relatedBusinessInfo.businessAddressRoad}  ${relatedBusinessInfo.businessAddressDetail}|"></span></p>
 <div id="map" style="width:500px;height:400px;"></div>
 
 

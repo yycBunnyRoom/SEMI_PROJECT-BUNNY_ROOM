@@ -81,7 +81,14 @@ public class SearchController {
             rooms = roomRegisterService.getRoomsByKeyword(keywordDTO);
         }
 
+        int total=0;
         System.out.println("roomDTO가 들어왔는가? : " + rooms);
+        for (RoomDTO room :
+                rooms) {
+            total++;
+        }
+        System.out.println("총 검색된 결과: "+total);
+
 
         modelAndView.addObject("rooms", rooms);
         modelAndView.setViewName("/reservation/view/searchResultView");
