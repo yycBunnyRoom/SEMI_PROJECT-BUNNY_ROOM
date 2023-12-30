@@ -98,5 +98,7 @@ public class RoomRegisterService {
     }
 
 
-
+    public BusinessDTO getBusinessInfoByRoomNo(int roomNo) {
+        return roomRegisterMapper.getBusinessInfoByRoomNo(roomNo);
+    }
 }

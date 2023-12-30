@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>방 상세 정보</title>
+    <!-- Kakao 지도 API 스크립트 -->
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13c9741586ee1ef04079d7c79c9ca27b&libraries=services"></script>
 
     <script th:inline="javascript">
         let appliedOptions = [[${appliedOptions}]]
+        let relatedBusinessInfo = [[${relatedBusinessInfo}]]
+        let address = [[${relatedBusinessInfo.businessAddressRoad}]]
     </script>
 
     <link rel="stylesheet" href="/css/reservation/detail/roomDetail.css">
     <script src="/js/reservation/detail/roomDetail.js"></script>
+
+
 </head>
 <body>
 
@@ -20,8 +27,10 @@
 
 <!-- 비즈니스 상세 정보가 표시될 부분 -->
 <div id="roomDetails">
-    <h2 th:text="${roomDetails.roomName}"></h2>
+    <h1 th:text="${roomDetails.roomName}"></h1>
     <p><strong>한 줄 소개:</strong> <span th:text="${roomDetails.roomIntro}"></span></p>
+    <p><strong>주소:</strong> <span th:text="|${relatedBusinessInfo.businessAddressRoad}  ${relatedBusinessInfo.businessAddressDetail}|"></span></p>
+    <p><strong>연락처:</strong> <span th:text="${relatedBusinessInfo.businessPhone}"></span></p>
     <p><strong>상세 소개:</strong> <span th:text="${roomDetails.roomDetail}"></span></p>
     <p><strong>최소 수용 인원:</strong> <span th:text="${roomDetails.roomMinPeople}"></span></p>
     <p><strong>최대 수용 인원:</strong> <span th:text="${roomDetails.roomMaxPeople}"></span></p>
@@ -31,6 +40,10 @@
 </div>
 
 <div id="appliedOptionsButtons"></div>
+
+<!-- 지도를 표시할 div -->
+<div id="map" style="width:500px;height:400px;"></div>
+
 
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.yyc.bunnyroom.reservation.controller;
 
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO;
+import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
 import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
@@ -98,6 +99,11 @@ public class SearchController {
 
         System.out.println("roomDTO 정보가 들어왔는지 확인: "+roomDetails);
 
+        // 해당 방과 관련된 사업체 정보를 가져온다
+        BusinessDTO relatedBusinessInfo = roomRegisterService.getBusinessInfoByRoomNo(Integer.parseInt(roomNo));
+
+        System.out.println("businessDTO 정보가 들어왔는지 확인: "+relatedBusinessInfo);
+
 
         // 선택한 appliedOptions를 같이 보냄
         List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(Integer.parseInt(roomNo));
@@ -106,6 +112,7 @@ public class SearchController {
 
 
         modelAndView.setViewName("/reservation/detail/roomDetail");
+        modelAndView.addObject("relatedBusinessInfo",relatedBusinessInfo);
         modelAndView.addObject("appliedOptions",appliedOptions);
         modelAndView.addObject("roomDetails",roomDetails);
         return modelAndView;

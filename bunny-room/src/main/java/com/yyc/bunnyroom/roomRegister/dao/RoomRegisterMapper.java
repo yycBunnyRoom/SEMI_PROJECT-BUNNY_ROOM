@@ -42,14 +42,13 @@ public interface RoomRegisterMapper {
 
     List<RoomDTO> getAllRooms();
 
+    List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);
 
     RoomDTO getRoomDetails(int roomNo);
 
-
-    List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO);
-
-
+    BusinessDTO getBusinessInfoByRoomNo(int roomNo);
 }

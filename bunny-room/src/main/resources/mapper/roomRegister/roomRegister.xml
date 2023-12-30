@@ -486,6 +486,29 @@
             ROOM_STATUS = 'active'
     </select>
 
+    <!--getBusinessInfoByRoomNo-->
+    <select id="getBusinessInfoByRoomNo" resultMap="businessDTO">
+        SELECT
+            A.BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS AS A
+        JOIN
+            TBL_ROOM AS B ON (A.BUSINESS_NO = B.BUSINESS_NO)
+        WHERE
+            ROOM_NO = #{roomNo}
+    </select>
+
 
 
 
