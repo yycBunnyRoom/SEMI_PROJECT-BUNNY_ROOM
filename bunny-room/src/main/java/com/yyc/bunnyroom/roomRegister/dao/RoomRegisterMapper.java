@@ -37,6 +37,8 @@ public interface RoomRegisterMapper {
 
     List<ClosedDayDTO> getAllClosedDays(int businessNo);
 
+    List<RoomDTO> getRoomsByCategory(String businessCategoryName);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);

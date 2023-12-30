@@ -303,7 +303,7 @@
             ROOM_STATUS = 'active'
     </select>
 
-    <!--getAllRooms-->
+    <!--getAppliedOptions-->
     <select id="getAppliedOptions" resultMap="appliedOptionDTO">
         SELECT
             A.ROOM_NO,
@@ -328,6 +328,42 @@
         WHERE
             BUSINESS_NO = #{businessNo}
     </select>
+
+    <!--getRoomsByCategory-->
+    <select id="getRoomsByCategory" resultMap="roomDTO">
+        SELECT
+            ROOM_NO,
+            BUSINESS_NO,
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_UPDATE_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+        FROM
+            TBL_ROOM
+        WHERE
+            BUSINESS_NO IN (
+                SELECT
+                    BUSINESS_NO
+                FROM
+                    TBL_BUSINESS AS A
+                JOIN
+                    TBL_BUSINESS_CATEGORY AS B
+                WHERE
+                    BUSINESS_CATEGORY_NAME = #{businessCategoryName}
+            )
+        AND
+            ROOM_STATUS = 'active'
+    </select>
+
+
 
 
 

@@ -54,7 +54,9 @@ function createCategoryButtons() {
         const button = document.createElement('button');
         button.textContent = category.businessCategoryName;
         button.style.backgroundColor = category.businessCategoryColorCode;
-        button.addEventListener('click', () => toggleOption(category, button));
+        button.addEventListener('click', function () {
+            window.location.href = '/search/category?businessCategoryName='+category.businessCategoryName;
+        })
         buttonsContainer.appendChild(button);
     });
 }

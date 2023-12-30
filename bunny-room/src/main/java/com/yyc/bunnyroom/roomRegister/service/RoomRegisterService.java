@@ -72,6 +72,10 @@ public class RoomRegisterService {
         return roomRegisterMapper.getAllClosedDays(businessNo);
     }
 
+    public List<RoomDTO> getRoomsByCategory(String businessCategoryName) {
+        return roomRegisterMapper.getRoomsByCategory(businessCategoryName);
+    }
+
 
 
 
