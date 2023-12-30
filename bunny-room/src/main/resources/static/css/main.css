@@ -209,7 +209,6 @@
 
 #categoryButtons button {
     padding: 15px 30px; /* 크게 만들기 */
-    background-color: #ffb545; /* 구글 크롬과 비슷한 파란색 */
     color: #fff;
     border: none;
     border-radius: 30px; /* 조금 더 둥글게 */

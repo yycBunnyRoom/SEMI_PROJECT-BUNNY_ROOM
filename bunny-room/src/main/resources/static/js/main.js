@@ -53,6 +53,7 @@ function createCategoryButtons() {
     categories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category.businessCategoryName;
+        button.style.backgroundColor = category.businessCategoryColorCode;
         button.addEventListener('click', () => toggleOption(category, button));
         buttonsContainer.appendChild(button);
     });
