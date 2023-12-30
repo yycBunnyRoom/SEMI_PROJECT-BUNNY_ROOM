@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.dao;
 
+import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -46,5 +47,5 @@ public interface RoomRegisterMapper {
     RoomDTO getRoomDetails(int roomNo);
 
 
-
+    List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO);
 }

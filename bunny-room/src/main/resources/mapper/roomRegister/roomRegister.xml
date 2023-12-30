@@ -363,6 +363,52 @@
             ROOM_STATUS = 'active'
     </select>
 
+    <!--getRoomsByCategory-->
+    <select id="getRoomsByKeyword" resultMap="roomDTO">
+        SELECT DISTINCT ROOM_NO,
+            BUSINESS_NO,
+            ROOM_NAME,
+            ROOM_INTRO,
+            ROOM_DETAIL,
+            ROOM_AVAILABLE_STATUS,
+            ROOM_MIN_PEOPLE,
+            ROOM_MAX_PEOPLE,
+            ROOM_FACILITY_INFO,
+            ROOM_NOTICE,
+            ROOM_REGIST_DATE,
+            ROOM_UPDATE_DATE,
+            ROOM_STATUS,
+            ROOM_PRICE
+        FROM
+            TBL_ROOM
+        WHERE
+            ROOM_STATUS = 'active'
+        AND (
+                ROOM_NAME LIKE #{keyWordRoomName}
+            OR
+                ROOM_INTRO LIKE #{keyWordRoomIntro}
+            OR
+                ROOM_DETAIL LIKE #{keyWordRoomDetail}
+            OR
+                ROOM_FACILITY_INFO LIKE #{keyWordRoomFacilityInfo}
+            OR
+                ROOM_NOTICE LIKE #{keyWordRoomNotice}
+            OR
+                BUSINESS_NO IN (
+                    SELECT
+                        BUSINESS_NO
+                    FROM
+                        TBL_BUSINESS
+                    WHERE
+                        BUSINESS_NAME LIKE #{keyWordBusinessName}
+                    OR
+                        BUSINESS_ADDRESS_ROAD LIKE #{keyWordAddressRoad}
+                )
+        )
+
+
+    </select>
+
 
 
 

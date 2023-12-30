@@ -15,8 +15,8 @@
 <div th:insert="~{common/header :: headerFragment}"></div>
 
 <div class="room-search">
-    <form action="https://www.google.com/search" method="GET" target="_blank">
-        <input type="text" name="q" placeholder="방 이름 검색" required>
+    <form action="/search/keyword" method="GET">
+        <input type="text" name="keyword" placeholder="키워드를 입력해 주세요" required>
         <button type="submit">검색</button>
     </form>
 </div>

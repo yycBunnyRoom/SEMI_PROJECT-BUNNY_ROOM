@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.service;
 
+import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.roomRegister.dao.RoomRegisterMapper;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,10 @@ public class RoomRegisterService {
 
     public List<RoomDTO> getRoomsByCategory(String businessCategoryName) {
         return roomRegisterMapper.getRoomsByCategory(businessCategoryName);
+    }
+
+    public List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO) {
+        return roomRegisterMapper.getRoomsByKeyword(keywordDTO);
     }
 
 
