@@ -48,3 +48,15 @@ document.getElementById('btn_login').addEventListener('click', function() {
 });
 
 
+function createCategoryButtons() {
+    const buttonsContainer = document.getElementById('categoryButtons');
+    categories.forEach(category => {
+        const button = document.createElement('button');
+        button.textContent = category.businessCategoryName;
+        button.addEventListener('click', () => toggleOption(category, button));
+        buttonsContainer.appendChild(button);
+    });
+}
+window.onload = () => {
+    createCategoryButtons();
+};
