@@ -30,7 +30,7 @@ public interface RoomRegisterMapper {
 
     List<BusinessDTO> getAllBusiness(int ownerNo);
 
-    List<RoomDTO> getAllRooms(int businessIdx);
+    List<RoomDTO> getRoomsByBusinessNo(int businessIdx);
 
     List<BusinessCategoryDTO> selectAllBusinessCategory();
 
@@ -40,6 +40,8 @@ public interface RoomRegisterMapper {
 
     List<RoomDTO> getRoomsByCategory(String businessCategoryName);
 
+    List<RoomDTO> getAllRooms();
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);
@@ -48,4 +50,6 @@ public interface RoomRegisterMapper {
 
 
     List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO);
+
+
 }

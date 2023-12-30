@@ -278,31 +278,6 @@
             BUSINESS_STATUS = 'active'
     </select>
 
-    <!--getAllRooms-->
-    <select id="getAllRooms" resultMap="roomDTO">
-        SELECT
-            ROOM_NO,
-            BUSINESS_NO,
-            ROOM_NAME,
-            ROOM_INTRO,
-            ROOM_DETAIL,
-            ROOM_AVAILABLE_STATUS,
-            ROOM_MIN_PEOPLE,
-            ROOM_MAX_PEOPLE,
-            ROOM_FACILITY_INFO,
-            ROOM_NOTICE,
-            ROOM_REGIST_DATE,
-            ROOM_UPDATE_DATE,
-            ROOM_STATUS,
-            ROOM_PRICE
-         FROM
-            TBL_ROOM
-        WHERE
-            BUSINESS_NO = #{businessIdx}
-        AND
-            ROOM_STATUS = 'active'
-    </select>
-
     <!--getAppliedOptions-->
     <select id="getAppliedOptions" resultMap="appliedOptionDTO">
         SELECT
@@ -327,6 +302,53 @@
             TBL_CLOSED_DAY
         WHERE
             BUSINESS_NO = #{businessNo}
+    </select>
+
+    <!--getAllRooms-->
+    <select id="getAllRooms" resultMap="roomDTO">
+        SELECT DISTINCT ROOM_NO,
+        BUSINESS_NO,
+        ROOM_NAME,
+        ROOM_INTRO,
+        ROOM_DETAIL,
+        ROOM_AVAILABLE_STATUS,
+        ROOM_MIN_PEOPLE,
+        ROOM_MAX_PEOPLE,
+        ROOM_FACILITY_INFO,
+        ROOM_NOTICE,
+        ROOM_REGIST_DATE,
+        ROOM_UPDATE_DATE,
+        ROOM_STATUS,
+        ROOM_PRICE
+        FROM
+        TBL_ROOM
+        WHERE
+        ROOM_STATUS = 'active'
+    </select>
+
+    <!--getRoomsByBusinessNo-->
+    <select id="getRoomsByBusinessNo" resultMap="roomDTO">
+        SELECT
+        ROOM_NO,
+        BUSINESS_NO,
+        ROOM_NAME,
+        ROOM_INTRO,
+        ROOM_DETAIL,
+        ROOM_AVAILABLE_STATUS,
+        ROOM_MIN_PEOPLE,
+        ROOM_MAX_PEOPLE,
+        ROOM_FACILITY_INFO,
+        ROOM_NOTICE,
+        ROOM_REGIST_DATE,
+        ROOM_UPDATE_DATE,
+        ROOM_STATUS,
+        ROOM_PRICE
+        FROM
+        TBL_ROOM
+        WHERE
+        BUSINESS_NO = #{businessIdx}
+        AND
+        ROOM_STATUS = 'active'
     </select>
 
     <!--getRoomsByCategory-->
@@ -408,6 +430,8 @@
 
 
     </select>
+
+
 
 
 

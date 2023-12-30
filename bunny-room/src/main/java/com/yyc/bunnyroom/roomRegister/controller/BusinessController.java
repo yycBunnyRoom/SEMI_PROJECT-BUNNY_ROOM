@@ -106,7 +106,7 @@ public class BusinessController {
 
     /* Detail 페이지 가기 전에 상응하는 ROOM을 찾아서 간다*/
     public List<RoomDTO> getAllRooms(int businessNo){
-        return roomRegisterService.getAllRooms(businessNo);
+        return roomRegisterService.getRoomsByBusinessNo(businessNo);
     }
 
     /* Detail 페이지 가기 전에 상응하는 CLOSED_DAY / HOLIDAYS 을 찾아서 간다*/

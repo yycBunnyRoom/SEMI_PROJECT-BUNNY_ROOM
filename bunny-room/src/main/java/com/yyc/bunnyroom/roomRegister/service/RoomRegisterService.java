@@ -65,8 +65,8 @@ public class RoomRegisterService {
         return roomRegisterMapper.getAppliedOptions(roomNo);
     }
 
-    public List<RoomDTO> getAllRooms(int businessNo) {
-        return roomRegisterMapper.getAllRooms(businessNo);
+    public List<RoomDTO> getRoomsByBusinessNo(int businessNo) {
+        return roomRegisterMapper.getRoomsByBusinessNo(businessNo);
     }
 
     public List<ClosedDayDTO> getAllClosedDays(int businessNo) {
@@ -79,6 +79,10 @@ public class RoomRegisterService {
 
     public List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO) {
         return roomRegisterMapper.getRoomsByKeyword(keywordDTO);
+    }
+
+    public List<RoomDTO> getAllRooms() {
+        return roomRegisterMapper.getAllRooms();
     }
 
 
