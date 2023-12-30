@@ -351,13 +351,13 @@
         WHERE
             BUSINESS_NO IN (
                 SELECT
-                    BUSINESS_NO
+                    A.BUSINESS_NO
                 FROM
                     TBL_BUSINESS AS A
                 JOIN
-                    TBL_BUSINESS_CATEGORY AS B
+                    TBL_BUSINESS_CATEGORY AS B ON (A.BUSINESS_CATEGORY_NO = B.BUSINESS_CATEGORY_NO)
                 WHERE
-                    BUSINESS_CATEGORY_NAME = #{businessCategoryName}
+                    B.BUSINESS_CATEGORY_NAME = #{businessCategoryName}
             )
         AND
             ROOM_STATUS = 'active'
@@ -374,20 +374,22 @@
     <!--getBusinessDetails-->
     <select id="getBusinessDetails" resultMap="businessDTO">
         SELECT
-        BUSINESS_NO,
-        USER_NO,
-        BUSINESS_REGIST_NO,
-        BUSINESS_NAME,
-        BUSINESS_CATEGORY_NO,
-        BUSINESS_ADDRESS_ROAD,
-        BUSINESS_ADDRESS_DETAIL,
-        BUSINESS_ZIP_CODE,
-        BUSINESS_PHONE,
-        BUSINESS_REGIST_DATE,
-        BUSINESS_UPDATE_DATE,
-        BUSINESS_STATUS
-        FROM TBL_BUSINESS
-        WHERE BUSINESS_NO = #{businessNo}
+            BUSINESS_NO,
+            USER_NO,
+            BUSINESS_REGIST_NO,
+            BUSINESS_NAME,
+            BUSINESS_CATEGORY_NO,
+            BUSINESS_ADDRESS_ROAD,
+            BUSINESS_ADDRESS_DETAIL,
+            BUSINESS_ZIP_CODE,
+            BUSINESS_PHONE,
+            BUSINESS_REGIST_DATE,
+            BUSINESS_UPDATE_DATE,
+            BUSINESS_STATUS
+        FROM
+            TBL_BUSINESS
+        WHERE
+            BUSINESS_NO = #{businessNo}
     </select>
 
     <!--getRoomDetails-->
@@ -406,9 +408,12 @@
             ROOM_REGIST_DATE,
             ROOM_STATUS,
             ROOM_PRICE
-        FROM TBL_ROOM
-        WHERE ROOM_NO = #{roomNo}
-        AND ROOM_STATUS = 'active'
+        FROM
+            TBL_ROOM
+        WHERE
+            ROOM_NO = #{roomNo}
+        AND
+            ROOM_STATUS = 'active'
     </select>
 
 

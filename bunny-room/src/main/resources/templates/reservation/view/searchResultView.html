@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>검색 결과</title>
+    <script th:inline="javascript">
+        let rooms = [[${rooms}]]
+    </script>
+
+    <link rel="stylesheet" href="/css/reservation/view/searchResultView.css">
+
 </head>
 <body>
 
+<div th:insert="~{common/header :: headerFragment}"></div>
+
+<div class="room-search">
+    <form action="https://www.google.com/search" method="GET" target="_blank">
+        <input type="text" name="q" placeholder="방 이름 검색" required>
+        <button type="submit">검색</button>
+    </form>
+</div>
+
+
+<div id="rooms">
+    <!-- 여기에 결과가 표시될 부분 -->
+</div>
+
+
+<script src="/js/reservation/view/searchResultView.js"></script>
 </body>
 </html>

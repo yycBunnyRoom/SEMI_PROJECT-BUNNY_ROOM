@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/search")
@@ -28,12 +29,19 @@ public class SearchController {
 
         System.out.println("roomDTO가 들어왔는가? : "+rooms);
 
-        modelAndView.addObject("rooms", rooms);
-        return null;
 
-        // 데이터를 가지고 검색페이지로 이동
-//        modelAndView.setViewName("/reservation/view/searchResultView");
-//        return modelAndView;
+
+        if (Objects.isNull(rooms)){
+            modelAndView.addObject("message", "해당 카테고리로 등록된 방이 없습니다.");
+            modelAndView.setViewName("/main");
+            return modelAndView;
+        }
+        else {
+            modelAndView.addObject("rooms", rooms);
+            modelAndView.setViewName("/reservation/view/searchResultView");
+            return modelAndView;
+        }
+
     }
 
 

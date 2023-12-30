@@ -6,10 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/dao/RoomRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/dao/RoomRegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/service/RoomRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/service/RoomRegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/reservation/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/reservation/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/view/searchResultView.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/view/searchResultView.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,10 +38,10 @@
       <list>
         <option value="Interface" />
         <option value="Enum" />
-        <option value="JavaScript File" />
-        <option value="CSS File" />
         <option value="Class" />
         <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -154,7 +154,7 @@
       <workItem from="1703723786006" duration="32521000" />
       <workItem from="1703778910301" duration="19222000" />
       <workItem from="1703843571661" duration="607000" />
-      <workItem from="1703920953439" duration="7199000" />
+      <workItem from="1703920953439" duration="10874000" />
     </task>
     <servers />
   </component>

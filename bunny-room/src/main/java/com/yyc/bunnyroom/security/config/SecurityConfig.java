@@ -60,6 +60,9 @@ public class SecurityConfig {
                         "/mailSend",
                         "/mailAuthCheck",
 
+                        // 검색기능은 모두에게
+                        "/search/**",
+
                         "/main/test2",
                         "/"
                 ).permitAll();

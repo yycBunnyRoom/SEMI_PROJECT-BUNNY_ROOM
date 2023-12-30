@@ -1,0 +1,53 @@
+.room-search {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.room-search form {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.room-search input[type="text"] {
+    padding: 10px;
+    border: none;
+    width: 200px;
+    outline: none;
+}
+
+.room-search button {
+    padding: 10px 20px;
+    background-color: rgb(255, 181, 69);
+    color: #fff;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.room-search button:hover {
+    background-color: rgba(255, 115, 0, 0.96);
+}
+
+.room-search input[type="text"]::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+
+
+/* business-item 클래스에 적용되는 스타일 */
+.room-item {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer; /* 클릭 가능한 커서 스타일 설정 */
+}
+
+/* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
+.room-item:hover {
+    background-color: #f0f0f0;
+}
