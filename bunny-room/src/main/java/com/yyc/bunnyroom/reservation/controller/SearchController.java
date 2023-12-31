@@ -1,12 +1,10 @@
 package com.yyc.bunnyroom.reservation.controller;
 
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
-import com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO;
-import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
-import com.yyc.bunnyroom.roomRegister.model.ClosedDayDTO;
-import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
+import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -111,6 +109,31 @@ public class SearchController {
 
         System.out.println("businessDTO 정보가 들어왔는지 확인: "+relatedBusinessInfo);
 
+
+        /* 해당 방의 휴무 정보와 시간 스케줄 정보를 가져온다 */
+
+        // 먼저 해당 방의 사업체 번호 확인
+        int businessNo = relatedBusinessInfo.getBusinessNo();
+
+        // 정기 휴무를 가져온다
+        List<ClosedDayDTO> closedDays = roomRegisterService.getAllClosedDays(businessNo);
+
+        System.out.println("정기 휴일 제대로 가져왔는지 확인: "+closedDays);
+
+        // 지정 휴무를 가져온다
+        List<HolidayDTO> holidays = roomRegisterService.getHolidaysByBusinessNo(businessNo);
+
+        System.out.println("지정 휴일 제대로 가져왔는지 확인: "+holidays);
+
+        modelAndView.addObject("closedDays",closedDays);
+        modelAndView.addObject("holidays",holidays);
+
+        // 타임 스케줄을 가져온다
+        List<TimeUnitScheduleDTO> timeUnits = roomRegisterService.getTimeUnitsByBusinessNo(businessNo);
+
+        System.out.println("타임 스케줄이 제대로 왔는지 확인: "+timeUnits);
+
+        modelAndView.addObject("timeUnits",timeUnits);
 
         // 선택한 appliedOptions를 같이 보냄
         List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(Integer.parseInt(roomNo));

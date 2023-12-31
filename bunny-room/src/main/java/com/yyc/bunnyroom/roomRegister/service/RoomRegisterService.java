@@ -85,6 +85,14 @@ public class RoomRegisterService {
         return roomRegisterMapper.getAllRooms();
     }
 
+    public List<HolidayDTO> getHolidaysByBusinessNo(int businessNo) {
+        return roomRegisterMapper.getHolidaysByBusinessNo(businessNo);
+    }
+
+    public List<TimeUnitScheduleDTO> getTimeUnitsByBusinessNo(int businessNo) {
+        return roomRegisterMapper.getTimeUnitsByBusinessNo(businessNo);
+    }
+
 
 
 
@@ -101,4 +109,7 @@ public class RoomRegisterService {
     public BusinessDTO getBusinessInfoByRoomNo(int roomNo) {
         return roomRegisterMapper.getBusinessInfoByRoomNo(roomNo);
     }
+
+
+
 }

@@ -11,6 +11,9 @@
         let appliedOptions = [[${appliedOptions}]]
         let relatedBusinessInfo = [[${relatedBusinessInfo}]]
         let address = [[${relatedBusinessInfo.businessAddressRoad}]]
+        let closedDays = [[${closedDays}]]
+        let holidays = [[${holidays}]]
+        let timeUnits = [[${timeUnits}]]
     </script>
 
     <link rel="stylesheet" href="/css/reservation/detail/roomDetail.css">
@@ -37,13 +40,32 @@
     <p><strong>시설 안내:</strong> <span th:text="${roomDetails.roomFacilityInfo}"></span></p>
     <p><strong>유의 사항:</strong> <span th:text="${roomDetails.roomNotice}"></span></p>
     <p><strong>등록일:</strong> <span th:text="${roomDetails.roomRegistDate}"></span></p>
-</div>
+
 
 <div id="appliedOptionsButtons"></div>
 
 <!-- 지도를 표시할 div -->
 <p><strong>주소:</strong> <span th:text="|${relatedBusinessInfo.businessAddressRoad}  ${relatedBusinessInfo.businessAddressDetail}|"></span></p>
 <div id="map" style="width:500px;height:400px;"></div>
+
+</div>
+<!--예약 날짜를 선택함-->
+    <input type="date" id="reservationDate">
+
+
+<!--예약 시간을 선택함-->
+    <div id="btn_timeUnits"></div>
+
+<!--예약 인원을 선택함-->
+
+<!--예약하기 버튼을 누르면 예약 절차 완료-->
+
+
+<div>
+
+
+</div>
+
 
 
 </body>

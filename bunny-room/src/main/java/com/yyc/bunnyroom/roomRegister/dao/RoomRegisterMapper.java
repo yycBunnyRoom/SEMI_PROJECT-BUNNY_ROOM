@@ -44,6 +44,10 @@ public interface RoomRegisterMapper {
 
     List<RoomDTO> getRoomsByKeyword(KeywordDTO keywordDTO);
 
+    List<HolidayDTO> getHolidaysByBusinessNo(int businessIdx);
+
+    List<TimeUnitScheduleDTO> getTimeUnitsByBusinessNo(int businessNo);
+
 
     //Select
     BusinessDTO getBusinessDetails(int businessNo);
@@ -51,4 +55,7 @@ public interface RoomRegisterMapper {
     RoomDTO getRoomDetails(int roomNo);
 
     BusinessDTO getBusinessInfoByRoomNo(int roomNo);
+
+
+
 }

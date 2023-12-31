@@ -69,6 +69,34 @@
         <result property="closedDay" column="CLOSED_DAY"/>
     </resultMap>
 
+    <!--HolidayDTO-->
+    <resultMap id="holidayDTO" type="com.yyc.bunnyroom.roomRegister.model.HolidayDTO">
+        <id property="holidayIdx" column="HOLIDAY_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="holidayName" column="HOLIDAY_NAME"/>
+        <result property="reason" column="HOLIDAY_REASON"/>
+        <result property="startDate" column="HOLIDAY_START_DATE"/>
+        <result property="endDate" column="HOLIDAY_END_DATE"/>
+        <result property="registDate" column="HOLIDAY_REGIST_DATE"/>
+        <result property="updateDate" column="HOLIDAY_UPDATE_DATE"/>
+        <result property="activeStatus" column="HOLIDAY_STATUS"/>
+    </resultMap>
+
+    <!--TimeUnitScheduleDTO-->
+    <resultMap id="timeUnitScheduleDTO" type="com.yyc.bunnyroom.roomRegister.model.TimeUnitScheduleDTO">
+        <id property="timeUnitScheduleIdx" column="TIME_UNIT_SCHEDULE_NO"/>
+        <result property="businessNo" column="BUSINESS_NO"/>
+        <result property="startTime" column="START_TIME_IDX"/>
+        <result property="endTime" column="END_TIME_IDX"/>
+        <result property="weekendTimeUnitStatus" column="WEEKEND_TIME_UNIT_STATUS"/>
+    </resultMap>
+
+
+
+
+
+
+
 
 
 
@@ -304,6 +332,44 @@
             BUSINESS_NO = #{businessNo}
     </select>
 
+    <!--getHolidaysByBusinessNo-->
+    <select id="getHolidaysByBusinessNo" resultMap="holidayDTO">
+        SELECT
+            HOLIDAY_NO,
+            BUSINESS_NO,
+            HOLIDAY_NAME,
+            HOLIDAY_REASON,
+            HOLIDAY_START_DATE,
+            HOLIDAY_END_DATE,
+            HOLIDAY_REGIST_DATE,
+            HOLIDAY_UPDATE_DATE,
+            HOLIDAY_STATUS
+        FROM
+            TBL_HOLIDAY
+        WHERE
+            HOLIDAY_STATUS = 'active'
+        AND
+            BUSINESS_NO = #{businessIdx}
+    </select>
+
+    <!--getTimeUnitsByBusinessNo-->
+    <select id="getTimeUnitsByBusinessNo" resultMap="timeUnitScheduleDTO">
+        SELECT
+            TIME_UNIT_SCHEDULE_NO,
+            BUSINESS_NO,
+            START_TIME_IDX,
+            END_TIME_IDX
+        FROM
+            TBL_TIME_UNIT_SCHEDULE
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </select>
+
+
+
+
+
+
     <!--getAllRooms-->
     <select id="getAllRooms" resultMap="roomDTO">
         SELECT DISTINCT ROOM_NO,
@@ -385,7 +451,7 @@
             ROOM_STATUS = 'active'
     </select>
 
-    <!--getRoomsByCategory-->
+    <!--getRoomsByKeyword-->
     <select id="getRoomsByKeyword" resultMap="roomDTO">
         SELECT DISTINCT ROOM_NO,
             BUSINESS_NO,
