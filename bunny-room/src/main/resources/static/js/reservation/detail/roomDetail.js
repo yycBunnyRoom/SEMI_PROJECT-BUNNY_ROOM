@@ -7,10 +7,11 @@ function createAppliedOptionsButtons() {
     appliedOptions.forEach(appliedOption => {
         const button = document.createElement('button');
         button.textContent = appliedOption.appliedOptionDescription;
-        button.addEventListener('click', () => toggleOption(appliedOption, button));
+        button.classList.add('applied-option-button'); // 클래스 추가
         buttonsContainer.appendChild(button);
     });
 }
+
 
 window.onload = () => {
     createAppliedOptionsButtons();
@@ -174,4 +175,41 @@ $(document).ready(function() {
         });
     }
 });
+
+$(document).ready(function() {
+    // roomDetails는 서버에서 전달된 정보로 초기값을 가진다고 가정합니다.
+
+        // pricePerPerson 업데이트 함수
+        function updatePricePerPerson() {
+            const pricePerPersonElement = document.getElementById('pricePerPerson');
+            pricePerPersonElement.textContent = roomDetails.price + '원 / 인';
+        }
+
+    // totalPrice 업데이트 함수
+    function updateTotalPrice() {
+        const reservationPeopleInput = document.getElementById('reservation_people');
+        const totalPriceElement = document.getElementById('totalPrice');
+        const reservationPeopleValue = parseInt(reservationPeopleInput.value);
+
+        if (!isNaN(reservationPeopleValue)) {
+            const totalPrice = roomDetails.price * reservationPeopleValue;
+            totalPriceElement.textContent =  totalPrice + '원';
+        }
+        else {
+            // 입력값이 없을 때의 처리
+            totalPriceElement.textContent = '';
+        }
+    }
+
+    // 초기 pricePerPerson 설정
+    updatePricePerPerson();
+
+    // reservation_people 값 변경 시 totalPrice 업데이트
+    $('#reservation_people').on('input', function() {
+        updateTotalPrice();
+    });
+});
+
+
+
 

@@ -1,12 +1,13 @@
 
-#appliedOptionsButtons {
-    /* 여기에 적절한 스타일을 추가하세요 */
-    /* 예를 들어 배경색, 패딩, 테두리, 정렬 등을 지정할 수 있습니다 */
-    padding: 5px 10px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
+.applied-option-button {
+    /* 여기에 적절한 스타일 추가 */
+    /* 예를 들어 배경색, 패딩, 테두리, 텍스트 스타일 등을 지정할 수 있습니다 */
     background-color: lightblue;
+    padding: 8px 12px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 
@@ -101,6 +102,25 @@ button.selected {
     font-family: Arial, sans-serif;
 }
 
+
+
+
+
+
+/* 크롬 스타일의 input 창 */
+
+.chrome-style-input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.chrome-style-input:focus {
+    border-color: dodgerblue;
+}
 
 
 

@@ -21,6 +21,7 @@
         let closedDays = [[${closedDays}]]
         let holidays = [[${holidays}]]
         let timeUnits = [[${timeUnits}]]
+        let roomDetails = [[${roomDetails}]]
     </script>
 
     <link rel="stylesheet" href="/css/reservation/detail/roomDetail.css">
@@ -74,6 +75,25 @@
 
     <!--예약 시간을 선택함-->
     <div id="btn_timeUnits"></div>
+
+    <div>
+        <!--Flexbox를 사용한 방법-->
+        <div style="display: flex; align-items: center;">
+            <input type="number" id="reservation_people" class="chrome-style-input" style="width: 50px">
+            <label for="reservation_people">인</label>
+        </div>
+
+<!--        &lt;!&ndash;Gird를 사용한 방법&ndash;&gt;-->
+<!--        <div style="display: grid; grid-template-columns: auto auto;">-->
+<!--            <input type="number" id="reservation_people" class="chrome-style-input" style="width: 50px">-->
+<!--            <label for="reservation_people">인</label>-->
+<!--        </div>-->
+
+        <p id="pricePerPerson"></p>
+
+        <h3 id="totalPrice"></h3>
+
+    </div>
 
 
 </div>
