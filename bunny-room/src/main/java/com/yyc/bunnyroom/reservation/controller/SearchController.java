@@ -31,9 +31,6 @@ public class SearchController {
         // 카테고리 이름으로 DB에서 해당하는 방 리스트를 가져옴
         List<RoomDTO> rooms = roomRegisterService.getRoomsByCategory(businessCategoryName);
 
-        System.out.println("roomDTO가 들어왔는가? : "+rooms);
-
-
 
         if (Objects.isNull(rooms)){
             modelAndView.addObject("message", "해당 카테고리로 등록된 방이 없습니다.");
@@ -80,12 +77,11 @@ public class SearchController {
         }
 
         int total=0;
-        System.out.println("roomDTO가 들어왔는가? : " + rooms);
+
         for (RoomDTO room :
                 rooms) {
             total++;
         }
-        System.out.println("총 검색된 결과: "+total);
 
 
         modelAndView.addObject("rooms", rooms);
@@ -102,13 +98,8 @@ public class SearchController {
 
         RoomDTO roomDetails = roomRegisterService.getRoomDetails(Integer.parseInt(roomNo));
 
-        System.out.println("roomDTO 정보가 들어왔는지 확인: "+roomDetails);
-
         // 해당 방과 관련된 사업체 정보를 가져온다
         BusinessDTO relatedBusinessInfo = roomRegisterService.getBusinessInfoByRoomNo(Integer.parseInt(roomNo));
-
-        System.out.println("businessDTO 정보가 들어왔는지 확인: "+relatedBusinessInfo);
-
 
         /* 해당 방의 휴무 정보와 시간 스케줄 정보를 가져온다 */
 
@@ -118,12 +109,8 @@ public class SearchController {
         // 정기 휴무를 가져온다
         List<ClosedDayDTO> closedDays = roomRegisterService.getAllClosedDays(businessNo);
 
-        System.out.println("정기 휴일 제대로 가져왔는지 확인: "+closedDays);
-
         // 지정 휴무를 가져온다
         List<HolidayDTO> holidays = roomRegisterService.getHolidaysByBusinessNo(businessNo);
-
-        System.out.println("지정 휴일 제대로 가져왔는지 확인: "+holidays);
 
         modelAndView.addObject("closedDays",closedDays);
         modelAndView.addObject("holidays",holidays);
@@ -131,15 +118,10 @@ public class SearchController {
         // 타임 스케줄을 가져온다
         List<TimeUnitScheduleDTO> timeUnits = roomRegisterService.getTimeUnitsByBusinessNo(businessNo);
 
-        System.out.println("타임 스케줄이 제대로 왔는지 확인: "+timeUnits);
-
         modelAndView.addObject("timeUnits",timeUnits);
 
         // 선택한 appliedOptions를 같이 보냄
         List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(Integer.parseInt(roomNo));
-
-        System.out.println(roomNo+"번방의 옵션들: "+appliedOptions);
-
 
         modelAndView.setViewName("/reservation/detail/roomDetail");
         modelAndView.addObject("relatedBusinessInfo",relatedBusinessInfo);

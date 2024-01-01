@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/reservation/controller/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/reservation/controller/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomRegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomRegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/mapper-config.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/mapper-config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/reservation/detail/roomDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/reservation/detail/roomDetail.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/detail/roomDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/detail/roomDetail.html" afterDir="false" />
@@ -35,12 +39,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="HTML File" />
         <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -155,7 +159,7 @@
       <workItem from="1703843571661" duration="607000" />
       <workItem from="1703920953439" duration="34613000" />
       <workItem from="1704044491625" duration="5107000" />
-      <workItem from="1704078940997" duration="7640000" />
+      <workItem from="1704078940997" duration="20077000" />
     </task>
     <servers />
   </component>

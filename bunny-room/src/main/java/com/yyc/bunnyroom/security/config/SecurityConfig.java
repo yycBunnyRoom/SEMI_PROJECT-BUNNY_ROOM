@@ -56,6 +56,9 @@ public class SecurityConfig {
                         "/roomRegister/*",
                         "/dayOff/*",
 
+                        // 개발중에는 예약 권한 모두에게 허락함
+                        "/reservation/**",
+
                         // 메일 인증을 위해
                         "/mailSend",
                         "/mailAuthCheck",

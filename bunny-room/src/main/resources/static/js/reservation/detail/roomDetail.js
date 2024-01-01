@@ -1,6 +1,4 @@
-console.log(address)
-console.log(closedDays)
-console.log(holidays)
+
 
 function createAppliedOptionsButtons() {
     const buttonsContainer = document.getElementById('appliedOptionsButtons');
@@ -73,49 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* 달력 */
 
-
-
-
-// $(document).ready(function() {
-//     function disableClosedDays(date) {
-//         var day = date.getDay();
-//         var dayName = getDayName(day);
-//
-//         // closedDays 배열에서 각 closedDayDTO의 closedDay 속성 값을 확인하여 비교
-//         var isClosedDay = closedDays.some(function(closedDayDTO) {
-//             return closedDayDTO.closedDay.includes(dayName);
-//         });
-//
-//         if (isClosedDay) {
-//             return [false, "closedDayStyle", "Closed"]; // 날짜 비활성화, 특정 클래스 부여, 툴팁 메시지
-//         } else {
-//             return [true, ""];
-//         }
-//     }
-//
-//     function getDayName(dayIndex) {
-//         var days = ["일", "월", "화", "수", "목", "금", "토"];
-//         return days[dayIndex];
-//     }
-//
-//     $("#datepicker").datepicker({
-//         dateFormat: 'yy-mm-dd',
-//         beforeShowDay: disableClosedDays,
-//
-//         onSelect: function(dateText, inst) {
-//             // 선택한 날짜를 div에 표시
-//             $("#selectedDate").text("선택한 날짜: " + dateText);
-//         }
-//     });
-//
-//     // 달력 보이기/숨기기 토글
-//     $("#showCalendar").click(function() {
-//         $(".ui-datepicker").toggle();
-//     });
-// });
-
-
-
 $(document).ready(function() {
     function disableDays(date) {
         var day = date.getDay();
@@ -149,6 +104,7 @@ $(document).ready(function() {
         onSelect: function(dateText, inst) {
             $("#selectedDate").text("선택한 날짜: " + dateText);
             createButtons(timeUnits);
+            reservationDate = dateText;
         }
     });
 
@@ -169,6 +125,7 @@ $(document).ready(function() {
                 // 선택된 버튼 스타일 변경
                 $('#btn_timeUnits button').removeClass('selected');
                 $(this).addClass('selected');
+                reservationUnit = $(this).text();
             });
 
             $('#btn_timeUnits').append(button);
@@ -191,8 +148,13 @@ $(document).ready(function() {
         const totalPriceElement = document.getElementById('totalPrice');
         const reservationPeopleValue = parseInt(reservationPeopleInput.value);
 
+        // 총 인원 수 업데이트
+
+        totalPeople = document.getElementById('reservation_people').value;
+
+
         if (!isNaN(reservationPeopleValue)) {
-            const totalPrice = roomDetails.price * reservationPeopleValue;
+            totalPrice = roomDetails.price * reservationPeopleValue;
             totalPriceElement.textContent =  totalPrice + '원';
         }
         else {
@@ -209,6 +171,56 @@ $(document).ready(function() {
         updateTotalPrice();
     });
 });
+
+
+
+
+
+
+
+
+/* 예약을 신청하는 폼*/
+
+let reservationDate = null;
+let reservationUnit = null;
+let totalPrice = null;
+let totalPeople = null;
+
+
+function addReservation(){
+
+    const data = {
+        date: reservationDate,
+        reservationUnit: reservationUnit,
+        totalCost: totalPrice,
+        roomNo: roomNo,
+        people: Number(totalPeople)
+    };
+
+    console.log("good1")
+
+    fetch('/reservation/addReservation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data === 1){
+                alert('예약 성공!')
+            }
+        })
+        .catch(error => {
+            console.error('에러 발생:', error);
+        });
+}
 
 
 

@@ -56,13 +56,10 @@ public class RoomRegisterController {
     @GetMapping("/dayOffRegisterForm")
     public ModelAndView dayOffRegisterForm(@RequestParam(value = "businessNo", required = false) int businessNo,
                                      ModelAndView modelAndView){
-        System.out.println("DO로 이동");
 
         // 해당하는 사업체의 휴무값을 조회해서 가져감
         List<ClosedDayDTO> closedDays = getAllClosedDays(businessNo);
         modelAndView.addObject("closedDays", closedDays);
-
-        System.out.println("조회한 값: "+closedDays);
 
         modelAndView.addObject("businessNo",businessNo);
         modelAndView.setViewName("/roomRegister/form/dayOffRegisterForm");

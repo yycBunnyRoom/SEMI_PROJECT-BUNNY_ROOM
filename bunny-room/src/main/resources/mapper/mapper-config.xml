@@ -21,6 +21,7 @@
         <mapper resource="mapper/admin/roomOption.xml"/>
         <mapper resource="mapper/admin/room.xml"/>
         <mapper resource="mapper/mypage/user/GuestMyPage.xml"/>
+        <mapper resource="mapper/reservation/reservation.xml"/>
     </mappers>
 
 </configuration>
