@@ -7,6 +7,13 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=13c9741586ee1ef04079d7c79c9ca27b&libraries=services"></script>
 
+
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
     <script th:inline="javascript">
         let appliedOptions = [[${appliedOptions}]]
         let relatedBusinessInfo = [[${relatedBusinessInfo}]]
@@ -49,22 +56,38 @@
 <div id="map" style="width:500px;height:400px;"></div>
 
 </div>
-<!--예약 날짜를 선택함-->
-    <input type="date" id="reservationDate">
 
 
-<!--예약 시간을 선택함-->
+
+
+<div id="reservation_form">
+    <!--예약 날짜를 선택함-->
+    <div>
+        <!-- 달력을 보여줄 div -->
+        <button id="showCalendar" class="button is-primary is-small">달력 보기/숨기기</button>
+        <div id="datepicker"></div>
+    </div>
+    <!--선택된 날짜를  보여 준다-->
+    <div id="selectedDate">선택한 날짜: </div>
+
+
+
+    <!--예약 시간을 선택함-->
     <div id="btn_timeUnits"></div>
+
+
+</div>
+
+
+
+
+
 
 <!--예약 인원을 선택함-->
 
 <!--예약하기 버튼을 누르면 예약 절차 완료-->
 
 
-<div>
-
-
-</div>
 
 
 

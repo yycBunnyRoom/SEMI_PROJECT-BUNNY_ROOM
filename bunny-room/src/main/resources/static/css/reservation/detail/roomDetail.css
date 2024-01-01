@@ -11,3 +11,60 @@ button.selected {
     /* 선택된 버튼에 대한 스타일링 */
 
 }
+
+
+
+
+
+/* 날짜 선택기 스타일 */
+.ui-datepicker {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+}
+
+.ui-datepicker-header {
+    background-color: #ffa500; /* 오렌지 헤더 */
+    border-radius: 8px 8px 0 0;
+}
+
+.ui-datepicker-title {
+    color: white; /* 월과 년도 텍스트 색상 */
+}
+
+.ui-datepicker-calendar {
+    border-radius: 0 0 8px 8px;
+}
+
+.ui-datepicker-calendar th,
+.ui-datepicker-calendar td {
+    border-radius: 8px;
+}
+
+.ui-state-default {
+    background-color: white; /* 날짜 배경 */
+    border: 1px solid #ccc;
+}
+
+.ui-state-default:hover {
+    background-color: #ffa500; /* 호버 색상 */
+    border: 1px solid #ccc;
+    color: white;
+}
+
+/* 선택된 날짜 스타일 */
+#selectedDate {
+    background-color: #ffa500; /* 오렌지 배경 */
+    color: white; /* 흰색 텍스트 */
+    border-radius: 8px;
+    width: 200px;
+    padding: 8px;
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+}
+
+
+
+
+

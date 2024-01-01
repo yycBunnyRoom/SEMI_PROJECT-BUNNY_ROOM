@@ -1,4 +1,5 @@
 console.log(address)
+console.log(closedDays)
 
 function createAppliedOptionsButtons() {
     const buttonsContainer = document.getElementById('appliedOptionsButtons');
@@ -64,3 +65,50 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+
+
+
+
+
+/* 달력 */
+
+$(document).ready(function() {
+    function disableClosedDays(date) {
+        var day = date.getDay();
+        var dayName = getDayName(day);
+
+        // closedDays 배열에서 각 closedDayDTO의 closedDay 속성 값을 확인하여 비교
+        var isClosedDay = closedDays.some(function(closedDayDTO) {
+            return closedDayDTO.closedDay.includes(dayName);
+        });
+
+        if (isClosedDay) {
+            return [false, "closedDayStyle", "Closed"]; // 날짜 비활성화, 특정 클래스 부여, 툴팁 메시지
+        } else {
+            return [true, ""];
+        }
+    }
+
+    function getDayName(dayIndex) {
+        var days = ["일", "월", "화", "수", "목", "금", "토"];
+        return days[dayIndex];
+    }
+
+    $("#datepicker").datepicker({
+        dateFormat: 'yy-mm-dd',
+        beforeShowDay: disableClosedDays,
+
+        onSelect: function(dateText, inst) {
+            // 선택한 날짜를 div에 표시
+            $("#selectedDate").text("선택한 날짜: " + dateText);
+        }
+    });
+
+    // 달력 보이기/숨기기 토글
+    $("#showCalendar").click(function() {
+        $(".ui-datepicker").toggle();
+    });
+});
+
