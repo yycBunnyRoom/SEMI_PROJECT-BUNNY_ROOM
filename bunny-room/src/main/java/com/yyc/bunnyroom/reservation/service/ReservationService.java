@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ReservationService {
@@ -14,7 +16,14 @@ public class ReservationService {
     ReservationMapper reservationMapper;
 
 
+    /* REGIST */
     public Integer addReservation(ReservationDTO newReservation) {
         return reservationMapper.addReservation(newReservation);
+    }
+
+
+    /*SELECT ALL */
+    public List<ReservationDTO> getReservationsByRoomNo(int roomNo) {
+        return reservationMapper.getReservationsByRoomNo(roomNo);
     }
 }

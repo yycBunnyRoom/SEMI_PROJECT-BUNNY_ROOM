@@ -55,6 +55,31 @@
         )
     </insert>
 
+
+
+
+    <!--getReservationsByRoomNo-->
+    <select id="getReservationsByRoomNo" resultMap="reservationDTO">
+        SELECT
+            RESERVATION_NO,
+            USER_NO,
+            RESERVATION_DATE,
+            RESERVATION_UNIT,
+            RESERVATION_PERSON,
+            RESERVATION_TOTAL_COST,
+            RESERVATION_STATUS,
+            RESERVATION_CANCEL_REASON,
+            RESERVATION_CANCEL_DATE,
+            RESERVATION_REGIST_DATE,
+            ROOM_NO
+        FROM
+            TBL_RESERVATION
+        WHERE
+            ROOM_NO = #{roomNo}
+        AND
+            RESERVATION_STATUS = "예약중"
+    </select>
+
 </mapper>
 
 

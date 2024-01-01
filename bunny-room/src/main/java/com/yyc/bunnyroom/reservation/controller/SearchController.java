@@ -1,6 +1,8 @@
 package com.yyc.bunnyroom.reservation.controller;
 
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
+import com.yyc.bunnyroom.reservation.model.ReservationDTO;
+import com.yyc.bunnyroom.reservation.service.ReservationService;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class SearchController {
 
     @Autowired
     RoomRegisterService roomRegisterService;
+
+    @Autowired
+    ReservationService reservationService;
 
     @GetMapping("/category")
     public ModelAndView searchByCategory(@RequestParam(value = "businessCategoryName")String businessCategoryName,
@@ -91,15 +96,21 @@ public class SearchController {
 
     /* 방 상세 페이지로 이동 */
     @GetMapping("/roomDetail")
-    public ModelAndView getBusinessDetails(@RequestParam(value = "roomNo")String roomNo,
+    public ModelAndView getBusinessDetails(@RequestParam(value = "roomNo")String roomNoString,
                                            ModelAndView modelAndView) {
 
+        int roomNo = Integer.parseInt(roomNoString);
         System.out.println("이동할 상세페이지의 방번호: "+roomNo);
 
-        RoomDTO roomDetails = roomRegisterService.getRoomDetails(Integer.parseInt(roomNo));
+
+        RoomDTO roomDetails = roomRegisterService.getRoomDetails(roomNo);
+
+        modelAndView.addObject("roomDetails",roomDetails);
 
         // 해당 방과 관련된 사업체 정보를 가져온다
-        BusinessDTO relatedBusinessInfo = roomRegisterService.getBusinessInfoByRoomNo(Integer.parseInt(roomNo));
+        BusinessDTO relatedBusinessInfo = roomRegisterService.getBusinessInfoByRoomNo(roomNo);
+
+        modelAndView.addObject("relatedBusinessInfo",relatedBusinessInfo);
 
         /* 해당 방의 휴무 정보와 시간 스케줄 정보를 가져온다 */
 
@@ -109,10 +120,11 @@ public class SearchController {
         // 정기 휴무를 가져온다
         List<ClosedDayDTO> closedDays = roomRegisterService.getAllClosedDays(businessNo);
 
+        modelAndView.addObject("closedDays",closedDays);
+
         // 지정 휴무를 가져온다
         List<HolidayDTO> holidays = roomRegisterService.getHolidaysByBusinessNo(businessNo);
 
-        modelAndView.addObject("closedDays",closedDays);
         modelAndView.addObject("holidays",holidays);
 
         // 타임 스케줄을 가져온다
@@ -121,12 +133,23 @@ public class SearchController {
         modelAndView.addObject("timeUnits",timeUnits);
 
         // 선택한 appliedOptions를 같이 보냄
-        List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(Integer.parseInt(roomNo));
+        List<AppliedOptionDTO> appliedOptions = roomRegisterService.getAppliedOptions(roomNo);
+
+        modelAndView.addObject("appliedOptions",appliedOptions);
+
+        // 해당하는 방의 예약리스트를 가져옴
+        List<ReservationDTO> reserved = reservationService.getReservationsByRoomNo(roomNo);
+
+        System.out.println("예약된 리스트를 가져왔니: "+reserved);
+
+        modelAndView.addObject("reserved",reserved);
 
         modelAndView.setViewName("/reservation/detail/roomDetail");
-        modelAndView.addObject("relatedBusinessInfo",relatedBusinessInfo);
-        modelAndView.addObject("appliedOptions",appliedOptions);
-        modelAndView.addObject("roomDetails",roomDetails);
+
+
+
+
+
         return modelAndView;
     }
 }
