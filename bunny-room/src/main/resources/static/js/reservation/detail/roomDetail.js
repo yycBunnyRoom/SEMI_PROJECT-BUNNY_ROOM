@@ -145,14 +145,33 @@ $(document).ready(function() {
     $("#datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
         beforeShowDay: disableDays,
-
         onSelect: function(dateText, inst) {
             $("#selectedDate").text("선택한 날짜: " + dateText);
+            createButtons(timeUnits);
         }
     });
 
     $("#showCalendar").click(function() {
         $(".ui-datepicker").toggle();
     });
+
+
+    function createButtons(timeUnits) {
+        // 이전에 남아있는 버튼들 삭제
+        $('#btn_timeUnits').empty();
+
+        timeUnits.forEach(function(timeUnit) {
+            var button = $('<button></button>').text(timeUnit.startTime + ':00 - ' + timeUnit.endTime + ':00');
+
+            // 클릭 이벤트 추가
+            button.click(function() {
+                // 선택된 버튼 스타일 변경
+                $('#btn_timeUnits button').removeClass('selected');
+                $(this).addClass('selected');
+            });
+
+            $('#btn_timeUnits').append(button);
+        });
+    }
 });
 
