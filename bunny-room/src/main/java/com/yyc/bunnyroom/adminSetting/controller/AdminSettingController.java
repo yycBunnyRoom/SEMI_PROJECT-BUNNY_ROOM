@@ -31,7 +31,7 @@ public class AdminSettingController{
         // 관리자 설정 페이지로 이동
         showCategory(model);
         model.addAttribute("optionList", roomOptionController.showOption());
-        return "admin/setting";
+        return "/admin/setting";
     }
     /**
      * 모든 카테고리를 출력해주는 메소드
@@ -41,7 +41,7 @@ public class AdminSettingController{
         List<CategoryDTO> category = adminSettingService.showCategory();
         model.addAttribute("categorylist", category);
 
-        return "admin/setting";
+        return "/admin/setting";
     }
 
     /**
@@ -54,7 +54,7 @@ public class AdminSettingController{
         mv.addObject("categoryNo", categoryNo);
         mv.addObject("categoryName", categoryName);
         mv.addObject("colorCode", colorCode);
-        mv.setViewName("admin/setting/categoryChanger");
+        mv.setViewName("/admin/setting/categoryChanger");
         return mv;
     }
 

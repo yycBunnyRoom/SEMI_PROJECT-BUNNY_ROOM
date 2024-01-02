@@ -5,11 +5,11 @@
     <title>블랙리스트 관리 페이지</title>
 </head>
 <body>
-<div th:insert="~{common/header :: headerFragment}"></div>
+<div th:insert="~{/common/header :: headerFragment}"></div>
 
   <h1>관리자 블랙리스트 관리 페이지</h1>
 
-  <div th:replace="admin/adminNav :: nav"></div>
+<div th:insert="~{/admin/adminNav :: nav}"></div>
 
   <section>
       <div>

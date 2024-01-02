@@ -7,9 +7,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-<div th:insert="~{common/header :: headerFragment}"></div>
+<div th:insert="~{/common/header :: headerFragment}"></div>
 
-    <nav th:insert="~{admin/adminNav :: nav}"></nav>
+    <nav th:insert="~{/admin/adminNav :: nav}"></nav>
 
     <section>
         <h5 th:text="${business.categoryName}"></h5>

@@ -6,11 +6,11 @@
 </head>
 <body>
 
-    <div th:insert="~{common/header :: headerFragment}"></div>
+    <div th:insert="~{/common/header :: headerFragment}"></div>
 
     <h1>업체 관리 페이지</h1>
 
-    <div th:include="~{admin/adminNav :: nav}"></div>
+    <div th:insert="~{/admin/adminNav :: nav}"></div>
 
     <section>
         <h2>업체 현황</h2>

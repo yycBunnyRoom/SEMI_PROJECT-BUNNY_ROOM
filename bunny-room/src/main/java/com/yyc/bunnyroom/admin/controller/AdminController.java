@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -30,7 +30,7 @@ public class AdminController {
     @GetMapping("/adminPage")
     public String adminPage(){
         // 관리자 메인 페이지로 이동
-        return "admin/adminPage";
+        return "/admin/adminPage";
     }
 
     /**
@@ -74,7 +74,7 @@ public class AdminController {
             model.addAttribute("members", members);
         }
 
-        return "admin/member";
+        return "/admin/member";
     }
 
     /**
@@ -103,7 +103,7 @@ public class AdminController {
         if(Objects.isNull(email)){
             System.out.println("탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
             model.addAttribute("withdraw", "탈퇴할 이메일이 정상적으로 전달되지 않았습니다.");
-            return "admin/member";
+            return "/admin/member";
         }
 
         // 정상적으로 전달된 email을 통해 탈퇴 처리를 실행
@@ -112,11 +112,11 @@ public class AdminController {
 
         if(result > 0) {// 정상적인 탈퇴 처리
             model.addAttribute("withdraw", email + "회원이 탈퇴처리되었습니다.");
-            return "admin/member";
+            return "/admin/member";
         }else {// 비정상적인 탈퇴 처리
             System.out.println("정상적으로 동작되지 않았습니다.");
             model.addAttribute("withdraw", "탈퇴처리에 실패하였습니다.");
-            return "admin/member";
+            return "/admin/member";
         }
     }
 
@@ -127,7 +127,7 @@ public class AdminController {
     @GetMapping("/room")
     public String room(){
         // 관리자 공간 관리 페이지로 이동
-        return "admin/room";
+        return "/admin/room";
     }
 
     /**
@@ -136,7 +136,7 @@ public class AdminController {
     @GetMapping("/report")
     public String report(){
         // 관리자 신고 관리 페이지로 이동
-        return "admin/report";
+        return "/admin/report";
     }
 
     /**
@@ -145,7 +145,7 @@ public class AdminController {
     @GetMapping("/announcement")
     public String announcement(){
         // 관리자 공지사항 페이지로 이동
-        return "admin/announcement";
+        return "/admin/announcement";
     }
 
     /**
@@ -154,6 +154,6 @@ public class AdminController {
     @GetMapping("/inquiry")
     public String inquiry(){
         // 관리자 문의사항 페이지로 이동
-        return "admin/inquiry";
+        return "/admin/inquiry";
     }
 }

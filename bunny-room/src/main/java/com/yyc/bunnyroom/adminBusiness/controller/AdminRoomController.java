@@ -41,7 +41,7 @@ public class AdminRoomController {
         model.addAttribute("closedDay", closedDayInBusinessInfo);
         model.addAttribute("holiday", holidayInBusinessInfo);
 
-        return "admin/business/detail/businessDetail";
+        return "/admin/business/detail/businessDetail";
     }
 
     /**

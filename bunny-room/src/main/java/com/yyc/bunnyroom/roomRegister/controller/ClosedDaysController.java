@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("roomRegister/closedDays")
+@RequestMapping("/roomRegister/closedDays")
 public class ClosedDaysController {
     @Autowired
     RoomRegisterService roomRegisterService;

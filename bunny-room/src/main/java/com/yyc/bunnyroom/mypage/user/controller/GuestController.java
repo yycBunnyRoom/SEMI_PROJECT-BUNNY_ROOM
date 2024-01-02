@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("myPage")
+@RequestMapping("/myPage")
 public class GuestController {
 
     @Autowired
@@ -41,7 +41,7 @@ public class GuestController {
                 throw new NullPointerException();
             }else{
                 mv.addObject("user", user);
-                mv.setViewName("myPage/guestSearch");
+                mv.setViewName("/myPage/guestSearch");
             }
         }
         return mv;
@@ -62,7 +62,7 @@ public class GuestController {
     @GetMapping("/mypageview")
     public String mypage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
         model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
-        return "myPage/guestUpdatePassword";
+        return "/myPage/guestUpdatePassword";
     }
 
 

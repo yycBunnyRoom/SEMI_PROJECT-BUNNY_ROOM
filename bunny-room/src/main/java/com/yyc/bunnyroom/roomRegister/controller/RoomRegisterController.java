@@ -92,21 +92,6 @@ public class RoomRegisterController {
 
 
 
-    @GetMapping("/login")
-    public String loginForm(@RequestParam(value = "error", required = false) String error,
-                            @RequestParam(value = "exception", required = false) String exception,
-                            Model model) {
-
-        if (error == null){
-            return "/main";
-        }
-
-        model.addAttribute("error", error);
-        model.addAttribute("exception", exception);
-        return "/security/auth/login";
-    }
-
-
 
     /*          Model Attributes            */
     @ModelAttribute("categories")
