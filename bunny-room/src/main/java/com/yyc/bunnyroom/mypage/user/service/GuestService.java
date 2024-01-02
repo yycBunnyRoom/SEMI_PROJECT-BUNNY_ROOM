@@ -51,4 +51,18 @@ public class GuestService {
             return 0;
         }
     }
+
+    /**
+     * 게스트의 닉네임을 수정하는 메소드
+     * */
+    public boolean changeNicknameByUserNo(int userNo, String nickName) {
+
+        int result = guestMapper.changeNicknameByUserNo(userNo, nickName);
+
+        if(result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

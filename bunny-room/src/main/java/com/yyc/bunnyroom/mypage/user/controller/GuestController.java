@@ -1,10 +1,9 @@
 package com.yyc.bunnyroom.mypage.user.controller;
 
-import com.yyc.bunnyroom.mypage.user.dto.ChangePasswordDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -66,21 +68,43 @@ public class GuestController {
      * 게스트 유저가 직접 회원을 탈퇴하는 메소드
      * */
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "reason") String reason, Model model){
+    public String withdraw(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "reason") String reason, RedirectAttributes redirectAttributes,
+                           HttpServletRequest request){
         String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         int result = guestService.withdrawByUserNo(userNo, reason, update);
 
         if(result > 0){
+            // 탈퇴 성공시 세션 만료
+            // 현재 사용자 보안 컨텍스트 제거
+            SecurityContextHolder.clearContext();
+            // 세션 만료
+            request.getSession().invalidate();
             return "/myPage/goodByePage";
         }else {
-            return "/myPage/guestSearch";
+            redirectAttributes.addFlashAttribute("message", "탈퇴에 실패하였습니다.");
+            return "/myPage/withdrawReason";
         }
+    }
+
+    /**
+     * 게스트 회원의 닉네임을 변경하는 요청을 수행하는 메소드
+     * */
+    @PostMapping("/changeNickname")
+    @ResponseBody
+    public Map<String, Object> changeNickname(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "nickname")String nickName){
+        boolean success = guestService.changeNicknameByUserNo(userNo, nickName);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", success);
+        result.put("nickname", nickName);
+
+        return result;
     }
 
 
 
     @GetMapping("/mypageview")
-    public String mypage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
+    public String myPage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
         model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
         return "/myPage/guestUpdatePassword";
     }

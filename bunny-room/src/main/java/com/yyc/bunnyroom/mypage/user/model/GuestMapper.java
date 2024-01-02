@@ -16,4 +16,6 @@ public interface GuestMapper {
     int updateUserPassword(LoginUserDTO loginUserDTO);
 
     int withdrawByUserNo(@Param("userNo") int userNo, @Param("reason")String reason, @Param("update") String update);
+
+    int changeNicknameByUserNo(@Param("userNo") int userNo, @Param("nickName") String nickName);
 }
