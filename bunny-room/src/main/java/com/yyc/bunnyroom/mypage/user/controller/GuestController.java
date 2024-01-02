@@ -1,21 +1,24 @@
 package com.yyc.bunnyroom.mypage.user.controller;
 
-import com.yyc.bunnyroom.mypage.user.dto.ChangePasswordDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Controller
@@ -66,58 +69,102 @@ public class GuestController {
      * 게스트 유저가 직접 회원을 탈퇴하는 메소드
      * */
     @PostMapping("/withdraw")
-    public String withdraw(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "reason") String reason, Model model){
+    public String withdraw(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "reason") String reason, RedirectAttributes redirectAttributes,
+                           HttpServletRequest request){
         String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         int result = guestService.withdrawByUserNo(userNo, reason, update);
 
         if(result > 0){
+            // 탈퇴 성공시 세션 만료
+            // 현재 사용자 보안 컨텍스트 제거
+            SecurityContextHolder.clearContext();
+            // 세션 만료
+            request.getSession().invalidate();
             return "/myPage/goodByePage";
         }else {
-            return "/myPage/guestSearch";
+            redirectAttributes.addFlashAttribute("message", "탈퇴에 실패하였습니다.");
+            return "/myPage/withdrawReason";
         }
     }
 
+    /**
+     * 게스트 회원의 닉네임을 변경하는 요청을 수행하는 메소드
+     * */
+    @PostMapping("/changeNickname")
+    @ResponseBody
+    public Map<String, Object> changeNickname(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "nickname")String nickName){
+        boolean success = guestService.changeNicknameByUserNo(userNo, nickName);
 
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", success);
+        result.put("nickname", nickName);
 
-    @GetMapping("/mypageview")
-    public String mypage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
-        model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
-        return "/myPage/guestUpdatePassword";
+        return result;
     }
 
+    /**
+     * 게스트 회원의 연락처를 변경하는 요청을 수행하는 메소드
+     * */
+    @PostMapping("/changePhone")
+    @ResponseBody
+    public Map<String, Object> changePhone(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "phone")String phone, Model model){
+        boolean success = guestService.changePhoneByUserNo(userNo, phone);
 
-//    @PostMapping("/changePassword")
-//    public ModelAndView updateUserPassword(
-//            @ModelAttribute ChangePasswordDTO changePasswordDTO,
-//            HttpSession session,
-//            ModelAndView modelAndView
-//    ) {
-//        // 세션에서 현재 로그인 사용자 정보 가져오기
-//        LoginUserDTO loggedInUser = (LoginUserDTO) session.getAttribute("user");
-//
-//        // 현재 비밀번호 확인
-//        if (loggedInUser.getUserPassword().equals(changePasswordDTO.getCurrentPassword())) {
-//            // 현재 비밀번호가 일치하면 새 비밀번호로 변경
-//            loggedInUser.setUserPassword(changePasswordDTO.getNewPassword());
-//
-//            // 비밀번호 변경 서비스 호출
-//            int result = guestService.updateUserPassword(loggedInUser);
-//
-//            if (result == 1) {
-//                modelAndView.addObject("message2", "비밀번호 변경 성공!!");
-//                modelAndView.setViewName("/myPage/guestSearch");
-//            } else {
-//                modelAndView.addObject("message2", "비밀번호 변경 실패!!");
-//                modelAndView.setViewName("/myPage/guestUpdatePassword");
-//            }
-//        } else {
-//            modelAndView.addObject("message2", "현재 비밀번호가 일치하지 않습니다.");
-//            modelAndView.setViewName("/myPage/guestUpdatePassword");
-//        }
-//
-//        return modelAndView;
-//    }
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", success);
+        result.put("phone", phone);
+        return result;
+    }
 
+    /**
+     * 게스트 비밀번호 변경 페이지로 이동하는 메소드
+     * */
+    @PostMapping("/changePasswordPage")
+    public ModelAndView changePasswordPage(@RequestParam("userNo")int userNo, @RequestParam("password")String password, ModelAndView mv){
+        mv.addObject("userNo", userNo);
+        mv.addObject("password", password);
+        mv.setViewName("/myPage/passwordChanger");
+
+        return mv;
+    }
+
+    /**
+     * 게스트가 비밀번호를 변경하는 메소드
+     * */
+    @PostMapping("/passwordChanger")
+    public String passwordChanger(@RequestParam("userNo")int userNo, @RequestParam("password")String password,
+                                  @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword,
+                                  @RequestParam("newPasswordRe")String newPasswordRe, Model model){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        model.addAttribute("userNo", userNo);
+        model.addAttribute("password", password);
+        model.addAttribute("oldPassword", oldPassword);
+        model.addAttribute("newPassword", newPassword);
+        model.addAttribute("newPasswordRe", newPasswordRe);
+        int minPass = 8;
+        int maxPass = 20;
+        int result = 0;
+
+        if(!passwordEncoder.matches(oldPassword, password)){ // 현재 비밀번호가 틀렸을 때
+            model.addAttribute("message", "현재 비밀번호가 올바르지 않습니다.");
+            return "/myPage/passwordChanger";
+        }else if (oldPassword.equals(newPassword)){ // 구 비밀번호와 신 비밀번호가 동일할 때
+            model.addAttribute("message", "입력하신 비밀번호가 전과 동일합니다.");
+            return "/myPage/passwordChanger";
+        }else if(!newPassword.equals(newPasswordRe)){ // 새 비밀번호와 확인번호가 다를 때
+            model.addAttribute("message", "새 비밀번호와 비밀번호 확인 번호가 다릅니다.");
+            return "/myPage/passwordChanger";
+        }else if(newPassword.length() < minPass || newPassword.length() > maxPass){ // 비밀번호 수 제한을 어길 때
+            model.addAttribute("message", "새 비밀번호는 최소 " + minPass + "자 이상이고, 최대 " + maxPass + "자 이하여야 합니다.");
+            return "/myPage/passwordChanger";
+        }else {
+            String encodedNewPassword = passwordEncoder.encode(newPassword);
+            result = guestService.changePasswordByUserNo(userNo, encodedNewPassword);
+            model.addAttribute("message", "비밀번호가 정상적으로 변경되었습니다.");
+            return "/myPage/guestSearch";
+        }
+    }
 
 }
 
