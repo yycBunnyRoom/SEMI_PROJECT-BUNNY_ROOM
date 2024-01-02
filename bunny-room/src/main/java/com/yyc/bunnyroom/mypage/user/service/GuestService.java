@@ -51,4 +51,46 @@ public class GuestService {
             return 0;
         }
     }
+
+    /**
+     * 게스트의 닉네임을 수정하는 메소드
+     * */
+    public boolean changeNicknameByUserNo(int userNo, String nickName) {
+
+        int result = guestMapper.changeNicknameByUserNo(userNo, nickName);
+
+        if(result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 게스트의 연락처를 수정하는 메소드
+     * */
+    public boolean changePhoneByUserNo(int userNo, String phone) {
+
+        int result = guestMapper.changePhoneByUserNo(userNo, phone);
+
+        if(result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    /**
+     * 게스트 비밀번호 변경하는 메소드
+     * */
+    public int changePasswordByUserNo(int userNo, String encodedNewPassword) {
+
+        int result = guestMapper.changePasswordByUserNo(userNo, encodedNewPassword);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
+    }
 }

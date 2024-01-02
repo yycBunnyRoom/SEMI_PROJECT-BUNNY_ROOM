@@ -51,5 +51,27 @@
             USER_NO = #{userNo}
     </update>
 
+    <update id="changeNicknameByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_NICKNAME = #{nickName}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 
+    <update id="changePhoneByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_PHONE = #{phone}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
+
+    <update id="changePasswordByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_PASSWORD = #{password}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 </mapper>

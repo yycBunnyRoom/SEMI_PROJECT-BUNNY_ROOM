@@ -1,14 +1,17 @@
-package com.yyc.bunnyroom.common;
+package com.yyc.bunnyroom.common.controller;
 
+import com.yyc.bunnyroom.common.UserRole;
 import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -21,7 +24,8 @@ public class MainController {
     RoomRegisterService roomRegisterService;
 
     @GetMapping
-    public ModelAndView main(ModelAndView modelAndView){
+    public ModelAndView main(ModelAndView modelAndView,
+                             @RequestParam(name = "message", required = false) String message){
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -42,9 +46,14 @@ public class MainController {
             userNickname= null;
         }
 
+//        String message = (String) request.getAttribute("message"); // 요청에 포함된 메시지 가져오기
+//
+        System.out.println("message 있니 없니?: "+message);
 
         modelAndView.addObject("userAuth",userAuth);
         modelAndView.addObject("userNickname",userNickname);
+
+        modelAndView.addObject("message", message); // 메시지 추가
 
 
 
