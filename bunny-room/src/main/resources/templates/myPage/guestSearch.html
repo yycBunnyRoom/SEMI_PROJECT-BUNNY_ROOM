@@ -16,7 +16,7 @@
             <h3 th:text="${user.userNickname}"></h3>
             회원 가입일 : <p th:text="${user.userRegistDate}"></p>
         </article>
-        <form action="/myPage/withdraw" method="post">
+        <form action="/myPage/withdrawReason" method="post">
             <input type="hidden" name="userNo" th:value="${user.userNo}"/>
             <button type="submit">회원 탈퇴</button>
         </form>

@@ -44,8 +44,11 @@
     <update id="withdrawByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
         UPDATE TBL_USER
         SET
-            USER_STATUS = 'inactive'
-
+            USER_STATUS = 'inactive',
+            USER_UPDATE_DATE = #{update},
+            USER_WITHDRAW_REASON = #{reason}
+        WHERE
+            USER_NO = #{userNo}
     </update>
 
 

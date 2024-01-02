@@ -13,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 @Controller
@@ -47,15 +50,32 @@ public class GuestController {
         return mv;
     }
 
-//    /**
-//     * 게스트 유저가 직접 회원을 탈퇴하는 메소드
-//     * */
-//    @PostMapping("/withdraw")
-//    public String withdraw(@RequestParam(name = "userNo")int userNo){
-//        int result = guestService.withdrawByUserNo(userNo);
-//
-//
-//    }
+    /**
+     * 게스트 유저가 직접 회원을 탈퇴하는 사유를 작성하는 페이지로 이동하는 메소드
+     * */
+    @PostMapping("/withdrawReason")
+    public ModelAndView withdraw(@RequestParam(name = "userNo")int userNo, ModelAndView mv){
+        mv.addObject("userNo", userNo);
+        mv.setViewName("/myPage/withdrawReason");
+        return mv;
+
+
+    }
+
+    /**
+     * 게스트 유저가 직접 회원을 탈퇴하는 메소드
+     * */
+    @PostMapping("/withdraw")
+    public String withdraw(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "reason") String reason, Model model){
+        String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = guestService.withdrawByUserNo(userNo, reason, update);
+
+        if(result > 0){
+            return "/myPage/goodByePage";
+        }else {
+            return "/myPage/guestSearch";
+        }
+    }
 
 
 
