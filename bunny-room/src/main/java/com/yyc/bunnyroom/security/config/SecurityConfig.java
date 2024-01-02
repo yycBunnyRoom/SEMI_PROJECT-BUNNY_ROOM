@@ -49,10 +49,10 @@ public class SecurityConfig {
                 //여기부터 로그인 권한을 설정하는 공간
                 auth.requestMatchers("/security/auth/*", "/security/auth/login", "/signup/*", "/main", "/mailSend", "/mailAuthCheck", "/search/**", "/main/test2", "/").permitAll();
                 auth.requestMatchers("/roomRegister/**").hasAnyAuthority(UserRole.HOST.getRole());
-                auth.requestMatchers("/reservation/**").hasAnyAuthority(UserRole.GUEST.getRole(),UserRole.ADMIN.getRole());
+                auth.requestMatchers("/reservation/**","/myPage/**").hasAnyAuthority(UserRole.GUEST.getRole(),UserRole.ADMIN.getRole());
                 auth.requestMatchers("/*/*").hasAnyAuthority(UserRole.ADMIN.getRole());
                 auth.anyRequest().authenticated();
-
+                
             })
             .formLogin(login ->{
                 login.loginPage("/security/auth/login").permitAll(); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
