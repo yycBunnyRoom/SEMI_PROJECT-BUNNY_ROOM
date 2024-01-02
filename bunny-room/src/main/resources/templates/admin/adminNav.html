@@ -7,19 +7,23 @@
 <body>
   <nav th:fragment="navbar" class="nav">
     <ul>
-      <li><a href="/admin/adminPage">관리자 메인</a> </li>
+      <li class="home"><a href="/admin/adminPage">관리자 메인</a> </li>
       <li><a href="/admin/member">회원 관리</a></li>
       <li><a href="/admin/black">블랙리스트 관리</a></li>
         <li><a href="/admin/business">업체 관리</a></li>
         <li><a href="/admin/announcement">공지사항</a> </li>
         <li><a href="/admin/inquiry">문의사항</a> </li>
         <li><a href="/admin/setting">설정</a> </li>
+
+      <div id="logout-btn">
+      <form th:action="@{/security/auth/logout}" th:method="post">
+        <button>로그아웃</button>
+      </form>
+      </div>
     </ul>
 
 
-    <form th:action="@{/security/auth/logout}" th:method="post">
-      <button>로그아웃</button>
-    </form>
+
 
   </nav>
 </body>

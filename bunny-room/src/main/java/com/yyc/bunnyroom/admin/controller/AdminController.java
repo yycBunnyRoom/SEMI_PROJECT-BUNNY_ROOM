@@ -41,7 +41,7 @@ public class AdminController {
         List<MemberDTO> members = adminService.searchAllMember();
         model.addAttribute("members", members);
 
-        return "admin/member";
+        return "/admin/member";
     }
 
     /**
@@ -89,7 +89,7 @@ public class AdminController {
             return "redirect:/admin/search?mode=inactive&str=";
         }else{
             model.addAttribute("email", email);
-            return "admin/withdrawReason";
+            return "/admin/withdrawReason";
         }
     }
 
