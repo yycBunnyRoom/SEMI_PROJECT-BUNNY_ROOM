@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <nav th:fragment="myPageNav" class="nav">
+        <ul>
+            <li><a href="/myPage/search">회원 정보</a></li>
+            <li><a href="/myPage/search">예약 리스트</a></li>
+            <li><a href="/myPage/search">리뷰</a></li>
+            <li><a href="/myPage/search">문의</a></li>
+        </ul>
+
+        <form th:action="@{/security/auth/logout}" th:method="post">
+            <button>로그아웃</button>
+        </form>
+    </nav>
+</body>
+</html>

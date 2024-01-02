@@ -5,11 +5,23 @@
     <title>탈퇴 사유</title>
 </head>
 <body>
-  <h1>탈퇴 사유를 작성해주세요.</h1>
-  <form action="/myPage/withdraw" method="post">
-    <input type="hidden" name="userNo" th:value="${userNo}">
-    <textarea name="reason" placeholder="탈퇴 사유를 작성해주세요."></textarea>
-    <button type="submit">회원 탈퇴</button>
-  </form>
+    <div th:insert="~{/common/header :: headerFragment}"></div>
+
+      <h1>탈퇴 사유를 작성해주세요.</h1>
+      <form action="/myPage/withdraw" method="post">
+        <input type="hidden" name="userNo" th:value="${userNo}">
+        <textarea name="reason" placeholder="탈퇴 사유를 작성해주세요."></textarea>
+        <button type="submit">회원 탈퇴</button>
+      </form>
+
+    <th:block th:if="${message}">
+        <script th:inline="javascript">
+            window.onload =function (){
+                let message = `[[${message}]]`;
+                alert(message);
+            }
+        </script>
+    </th:block>
+
 </body>
 </html>
