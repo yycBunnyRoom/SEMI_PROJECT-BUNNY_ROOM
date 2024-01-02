@@ -18,4 +18,6 @@ public interface GuestMapper {
     int withdrawByUserNo(@Param("userNo") int userNo, @Param("reason")String reason, @Param("update") String update);
 
     int changeNicknameByUserNo(@Param("userNo") int userNo, @Param("nickName") String nickName);
+
+    int changePhoneByUserNo(@Param("userNo") int userNo, @Param("phone") String phone);
 }

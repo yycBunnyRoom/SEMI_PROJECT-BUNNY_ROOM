@@ -101,6 +101,22 @@ public class GuestController {
         return result;
     }
 
+    /**
+     * 게스트 회원의 연락처를 변경하는 요청을 수행하는 메소드
+     * */
+    @PostMapping("/changePhone")
+    @ResponseBody
+    public Map<String, Object> changePhone(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "phone")String phone){
+        boolean success = guestService.changePhoneByUserNo(userNo, phone);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("success", success);
+        result.put("phone", phone);
+
+        return result;
+
+    }
+
 
 
     @GetMapping("/mypageview")

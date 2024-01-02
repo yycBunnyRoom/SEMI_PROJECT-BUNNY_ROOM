@@ -59,4 +59,11 @@
             USER_NO = #{userNo}
     </update>
 
+    <update id="changePhoneByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_PHONE = #{phone}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 </mapper>

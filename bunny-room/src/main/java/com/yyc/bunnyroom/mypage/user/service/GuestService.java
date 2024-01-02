@@ -65,4 +65,18 @@ public class GuestService {
             return false;
         }
     }
+
+    /**
+     * 게스트의 연락처를 수정하는 메소드
+     * */
+    public boolean changePhoneByUserNo(int userNo, String phone) {
+
+        int result = guestMapper.changePhoneByUserNo(userNo, phone);
+
+        if(result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
