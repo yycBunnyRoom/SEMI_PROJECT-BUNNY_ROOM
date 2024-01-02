@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("inquirys")
+@RequestMapping("/inquirys")
 public class InquiryController {
 
     @Autowired
@@ -46,7 +46,7 @@ public class InquiryController {
             System.out.println("안보여");
         }
         mv.addObject("inquirys", list);
-        mv.setViewName("inquiry/allInquirys");
+        mv.setViewName("/inquiry/allInquirys");
         return mv;
     }
 
@@ -66,7 +66,7 @@ public class InquiryController {
             throw new NullPointerException();
         } else {
             mv.addObject("contentslist", contentslist);
-            mv.setViewName("inquiry/allinquirysContent");
+            mv.setViewName("/inquiry/allinquirysContent");
             return mv;
 
         }
@@ -76,7 +76,7 @@ public class InquiryController {
     @GetMapping("/insert_inquiry")
     public ModelAndView insertInquiry(ModelAndView mv) {
         mv.addObject("inquiryDTO", new InquiryDTO());
-        mv.setViewName("inquiry/inquiryInsert"); // 뷰 이름 설정
+        mv.setViewName("/inquiry/inquiryInsert"); // 뷰 이름 설정
         return mv;
     }
 
@@ -140,7 +140,7 @@ public class InquiryController {
 
         // 가져온 정보를 폼에 전달
         mv.addObject("inquiryDTO", inquiryDTO);
-        mv.setViewName("inquiry/inquiryUpdate");
+        mv.setViewName("/inquiry/inquiryUpdate");
 
         return mv;
     }

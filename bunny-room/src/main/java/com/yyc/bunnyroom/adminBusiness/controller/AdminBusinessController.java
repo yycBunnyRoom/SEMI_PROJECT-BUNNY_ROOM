@@ -26,7 +26,7 @@ public class AdminBusinessController {
         // 관리자 업체 관리 페이지로 이동
         List<AdminBusinessDTO> BusinessList = adminBusinessService.allSearcher();
         model.addAttribute("BusinessList", BusinessList);
-        return "admin/business";
+        return "/admin/business";
     }
 
     @GetMapping("/search")
@@ -66,7 +66,7 @@ public class AdminBusinessController {
 
         model.addAttribute("BusinessList", BusinessList);
 
-        return "admin/business";
+        return "/dmin/business";
     }
 
     @PostMapping("/delete")
@@ -80,7 +80,7 @@ public class AdminBusinessController {
 
         model.addAttribute("businessNo", businessNo);
         model.addAttribute("status", status);
-        return "admin/business/deleteReason";
+        return "/admin/business/deleteReason";
     }
 
     @PostMapping("/deleteReason")
@@ -114,7 +114,7 @@ public class AdminBusinessController {
         model.addAttribute("status", status);
         model.addAttribute("reason", reason);
 
-        return "admin/business/restoreReason";
+        return "/admin/business/restoreReason";
     }
 
     @PostMapping("/restoreReason")

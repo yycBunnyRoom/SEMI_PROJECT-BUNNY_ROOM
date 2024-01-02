@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping("admin/black")
+@RequestMapping("/admin/black")
 @RequiredArgsConstructor
 public class BlackController {
 
@@ -30,7 +30,7 @@ public class BlackController {
     private String black(Model model){
         List<BlackDTO> blacklist = blackService.showAll();
         model.addAttribute("blacklist", blacklist);
-        return "black/blacklist";
+        return "/black/blacklist";
     }
 
     /**
@@ -63,7 +63,7 @@ public class BlackController {
             model.addAttribute("blacklist", blacklist);
         }
 
-        return "black/blacklist";
+        return "/black/blacklist";
     }
 
     /**
@@ -91,7 +91,7 @@ public class BlackController {
         model.addAttribute("phone", phone);
         model.addAttribute("auth", auth);
 
-        return "black/addBlackReason";
+        return "/black/addBlackReason";
     }
 
     /**
@@ -128,7 +128,7 @@ public class BlackController {
             model.addAttribute("blacklist", "블랙처리에 실패하였습니다.");
         }
 
-        return "admin/member";
+        return "/admin/member";
     }
 
     /**
@@ -142,7 +142,7 @@ public class BlackController {
         // 블랙리스트가 아닌 경우
         if(!status.equals("active")){
             model.addAttribute("restore", "현재 블랙리스트에 등재되어 있지 않습니다.");
-            return "black/blacklist";
+            return "/black/blacklist";
         }
 
         // 블랙리스트 명단에서 상태를 비활성화하고 수정 날짜 기록

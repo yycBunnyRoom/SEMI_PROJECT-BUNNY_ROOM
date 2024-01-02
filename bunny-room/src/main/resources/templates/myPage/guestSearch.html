@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>마이 페이지</title>
+</head>
+<body>
+<div th:insert="~{/common/header :: headerFragment}"></div>
+
+    <section>
+        <h1>MEMBER</h1>
+        <article>
+            <img src="/img/profile/엄지척%20토끼.jpg" alt="임시 프로필"/>
+        </article>
+        <article>
+            <h3 th:text="${user.userNickname}"></h3>
+            회원 가입일 : <p th:text="${user.userRegistDate}"></p>
+        </article>
+        <form action="/myPage/withdrawReason" method="post">
+            <input type="hidden" name="userNo" th:value="${user.userNo}"/>
+            <button type="submit">회원 탈퇴</button>
+        </form>
+    </section>
+
+    <section>
+        <article>
+            EMAIL : <p th:text="${user.userEmail}"></p>
+        </article>
+        <article>
+            비밀번호 : <P th:text="${user.userPassword}"></P>
+        </article>
+        <article>
+            닉네임 : <p th:text="${user.userNickname}"></p>
+        </article>
+        <article>
+            연락처 : <p th:text="${user.userPhone}"></p>
+        </article>
+    </section>
+
+</body>
+</html>

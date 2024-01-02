@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<header th:insert="~{common/header :: headerFragment}"></header>
+<div th:insert="~{/common/header :: headerFragment}"></div>
     <script th:inline="javascript">
         alert([[${message}]]);
         window.location.replace("/security/auth/login");

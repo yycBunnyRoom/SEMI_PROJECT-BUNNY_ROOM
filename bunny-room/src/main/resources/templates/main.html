@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <div th:insert="~{common/header :: headerFragment}"></div>
+    <div th:insert="~{/common/header :: headerFragment}"></div>
 
     <div class="room-search">
         <form action="/search/keyword" method="GET">
@@ -48,7 +48,7 @@
 
 
     <div sec:authorize="hasAnyAuthority('GUEST')">
-        <button onclick="location.href='mypages/search'">마이페이지</button>
+        <button onclick="location.href='myPage/search'">마이페이지</button>
     </div>
 
 
