@@ -8,9 +8,9 @@
     <nav th:fragment="myPageNav" class="nav">
         <ul>
             <li><a href="/myPage/search">회원 정보</a></li>
-            <li><a href="/myPage/search">예약 리스트</a></li>
-            <li><a href="/myPage/search">리뷰</a></li>
-            <li><a href="/myPage/search">문의</a></li>
+            <li><a href="/myPage/reservation">예약 리스트</a></li>
+            <li><a href="/myPage/review">리뷰</a></li>
+            <li><a href="/myPage/inquiry">문의</a></li>
         </ul>
 
         <form th:action="@{/security/auth/logout}" th:method="post">
