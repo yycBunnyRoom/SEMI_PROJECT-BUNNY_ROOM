@@ -77,7 +77,7 @@ public class SecurityConfig {
 
             })
             .formLogin(login ->{
-                login.loginPage("/security/auth/login"); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
+                login.loginPage("/security/auth/login").permitAll(); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
 
                 // 로그인 아이디로 회원 이메일을 받음
                 login.usernameParameter("userEmail");
