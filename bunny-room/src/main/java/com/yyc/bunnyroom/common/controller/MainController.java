@@ -1,5 +1,6 @@
-package com.yyc.bunnyroom.common;
+package com.yyc.bunnyroom.common.controller;
 
+import com.yyc.bunnyroom.common.UserRole;
 import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;

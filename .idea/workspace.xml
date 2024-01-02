@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +71,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.BunnyRoomApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feature/reservation",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/dev/10_spring_boot/Digestion/understand2",
     "list.type.of.created.stylesheet": "CSS",
@@ -153,7 +151,7 @@
       <workItem from="1703920953439" duration="34613000" />
       <workItem from="1704044491625" duration="5107000" />
       <workItem from="1704078940997" duration="23885000" />
-      <workItem from="1704158786374" duration="9534000" />
+      <workItem from="1704158786374" duration="10152000" />
     </task>
     <servers />
   </component>
