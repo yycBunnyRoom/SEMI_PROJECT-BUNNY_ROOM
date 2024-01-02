@@ -66,37 +66,37 @@ public class GuestController {
     }
 
 
-    @PostMapping("/changePassword")
-    public ModelAndView updateUserPassword(
-            @ModelAttribute ChangePasswordDTO changePasswordDTO,
-            HttpSession session,
-            ModelAndView modelAndView
-    ) {
-        // 세션에서 현재 로그인 사용자 정보 가져오기
-        LoginUserDTO loggedInUser = (LoginUserDTO) session.getAttribute("user");
-
-        // 현재 비밀번호 확인
-        if (loggedInUser.getUserPassword().equals(changePasswordDTO.getCurrentPassword())) {
-            // 현재 비밀번호가 일치하면 새 비밀번호로 변경
-            loggedInUser.setUserPassword(changePasswordDTO.getNewPassword());
-
-            // 비밀번호 변경 서비스 호출
-            int result = guestService.updateUserPassword(loggedInUser);
-
-            if (result == 1) {
-                modelAndView.addObject("message2", "비밀번호 변경 성공!!");
-                modelAndView.setViewName("/myPage/guestSearch");
-            } else {
-                modelAndView.addObject("message2", "비밀번호 변경 실패!!");
-                modelAndView.setViewName("/myPage/guestUpdatePassword");
-            }
-        } else {
-            modelAndView.addObject("message2", "현재 비밀번호가 일치하지 않습니다.");
-            modelAndView.setViewName("/myPage/guestUpdatePassword");
-        }
-
-        return modelAndView;
-    }
+//    @PostMapping("/changePassword")
+//    public ModelAndView updateUserPassword(
+//            @ModelAttribute ChangePasswordDTO changePasswordDTO,
+//            HttpSession session,
+//            ModelAndView modelAndView
+//    ) {
+//        // 세션에서 현재 로그인 사용자 정보 가져오기
+//        LoginUserDTO loggedInUser = (LoginUserDTO) session.getAttribute("user");
+//
+//        // 현재 비밀번호 확인
+//        if (loggedInUser.getUserPassword().equals(changePasswordDTO.getCurrentPassword())) {
+//            // 현재 비밀번호가 일치하면 새 비밀번호로 변경
+//            loggedInUser.setUserPassword(changePasswordDTO.getNewPassword());
+//
+//            // 비밀번호 변경 서비스 호출
+//            int result = guestService.updateUserPassword(loggedInUser);
+//
+//            if (result == 1) {
+//                modelAndView.addObject("message2", "비밀번호 변경 성공!!");
+//                modelAndView.setViewName("/myPage/guestSearch");
+//            } else {
+//                modelAndView.addObject("message2", "비밀번호 변경 실패!!");
+//                modelAndView.setViewName("/myPage/guestUpdatePassword");
+//            }
+//        } else {
+//            modelAndView.addObject("message2", "현재 비밀번호가 일치하지 않습니다.");
+//            modelAndView.setViewName("/myPage/guestUpdatePassword");
+//        }
+//
+//        return modelAndView;
+//    }
 
 
 }
