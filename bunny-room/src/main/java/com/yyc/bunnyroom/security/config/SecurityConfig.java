@@ -3,6 +3,7 @@ package com.yyc.bunnyroom.security.config;
 
 import com.yyc.bunnyroom.security.config.handler.AuthFailHandler;
 import com.yyc.bunnyroom.common.UserRole;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -46,34 +47,11 @@ public class SecurityConfig {
                     request.requestCache(requestCache))
             .authorizeHttpRequests(auth -> { // 서버의 리소스에 접근 가능한 권한을 설정함
                 //여기부터 로그인 권한을 설정하는 공간
-                auth.requestMatchers(
-                        "/security/auth/*",
-                        "/security/auth/login",
-                        "/signup/*",
-//                        "/security/auth/fail",
-                        "/main",
-
-                        // roomRegister
-                        "/roomRegister/*",
-                        "/dayOff/*",
-
-                        // 개발중에는 예약 권한 모두에게 허락함
-                        "/reservation/**",
-
-                        // 메일 인증을 위해
-                        "/mailSend",
-                        "/mailAuthCheck",
-
-                        // 검색기능은 모두에게
-                        "/search/**",
-
-                        "/main/test2",
-                        "/"
-                ).permitAll();
-                auth.requestMatchers("/admin/*").hasAnyAuthority(UserRole.ADMIN.getRole());
-                auth.requestMatchers("/guest/*").hasAnyAuthority(UserRole.GUEST.getRole());
+                auth.requestMatchers("/security/auth/*", "/security/auth/login", "/signup/*", "/main", "/mailSend", "/mailAuthCheck", "/search/**", "/main/test2", "/").permitAll();
+                auth.requestMatchers("/roomRegister/**").hasAnyAuthority(UserRole.HOST.getRole());
+                auth.requestMatchers("/reservation/**").hasAnyAuthority(UserRole.GUEST.getRole(),UserRole.ADMIN.getRole());
+                auth.requestMatchers("/*/*").hasAnyAuthority(UserRole.ADMIN.getRole());
                 auth.anyRequest().authenticated();
-
 
             })
             .formLogin(login ->{
