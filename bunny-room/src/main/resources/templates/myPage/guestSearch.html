@@ -34,35 +34,46 @@
         <article>
             <form id="changeNickname" action="/myPage/changeNickname" method="post">
                 <input type="hidden" name="userNo" th:value="${user.userNo}"/>
-                닉네임 : <input type="text" id="nickname" name="nickname" th:placeholder="${user.userNickname}">
-                <button type="button" onclick="changeNickname()">닉네임 변경</button>
+                닉네임 : <input type="text" id="nickname" name="nickname" th:value="${user.userNickname}" th:placeholder="${user.userNickname}">
+                <button type="button" on onclick="changeNickname()">닉네임 변경</button>
             </form>
         </article>
         <article>
-            연락처 : <p th:text="${user.userPhone}"></p>
+            <form id="changePhone" action="/myPage/changePhone" method="post">
+                연락처 : <input type="text" id="phone" name="phone" th:placeholder="${user.userPhone}">
+                <button type="button" onclick="changePhone()">연락처 변경</button>
+            </form>
+            <p th:text="${user.userPhone}"></p>
         </article>
     </section>
 
     <script>
         function changeNickname(){
-            let userNo = $("input[name='userNo']").val();
-            let nickname = $("#nickname").val();
+            const userConfirmed = confirm("닉네임을 변경하시겠습니까?")
 
-            // Ajax 활용한 비동기화 요청
-            $.ajax({
-                type: "POST",
-                url: "/myPage/changeNickname",
-                data: {userNo: userNo, nickname: nickname},
-                success: function (response){
-                    // 성공 시 결과를 동적으로 페이지에 추가
-                    $("#nickname").val(nickname); // 닉네임 필드 업데이트
-                    $("#memberNickname").text(nickname);
-                },
-                error: function (error){
-                    console.error("에러 발생", error);
-                    // 실패 시 에러 처리
-                }
-            });
+            if(userConfirmed){
+                let userNo = $("input[name='userNo']").val();
+                let nickname = $("#nickname").val();
+
+                // Ajax 활용한 비동기화 요청
+                $.ajax({
+                    type: "POST",
+                    url: "/myPage/changeNickname",
+                    data: {userNo: userNo, nickname: nickname},
+                    success: function (response){
+                        // 성공 시 결과를 동적으로 페이지에 추가
+                        $("#nickname").val(nickname); // 닉네임 필드 업데이트
+                        $("#memberNickname").text(nickname);
+                    },
+                    error: function (error){
+                        console.error("에러 발생", error);
+                        // 실패 시 에러 처리
+                    }
+                });
+            }else {
+                console.log("닉네임 변경을 취소합니다.")
+            }
+
         }
     </script>
 </body>
