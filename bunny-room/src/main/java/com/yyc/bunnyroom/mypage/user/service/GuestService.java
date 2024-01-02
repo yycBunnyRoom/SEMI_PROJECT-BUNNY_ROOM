@@ -38,4 +38,11 @@ public class GuestService {
         return guestMapper.updateUserPassword(loginUserDTO);
     }
 
+    /**
+     * 게스트 탈퇴를 수행하는 메소드
+     * */
+    public int withdrawByUserNo(int userNo) {
+
+        int result = guestMapper.withdrawByUserNo(userNo);
+    }
 }

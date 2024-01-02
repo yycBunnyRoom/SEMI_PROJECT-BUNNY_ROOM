@@ -14,4 +14,6 @@ public interface GuestMapper {
 
 
     int updateUserPassword(LoginUserDTO loginUserDTO);
+
+    int withdrawByUserNo(int userNo);
 }

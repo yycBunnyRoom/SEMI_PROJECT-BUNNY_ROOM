@@ -41,6 +41,12 @@
         WHERE USER_EMAIL = #{userEmail}
     </update>
 
+    <update id="withdrawByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_STATUS = 'inactive'
+
+    </update>
 
 
 </mapper>
