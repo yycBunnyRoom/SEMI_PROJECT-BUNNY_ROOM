@@ -107,15 +107,13 @@ public class GuestController {
      * */
     @PostMapping("/changePhone")
     @ResponseBody
-    public Map<String, Object> changePhone(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "phone")String phone){
+    public Map<String, Object> changePhone(@RequestParam(name = "userNo")int userNo, @RequestParam(name = "phone")String phone, Model model){
         boolean success = guestService.changePhoneByUserNo(userNo, phone);
 
         Map<String, Object> result = new HashMap<>();
         result.put("success", success);
         result.put("phone", phone);
-
         return result;
-
     }
 
     /**

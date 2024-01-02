@@ -15,7 +15,7 @@
             <img src="/img/profile/엄지척%20토끼.jpg" alt="임시 프로필"/>
         </article>
         <article>
-            <h3 id="memberNickname" th:text="${user.userNickname}"></h3>
+            <h2 id="memberNickname" th:text="${user.userNickname}"></h2>
             회원 가입일 : <p th:text="${user.userRegistDate}"></p>
         </article>
         <form action="/myPage/withdrawReason" method="post">
@@ -26,9 +26,10 @@
 
     <section>
         <article>
-            EMAIL : <p th:text="${user.userEmail}"></p>
+            EMAIL : <span th:text="${user.userEmail}"></span>
         </article>
         <article>
+            비밀번호 :
             <form action="/myPage/changePasswordPage" method="post">
                 <input type="hidden" name="userNo" th:value="${user.userNo}"/>
                 <input type="hidden" name="password" th:value="${user.userPassword}">
@@ -55,9 +56,10 @@
         function changeNickname(){
             const userConfirmed = confirm("닉네임을 변경하시겠습니까?")
 
-            if(userConfirmed){
+            let nickname = $("#nickname").val();
+
+            if(userConfirmed && nickname !== ""){
                 let userNo = $("input[name='userNo']").val();
-                let nickname = $("#nickname").val();
 
                 // Ajax 활용한 비동기화 요청
                 $.ajax({
@@ -68,13 +70,18 @@
                         // 성공 시 결과를 동적으로 페이지에 추가
                         $("#nickname").val(nickname); // 닉네임 필드 업데이트
                         $("#memberNickname").text(nickname);
+                        alert("닉네임이 변경되었습니다.")
                     },
                     error: function (error){
                         console.error("에러 발생", error);
                         // 실패 시 에러 처리
+                        alert("닉네임 변경에 실패하였습니다.")
                     }
                 });
             }else {
+                if(nickname === ""){
+                    alert("닉네임은 필수입니다.")
+                }
                 console.log("닉네임 변경을 취소합니다.")
             }
 
@@ -87,20 +94,31 @@
                 let userNo = $("input[name='userNo']").val();
                 let phone = $("#phone").val();
 
-                // Ajax 활용
-                $.ajax({
-                    type: "POST",
-                    url: "/myPage/changePhone",
-                    data: {userNo: userNo, phone: phone},
-                    success: function (response){
-                        // 성공 시 결과를 동적으로 페이지에 추가
-                        $("#phone").val(phone); // 연락처 필드 업데이트
-                    },
-                    error: function (error){
-                        console.error("에러 발생", error);
-                        // 실패 시 에러 처리
-                    }
-                });
+                // 전화번호 글자 수 제한
+                let minPhoneLength = 9;
+                let maxPhoneLength = 15;
+
+                if(phone !== "" && phone.length >= minPhoneLength && phone.length <= maxPhoneLength){
+                    // Ajax 활용
+                    $.ajax({
+                        type: "POST",
+                        url: "/myPage/changePhone",
+                        data: {userNo: userNo, phone: phone},
+                        success: function (response){
+                            // 성공 시 결과를 동적으로 페이지에 추가
+                            $("#phone").val(phone); // 연락처 필드 업데이트
+                            alert("연락처가 변경되었습니다.")
+                        },
+                        error: function (error){
+                            console.error("에러 발생", error);
+                            // 실패 시 에러 처리
+                            alert("연락처 변경에 실패하였습니다.")
+                        }
+                    });
+                }else {
+                    alert("적절하지 못한 연락처입니다.")
+                }
+
             }else {
                 console.log("연락처 변경을 취소합니다.")
             }
