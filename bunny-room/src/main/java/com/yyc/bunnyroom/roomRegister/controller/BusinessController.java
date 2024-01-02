@@ -38,6 +38,21 @@ public class BusinessController {
         return roomRegisterService.getAllBusiness(ownerNo);
     }
 
+    /* 사업자 번호가 중복되는지 체크 */
+    @GetMapping("/checkBusinessRegistNo/{businessRegistNo}")
+    public ResponseEntity<?> checkBusinessRegistNo(@PathVariable("businessRegistNo") int businessRegistNo) {
+
+        System.out.println("여기는 왔냐?");
+        boolean isDuplicate = roomRegisterService.checkBusinessRegistNo(businessRegistNo);
+        System.out.println("조회했음: "+isDuplicate);
+
+        return ResponseEntity.ok("{\"duplicate\": " + isDuplicate + "}");
+    }
+
+
+
+
+
 
 
     /* 업체 등록 */

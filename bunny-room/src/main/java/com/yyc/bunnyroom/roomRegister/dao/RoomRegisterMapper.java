@@ -11,6 +11,11 @@ import java.util.List;
 @Mapper
 public interface RoomRegisterMapper {
 
+
+    //Check
+    boolean checkBusinessRegistNo (int businessRegistNo);
+
+
     //Register
     Integer businessRegister(BusinessDTO businessDTO);
 

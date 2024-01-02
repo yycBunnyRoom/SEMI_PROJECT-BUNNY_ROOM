@@ -1,3 +1,46 @@
+
+
+// 비동기 요청으로 사업자번호 중복 확인
+document.addEventListener('DOMContentLoaded', function () {
+    let inputBusinessRegistNo = document.getElementById('inputBusinessRegistNo');
+    let confirmBusinessRegistNo = document.getElementById('checkBusinessRegistNo');
+
+    inputBusinessRegistNo.addEventListener('input', function () {
+        let businessRegistNo = this.value;
+
+        if (!businessRegistNo) {
+            // 입력 필드에 값이 없을 때 텍스트를 숨깁니다.
+            confirmBusinessRegistNo.style.display = 'none';
+            return; // 값이 없으면 여기서 함수 종료
+        }
+
+        // 값이 있을 때는 텍스트를 보이도록 처리
+        fetch('/roomRegister/business/checkBusinessRegistNo/' + businessRegistNo)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                confirmBusinessRegistNo.style.display = 'block'; // 텍스트를 보이도록 설정
+
+                if (data.duplicate) {
+                    confirmBusinessRegistNo.textContent = '중복된 사업자번호입니다.';
+                    confirmBusinessRegistNo.classList.remove('available');
+                    confirmBusinessRegistNo.classList.add('duplicate');
+                } else {
+                    confirmBusinessRegistNo.textContent = '사용 가능한 사업자번호입니다.';
+                    confirmBusinessRegistNo.classList.remove('duplicate');
+                    confirmBusinessRegistNo.classList.add('available');
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    });
+});
+
+
+
+
 <!--    핸드폰 관련-->
 // 자동으로 businessPhone 을 update
 function updateBusinessPhone() {

@@ -16,6 +16,11 @@ public class RoomRegisterService {
     @Autowired
     RoomRegisterMapper roomRegisterMapper;
 
+    //Check
+    public boolean checkBusinessRegistNo(int businessRegistNo) {
+        return roomRegisterMapper.checkBusinessRegistNo(businessRegistNo);
+    }
+
 
 
 

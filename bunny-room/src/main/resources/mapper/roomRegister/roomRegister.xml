@@ -93,8 +93,16 @@
 
 
 
-
-
+    <!--CHECK-->
+    <!--checkBusinessRegistNo-->
+    <select id="checkBusinessRegistNo" resultType="boolean">
+        SELECT
+            COUNT(*) > 0
+        FROM
+            TBL_BUSINESS
+        WHERE
+            BUSINESS_REGIST_NO = #{businessRegistNo}
+    </select>
 
 
 

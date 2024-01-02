@@ -66,4 +66,5 @@ window.onload = () => {
 // URL에서 메시지 파라미터를 읽어옴
 if (message && typeof message === 'string' && message !== "") {
     alert(decodeURIComponent(message)); // URL 디코딩하여 메시지 출력
+    message="";
 }

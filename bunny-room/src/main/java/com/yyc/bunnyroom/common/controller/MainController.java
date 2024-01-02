@@ -58,8 +58,10 @@ public class MainController {
 
 
         modelAndView.setViewName("/main");
+        System.out.println("/main 은 넣었어");
         return modelAndView;
     }
+
 
     @GetMapping("/test2")
     public String test2(){
