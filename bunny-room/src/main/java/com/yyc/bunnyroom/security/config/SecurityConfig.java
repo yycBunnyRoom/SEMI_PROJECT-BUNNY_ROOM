@@ -3,6 +3,7 @@ package com.yyc.bunnyroom.security.config;
 
 import com.yyc.bunnyroom.security.config.handler.AuthFailHandler;
 import com.yyc.bunnyroom.common.UserRole;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -14,8 +15,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @Configuration
 @EnableWebSecurity
@@ -52,7 +57,7 @@ public class SecurityConfig {
                 auth.requestMatchers("/reservation/**","/myPage/**").hasAnyAuthority(UserRole.GUEST.getRole(),UserRole.ADMIN.getRole());
                 auth.requestMatchers("/*/*").hasAnyAuthority(UserRole.ADMIN.getRole());
                 auth.anyRequest().authenticated();
-                
+
             })
             .formLogin(login ->{
                 login.loginPage("/security/auth/login").permitAll(); // 로그인 페이지에 해당되는 서블릿이 존재해야 한다.
@@ -87,12 +92,24 @@ public class SecurityConfig {
                 // 세션만료시 메인 페이지로 이동
                 session.invalidSessionUrl("/main");
 
-            }).csrf(csrf -> csrf.disable());
+            }).csrf(csrf -> csrf.disable())
 
-
-
-
+            .exceptionHandling(exceptionHandling ->
+                    exceptionHandling.accessDeniedHandler(accessDeniedHandler())
+            );
 
         return http.build();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            // 접근 거부 처리 로직
+            String message = "해당 페이지에 대한 권한이 없습니다.";
+            System.out.println("AccessDenied:  "+message);
+
+            // 메시지를 URL 파라미터로 전달하여 리다이렉트
+            response.sendRedirect("/main?message=" + URLEncoder.encode(message, StandardCharsets.UTF_8));
+        };
     }
 }

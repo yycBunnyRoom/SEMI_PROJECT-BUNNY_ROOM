@@ -1,7 +1,4 @@
-/* 메세지를 가져온 경우에는 바로 메세지를 보여준다*/
-if (message){
-    alert(message)
-}
+
 
 // JavaScript 변수 정의
 var myString = userAuth+" "+userNickname+"님";
@@ -60,6 +57,13 @@ function createCategoryButtons() {
         buttonsContainer.appendChild(button);
     });
 }
+
 window.onload = () => {
     createCategoryButtons();
 };
+
+
+// URL에서 메시지 파라미터를 읽어옴
+if (message && typeof message === 'string' && message !== "") {
+    alert(decodeURIComponent(message)); // URL 디코딩하여 메시지 출력
+}
