@@ -10,9 +10,6 @@
     cursor: pointer;
 }
 
-
-
-/* 기본 버튼 스타일 */
 button {
     padding: 8px 12px;
     margin: 4px;
@@ -33,16 +30,44 @@ button:hover {
     background-color: #f1f3f4;
 }
 
+
+
+/* 기본 버튼 스타일 */
+
+#btn_timeUnits button {
+    padding: 8px 12px;
+    margin: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #4b4f56;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+/* 마우스 호버 시 스타일 */
+#btn_timeUnits button:hover {
+    background-color: #f5c62e;
+}
+
 /* 선택된 버튼 스타일 */
-button.selected {
+#btn_timeUnits button.selected {
     background-color: #ffa500; /* 주황색 */
     color: white;
 }
 
+#btn_timeUnits button.reserved {
+    background-color: rgba(138, 131, 131, 0.08); /* 예약된 시간 버튼 색 */
+}
 
-
-
-
+#btn_timeUnits button.reserved:hover {
+    background-color: rgba(138, 131, 131, 0.08);
+}
 
 
 
@@ -135,5 +160,42 @@ button.selected {
 
 #btn_addReservation:hover {
     background-color: darkorange;
+}
+
+
+#btn_reservation {
+    display: inline-block;
+    padding: 16px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color: #ff9100;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#btn_reservation:hover {
+    background-color: #ff6a00; /* 호버 시 배경색 변경 */
+}
+
+
+/* roomDetails를 왼쪽에 배치 */
+#roomDetails {
+    float: left; /* 왼쪽으로 배치 */
+    width: 60%; /* 적절한 너비 설정 */
+}
+
+/* reservation-container를 오른쪽에 배치 */
+.reservation-container {
+    float: right; /* 오른쪽으로 배치 */
+    width: 40%; /* 적절한 너비 설정 */
+}
+
+#reservation_form {
+    width: auto; /* 원하는 폼 너비 설정 */
 }
 

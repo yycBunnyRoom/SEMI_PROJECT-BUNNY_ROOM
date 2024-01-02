@@ -108,63 +108,57 @@ $(document).ready(function() {
         }
     });
 
-    $("#showCalendar").click(function() {
-        $(".ui-datepicker").toggle();
+    // $("#showCalendar").click(function() {
+    //     $(".ui-datepicker").toggle();
+    // });
+
+    // 초기에는 예약 폼을 숨깁니다.
+    $('#reservation_form').hide();
+
+    // 예약 버튼 클릭 시 예약 폼을 토글합니다.
+    $('#btn_reservation').on('click', function() {
+        $('#reservation_form').toggle();
+        $(this).hide();
     });
 
 
-    // function createButtons(timeUnits) {
-    //     // 이전에 남아있는 버튼들 삭제
-    //     $('#btn_timeUnits').empty();
-    //
-    //     timeUnits.forEach(function(timeUnit) {
-    //         var button = $('<button></button>').text(timeUnit.startTime + ':00 - ' + timeUnit.endTime + ':00');
-    //
-    //         // 클릭 이벤트 추가
-    //         button.click(function() {
-    //             // 선택된 버튼 스타일 변경
-    //             $('#btn_timeUnits button').removeClass('selected');
-    //             $(this).addClass('selected');
-    //             reservationUnit = $(this).text();
-    //         });
-    //
-    //         $('#btn_timeUnits').append(button);
-    //     });
-    // }
+
 });
 
-// 예약된 정보를 사용하여 중복 확인 및 버튼 생성
+
 function createButtons(timeUnits) {
     // 이전에 남아있는 버튼들 삭제
     $('#btn_timeUnits').empty();
 
     timeUnits.forEach(function (timeUnit) {
         const isReserved = reserved.some(reservation => {
-            /* reservation.reservationDate 가 ZoneDateTime 이므로 Date 형식으로 변환 */
             const reservationDateObj = new Date(reservation.reservationDate);
             const currentDateObj = new Date(reservationDate);
 
-            console.log("1번",reservationDateObj)
-            console.log("2번",currentDateObj)
             return (
                 reservation.reservationUnit === timeUnit.startTime + ':00 - ' + timeUnit.endTime + ':00' &&
                 reservationDateObj.getTime() === currentDateObj.getTime()
             );
         });
 
-        if (!isReserved) {
-            var button = $('<button></button>').text(timeUnit.startTime + ':00 - ' + timeUnit.endTime + ':00');
+        var button = $('<button></button>').text(timeUnit.startTime + ':00 - ' + timeUnit.endTime + ':00');
 
+        if (isReserved) {
+            button.addClass('reserved');
+            button.prop('disabled', true); // 예약된 시간은 클릭 불가능하도록 설정
+        } else {
             button.click(function () {
                 $('#btn_timeUnits button').removeClass('selected');
                 $(this).addClass('selected');
                 reservationUnit = $(this).text();
             });
-
-            $('#btn_timeUnits').append(button);
         }
+
+        $('#btn_timeUnits').append(button);
     });
 }
+
+
 
 
 $(document).ready(function() {

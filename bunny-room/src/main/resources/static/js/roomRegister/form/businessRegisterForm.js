@@ -2,7 +2,7 @@
 
 // 비동기 요청으로 사업자번호 중복 확인
 document.addEventListener('DOMContentLoaded', function () {
-    let inputBusinessRegistNo = document.getElementById('inputBusinessRegistNo');
+    let inputBusinessRegistNo = document.getElementById('businessRegistNo');
     let confirmBusinessRegistNo = document.getElementById('checkBusinessRegistNo');
 
     inputBusinessRegistNo.addEventListener('input', function () {
@@ -87,8 +87,6 @@ function fn_searchAddress() {
                 extraRoadAddr = ' (' + extraRoadAddr + ')';
             }
 
-
-
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
             document.getElementById('businessZipCode').value = data.zonecode;
             document.getElementById("businessAddressRoad").value = roadAddr;
@@ -110,40 +108,9 @@ function fn_searchAddress() {
             confirmedAddressRoad.disabled = true;
             confirmedZipCode.disabled = true;
 
-
-
-            // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-            // if(roadAddr !== ''){
-            //     document.getElementById("sample4_extraAddress").value = extraRoadAddr;
-            // } else {
-            //     document.getElementById("sample4_extraAddress").value = '';
-            // }
-
-            // var guideTextBox = document.getElementById("guide");
-            // // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-            // if(data.autoRoadAddress) {
-            //     var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-            //     guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-            //     guideTextBox.style.display = 'block';
-            //
-            // } else if(data.autoJibunAddress) {
-            //     var expJibunAddr = data.autoJibunAddress;
-            //     guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-            //     guideTextBox.style.display = 'block';
-            // } else {
-            //     guideTextBox.innerHTML = '';
-            //     guideTextBox.style.display = 'none';
-            // }
         }
     }).open();
 }
-
-
-
-
-
-
-
 
 
 
@@ -266,6 +233,19 @@ function createEndTimeOption(value) {
     return option;
 }
 
+// 시작시간의 default를 8시로 설정
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* 영업 시간의 default 시간 설정 */
+    // startTime 요소 가져오기
+    let startTimeSelect = document.getElementById('startTime');
+
+    // startTime 요소의 디폴트 값을 9로 설정
+    startTimeSelect.selectedIndex = 8;
+    // minRsvTime 요소의 디폴트 값을 1로 설정
+
+});
+
 
 
 
@@ -279,7 +259,44 @@ function createEndTimeOption(value) {
 
 
 /* 업체 등록하기 */
+
 function submitBusinessRegisterForm() {
+
+    /* 입력된 값에 대한 유효성 검사*/
+    if (!document.getElementById('businessRegistNo').value.trim()) {
+        alert('사업자 번호는 필수 입니다.');
+        return;
+    }
+    else if (!document.getElementById('businessName').value.trim()){
+        alert('사업체 이름은 필수 입니다.');
+        return;
+    }
+    else if (!document.getElementById('businessCategoryNo').value.trim()){
+        alert('카테고리를 선택해주세요.');
+        return;
+    }
+    if (!document.getElementById('businessAddressRoad').value.trim()) {
+        alert('주소를 선택해주세요.');
+        return;
+    }
+    if (!document.getElementById('businessPhone').value.trim()) {
+        alert('사업체 전화번호는 필수입니다.');
+        return;
+    }
+    if (!document.getElementById('startTime').value.trim()) {
+        alert('영업 시작 시간을 선택해주세요.');
+        return;
+    }
+    else if (!document.getElementById('minRsvTime').value.trim()){
+        alert('최소 예약 시간을 선택해주세요.');
+        return;
+    }
+    else if (!document.getElementById('endTime').value.trim()){
+        alert('영업 종료 시간을 선택해주세요.');
+        return;
+    }
+
+
     const businessRegistNo = document.getElementById('businessRegistNo').value;
     const businessName = document.getElementById('businessName').value;
     const businessCategoryNo = document.getElementById('businessCategoryNo').value;
@@ -292,6 +309,9 @@ function submitBusinessRegisterForm() {
     const startTime = document.getElementById('startTime').value;
     const minRsvTime = document.getElementById('minRsvTime').value;
     const endTime = document.getElementById('endTime').value;
+
+
+
 
 
     if (endTime !== null){
