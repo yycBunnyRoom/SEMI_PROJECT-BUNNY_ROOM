@@ -48,6 +48,7 @@ public class SecurityConfig {
                 //여기부터 로그인 권한을 설정하는 공간
                 auth.requestMatchers(
                         "/security/auth/*",
+                        "/security/auth/login",
                         "/signup/*",
 //                        "/security/auth/fail",
                         "/main",
