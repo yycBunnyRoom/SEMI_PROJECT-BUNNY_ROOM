@@ -20,4 +20,6 @@ public interface GuestMapper {
     int changeNicknameByUserNo(@Param("userNo") int userNo, @Param("nickName") String nickName);
 
     int changePhoneByUserNo(@Param("userNo") int userNo, @Param("phone") String phone);
+
+    int changePasswordByUserNo(@Param("userNo") int userNo, @Param("encodedNewPassword") String password);
 }

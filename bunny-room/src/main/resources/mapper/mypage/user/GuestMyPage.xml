@@ -66,4 +66,12 @@
         WHERE
             USER_NO = #{userNo}
     </update>
+
+    <update id="changePasswordByUserNo" parameterType="com.yyc.bunnyroom.signup.model.dto.LoginUserDTO">
+        UPDATE TBL_USER
+        SET
+            USER_PASSWORD = #{password}
+        WHERE
+            USER_NO = #{userNo}
+    </update>
 </mapper>

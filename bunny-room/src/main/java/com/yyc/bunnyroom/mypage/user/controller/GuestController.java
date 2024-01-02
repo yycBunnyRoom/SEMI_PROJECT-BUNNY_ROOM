@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -117,47 +118,55 @@ public class GuestController {
 
     }
 
+    /**
+     * 게스트 비밀번호 변경 페이지로 이동하는 메소드
+     * */
+    @PostMapping("/changePasswordPage")
+    public ModelAndView changePasswordPage(@RequestParam("userNo")int userNo, @RequestParam("password")String password, ModelAndView mv){
+        mv.addObject("userNo", userNo);
+        mv.addObject("password", password);
+        mv.setViewName("/myPage/passwordChanger");
 
-
-    @GetMapping("/mypageview")
-    public String myPage(@AuthenticationPrincipal AuthDetails userDetails, Model model) {
-        model.addAttribute("user", userDetails.getLoginUserDTO().getUserEmail());
-        return "/myPage/guestUpdatePassword";
+        return mv;
     }
 
+    /**
+     * 게스트가 비밀번호를 변경하는 메소드
+     * */
+    @PostMapping("/passwordChanger")
+    public String passwordChanger(@RequestParam("userNo")int userNo, @RequestParam("password")String password,
+                                  @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword,
+                                  @RequestParam("newPasswordRe")String newPasswordRe, Model model){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-//    @PostMapping("/changePassword")
-//    public ModelAndView updateUserPassword(
-//            @ModelAttribute ChangePasswordDTO changePasswordDTO,
-//            HttpSession session,
-//            ModelAndView modelAndView
-//    ) {
-//        // 세션에서 현재 로그인 사용자 정보 가져오기
-//        LoginUserDTO loggedInUser = (LoginUserDTO) session.getAttribute("user");
-//
-//        // 현재 비밀번호 확인
-//        if (loggedInUser.getUserPassword().equals(changePasswordDTO.getCurrentPassword())) {
-//            // 현재 비밀번호가 일치하면 새 비밀번호로 변경
-//            loggedInUser.setUserPassword(changePasswordDTO.getNewPassword());
-//
-//            // 비밀번호 변경 서비스 호출
-//            int result = guestService.updateUserPassword(loggedInUser);
-//
-//            if (result == 1) {
-//                modelAndView.addObject("message2", "비밀번호 변경 성공!!");
-//                modelAndView.setViewName("/myPage/guestSearch");
-//            } else {
-//                modelAndView.addObject("message2", "비밀번호 변경 실패!!");
-//                modelAndView.setViewName("/myPage/guestUpdatePassword");
-//            }
-//        } else {
-//            modelAndView.addObject("message2", "현재 비밀번호가 일치하지 않습니다.");
-//            modelAndView.setViewName("/myPage/guestUpdatePassword");
-//        }
-//
-//        return modelAndView;
-//    }
+        model.addAttribute("userNo", userNo);
+        model.addAttribute("password", password);
+        model.addAttribute("oldPassword", oldPassword);
+        model.addAttribute("newPassword", newPassword);
+        model.addAttribute("newPasswordRe", newPasswordRe);
+        int minPass = 8;
+        int maxPass = 20;
+        int result = 0;
 
+        if(!passwordEncoder.matches(oldPassword, password)){ // 현재 비밀번호가 틀렸을 때
+            model.addAttribute("message", "현재 비밀번호가 올바르지 않습니다.");
+            return "/myPage/passwordChanger";
+        }else if (oldPassword.equals(newPassword)){ // 구 비밀번호와 신 비밀번호가 동일할 때
+            model.addAttribute("message", "입력하신 비밀번호가 전과 동일합니다.");
+            return "/myPage/passwordChanger";
+        }else if(!newPassword.equals(newPasswordRe)){ // 새 비밀번호와 확인번호가 다를 때
+            model.addAttribute("message", "새 비밀번호와 비밀번호 확인 번호가 다릅니다.");
+            return "/myPage/passwordChanger";
+        }else if(newPassword.length() < minPass || newPassword.length() > maxPass){ // 비밀번호 수 제한을 어길 때
+            model.addAttribute("message", "새 비밀번호는 최소 " + minPass + "자 이상이고, 최대 " + maxPass + "자 이하여야 합니다.");
+            return "/myPage/passwordChanger";
+        }else {
+            String encodedNewPassword = passwordEncoder.encode(newPassword);
+            result = guestService.changePasswordByUserNo(userNo, encodedNewPassword);
+            model.addAttribute("message", "비밀번호가 정상적으로 변경되었습니다.");
+            return "/myPage/guestSearch";
+        }
+    }
 
 }
 

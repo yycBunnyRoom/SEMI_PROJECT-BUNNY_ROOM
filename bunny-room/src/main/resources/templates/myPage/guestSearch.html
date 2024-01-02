@@ -29,7 +29,11 @@
             EMAIL : <p th:text="${user.userEmail}"></p>
         </article>
         <article>
-            비밀번호 : <P th:text="${user.userPassword}"></P>
+            <form action="/myPage/changePasswordPage" method="post">
+                <input type="hidden" name="userNo" th:value="${user.userNo}"/>
+                <input type="hidden" name="password" th:value="${user.userPassword}">
+                <button type="submit">비밀번호 변경</button>
+            </form>
         </article>
         <article>
             <form id="changeNickname" action="/myPage/changeNickname" method="post">
@@ -102,5 +106,14 @@
             }
         }
     </script>
+
+    <th:block th:if="${message}">
+        <script th:inline="javascript">
+            window.onload =function (){
+                let message = `[[${message}]]`;
+                alert(message);
+            }
+        </script>
+    </th:block>
 </body>
 </html>
