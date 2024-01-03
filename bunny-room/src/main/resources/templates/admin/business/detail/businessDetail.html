@@ -32,8 +32,8 @@
         </article>
 
         <article>
-            <p th:text="'최초 등록일 : ' + ${business.businessRegisterDate}"></p>
-            <p th:text="'최종 정보 수정일 : ' + ${business.businessUpdateDate}"></p>
+            <p th:text="'최초 등록일 : ' + ${#calendars.format(business.businessRegisterDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
+            <p th:text="'최종 정보 수정일 : ' + ${#calendars.format(business.businessUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
         </article>
 
         <article>
@@ -79,8 +79,8 @@
                 <td th:text="${room.roomMaxPeople}"></td>
                 <td th:text="${room.roomFacilityInfo}"></td>
                 <td th:text="${room.roomNotice}"></td>
-                <td th:text="${room.roomRegistDate}"></td>
-                <td th:text="${room.roomUpdateDate}"></td>
+                <td th:text="${#calendars.format(room.roomRegistDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#calendars.format(room.roomUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td th:text="${room.roomStatus}"></td>
                 <td>
                     <button type="button" id="deleteRoom" class="btn btn-primary" data-bs-toggle="modal"

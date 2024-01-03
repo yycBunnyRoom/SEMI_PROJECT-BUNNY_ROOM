@@ -276,4 +276,40 @@
         WHERE
         BUSINESS_NO = #{businessNo}
     </update>
+
+    <update id="deleteRoom" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        UPDATE TBL_ROOM
+        SET
+            ROOM_UPDATE_DATE = #{update},
+            ROOM_STATUS = 'inactive'
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </update>
+
+    <update id="restoreRoom" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        UPDATE TBL_ROOM
+        SET
+            ROOM_UPDATE_DATE = #{update},
+            ROOM_STATUS = 'active'
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </update>
+
+    <update id="cancelRoom" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_STATUS = '취소됨',
+            RESERVATION_CANCEL_REASON = '관리자에 의한 업체 삭제',
+            RESERVATION_CANCEL_DATE = #{update}
+        WHERE
+            ROOM_NO IN (SELECT
+                            R.ROOM_NO
+                        FROM
+                            TBL_ROOM AS R
+                        JOIN
+                            TBL_BUSINESS AS B ON (B.BUSINESS_NO = R.BUSINESS_NO)
+                        WHERE
+                            B.BUSINESS_NO = #{businessNo}
+                        )
+    </update>
 </mapper>

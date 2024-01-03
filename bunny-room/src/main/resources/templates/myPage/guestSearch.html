@@ -18,7 +18,7 @@
         </article>
         <article>
             <h2 id="memberNickname" th:text="${user.userNickname}"></h2>
-            회원 가입일 : <p th:text="${user.userRegistDate}"></p>
+            회원 가입일 : <p th:text="${#calendars.format(user.userRegistDate, 'yyyy-MM-dd')}"></p>
         </article>
         <form action="/myPage/withdrawReason" method="post">
             <input type="hidden" name="userNo" th:value="${user.userNo}"/>
