@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/common/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/common/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/dao/RoomRegisterMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/dao/RoomRegisterMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/model/RoomDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/model/RoomDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/service/RoomRegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/service/RoomRegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/test/test2.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/test/test2.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/test/test2.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/test/test2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/test/test2.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/test/test2.html" afterDir="false" />
-    </list>
+    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -84,7 +71,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.BunnyRoomApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feature/security",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/dev/10_spring_boot/chap04-exception",
     "list.type.of.created.stylesheet": "CSS",
@@ -166,7 +153,7 @@
       <workItem from="1704078940997" duration="23885000" />
       <workItem from="1704158786374" duration="28486000" />
       <workItem from="1704193660095" duration="18587000" />
-      <workItem from="1704241011676" duration="27144000" />
+      <workItem from="1704241011676" duration="28076000" />
     </task>
     <servers />
   </component>

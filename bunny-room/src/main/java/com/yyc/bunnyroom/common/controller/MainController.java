@@ -47,19 +47,11 @@ public class MainController {
             userNickname= null;
         }
 
-//        String message = (String) request.getAttribute("message"); // 요청에 포함된 메시지 가져오기
-//
-        System.out.println("message 있니 없니?: "+message);
-
         modelAndView.addObject("userAuth",userAuth);
         modelAndView.addObject("userNickname",userNickname);
-
         modelAndView.addObject("message", message); // 메시지 추가
 
-
-
         modelAndView.setViewName("/main");
-        System.out.println("/main 은 넣었어");
         return modelAndView;
     }
 
