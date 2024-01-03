@@ -1,7 +1,11 @@
 package com.yyc.bunnyroom.security.auth.model;
 
+import com.yyc.bunnyroom.signup.dao.UserMapper;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
+import com.yyc.bunnyroom.signup.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
@@ -63,9 +67,7 @@ public class AuthDetails implements UserDetails {
     // false이면 해당 계정을 사용할 수 없다
     // 보통 데이터 삭제는 즉시하는 것이 아닌 일정 기간 보관후 삭제를 한다
     @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+    public boolean isCredentialsNonExpired() { return true;}
 
     // 계정 비활성화 여부로 사용자가 사용할 수 없는 상테
     // false이면 계정을 사용할 수 없다

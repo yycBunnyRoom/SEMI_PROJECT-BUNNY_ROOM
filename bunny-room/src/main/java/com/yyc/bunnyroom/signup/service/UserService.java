@@ -76,4 +76,8 @@ public class UserService {
     }
 
 
+    public boolean checkEmailByUserEmail(String userEmail) {
+        return userMapper.checkEmailByUserEmail(userEmail);
+    }
+
 }

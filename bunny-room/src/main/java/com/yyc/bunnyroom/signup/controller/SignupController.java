@@ -23,6 +23,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/signup")
 public class SignupController {
+
     @Autowired
     private UserService userService;
 

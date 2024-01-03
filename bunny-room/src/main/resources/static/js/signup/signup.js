@@ -2,66 +2,53 @@
 <!--    이메일 관련-->
 let isSendingEmail = false;
 let emailConfirmed = false;
+let userEmail = "";
+
+let checkEmail = document.getElementById('checkEmail');
+
+// 비동기 이메일 확인
+document.addEventListener('DOMContentLoaded', function () {
+    let inputUserEmail = document.getElementById('inputUserEmail');
 
 
-// 이메일 중복 확인
-function fn_emailCheck() {
-    $.ajax({
-        url : "/signup/emailCheck",
-        type : "POST",
-        dataType :"JSON",
-        data : {"userEmail" : $("#inputUserEmail").val()},
-        success : function (data) {
-            if(data == 1) {
-                alert("중복된 이메일입니다.");
-            } else if (data == 0) {
-                $("#emailCheck").attr("value", "Y");
-                alert("사용 가능한 이메일입니다.")
+    inputUserEmail.addEventListener('input', function () {
+        userEmail = this.value;
 
-                // 이메일 중복확인을 누르면 이메일 인증하기 버튼이 보이게
-                document.getElementById('sendAuthNumber').style.display = 'block';
-            }
+        if (!userEmail) {
+            // 입력 필드에 값이 없을 때 텍스트를 숨깁니다.
+            checkEmail.style.display = 'none';
+            document.getElementById('sendAuthNumber').style.display = 'none';
+            return; // 값이 없으면 여기서 함수 종료
         }
 
-    })
-}
+        // 값이 있을 때는 텍스트를 보이도록 처리
+        fetch('/check/email/' + userEmail)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                checkEmail.style.display = 'block'; // 텍스트를 보이도록 설정
 
+                if (data.duplicate) {
+                    checkEmail.textContent = '가입된 이메일이 있습니다.';
+                    checkEmail.classList.remove('available');
+                    checkEmail.classList.add('duplicate');
 
+                    document.getElementById('sendAuthNumber').style.display = 'none';
+                } else {
+                    checkEmail.textContent = '사용가능한 이메일입니다.';
+                    checkEmail.classList.remove('duplicate');
+                    checkEmail.classList.add('available');
 
-
-
-
-// const emailCheck = () => {
-//     const email = document.getElementById("userEmail").value; // 입력값을 가져오는 내용
-//     const checkResult = document.getElementById("check-result1"); // <p id="check-result"></p> 이거 가져오는 요소
-//     console.log("입력한 이메일",email); // 확인용 콘솔
-//     $.ajax({
-//         //요청방식 post,url: "email-check",데이터: 이메일
-//         type: "post", //post방식으로
-//         url: "/user/email-check", //이주소에 보내겠다
-//         data: {
-//             "memberEmail": email //보내고자하는 데이터의 내용 memberEmail이 파라미터이름 email은 사용자가 입력한 이메일 값
-//         },
-//         success: function (res){ //요청 성공시
-//             console.log("요청성공", res); //콘솔 확잉용
-//             if (res === 1){
-//                 console.log("사용가능한 이메일");
-//                 checkResult.style.color = "green";
-//                 checkResult.innerHTML = "사용 가능한 이메일입니다.";
-//             } else {
-//                 console.log("이미 사용중인 이메일");
-//                 checkResult.style.color = "red";
-//                 checkResult.innerHTML = "사용 중인 이메일입니다."
-//             }
-//         },
-//         error: function (err){
-//             console.log("에러발생", err);
-//         }
-//     })
-// }
-
-
-
+                    // 이메일 중복확인을 누르면 이메일 인증하기 버튼이 보이게
+                    document.getElementById('sendAuthNumber').style.display = 'block';
+                }
+            })
+            .catch(function (error) {
+                console.error('Error:', error);
+            });
+    });
+});
 
 
 
@@ -71,6 +58,11 @@ function fn_emailCheck() {
 function fn_sendAuthEmail(){
 
     alert("인증 이메일을 발송했습니다.")
+
+    document.getElementById('inputUserEmail').style.display = 'none';
+    checkEmail.textContent = userEmail;
+    checkEmail.classList.remove('duplicate');
+    checkEmail.classList.remove('available');
 
     // 이메일 보낸 경우 중복 보내는 거 방지
     if (isSendingEmail) {
@@ -93,6 +85,9 @@ function fn_sendAuthEmail(){
 
             // 인증메일을 보내면 인증 번호 확인 버튼이 보이게
             document.getElementById('confirmAuthNumberBtn').style.display = 'block';
+            let sendAuthNumber = document.getElementById('sendAuthNumber');
+            sendAuthNumber.textContent = '인증번호 다시 보내기'
+
             document.getElementById('authNum').style.display = 'block';
 
             // 전송 완료 후 전송 상태 변경
@@ -120,38 +115,30 @@ function fn_confirmAuthNumber(){
             if(data == 1) {
                 alert("인증 되었습니다");
 
-                document.getElementById('emailCheck').style.display = 'none';
                 document.getElementById('sendAuthNumber').style.display = 'none';
                 document.getElementById('authNum').style.display = 'none';
                 document.getElementById('confirmAuthNumberBtn').style.display = 'none';
 
-                var confirmedEmail = document.getElementById('inputUserEmail').value;
-                var inputUserEmail = document.getElementById('inputUserEmail');
-                // 인증된 이메일 변경 불가능
-                inputUserEmail.disabled = true;
-                // 인증관련 버튼들 사라져
-
-
-
-                document.getElementById('userEmail').value = confirmedEmail;
                 emailConfirmed =true;
 
             } else if (data == 0) {
-                $("#emailCheck").attr("value", "Y");
                 alert("잘못된 인증번호입니다.")
             }
         }
     })
 }
-<!--   자바스크립트: 동적으로 입력한 핸드폰 번호를 숨겨진 userPhone에 입력 -->
+
+
+
+<!--핸드폰-->
+let userPhone = "";
 
 function updateUserPhone() {
     var phone1 = document.getElementById('phone1').value;
     var phone2 = document.getElementById('phone2').value;
     var phone3 = document.getElementById('phone3').value;
 
-    var userPhone = phone1 + phone2 + phone3;
-    document.getElementById('userPhone').value = userPhone;
+    userPhone = phone1 + phone2 + phone3;
 }
 
 // 입력값이 변경될 때마다 updateUserPhone() 함수 호출하여 userPhone 업데이트
@@ -159,27 +146,90 @@ document.getElementById('phone1').addEventListener('change', updateUserPhone);
 document.getElementById('phone2').addEventListener('input', updateUserPhone);
 document.getElementById('phone3').addEventListener('input', updateUserPhone);
 
-// 유저의 아이디 유지
-function updateUserEmail(){
-
-}
-document.getElementById('phone2').addEventListener('input', updateUserPhone);
 
 
+<!--비밀번호 확인하는 코드-->
+let userPassword;
 
-document.getElementById('signupForm').addEventListener('submit', function(event) {
-    // updateUserPhone 함수를 호출하여 userPhone 값을 업데이트
-    updateUserPhone();
+// 비밀번호가 맞다면 true, 틀리면 false를 반환
+function verifyPassword() {
+    let password1 = document.getElementById("password1").value;
+    let password2 = document.getElementById("password2").value;
 
-// 이메일 인증이 됐는지 먼저 확인
-
-if (!emailConfirmed) {
-    alert("이메일 인증은 필수입니다");
-    event.preventDefault(); // 제출 이벤트 취소
-}
-
-if (message){
-    alert(message);
+    if (password1 === password2){
+        userPassword = password2;
+        return true;
+    }
+    else {
+        alert("입력하신 비밀번호가 다릅니다")
+    }
 }
 
-});
+
+
+
+
+
+
+
+/* 가입하기 */
+function registUser() {
+
+    /* 입력된 값에 대한 유효성 검사*/
+    if (!emailConfirmed) {
+        alert('이메일 인증은 필수 입니다.');
+        return;
+    }
+    else if (!verifyPassword()){
+        return;
+    }
+    else if (!document.getElementById('userNickname').value.trim()){
+        alert('닉네임은 필수 입니다.');
+        return;
+    }
+    else if (!userPhone) {
+        alert('전화번호를 입력해주세요');
+        return;
+    }
+
+    const userNickname = document.getElementById('userNickname').value;
+
+
+    const data = {
+        userEmail: userEmail,
+        userPassword: userPassword,
+        userNickname: userNickname,
+        userPhone: userPhone,
+        userAuth: userAuth
+    };
+
+    console.log(data)
+
+    fetch('/check/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received data:', data);
+
+            alert(data.message)
+
+            if(data.result){
+                window.location.href = '/security/auth/login';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('네트워크 오류가 발생했습니다.');
+        });
+
+}

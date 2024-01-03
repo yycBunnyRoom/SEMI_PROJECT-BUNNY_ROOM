@@ -14,7 +14,7 @@ function createButtons() {
 }
 
 function toggleOption(option, button) {
-    const index = appliedOptions.findIndex(opt => opt.optionIdx === option.optionIdx);
+    const index = appliedOptions.indexOf(option.optionIdx);
     if (index > -1) {
         appliedOptions.splice(index, 1);
         button.classList.remove('selected'); // 선택 해제 시 클래스 제거
@@ -24,6 +24,8 @@ function toggleOption(option, button) {
     }
     console.log('선택된 값:', appliedOptions);
 }
+
+
 
 window.onload = () => {
     createButtons();
