@@ -13,6 +13,7 @@
         <result property="userRegistDate" column="USER_REGIST_DATE"/>
         <result property="userUpdateDate" column="USER_UPDATE_DATE"/>
         <result property="status" column="USER_STATUS"/>
+        <result property="withdrawReason" column="USER_WITHDRAW_REASON"/>
     </resultMap>
 
     <select id="searchAllMember" resultMap="memberResult">
