@@ -30,4 +30,8 @@ public interface AdminBusinessDAO {
     int delete(@Param("businessNo") int businessNo, @Param("reason") String reason, @Param("update") String update);
 
     int restore(@Param("businessNo") int businessNo, @Param("update") String update, @Param("reason") String reason);
+
+    int deleteRoom(@Param("businessNo") int businessNo, @Param("update") String update);
+
+    int restoreRoom(@Param("businessNo") int businessNo, @Param("update") String update);
 }

@@ -29,6 +29,9 @@ public class AdminBusinessController {
         return "/admin/business";
     }
 
+    /**
+     * 업체를 조회하도록 요청하는 메소드
+     * */
     @GetMapping("/search")
     public String businessSearcher(@RequestParam("mode")String mode,
                                    @RequestParam("target")String target, Model model){
@@ -69,6 +72,9 @@ public class AdminBusinessController {
         return "/admin/business";
     }
 
+    /**
+     * 업체를 삭제하는 이유를 입력하는 페이지로 이동하는 메소드
+     * */
     @PostMapping("/delete")
     public String delete(@RequestParam(name = "businessNo") int businessNo,
                          @RequestParam(name = "status") String status, Model model, RedirectAttributes redirectAttributes){
@@ -83,6 +89,9 @@ public class AdminBusinessController {
         return "/admin/business/deleteReason";
     }
 
+    /**
+     * 업체 삭제를 요청받은 메소드
+     * */
     @PostMapping("/deleteReason")
     public String deleteReason(@RequestParam(name = "businessNo")int businessNo,
                                @RequestParam(name = "reason")String reason, RedirectAttributes redirectAttributes){
@@ -100,6 +109,9 @@ public class AdminBusinessController {
         return "redirect:/admin/business";
     }
 
+    /**
+     * 업체 복구 사유를 입력하는 페이지로 이동하는 메소드
+     * */
     @PostMapping("/restore")
     public String restore(@RequestParam(name = "businessNo") int businessNo,
                           @RequestParam(name = "status") String status,
@@ -117,6 +129,9 @@ public class AdminBusinessController {
         return "/admin/business/restoreReason";
     }
 
+    /**
+     * 업체를 복구하도록 요청하는 메소드
+     * */
     @PostMapping("/restoreReason")
     public String restoreReason(@RequestParam(name = "businessNo") int businessNo,
                                 @RequestParam(name = "deleteReason") String deleteReason,

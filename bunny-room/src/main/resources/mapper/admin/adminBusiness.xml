@@ -276,4 +276,22 @@
         WHERE
         BUSINESS_NO = #{businessNo}
     </update>
+
+    <update id="deleteRoom" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        UPDATE TBL_ROOM
+        SET
+            ROOM_UPDATE_DATE = #{update},
+            ROOM_STATUS = 'inactive'
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </update>
+
+    <update id="restoreRoom" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomDTO">
+        UPDATE TBL_ROOM
+        SET
+            ROOM_UPDATE_DATE = #{update},
+            ROOM_STATUS = 'active'
+        WHERE
+            BUSINESS_NO = #{businessNo}
+    </update>
 </mapper>
