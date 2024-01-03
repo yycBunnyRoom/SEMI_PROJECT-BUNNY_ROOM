@@ -22,7 +22,7 @@ $(document).ready(function()
                 '<div class="bbb_price">' + room.price + '원/인' + '</div>' +
                 '</div>' +
 
-                '<div class="bbb_category"><a href="#">한줄소개: ' + room.description + '</a></div>' +
+                '<div class="bbb_category"><a href="#"> ' + room.roomIntro + '</a></div>' +
                 '</div>' +
 
                 '<ul class="bbb_marks">' +
