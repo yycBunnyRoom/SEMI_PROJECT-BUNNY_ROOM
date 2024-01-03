@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.mypage.user.model;
 
 import com.yyc.bunnyroom.common.dto.UserDTO;
+import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -22,4 +23,10 @@ public interface GuestMapper {
     int changePhoneByUserNo(@Param("userNo") int userNo, @Param("phone") String phone);
 
     int changePasswordByUserNo(@Param("userNo") int userNo, @Param("encodedNewPassword") String password);
+
+    List<ReservationListDTO> showReservation(int userNo);
+
+    int cancelReservation(@Param("reservationNo") int reservationNo, @Param("reason") String reason, @Param("cancelDate") String cancelDate);
+
+    int cancelReservationBecauseOfWithdraw(int userNo, String update);
 }

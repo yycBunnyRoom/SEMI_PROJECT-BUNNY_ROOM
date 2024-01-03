@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 예약 리스트</title>
+    <!-- 부트스트랩 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+<div th:insert="~{/common/header :: headerFragment}"></div>
+
+<div th:insert="~{/myPage/myPageNav :: myPageNav}"></div>
+
+    <h1>예약 리스트</h1>
+
+    <section>
+        <article>
+            <table>
+                <tr>
+                    <th>예약 업체명</th>
+                    <th>예약 공간명</th>
+                    <th>업체 연락처</th>
+                    <th>예약 날짜</th>
+                    <th>예약 시간</th>
+                    <th>예약 인원</th>
+                    <th>총액</th>
+                    <th>예약상태</th>
+                    <th>예약한 날짜</th>
+                    <th>예약 취소 날짜</th>
+                    <th>예약 취소 사유</th>
+                    <th>기능</th>
+                </tr>
+                <tr th:each="list : ${reservationList}">
+                    <td th:text="${list.businessName}"></td>
+                    <td th:text="${list.roomName}"></td>
+                    <td th:text="${list.businessPhone}"></td>
+                    <td th:text="${#calendars.format(list.reservationDate, 'yyyy-MM-dd')}"></td>
+                    <td th:text="${list.reservationTime}"></td>
+                    <td th:text="${list.reservationPerson}"></td>
+                    <td th:text="${list.totalCost}"></td>
+                    <td th:text="${list.reservationStatus}"></td>
+                    <td th:text="${#calendars.format(list.registerDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#calendars.format(list.cancelDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${list.cancelReason}"></td>
+                    <td>
+                        <button th:if="${list.reservationStatus == '예약중'}" type="button" id="cancel" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" th:attr="reservationNo=${list.reservationNo}" onclick="cancelReservation(this)">
+                            예약 취소
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </article>
+    </section>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">예약 취소</h1>
+            </div>
+            <div class="modal-body">
+                <h3>예약 취소 사유를 작성해주세요.</h3>
+                <h4>(한 번 취소된 예약은 되돌릴 수 없습니다.)</h4>
+                <input type="hidden" id="getReservationNo" name="reservationNo" value=""/>
+                <textarea id="getReason" name="reason" placeholder="취소 사유를 작성해주세요..." style="width: 400px; height: 200px;resize: none"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                <button type="button" id="submitReservationNo" class="btn btn-primary" onclick="submitReservationNo()" data-bs-dismiss="modal">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 모달창 동작에 대한 js -->
+<script src="/myPage/reservationList.js"/>
+<!-- 부트스트랩 JS 및 Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+</body>
+</html>

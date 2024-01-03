@@ -1,11 +1,14 @@
 package com.yyc.bunnyroom.mypage.user.service;
 
 import com.yyc.bunnyroom.common.dto.UserDTO;
+import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.mypage.user.model.GuestMapper;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,9 +47,9 @@ public class GuestService {
     public int withdrawByUserNo(int userNo, String reason, String update) {
 
         int result = guestMapper.withdrawByUserNo(userNo, reason, update);
-
-        if(result > 0){
-            return result;
+        int cancel = guestMapper.cancelReservationBecauseOfWithdraw(userNo, update);
+        if(result > 0 && cancel > 0){
+            return result + cancel;
         }else {
             return 0;
         }
@@ -86,6 +89,23 @@ public class GuestService {
     public int changePasswordByUserNo(int userNo, String encodedNewPassword) {
 
         int result = guestMapper.changePasswordByUserNo(userNo, encodedNewPassword);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
+    }
+
+    public List<ReservationListDTO> showReservation(int userNo) {
+        List<ReservationListDTO> list = guestMapper.showReservation(userNo);
+
+        return list;
+    }
+
+    public int cancelReservation(int reservationNo, String reason) {
+        String cancelDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = guestMapper.cancelReservation(reservationNo, reason, cancelDate);
 
         if(result > 0){
             return result;

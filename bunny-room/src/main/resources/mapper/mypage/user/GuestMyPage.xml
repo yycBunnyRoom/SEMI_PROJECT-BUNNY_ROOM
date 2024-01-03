@@ -18,6 +18,22 @@
         <result property="profileImageNo" column="PROFILE_IMAGE_NO"/>
     </resultMap>
 
+    <resultMap id="reservation" type="com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO">
+        <id property="reservationNo" column="RESERVATION_NO"/>
+        <result property="userNo" column="USER_NO"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="roomName" column="ROOM_NAME"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="reservationDate" column="RESERVATION_DATE"/>
+        <result property="reservationTime" column="RESERVATION_UNIT"/>
+        <result property="reservationPerson" column="RESERVATION_PERSON"/>
+        <result property="totalCost" column="RESERVATION_TOTAL_COST"/>
+        <result property="reservationStatus" column="RESERVATION_STATUS"/>
+        <result property="cancelReason" column="RESERVATION_CANCEL_REASON"/>
+        <result property="registerDate" column="RESERVATION_REGIST_DATE"/>
+        <result property="cancelDate" column="RESERVATION_CANCEL_DATE"/>
+    </resultMap>
+
 
     <select id="selectByUserEmail" resultMap="loginUser">
         SELECT
@@ -73,5 +89,61 @@
             USER_PASSWORD = #{password}
         WHERE
             USER_NO = #{userNo}
+    </update>
+
+    <select id="showReservation" resultMap="reservation">
+        SELECT
+            R.RESERVATION_NO,
+            R.USER_NO,
+            BR.BUSINESS_NAME,
+            BR.ROOM_NAME,
+            BR.BUSINESS_PHONE,
+            R.RESERVATION_DATE,
+            R.RESERVATION_UNIT,
+            R.RESERVATION_PERSON,
+            R.RESERVATION_TOTAL_COST,
+            R.RESERVATION_STATUS,
+            R.RESERVATION_CANCEL_REASON,
+            R.RESERVATION_REGIST_DATE,
+            R.RESERVATION_CANCEL_DATE
+        FROM
+            TBL_RESERVATION AS R
+        JOIN
+            (SELECT
+                R.ROOM_NO,
+                R.ROOM_NAME,
+                B.BUSINESS_NAME,
+                B.BUSINESS_PHONE
+            FROM
+                TBL_ROOM AS R
+            JOIN
+                TBL_BUSINESS AS B ON (R.BUSINESS_NO = B.BUSINESS_NO)
+            ) AS BR ON (R.ROOM_NO = BR.ROOM_NO)
+        WHERE
+            USER_NO = #{userNo}
+        ORDER BY
+            R.RESERVATION_REGIST_DATE DESC
+    </select>
+
+    <update id="cancelReservation" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_CANCEL_REASON = #{reason},
+            RESERVATION_CANCEL_DATE = #{cancelDate},
+            RESERVATION_STATUS = '취소됨'
+        WHERE
+            RESERVATION_NO = #{reservationNo}
+    </update>
+
+    <update id="cancelReservationBecauseOfWithdraw" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_CANCEL_REASON = '회원 탈퇴',
+            RESERVATION_CANCEL_DATE = #{update},
+            RESERVATION_STATUS = '취소됨'
+        WHERE
+            USER_NO = #{userNo}
+            AND
+            RESERVATION_DATE > CURRENT_TIMESTAMP()
     </update>
 </mapper>
