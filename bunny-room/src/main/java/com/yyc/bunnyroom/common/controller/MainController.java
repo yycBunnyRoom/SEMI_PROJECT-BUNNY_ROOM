@@ -68,6 +68,13 @@ public class MainController {
         return "/test/test2";
     }
 
+    @GetMapping("/test4")
+    public String test4(){
+        return "/test/test4";
+    }
+
+
+
     // 메인 창에 카테고리 코드를 가져감
     @ModelAttribute("categories")
     public List<BusinessCategoryDTO> categories(){
