@@ -38,6 +38,7 @@
                   <th>회원 가입일</th>
                   <th>회원 정보 수정일</th>
                   <th>회원 상태</th>
+                  <th>탈퇴 사유</th>
               </tr>
               <tr th:each="member : ${members}">
                   <td th:text="${member.userNo}"></td>
@@ -45,9 +46,10 @@
                   <td th:text="${member.email}"></td>
                   <td th:text="${member.nickname}"></td>
                   <td th:text="${member.phone}"></td>
-                  <td th:text="${member.userRegistDate}"></td>
-                  <td th:text="${member.userUpdateDate}"></td>
+                  <td th:text="${#calendars.format(member.userRegistDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                  <td th:text="${#calendars.format(member.userUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                   <td th:text="${member.status}"></td>
+                  <td th:text="${member.withdrawReason}"></td>
                   <td>
                       <form action="/admin/black/addBlacklist" method="post">
                           <input type="hidden" name="userNo" th:value="${member.userNo}">
@@ -62,6 +64,7 @@
                   <td>
                       <form action="/admin/withdrawReason" method="post">
                           <input type="hidden" name="email" th:value="${member.email}">
+                          <input type="hidden" name="userNo" th:value="${member.userNo}">
                           <button type="submit">탈퇴</button>
                       </form>
                   </td>

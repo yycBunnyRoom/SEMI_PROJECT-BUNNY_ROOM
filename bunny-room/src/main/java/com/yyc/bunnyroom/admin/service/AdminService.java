@@ -2,6 +2,7 @@ package com.yyc.bunnyroom.admin.service;
 
 import com.yyc.bunnyroom.admin.model.dao.AdminDAO;
 import com.yyc.bunnyroom.admin.model.dto.MemberDTO;
+import com.yyc.bunnyroom.mypage.user.model.GuestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import java.util.Map;
 public class AdminService {
 
     private final AdminDAO adminDAO;
+
+    private final GuestMapper guestMapper;
 
     public List<MemberDTO> searchAllMember() {
         // 전체 회원 정보를 탐색
@@ -38,11 +41,13 @@ public class AdminService {
     /**
      * 해당회원의 탈퇴 요청을 수행하는 메소드
      * */
-    public int withdrawMember(String email, String reason) {
+    public int withdrawMember(String email, int userNo, String reason) {
         String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        // 회원 탈퇴
         int result = adminDAO.withdrawMember(email, reason, updateDate);
-
-        if(result > 0){
+        // 탈퇴할 회원의 예약 취소
+        int cancelReservation = guestMapper.cancelReservationBecauseOfWithdraw(userNo, updateDate);
+        if(result > 0 && cancelReservation > 0){
             System.out.println("정상적으로 탈퇴처리되었습니다.");
             return result;
         }else {

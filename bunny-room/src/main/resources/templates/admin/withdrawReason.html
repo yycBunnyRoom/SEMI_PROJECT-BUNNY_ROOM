@@ -8,6 +8,7 @@
   <h3>탈퇴 사유를 작성해주세요</h3>
   <form action="/admin/withdraw" method="post">
     <input type="hidden" name="email" th:value="${email}">
+      <input type="hidden" name="userNo" th:value="${userNo}">
       <p>사유 : </p><input type="text" name="reason"/>
       <button type="submit">탈퇴</button>
   </form>
