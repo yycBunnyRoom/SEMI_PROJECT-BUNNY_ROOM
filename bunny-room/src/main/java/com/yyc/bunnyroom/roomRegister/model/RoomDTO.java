@@ -44,4 +44,6 @@ public class RoomDTO {
 
     private int [] appliedOptions;
 
+    private String categoryName;
+
 }

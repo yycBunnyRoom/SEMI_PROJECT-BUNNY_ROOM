@@ -2,6 +2,7 @@ package com.yyc.bunnyroom.common.controller;
 
 import com.yyc.bunnyroom.common.UserRole;
 import com.yyc.bunnyroom.roomRegister.model.BusinessCategoryDTO;
+import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import jakarta.servlet.http.HttpServletRequest;
@@ -74,4 +75,11 @@ public class MainController {
         // DB 에 있는 카테고리를 가져와서 같이 보낸다
         return roomRegisterService.selectAllBusinessCategory();
     }
+    @ModelAttribute("latestRooms")
+    public List<RoomDTO> latestRooms(){
+        List<RoomDTO> rooms = roomRegisterService.getLatestRoomsByLimit10();
+        System.out.println("최신방: "+rooms);
+        return rooms;
+    }
+
 }

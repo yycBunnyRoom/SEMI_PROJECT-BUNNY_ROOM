@@ -4,6 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <title>메인 페이지</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
+
     <script defer th:src="@{/js/main.js}"></script>
 
     <script th:inline="javascript">
@@ -11,6 +22,7 @@
         let userNickname = [[${userNickname}]]
         let message = [[${message}]]
         let categories = [[${categories}]]
+        let latestRooms = [[${latestRooms}]]
     </script>
 
     <link th:href="@{/css/header/header.css}" rel="stylesheet"/>
@@ -35,10 +47,6 @@
         <button id="btn_logout" style="display: block">로그아웃</button>
     </form>
 
-<!--    <form th:action="@{/admin/adminPage}" >-->
-<!--        <button id="btn_adminPage" style="display: none">어드민페이지로 가기</button>-->
-<!--    </form>-->
-
     <!--어드민 페이지로 가는 버튼-->
     <div class="button" id="btn_goToAdmin" style="display: none">어드민 페이지</div>
 
@@ -56,6 +64,41 @@
 
 
     <div id="categoryButtons"></div>
+
+
+    <!--최신 방 보여주는 공간-->
+    <div class="trends">
+        <div class="bbb_background"></div>
+        <div class="bbb_overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="bbb_container">
+                        <h2 class="bbb_title">Latest Rooms 2024</h2>
+                        <div class="bbb_text">
+                            <p>2024년 HOT 플레이스!!</p>
+                        </div>
+                        <div class="bbb_slider_nav">
+                            <div class="bbb_prev bbb_nav"><i class="fas fa-angle-left ml-auto"></i></div>
+                            <div class="bbb_next bbb_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="bbb_slider_container">
+                        <div class="owl-carousel owl-theme bbb_slider">
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
 
     <p id="output"></p>

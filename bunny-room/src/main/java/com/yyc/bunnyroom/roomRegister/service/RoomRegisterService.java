@@ -116,5 +116,7 @@ public class RoomRegisterService {
     }
 
 
-
+    public List<RoomDTO> getLatestRoomsByLimit10() {
+        return roomRegisterMapper.getLatestRoomsByLimit10();
+    }
 }

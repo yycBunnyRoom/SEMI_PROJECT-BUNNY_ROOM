@@ -53,6 +53,7 @@
         <result property="roomUpdateDate" column="ROOM_UPDATE_DATE"/>
         <result property="roomStatus" column="ROOM_STATUS"/>
         <result property="price" column="ROOM_PRICE"/>
+        <result property="categoryName" column="BUSINESS_CATEGORY_NAME"/>
     </resultMap>
 
     <!--AppliedOption DTO-->
@@ -261,6 +262,7 @@
             )
         </foreach>
     </insert>
+
 
 
 
@@ -507,7 +509,35 @@
 
 
 
-
+    <!--getLatestRoomsByLimit10-->
+    <select id="getLatestRoomsByLimit10" resultMap="roomDTO">
+        SELECT DISTINCT ROOM_NO,
+            A.BUSINESS_NO,
+            A.ROOM_NAME,
+            A.ROOM_INTRO,
+            A.ROOM_DETAIL,
+            A.ROOM_AVAILABLE_STATUS,
+            A.ROOM_MIN_PEOPLE,
+            A.ROOM_MAX_PEOPLE,
+            A.ROOM_FACILITY_INFO,
+            A.ROOM_NOTICE,
+            A.ROOM_REGIST_DATE,
+            A.ROOM_UPDATE_DATE,
+            A.ROOM_STATUS,
+            A.ROOM_PRICE,
+            C.BUSINESS_CATEGORY_NAME
+        FROM
+            TBL_ROOM AS A
+        JOIN
+            TBL_BUSINESS AS B ON (A.BUSINESS_NO = B.BUSINESS_NO)
+        JOIN
+            TBL_BUSINESS_CATEGORY AS C ON (B.BUSINESS_CATEGORY_NO = C.BUSINESS_CATEGORY_NO)
+        WHERE
+            ROOM_STATUS = 'active'
+        ORDER BY
+            ROOM_UPDATE_DATE DESC
+        LIMIT 10
+    </select>
 
 
 

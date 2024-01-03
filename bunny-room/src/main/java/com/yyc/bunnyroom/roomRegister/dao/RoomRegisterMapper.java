@@ -62,5 +62,5 @@ public interface RoomRegisterMapper {
     BusinessDTO getBusinessInfoByRoomNo(int roomNo);
 
 
-
+    List<RoomDTO> getLatestRoomsByLimit10();
 }
