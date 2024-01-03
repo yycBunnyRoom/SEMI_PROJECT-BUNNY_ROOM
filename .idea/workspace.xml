@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/reservation/detail/roomDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/reservation/detail/roomDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/test/test2.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/test/test2.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/businessRegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/businessRegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/test/test2.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/test/test2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/detail/roomDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/reservation/detail/roomDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/form/businessRegisterForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/form/businessRegisterForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/test/test2.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/test/test2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +160,7 @@
       <workItem from="1704044491625" duration="5107000" />
       <workItem from="1704078940997" duration="23885000" />
       <workItem from="1704158786374" duration="28486000" />
-      <workItem from="1704193660095" duration="13530000" />
+      <workItem from="1704193660095" duration="18587000" />
     </task>
     <servers />
   </component>

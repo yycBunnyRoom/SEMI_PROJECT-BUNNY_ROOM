@@ -18,9 +18,6 @@ window.onload = () => {
 
 //카카오 지도 API
 
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     // 지도를 표시할 div 요소를 가져옵니다.
     var mapContainer = document.getElementById('map');
@@ -50,17 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 position: coords
             });
 
-            // 인포윈도우를 사용하지 않으므로 해당 부분은 제거합니다.
-            // var infowindow = new kakao.maps.InfoWindow({
-            //     content: '<div style="width:150px;text-align:center;padding:6px 0;"></div>'
-            // });
-
-            // 인포윈도우를 지도에 표시하는 대신 마커의 클릭 이벤트를 사용하여 원하는 동작을 추가할 수 있습니다.
-            // marker.on('click', function() {
-            //     // 마커를 클릭했을 때 원하는 동작을 구현합니다.
-            // });
-
-            // 검색한 좌표를 지도의 중심으로 설정합니다.
             map.setCenter(coords);
         }
     });
