@@ -60,8 +60,8 @@
                     <td th:text="${business.zipCode}"></td>
                     <td th:text="${business.address}"></td>
                     <td th:text="${business.phone}"></td>
-                    <td th:text="${business.registDate}"></td>
-                    <td th:text="${business.updateDate}"></td>
+                    <td th:text="${#calendars.format(business.registDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#calendars.format(business.updateDate,'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${business.reason}"></td>
                     <td th:text="${business.status}"></td>
                     <td>

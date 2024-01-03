@@ -99,10 +99,14 @@ public class AdminBusinessService {
     public int delete(int businessNo, String reason) {
         String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         int result = adminBusinessDAO.delete(businessNo, reason, update);
+        // 방 상태 또한 삭제처리
+        int deleteRoom = adminBusinessDAO.deleteRoom(businessNo, update);
+        // 업체 삭제시 기존 예약 전부 취소처리
+        int cancelRoom = adminBusinessDAO.cancelRoom(businessNo, update);
 
-        if(result > 0){
+        if(result > 0 && deleteRoom > 0){
             System.out.println("정상적으로 DB에서 삭제되었습니다.");
-            return result;
+            return result + deleteRoom;
         }else {
             return 0;
         }
@@ -114,10 +118,12 @@ public class AdminBusinessService {
     public int restore(int businessNo, String reason) {
         String update = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         int result = adminBusinessDAO.restore(businessNo, update, reason);
+        // 방 상태 또한 부활처리
+        int restoreRoom = adminBusinessDAO.restoreRoom(businessNo, update);
 
-        if(result > 0){
+        if(result > 0 && restoreRoom > 0){
             System.out.println("정상적으로 DB에서 복구되었습니다.");
-            return result;
+            return result + restoreRoom;
         }else {
             return 0;
         }
