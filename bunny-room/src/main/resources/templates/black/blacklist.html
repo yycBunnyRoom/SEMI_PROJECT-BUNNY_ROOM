@@ -50,9 +50,9 @@
                   <td th:text="${member.nickname}"></td>
                   <td th:text="${member.phone}"></td>
                   <td th:text="${member.blackReason}"></td>
-                  <td th:text="${member.blackRegistDate}"></td>
+                  <td th:text="${#calendars.format(member.blackRegistDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                   <td th:text="${member.blackStatus}"></td>
-                  <td th:text="${member.blackUpdateDate}"></td>
+                  <td th:text="${#calendars.format(member.blackUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                   <td th:text="${member.blackSentencePeriod}"></td>
                   <td>
                       <form action="/admin/black/restoreAuth" method="post">
