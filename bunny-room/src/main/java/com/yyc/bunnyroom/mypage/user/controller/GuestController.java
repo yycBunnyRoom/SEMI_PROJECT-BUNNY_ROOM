@@ -2,7 +2,6 @@ package com.yyc.bunnyroom.mypage.user.controller;
 
 import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
-import com.yyc.bunnyroom.reservation.model.ReservationDTO;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class GuestController {
     /**
      * 게스트 유저 마이페이지로 이동하는 메소드
      * */
-    @GetMapping("/search")
+    @GetMapping(value = {"", "/search"})
     public ModelAndView selectByUserEmail(ModelAndView mv){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -217,6 +216,18 @@ public class GuestController {
         }else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
         }
+    }
+
+    @GetMapping("/review")
+    public ModelAndView reviewPage(ModelAndView mv){
+        mv.setViewName("/myPage/reviewPage");
+        return mv;
+    }
+
+    @GetMapping("/inquiry")
+    public ModelAndView inquiryPage(ModelAndView mv){
+        mv.setViewName("/myPage/inquiryPage");
+        return mv;
     }
 }
 
