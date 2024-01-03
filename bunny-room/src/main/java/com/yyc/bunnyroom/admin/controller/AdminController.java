@@ -81,7 +81,7 @@ public class AdminController {
      * 해당 회원의 탈퇴를 위해 사유를 작성하기 위한 페이지로 이동시키는 메소드
      * */
     @PostMapping("/withdrawReason")
-    public String withdrawReason(@RequestParam(name = "email")String email, Model model, RedirectAttributes redirectAttributes){
+    public String withdrawReason(@RequestParam(name = "email")String email, @RequestParam(name = "userNo")int userNo, Model model, RedirectAttributes redirectAttributes){
 
         if(adminService.searchAllConditionByEmail(email).getStatus().equals("inactive")){
             System.out.println("이미 탈퇴된 이메일" + email);
@@ -89,6 +89,7 @@ public class AdminController {
             return "redirect:/admin/search?mode=inactive&str=";
         }else{
             model.addAttribute("email", email);
+            model.addAttribute("userNo", userNo);
             return "/admin/withdrawReason";
         }
     }
@@ -97,7 +98,8 @@ public class AdminController {
      * 해당 회원의 정보를 탈퇴(inactive)로 변경하는 메소드
      * */
     @PostMapping("/withdraw")
-    public String withdrawMember(@RequestParam(name = "email") String email, @RequestParam("reason")String reason, Model model){
+    public String withdrawMember(@RequestParam(name = "email") String email, @RequestParam(name = "userNo")int userNo,
+                                 @RequestParam("reason")String reason, Model model){
 
         // 정상적으로 email이 전달되지 않았을 경우
         if(Objects.isNull(email)){
@@ -108,7 +110,7 @@ public class AdminController {
 
         // 정상적으로 전달된 email을 통해 탈퇴 처리를 실행
         System.out.println("EMAIL이 " + email + "인 회원님의 탈퇴 처리를 실행합니다.");
-        int result = adminService.withdrawMember(email, reason);
+        int result = adminService.withdrawMember(email, userNo, reason);
 
         if(result > 0) {// 정상적인 탈퇴 처리
             model.addAttribute("withdraw", email + "회원이 탈퇴처리되었습니다.");
