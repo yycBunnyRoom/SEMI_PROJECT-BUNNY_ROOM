@@ -95,4 +95,16 @@
         WHERE
             USER_EMAIL = #{email}
     </select>
+
+    <update id="cancelReservation" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_CANCEL_REASON = '회원 탈퇴',
+            RESERVATION_CANCEL_DATE = #{updateDate},
+            RESERVATION_STATUS = '취소됨'
+        WHERE
+            USER_EMAIL = #{email}
+            AND
+            RESERVATION_DATE > CURRENT_TIMESTAMP()
+    </update>
 </mapper>

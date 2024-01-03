@@ -40,9 +40,11 @@ public class AdminService {
      * */
     public int withdrawMember(String email, String reason) {
         String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        // 회원 탈퇴
         int result = adminDAO.withdrawMember(email, reason, updateDate);
-
-        if(result > 0){
+        // 탈퇴할 회원의 예약 취소
+        int cancelReservation = adminDAO.cancelReservation(email, updateDate);
+        if(result > 0 && cancelReservation > 0){
             System.out.println("정상적으로 탈퇴처리되었습니다.");
             return result;
         }else {

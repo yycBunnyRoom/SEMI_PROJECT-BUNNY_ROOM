@@ -23,4 +23,6 @@ public interface AdminDAO {
     List<MemberDTO> searchMemberByInactiveFor(String email);
 
     MemberDTO searchAllConditionByEmail(String email);
+
+    int cancelReservation(@Param("email") String email, @Param("updateDate") String updateDate);
 }
