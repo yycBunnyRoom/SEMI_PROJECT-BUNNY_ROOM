@@ -134,4 +134,16 @@
         WHERE
             RESERVATION_NO = #{reservationNo}
     </update>
+
+    <update id="cancelReservationBecauseOfWithdraw" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_CANCEL_REASON = '회원 탈퇴',
+            RESERVATION_CANCEL_DATE = #{update},
+            RESERVATION_STATUS = '취소됨'
+        WHERE
+            USER_NO = #{userNo}
+            AND
+            RESERVATION_DATE > CURRENT_TIMESTAMP()
+    </update>
 </mapper>

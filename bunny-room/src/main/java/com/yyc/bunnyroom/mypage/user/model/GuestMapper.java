@@ -27,4 +27,6 @@ public interface GuestMapper {
     List<ReservationListDTO> showReservation(int userNo);
 
     int cancelReservation(@Param("reservationNo") int reservationNo, @Param("reason") String reason, @Param("cancelDate") String cancelDate);
+
+    int cancelReservationBecauseOfWithdraw(int userNo, String update);
 }

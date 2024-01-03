@@ -47,9 +47,9 @@ public class GuestService {
     public int withdrawByUserNo(int userNo, String reason, String update) {
 
         int result = guestMapper.withdrawByUserNo(userNo, reason, update);
-
-        if(result > 0){
-            return result;
+        int cancel = guestMapper.cancelReservationBecauseOfWithdraw(userNo, update);
+        if(result > 0 && cancel > 0){
+            return result + cancel;
         }else {
             return 0;
         }
