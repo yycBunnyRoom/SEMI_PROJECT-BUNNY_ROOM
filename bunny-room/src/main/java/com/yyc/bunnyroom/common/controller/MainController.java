@@ -69,9 +69,7 @@ public class MainController {
     }
     @ModelAttribute("latestRooms")
     public List<RoomDTO> latestRooms(){
-        List<RoomDTO> rooms = roomRegisterService.getLatestRoomsByLimit10();
-        System.out.println("최신방: "+rooms);
-        return rooms;
+        return roomRegisterService.getLatestRoomsByLimit10();
     }
 
 }

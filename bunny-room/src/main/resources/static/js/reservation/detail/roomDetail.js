@@ -1,4 +1,4 @@
-
+let isRegistering = false;
 
 function createAppliedOptionsButtons() {
     const buttonsContainer = document.getElementById('appliedOptionsButtons');
@@ -86,7 +86,14 @@ $(document).ready(function() {
 
     $("#datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
-        beforeShowDay: disableDays,
+        beforeShowDay: function(date) {
+
+            /* 오늘 포함 오늘 이전의 날은 다 비활성화 */
+            let today = new Date();
+
+            // 오늘 이후의 날짜는 활성화, 이전 날짜는 비활성화
+            return date > today ? [true] : [false];
+        },
         onSelect: function(dateText, inst) {
             $("#selectedDate").text("선택한 날짜: " + dateText);
             reservationDate = dateText;
@@ -146,35 +153,34 @@ function createButtons(timeUnits) {
 
 
 
-
 $(document).ready(function() {
     // roomDetails는 서버에서 전달된 정보로 초기값을 가진다고 가정합니다.
 
-        // pricePerPerson 업데이트 함수
-        function updatePricePerPerson() {
-            const pricePerPersonElement = document.getElementById('pricePerPerson');
-            pricePerPersonElement.textContent = roomDetails.price + '원 / 인';
-        }
+    // pricePerPerson 업데이트 함수
+    function updatePricePerPerson() {
+        const pricePerPersonElement = document.getElementById('pricePerPerson');
+        pricePerPersonElement.textContent = roomDetails.price + '원 / 인';
+    }
 
     // totalPrice 업데이트 함수
     function updateTotalPrice() {
-        const reservationPeopleInput = document.getElementById('reservation_people');
-        const totalPriceElement = document.getElementById('totalPrice');
-        const reservationPeopleValue = parseInt(reservationPeopleInput.value);
-
-        // 총 인원 수 업데이트
-
         totalPeople = document.getElementById('reservation_people').value;
 
+        const totalPriceElement = document.getElementById('totalPrice');
 
-        if (!isNaN(reservationPeopleValue)) {
-            totalPrice = roomDetails.price * reservationPeopleValue;
+        if (!isNaN(totalPeople)) {
+            // 총 인원 수 업데이트
+            totalPrice = roomDetails.price * totalPeople;
             totalPriceElement.textContent =  totalPrice + '원';
+            if (totalPeople == 0){
+                totalPriceElement.textContent = '';
+            }
         }
         else {
             // 입력값이 없을 때의 처리
             totalPriceElement.textContent = '';
         }
+
     }
 
     // 초기 pricePerPerson 설정
@@ -188,52 +194,70 @@ $(document).ready(function() {
 
 
 
-
-
-
-
+let reservationDate = "";
+let reservationUnit = "";
+let totalPrice = 0;
+let totalPeople = 0;
 
 /* 예약을 신청하는 폼*/
-
-let reservationDate = null;
-let reservationUnit = null;
-let totalPrice = null;
-let totalPeople = null;
-
-
 function addReservation(){
 
-    const data = {
-        date: reservationDate,
-        reservationUnit: reservationUnit,
-        totalCost: totalPrice,
-        roomNo: roomNo,
-        people: Number(totalPeople)
-    };
+    if (isRegistering){
+        alert("예약 요청을 보내고 있습니다. 잠시만 기달려 주세요~")
+    }
+    else {
+        // 받는 값에 대한 유효성 검사
+        if (!reservationDate.trim()){
+            alert("예약 날짜를 선택해주세요.")
+            return;
+        }
+        else if (!reservationUnit.trim()){
+            alert("예약 시간을 입력해주세요.")
+            return;
+        }
+        else if (totalPeople == 0){
+            alert("예약 인원을 입력해주세요.")
+            return;
+        }
+        else if (totalPeople < 0){
+            alert("예약 인원은 음수일 수 없습니다.")
+            return;
+        }
 
-    console.log("good1")
+        isRegistering = true;
 
-    fetch('/reservation/addReservation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
+        const data = {
+            date: reservationDate,
+            reservationUnit: reservationUnit,
+            totalCost: totalPrice,
+            roomNo: roomNo,
+            people: Number(totalPeople)
+        };
+
+        fetch('/reservation/addReservation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
         })
-        .then(data => {
-            if (data === 1){
-                alert('예약 성공!')
-            }
-        })
-        .catch(error => {
-            console.error('에러 발생:', error);
-        });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data === 1){
+                    alert('예약 성공!')
+                    isRegistering = false;
+                    window.location.href = "/main";
+                }
+            })
+            .catch(error => {
+                console.error('에러 발생:', error);
+            });
+    }
 }
 
 

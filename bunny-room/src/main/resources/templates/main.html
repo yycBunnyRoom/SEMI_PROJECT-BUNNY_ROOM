@@ -50,11 +50,11 @@
     <!--어드민 페이지로 가는 버튼-->
     <div class="button" id="btn_goToAdmin" style="display: none">어드민 페이지</div>
 
-    <!--호스트 페이지로 가는 버튼-->
-    <div class="button" id="btn_goToHost" style="display: none">호스트 페이지</div>
+    <!-- 호스트 페이지 버튼 -->
+    <div id="btn_goToHost" class="circular-button" style="display: none">호스트 페이지</div>
 
     <!--문의사항-->
-    <button onclick="location.href='inquirys'" class="circular-button">문의사항 게시판</button>
+    <button onclick="location.href='inquirys'" class="circular-button">문의사항</button>
 
 
     <div sec:authorize="hasAnyAuthority('GUEST')">

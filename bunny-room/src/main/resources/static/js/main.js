@@ -22,7 +22,7 @@ $(document).ready(function()
                 '<div class="bbb_price">' + room.price + '원/인' + '</div>' +
                 '</div>' +
 
-                '<div class="bbb_category"><a href="#"> ' + room.roomIntro + '</a></div>' +
+                '<div class="bbb_category"> ' + room.roomIntro + '</a></div>' +
                 '</div>' +
 
                 '<ul class="bbb_marks">' +
@@ -94,36 +94,6 @@ $(document).ready(function()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // JavaScript 변수 정의
 var myString = userAuth+" "+userNickname+"님";
 
@@ -161,7 +131,7 @@ document.getElementById('btn_goToAdmin').addEventListener('click', function() {
 });
 
 document.getElementById('btn_goToHost').addEventListener('click', function() {
-    window.location.href ="/roomRegister/hostMainView"
+    window.location.href ="/roomRegister/hostBusinessView"
 });
 
 document.getElementById('btn_login').addEventListener('click', function() {

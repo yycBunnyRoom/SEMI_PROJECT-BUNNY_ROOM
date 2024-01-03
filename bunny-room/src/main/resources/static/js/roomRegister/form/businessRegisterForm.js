@@ -275,15 +275,15 @@ function submitBusinessRegisterForm() {
         alert('카테고리를 선택해주세요.');
         return;
     }
-    if (!document.getElementById('businessAddressRoad').value.trim()) {
+    else if (!document.getElementById('businessAddressRoad').value.trim()) {
         alert('주소를 선택해주세요.');
         return;
     }
-    if (!document.getElementById('businessPhone').value.trim()) {
+    else if (!document.getElementById('businessPhone').value.trim()) {
         alert('사업체 전화번호는 필수입니다.');
         return;
     }
-    if (!document.getElementById('startTime').value.trim()) {
+    else if (!document.getElementById('startTime').value.trim()) {
         alert('영업 시작 시간을 선택해주세요.');
         return;
     }

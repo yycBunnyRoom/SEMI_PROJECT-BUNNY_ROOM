@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
+import com.yyc.bunnyroom.common.eNum.WeekDay;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
@@ -113,9 +114,26 @@ public class BusinessController {
 
         modelAndView.addObject("roomList", roomList);
 
+        /* businessNo에 대응하는 휴무시간을 가져간다 */
+        List<HolidayDTO> holidays = getHolidaysByBusinessNo(businessNo);
+        List<ClosedDayDTO> closedDays = getAllClosedDays(businessNo);
+
+        modelAndView.addObject("holidays", holidays);
+        modelAndView.addObject("closedDays", closedDays);
+
+        /* businessNo에 대응하는 영업시간을 가져간다 */
+        List<TimeUnitScheduleDTO> timeUnits = getTimeUnitsByBusinessNo(businessNo);
+
+        System.out.println(timeUnits);
+
+        modelAndView.addObject("timeUnits", timeUnits);
+
         modelAndView.setViewName("/roomRegister/detail/businessDetail");
         return modelAndView;
     }
+
+
+
 
     /* Detail 페이지 가기 전에 상응하는 ROOM을 찾아서 간다*/
     public List<RoomDTO> getAllRooms(int businessNo){
@@ -127,8 +145,14 @@ public class BusinessController {
         return roomRegisterService.getAllClosedDays(businessNo);
     }
 
-    /* Detail 페이지 가기 전에 상응하는 TIME_SCHEDULE 을 찾아서 간다*/
+    public List<HolidayDTO> getHolidaysByBusinessNo(int businessNo){
+        return roomRegisterService.getHolidaysByBusinessNo(businessNo);
+    }
 
+    /* Detail 페이지 가기 전에 상응하는 TimeUnits 을 찾아서 간다*/
+    public List<TimeUnitScheduleDTO> getTimeUnitsByBusinessNo(int businessNo){
+        return roomRegisterService.getTimeUnitsByBusinessNo(businessNo);
+    }
 
 
     /* 예약 가능 시간 등록 */
@@ -170,6 +194,16 @@ public class BusinessController {
 
 
 
+    @ModelAttribute("weekDays")
+    public String[] weekDays(){
+        WeekDay[] weekDayList = WeekDay.values();
+        String[] weekdays = new String[weekDayList.length];
+
+        for (int i = 0; i < weekDayList.length; i++) {
+            weekdays[i] = weekDayList[i].getDescription();
+        }
+        return weekdays;
+    }
 
 
 
