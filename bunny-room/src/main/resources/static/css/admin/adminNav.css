@@ -1,0 +1,48 @@
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    width: 120px;
+    background: #FF6347;
+    height: 100%;
+    overflow: auto;
+    position: fixed;
+}
+
+li a {
+    text-decoration: none;
+    padding: 10px;
+    display: block;
+    color: #000;
+    font-weight: bold;
+}
+
+li a:hover {
+    background: #333;
+    color: #fff;
+}
+
+li a.home {
+    background : #333;
+    color: #fff;
+}
+
+.cd1 {
+    margin-left: 150px;
+}
+
+#logout-btn {
+    position: fixed;
+    bottom: 10px; /* 하단 여백 설정 */
+    width: 100px;
+    text-align: center;
+    background: #FF6347;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#logout-btn:hover {
+    background: #555;
+}
+

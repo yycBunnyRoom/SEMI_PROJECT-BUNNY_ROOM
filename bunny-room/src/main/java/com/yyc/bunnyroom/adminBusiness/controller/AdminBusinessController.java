@@ -66,7 +66,7 @@ public class AdminBusinessController {
 
         model.addAttribute("BusinessList", BusinessList);
 
-        return "/dmin/business";
+        return "/admin/business";
     }
 
     @PostMapping("/delete")

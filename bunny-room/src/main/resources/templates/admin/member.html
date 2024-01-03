@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 관리 페이지</title>
+
+    <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 </head>
 <body>
   <div th:insert="~{/common/header :: headerFragment}"></div>
@@ -11,7 +13,7 @@
 
   <div th:insert="~{/admin/adminNav :: nav}"></div>
 
-  <section>
+  <section class="cd1">
       <div>
         <form action="/admin/search" method="get">
             <select name="mode">
