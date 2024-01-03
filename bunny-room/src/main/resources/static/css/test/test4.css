@@ -70,8 +70,8 @@ p {
 
 .table,
 .jsgrid .jsgrid-table {
-    width: 200%;
-    max-width: 200%;
+    width: 100%;
+    max-width: 100%;
     margin-bottom: 1rem;
     background-color: transparent;
 }
