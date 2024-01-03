@@ -18,6 +18,21 @@
         <result property="profileImageNo" column="PROFILE_IMAGE_NO"/>
     </resultMap>
 
+    <resultMap id="reservation" type="com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO">
+        <result property="userNo" column="USER_NO"/>
+        <result property="businessName" column="BUSINESS_NAME"/>
+        <result property="roomName" column="ROOM_NAME"/>
+        <result property="businessPhone" column="BUSINESS_PHONE"/>
+        <result property="reservationDate" column="RESERVATION_DATE"/>
+        <result property="reservationTime" column="RESERVATION_UNIT"/>
+        <result property="reservationPerson" column="RESERVATION_PERSON"/>
+        <result property="totalCost" column="RESERVATION_TOTAL_COST"/>
+        <result property="reservationStatus" column="RESERVATION_STATUS"/>
+        <result property="cancelReason" column="RESERVATION_CANCEL_REASON"/>
+        <result property="registerDate" column="RESERVATION_REGIST_DATE"/>
+        <result property="cancelDate" column="RESERVATION_CANCEL_DATE"/>
+    </resultMap>
+
 
     <select id="selectByUserEmail" resultMap="loginUser">
         SELECT
@@ -74,4 +89,37 @@
         WHERE
             USER_NO = #{userNo}
     </update>
+
+    <select id="showReservation" resultMap="reservation">
+        SELECT
+            R.USER_NO,
+            BR.BUSINESS_NAME,
+            BR.ROOM_NAME,
+            BR.BUSINESS_PHONE,
+            R.RESERVATION_DATE,
+            R.RESERVATION_UNIT,
+            R.RESERVATION_PERSON,
+            R.RESERVATION_TOTAL_COST,
+            R.RESERVATION_STATUS,
+            R.RESERVATION_CANCEL_REASON,
+            R.RESERVATION_REGIST_DATE,
+            R.RESERVATION_CANCEL_DATE
+        FROM
+            TBL_RESERVATION AS R
+        JOIN
+            (SELECT
+                R.ROOM_NO,
+                R.ROOM_NAME,
+                B.BUSINESS_NAME,
+                B.BUSINESS_PHONE
+            FROM
+                TBL_ROOM AS R
+            JOIN
+                TBL_BUSINESS AS B ON (R.BUSINESS_NO = B.BUSINESS_NO)
+            ) AS BR ON (R.ROOM_NO = BR.ROOM_NO)
+        WHERE
+            USER_NO = #{userNo}
+        ORDER BY
+            R.RESERVATION_REGIST_DATE DESC
+    </select>
 </mapper>

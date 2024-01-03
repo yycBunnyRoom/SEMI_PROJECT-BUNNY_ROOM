@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 예약 리스트</title>
+</head>
+<body>
+<div th:insert="~{/common/header :: headerFragment}"></div>
+
+<div th:insert="~{/myPage/myPageNav :: myPageNav}"></div>
+
+    <h1>예약 리스트</h1>
+
+    <section>
+        <article>
+            <table>
+                <tr>
+                    <th>예약 업체명</th>
+                    <th>예약 공간명</th>
+                    <th>업체 연락처</th>
+                    <th>예약 날짜</th>
+                    <th>예약 시간</th>
+                    <th>예약 인원</th>
+                    <th>총액</th>
+                    <th>예약상태</th>
+                    <th>예약한 날짜</th>
+                    <th>예약 취소 날짜</th>
+                    <th>예약 취소 사유</th>
+                </tr>
+                <tr th:each="list : ${reservationList}">
+                    <td th:text="${list.businessName}"></td>
+                    <td th:text="${list.roomName}"></td>
+                    <td th:text="${list.businessPhone}"></td>
+                    <td th:text="${list.reservationDate}"></td>
+                    <td th:text="${list.reservationTime}"></td>
+                    <td th:text="${list.reservationPerson}"></td>
+                    <td th:text="${list.totalCost}"></td>
+                    <td th:text="${list.reservationStatus}"></td>
+                    <td th:text="${list.registerDate}"></td>
+                    <td th:text="${list.cancelDate}"></td>
+                    <td th:text="${list.cancelReason}"></td>
+                </tr>
+            </table>
+        </article>
+    </section>
+</body>
+</html>

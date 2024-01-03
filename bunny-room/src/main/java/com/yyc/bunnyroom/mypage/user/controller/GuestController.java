@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.mypage.user.controller;
 
+import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -165,5 +167,37 @@ public class GuestController {
         }
     }
 
+    /**
+     * 마이페이지의 예약리스트 페이지로 이동하는 요청을 수행하는 메소드
+     * */
+    @GetMapping("/reservationList")
+    public String reservationList(Model model){
+        showReservation(model);
+        return "/myPage/reservationList";
+    }
+
+    /**
+     * 마이페이지 예약리스트를 조회하는 요청을 수행하는 메소드
+     * */
+    @GetMapping("/showReservation")
+    public Model showReservation(Model model){
+        // 시큐리티에서 현재 유저 정보를 취득
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        int userNo;
+        if (authentication != null && authentication.isAuthenticated()) {
+            AuthDetails userDetails = (AuthDetails) authentication.getPrincipal();
+            userNo = userDetails.getLoginUserDTO().getUserNo();
+        }else {
+            model.addAttribute("message", "정상적으로 인증되지 않아 리스트를 조회할 수 없습니다.");
+            return model;
+        }
+
+        // 예약리스트 조회
+        List<ReservationListDTO> reservationList = guestService.showReservation(userNo);
+
+        model.addAttribute("reservationList", reservationList);
+        return model;
+    }
 }
 

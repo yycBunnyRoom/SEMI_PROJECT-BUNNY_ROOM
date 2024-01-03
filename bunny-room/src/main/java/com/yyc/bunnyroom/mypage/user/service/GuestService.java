@@ -1,6 +1,7 @@
 package com.yyc.bunnyroom.mypage.user.service;
 
 import com.yyc.bunnyroom.common.dto.UserDTO;
+import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.mypage.user.model.GuestMapper;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.springframework.stereotype.Service;
@@ -92,5 +93,11 @@ public class GuestService {
         }else {
             return 0;
         }
+    }
+
+    public List<ReservationListDTO> showReservation(int userNo) {
+        List<ReservationListDTO> list = guestMapper.showReservation(userNo);
+
+        return list;
     }
 }
