@@ -345,7 +345,7 @@ function submitBusinessRegisterForm() {
                 return response.json();
             })
             .then(data => {
-                console.log('Success:', data);
+                console.log('Received data:', data);
                 if (data === 1) {
                     alert('사업체를 성공적으로 등록하셨습니다.');
                     window.location.href = '/roomRegister/hostMainView';

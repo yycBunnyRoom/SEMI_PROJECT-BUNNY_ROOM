@@ -21,4 +21,8 @@ public interface UserMapper {
     int resetPassword(LoginUserDTO loginUserDTO);
 
 
+    // Check
+    boolean checkEmailByUserEmail(String userEmail);
+
+    boolean isUserDeleted(String userEmail);
 }

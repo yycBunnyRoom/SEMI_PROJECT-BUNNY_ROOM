@@ -62,11 +62,11 @@ button:hover {
 }
 
 #btn_timeUnits button.reserved {
-    background-color: rgba(138, 131, 131, 0.08); /* 예약된 시간 버튼 색 */
+    background-color: rgba(47, 47, 47, 0.2); /* 예약된 시간 버튼 색 */
 }
 
 #btn_timeUnits button.reserved:hover {
-    background-color: rgba(138, 131, 131, 0.08);
+    background-color: rgba(47, 47, 47, 0.2);
 }
 
 

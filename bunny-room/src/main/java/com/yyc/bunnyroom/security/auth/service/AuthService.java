@@ -4,6 +4,7 @@ import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import com.yyc.bunnyroom.signup.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,10 +22,15 @@ public class AuthService implements UserDetailsService {
     // 전달된 사용자의 개체 타입은 AuthDetails를 구현한 구현체가 된다
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
+
         LoginUserDTO loginUserDTO = userService.findByUserEmail(userEmail);
 
         if (Objects.isNull(loginUserDTO)){
             throw new UsernameNotFoundException("회원정보가 존재하지 않습니다");
+        }
+
+        if ("inactive".equals(loginUserDTO.getUserStatus())) {
+            throw new DisabledException("탈퇴된 회원입니다");
         }
 
         return new AuthDetails(loginUserDTO);

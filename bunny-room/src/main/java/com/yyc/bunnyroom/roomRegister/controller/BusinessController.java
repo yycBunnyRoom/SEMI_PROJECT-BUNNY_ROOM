@@ -42,9 +42,7 @@ public class BusinessController {
     @GetMapping("/checkBusinessRegistNo/{businessRegistNo}")
     public ResponseEntity<?> checkBusinessRegistNo(@PathVariable("businessRegistNo") int businessRegistNo) {
 
-        System.out.println("여기는 왔냐?");
         boolean isDuplicate = roomRegisterService.checkBusinessRegistNo(businessRegistNo);
-        System.out.println("조회했음: "+isDuplicate);
 
         return ResponseEntity.ok("{\"duplicate\": " + isDuplicate + "}");
     }

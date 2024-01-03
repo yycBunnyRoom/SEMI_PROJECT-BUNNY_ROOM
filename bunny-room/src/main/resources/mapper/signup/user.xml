@@ -22,20 +22,34 @@
 
 
 
+    <!--CHECK-->
+    <!--checkEmailByUserEmail-->
+    <select id="checkEmailByUserEmail" resultType="boolean">
+        SELECT
+            COUNT(*) > 0
+        FROM
+            TBL_USER
+        WHERE
+            USER_EMAIL = #{userEmail}
+    </select>
+
+
     <select id="findByUserEmail" resultMap="loginUser">
         SELECT
-        USER_NO,
-        USER_EMAIL,
-        USER_PASSWORD,
-        USER_NICKNAME,
-        USER_PHONE,
-        USER_AUTH,
-        USER_STATUS,
-        USER_REGIST_DATE,
-        USER_UPDATE_DATE,
-        PROFILE_IMAGE_NO
-        FROM TBL_USER
-        WHERE USER_EMAIL = #{userEmail}
+            USER_NO,
+            USER_EMAIL,
+            USER_PASSWORD,
+            USER_NICKNAME,
+            USER_PHONE,
+            USER_AUTH,
+            USER_STATUS,
+            USER_REGIST_DATE,
+            USER_UPDATE_DATE,
+            PROFILE_IMAGE_NO
+        FROM
+            TBL_USER
+        WHERE
+            USER_EMAIL = #{userEmail}
     </select>
 
 
