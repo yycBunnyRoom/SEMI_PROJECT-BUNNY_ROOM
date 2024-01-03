@@ -34,4 +34,6 @@ public interface AdminBusinessDAO {
     int deleteRoom(@Param("businessNo") int businessNo, @Param("update") String update);
 
     int restoreRoom(@Param("businessNo") int businessNo, @Param("update") String update);
+
+    int cancelRoom(@Param("businessNo") int businessNo,@Param("update") String update);
 }

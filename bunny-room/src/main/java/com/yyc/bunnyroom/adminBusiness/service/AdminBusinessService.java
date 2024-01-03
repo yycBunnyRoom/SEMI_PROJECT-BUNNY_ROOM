@@ -101,6 +101,8 @@ public class AdminBusinessService {
         int result = adminBusinessDAO.delete(businessNo, reason, update);
         // 방 상태 또한 삭제처리
         int deleteRoom = adminBusinessDAO.deleteRoom(businessNo, update);
+        // 업체 삭제시 기존 예약 전부 취소처리
+        int cancelRoom = adminBusinessDAO.cancelRoom(businessNo, update);
 
         if(result > 0 && deleteRoom > 0){
             System.out.println("정상적으로 DB에서 삭제되었습니다.");
