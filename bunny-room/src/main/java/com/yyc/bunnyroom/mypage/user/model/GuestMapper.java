@@ -25,4 +25,6 @@ public interface GuestMapper {
     int changePasswordByUserNo(@Param("userNo") int userNo, @Param("encodedNewPassword") String password);
 
     List<ReservationListDTO> showReservation(int userNo);
+
+    int cancelReservation(@Param("reservationNo") int reservationNo, @Param("reason") String reason, @Param("cancelDate") String cancelDate);
 }

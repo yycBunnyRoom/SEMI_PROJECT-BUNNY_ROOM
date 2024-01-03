@@ -8,6 +8,8 @@ import java.util.Date;
 @Data
 public class ReservationListDTO {
 
+    private int reservationNo;
+
     private int userNo;
 
     private String businessName;

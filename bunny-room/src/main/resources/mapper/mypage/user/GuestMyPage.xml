@@ -19,6 +19,7 @@
     </resultMap>
 
     <resultMap id="reservation" type="com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO">
+        <id property="reservationNo" column="RESERVATION_NO"/>
         <result property="userNo" column="USER_NO"/>
         <result property="businessName" column="BUSINESS_NAME"/>
         <result property="roomName" column="ROOM_NAME"/>
@@ -92,6 +93,7 @@
 
     <select id="showReservation" resultMap="reservation">
         SELECT
+            R.RESERVATION_NO,
             R.USER_NO,
             BR.BUSINESS_NAME,
             BR.ROOM_NAME,
@@ -122,4 +124,14 @@
         ORDER BY
             R.RESERVATION_REGIST_DATE DESC
     </select>
+
+    <update id="cancelReservation" parameterType="com.yyc.bunnyroom.reservation.model.ReservationDTO">
+        UPDATE TBL_RESERVATION
+        SET
+            RESERVATION_CANCEL_REASON = #{reason},
+            RESERVATION_CANCEL_DATE = #{cancelDate},
+            RESERVATION_STATUS = '취소됨'
+        WHERE
+            RESERVATION_NO = #{reservationNo}
+    </update>
 </mapper>

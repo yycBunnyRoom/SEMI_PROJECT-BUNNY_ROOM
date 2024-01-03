@@ -7,6 +7,8 @@ import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
@@ -99,5 +101,16 @@ public class GuestService {
         List<ReservationListDTO> list = guestMapper.showReservation(userNo);
 
         return list;
+    }
+
+    public int cancelReservation(int reservationNo, String reason) {
+        String cancelDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        int result = guestMapper.cancelReservation(reservationNo, reason, cancelDate);
+
+        if(result > 0){
+            return result;
+        }else {
+            return 0;
+        }
     }
 }

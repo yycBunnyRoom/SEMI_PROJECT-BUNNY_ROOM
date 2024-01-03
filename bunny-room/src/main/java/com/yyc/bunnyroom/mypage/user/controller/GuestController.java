@@ -2,10 +2,13 @@ package com.yyc.bunnyroom.mypage.user.controller;
 
 import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
 import com.yyc.bunnyroom.mypage.user.service.GuestService;
+import com.yyc.bunnyroom.reservation.model.ReservationDTO;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
 import com.yyc.bunnyroom.signup.model.dto.LoginUserDTO;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -198,6 +201,22 @@ public class GuestController {
 
         model.addAttribute("reservationList", reservationList);
         return model;
+    }
+
+    @PostMapping("/cancelReservation")
+    @ResponseBody
+    public ResponseEntity<String> cancelReservation(@RequestBody ReservationListDTO reservationListDTO){
+        // 제이슨 요청에서 키를 통해 밸류값 뽑아내기(이 때 키의 이름과 객체에서 뽑아낼 이름이 같아야 함)
+        int reservationNo = reservationListDTO.getReservationNo();
+        String reason = reservationListDTO.getCancelReason();
+
+        int result = guestService.cancelReservation(reservationNo, reason);
+
+        if(result > 0){
+            return ResponseEntity.ok("ok");
+        }else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
+        }
     }
 }
 
