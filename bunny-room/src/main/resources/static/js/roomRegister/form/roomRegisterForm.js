@@ -1,3 +1,5 @@
+let isRegistering = false;
+
 
 /*          Room Options             */
 
@@ -32,16 +34,69 @@ window.onload = () => {
 };
 
 function submitRoomRegisterForm() {
+
+    if (isRegistering){
+        alert("등록 중입니다. 잠시만 기다려 주세요.")
+        return;
+    }
+
     const roomName = document.getElementById('roomName').value;
     const roomIntro = document.getElementById('roomIntro').value;
     const roomDetail = document.getElementById('roomDetail').value;
-
     const roomMinPeople = document.getElementById('roomMinPeople').value;
     const roomMaxPeople = document.getElementById('roomMaxPeople').value;
     const roomFacilityInfo = document.getElementById('roomFacilityInfo').value;
     const roomNotice = document.getElementById('roomNotice').value;
     const price = document.getElementById('price').value;
 
+
+    // 유효성 검사
+    if (!roomName.trim()){
+        alert("방 이름을 입력해주세요.")
+        return;
+    }
+    else if (!roomIntro.trim()){
+        alert("방 한줄 소개를 입력해주세요.")
+        return;
+    }
+    else if (!roomDetail.trim()){
+        alert("상세 소개를 입력해주세요.")
+        return;
+    }
+    else if (!roomMinPeople){
+        alert("최소 수용 인원을 입력 해주세요.")
+        return;
+    }
+    else if (roomMinPeople <= 0){
+        alert("최소 수용 인원은 0보다 작거나 같을 수 없습니다.")
+        return;
+    }
+    else if (!roomMaxPeople){
+        alert("최대 수용 인원을 입력 해주세요.")
+        return;
+    }
+    else if (roomMaxPeople < roomMinPeople){
+        alert("최대 수용 인원은 최소 수용 인원보다 적을 수 없습니다.")
+        return;
+    }
+    else if (!roomFacilityInfo.trim()){
+        alert("시설 안내를 입력해주세요.")
+        return;
+    }
+    else if (!roomNotice.trim()){
+        alert("유의 사항를 입력해주세요.")
+        return;
+    }
+    else if (!price){
+        alert("방 가격을 입력 해주세요.")
+        return;
+    }
+    else if (price <= 0){
+        alert("방 가격은 0보다 작거나 같을 수 없습니다.")
+        return;
+    }
+
+    isRegistering = true;
 
     const data = {
         businessNo: businessNo,
@@ -63,23 +118,26 @@ function submitRoomRegisterForm() {
         },
         body: JSON.stringify(data)
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success:', data);
-            if (data === 1) {
-                alert('방 등록 성공');
-                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
-            } else {
-                alert('방 등록 실패');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('네트워크 오류가 발생했습니다.');
-        });
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+        if (data === 1) {
+            alert('방 등록 성공');
+            window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
+        } else {
+            alert('방 등록 실패');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('네트워크 오류가 발생했습니다.');
+    })
+    .finally(()=>{
+        isRegistering = false
+    }) ;
 }
