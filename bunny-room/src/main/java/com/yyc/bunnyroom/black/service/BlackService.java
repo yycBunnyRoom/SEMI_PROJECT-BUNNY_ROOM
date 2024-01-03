@@ -30,7 +30,6 @@ public class BlackService {
         String registDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         // 3일의 블랙 기간
         String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        blackTimeout(userNo);
 
         int result = blackDAO.addBlacklist(userNo, auth, reason, registDate, sentenceTime);
 
@@ -42,20 +41,11 @@ public class BlackService {
     }
 
     /**
-     * 블랙 기간이 지났을 때 (기본은 3일로 저장됨) 자동으로 풀어주는 메소드
-     * */
-    @Scheduled(fixedDelay = 3 * 24 * 60 * 60 * 1000)
-    public void blackTimeout(int userNo){
-        disableBlack(userNo);
-    }
-
-    /**
      * 이미 블랙리스트에 오른 적이 있다면 기존 정보를 수정해 재등록하는 메소드
      * */
     public int modifyBlacklist(int userNo, String reason) {
         String updateDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         String sentenceTime = ZonedDateTime.now().plusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        blackTimeout(userNo);
         int result = blackDAO.modifyBlacklist(userNo, reason, updateDate, sentenceTime);
 
         if(result > 0){
