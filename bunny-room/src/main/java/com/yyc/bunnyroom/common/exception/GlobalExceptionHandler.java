@@ -1,3 +1,4 @@
+/*
 package com.yyc.bunnyroom.common.exception;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -56,3 +57,4 @@ public class GlobalExceptionHandler {
 
 
 }
+*/

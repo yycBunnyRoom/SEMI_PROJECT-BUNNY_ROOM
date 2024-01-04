@@ -1,5 +1,7 @@
 
 
+let isRegistering = false;
+
 // 비동기 요청으로 사업자번호 중복 확인
 document.addEventListener('DOMContentLoaded', function () {
     let inputBusinessRegistNo = document.getElementById('businessRegistNo');
@@ -117,6 +119,9 @@ function fn_searchAddress() {
 
 /* 영업 시간*/
 
+/* 영업 시작시간의 최대값 설정*/
+let maxStartTime = 12;
+
 let selectedStartTime;
 let selectedMinRsvTime;
 
@@ -126,7 +131,7 @@ let selectedMinRsvTime;
 const startTimeSelect = document.getElementById('startTime');
 
 // option을 만들어 시작 시간 선택 요소에 추가합니다.
-for (let i = 1; i <= 12; i++) {
+for (let i = 1; i <= maxStartTime && i <24; i++) {
     const startTimeOption = createStartTimeOption(i);
     startTimeSelect.appendChild(startTimeOption);
 }
@@ -247,20 +252,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
 /* 업체 등록하기 */
 
 function submitBusinessRegisterForm() {
+
+    if (isRegistering){
+        alert('등록 중입니다. 잠시만 기다려 주세요')
+        return;
+    }
 
     /* 입력된 값에 대한 유효성 검사*/
     if (!document.getElementById('businessRegistNo').value.trim()) {
@@ -310,55 +309,52 @@ function submitBusinessRegisterForm() {
     const minRsvTime = document.getElementById('minRsvTime').value;
     const endTime = document.getElementById('endTime').value;
 
+    isRegistering = true;
 
 
+    const data = {
+        businessRegistNo: businessRegistNo,
+        businessName: businessName,
+        businessCategoryNo: businessCategoryNo,
 
+        businessAddressRoad: businessAddressRoad,
+        businessAddressDetail: businessAddressDetail,
+        businessZipCode: businessZipCode,
+        businessPhone: businessPhone,
 
-    if (endTime !== null){
-        const data = {
-            businessRegistNo: businessRegistNo,
-            businessName: businessName,
-            businessCategoryNo: businessCategoryNo,
+        startTime: startTime,
+        minRsvTime: minRsvTime,
+        endTime: endTime
 
-            businessAddressRoad: businessAddressRoad,
-            businessAddressDetail: businessAddressDetail,
-            businessZipCode: businessZipCode,
-            businessPhone: businessPhone,
+    };
 
-            startTime: startTime,
-            minRsvTime: minRsvTime,
-            endTime: endTime
-
-        };
-
-        fetch('/roomRegister/business/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json' // JSON 형태로 데이터 전송
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Received data:', data);
-                if (data === 1) {
-                    alert('사업체를 성공적으로 등록하셨습니다.');
-                    window.location.href = '/roomRegister/hostMainView';
-                } else {
-                    alert('사업체를 등록 실패했습니다.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('네트워크 오류가 발생했습니다.');
-            });
-    }
-    else {
-        alert("영업시간 입력은 필수 입니다")
-    }
+    fetch('/roomRegister/business/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Received data:', data);
+        if (data === 1) {
+            alert('사업체를 성공적으로 등록하셨습니다.');
+            window.location.href = '/roomRegister/hostMainView';
+        } else {
+            alert('사업체를 등록 실패했습니다.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('네트워크 오류가 발생했습니다.');
+    })
+    .finally(()=>{
+        isRegistering = false;
+    });
 }

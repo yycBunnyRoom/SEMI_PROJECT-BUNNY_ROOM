@@ -48,17 +48,17 @@
     </form>
 
     <!--어드민 페이지로 가는 버튼-->
-    <div class="button" id="btn_goToAdmin" style="display: none">어드민 페이지</div>
+    <div class="circular-button" id="btn_goToAdmin" style="display: none">ADMIN</div>
 
     <!-- 호스트 페이지 버튼 -->
-    <div id="btn_goToHost" class="circular-button" style="display: none">호스트 페이지</div>
+    <div id="btn_goToHost" class="circular-button" style="display: none">HOST</div>
 
     <!--문의사항-->
     <button onclick="location.href='inquirys'" class="circular-button">문의사항</button>
 
 
     <div sec:authorize="hasAnyAuthority('GUEST')">
-        <button onclick="location.href='myPage/search'">마이페이지</button>
+        <button onclick="location.href='myPage/search'"  id="btn_myPage" class="circular-button" >MyPage</button>
     </div>
 
 
@@ -103,52 +103,5 @@
 
     <p id="output"></p>
 
-<!--    <a href="/main/test2">test2</a>-->
-<!--    <a href="/main/test4">test4</a>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!--    <script th:inline="javascript">-->
-    <!--        if ([[${message}]]){-->
-    <!--            alert([[${message}]]);-->
-    <!--        }-->
-    <!--    </script>-->
-
-    <!--    로그인 버튼 관련 JS-->
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--    <h1> 유저 리스트 </h1>-->
-<!--    <button onclick="location.href='inquirys'">조회</button>-->
-
-<!--    <form th:action="@{/auth/logout}" th:method="post">-->
-<!--        <button>로그아웃</button>-->
-<!--    </form>-->

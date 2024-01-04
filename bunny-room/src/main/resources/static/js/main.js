@@ -114,10 +114,11 @@ if (userAuth)
     if (userAuth === "ADMIN"){
         // document.getElementById("btn_adminPage").style.display = 'block';
         document.getElementById("btn_goToAdmin").style.display = 'block';
-        document.getElementById("btn_goToHost").style.display = 'block';
+        document.getElementById("btn_goToHost").style.display = 'none';
     }
     else if (userAuth === "HOST"){
         document.getElementById("btn_goToHost").style.display = 'block';
+        document.getElementById("btn_goToAdmin").style.display = 'none';
     }
 }
 

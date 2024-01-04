@@ -45,20 +45,7 @@
 
 #btn_goToAdmin {
     position: fixed;
-    bottom: 50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    padding: 12px 24px;
-    background-color: rgb(255, 181, 69);
-    color: white;
-    border-radius: 24px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    outline: none;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    bottom: 12%;
 }
 
 /* 호버 효과 */
@@ -130,13 +117,25 @@
 
 
 
+#output{
+    bottom: 50%;
+}
 
 
 
+#btn_myPage {
+    position: fixed;
+    bottom: 12%;
+}
+
+#btn_myPage:hover {
+    background-color: rgba(255, 115, 0, 0.96);
+}
 
 /* 호스트 페이지 버튼 위치 조정 */
 #btn_goToHost {
-    bottom: calc(20px + 90px); /* 로그인 버튼 위치보다 상단에 배치되도록 조정 */
+    position: fixed;
+    bottom: 12%;
 }
 
 #btn_goToHost:hover {
