@@ -13,4 +13,6 @@ public interface RoomOptionDAO {
     List<RoomOptionDTO> showOption();
 
     int changeOptionName(@Param("optionNo") int optionNo, @Param("newName") String newName);
+
+    int addOption(String optionName);
 }

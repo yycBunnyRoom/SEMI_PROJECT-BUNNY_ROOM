@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Objects;
@@ -46,5 +47,29 @@ public class RoomOptionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Update failed. ");
         }
+    }
+
+    /**
+     * 새로운 방 옵션 추가 페이지로 이동하는 메소드
+     * */
+    @GetMapping("/toNewOption")
+    public String toNewOption(){
+        return "/admin/setting/newOption";
+    }
+
+    /**
+     * 새로운 방 옵션을 추가하는 요청을 받는 메소드
+     * */
+    @PostMapping("/addOption")
+    public String addOption(@RequestParam(name = "optionName")String optionName, RedirectAttributes redirectAttributes){
+        int result = adminSettingService.addOption(optionName);
+
+        if(result > 0){
+            redirectAttributes.addFlashAttribute("message", "새로운 옵션이 추가되었습니다.");
+        }else {
+            redirectAttributes.addFlashAttribute("message", "옵션 추가에 실패하였습니다.");
+        }
+
+        return "redirect:/admin/setting";
     }
 }

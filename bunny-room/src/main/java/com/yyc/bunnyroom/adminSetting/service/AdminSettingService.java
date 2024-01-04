@@ -83,4 +83,17 @@ public class AdminSettingService {
             return 0;
         }
     }
+
+    /**
+     * 방 옵션을 추가하는 메소드
+     * */
+    public int addOption(String optionName) {
+       int result = roomOptionDAO.addOption(optionName);
+
+       if(result > 0){
+           return result;
+       }else {
+           return 0;
+       }
+    }
 }

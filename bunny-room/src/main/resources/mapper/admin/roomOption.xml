@@ -23,4 +23,14 @@
         WHERE
             OPTION_NO = #{optionNo}
     </update>
+
+    <insert id="addOption" parameterType="com.yyc.bunnyroom.roomRegister.model.RoomOptionDTO">
+        INSERT INTO TBL_ROOM_OPTION(
+            OPTION_NO,
+            OPTION_NAME
+            )VALUES(
+            NULL,
+            #{optionName}
+            )
+    </insert>
 </mapper>
