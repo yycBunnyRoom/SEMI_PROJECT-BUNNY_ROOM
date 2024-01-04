@@ -1,3 +1,17 @@
+body {
+    height: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+.nav{
+    padding: 1rem;
+    margin: 1rem -1rem -1rem;
+    width: 12rem;
+    background: #ffcc00;
+    height: 100%;
+    position: absolute;
+}
 nav {
     padding: 1rem;
     margin: 1rem -1rem -1rem;
@@ -43,19 +57,26 @@ nav {
     text-align: center;
     color: #fff;
     padding: 0rem;
-    margin:-0.8rem;
+    margin: -0.8rem;
 }
 
-#logout-btn:hover {
-    background: #555;
-}
-
-#logout-btn-icon{
+#logout-btn-icon {
     height: 3rem;
     width: 10rem;
     font-size: large;
     font-weight: bold;
     font-family: auto;
     background-color: ghostwhite;
+    transition: background-color 0.5s;
+}
+
+#logout-btn-icon:hover {
+    background-color: orange;
+    height: 3rem;
+    width: 10rem;
+    font-size: large;
+    font-weight: bold;
+    font-family: auto;
+    text-emphasis-color: white;
 }
 

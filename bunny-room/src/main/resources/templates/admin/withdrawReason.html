@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
-<div th:insert="~{/admin/adminNav :: nav}"></div>
+<div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
   <h3>탈퇴 사유를 작성해주세요</h3>
   <form action="/admin/withdraw" method="post">

@@ -1,0 +1,21 @@
+.main-content {
+    margin-left: 14.5rem;
+    margin-top: 2rem;
+}
+
+.search {
+    padding-top: 1rem;
+}
+
+.padding {
+    padding-top: 1rem;
+    padding-left: 0rem;
+}
+
+div.card-body {
+    padding: 1rem;
+}
+
+thead {
+    background-color: gold;
+}

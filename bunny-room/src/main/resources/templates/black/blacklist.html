@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 </head>
 <body>
+
 <div th:insert="~{/common/header :: headerFragment}"></div>
+<div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
-  <h1>관리자 블랙리스트 관리 페이지</h1>
+  <section class="section1">
+      <h1>관리자 블랙리스트 관리 페이지</h1>
 
-<div th:insert="~{/admin/adminNav :: nav}"></div>
-
-  <section class="cd1">
       <div>
           <form action="/admin/black/showBlacklist" method="get">
               <select name="mode">
