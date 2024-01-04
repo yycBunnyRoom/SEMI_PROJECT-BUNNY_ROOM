@@ -5,6 +5,8 @@
 
 .search {
     padding-top: 1rem;
+    padding-left: 0.8rem;
+
 }
 
 .padding {
@@ -16,6 +18,53 @@ div.card-body {
     padding: 1rem;
 }
 
-thead {
-    background-color: gold;
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    background-color: lightgray;
+    width: 101rem;
+}
+
+.category-list article {
+    margin: 0.7rem;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.sub-content {
+    margin-left: 14.5rem;
+    margin-top: 1.5rem;
+}
+
+.option-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
+    width: 101rem;
+}
+
+.option {
+    border: solid 0.2rem orange;
+    text-align: center;
+    font-weight: bolder;
+    padding: 0.5rem;
+    background-color: coral;
+    margin: 2rem;
+    border-radius: 10% 10% 20rem 20rem;
+}
+
+.option p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    line-height: 1.5rem;
+}
+
+button#giveNo {
+    background-color: limegreen;
+    border: solid 0.1rem green;
+    margin-top: -8rem;
 }

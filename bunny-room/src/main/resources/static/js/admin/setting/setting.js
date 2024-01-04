@@ -32,9 +32,7 @@
     .then(data => {
     // 서버 응답 처리
     console.log(data);
-
-    // 모달 닫기
-    $('#staticBackdrop').modal('hide');
+    location.reload();
 
     // 테이블에서 해당 행 찾아서 업데이트
     let tableRow = $('button[data-option-idx="' + optionIdx + '"]').closest('tr');

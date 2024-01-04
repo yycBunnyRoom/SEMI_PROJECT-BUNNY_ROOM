@@ -8,69 +8,66 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-    <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
     <link th:href="@{/css/header/header.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
+    <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+
 </head>
 <body>
 
-    <div th:insert="~{/common/header :: headerFragment}"></div>
-    <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
+    <header class="header" th:insert="~{/common/header :: headerFragment}"></header>
+    <nav class="nav" th:insert="~{/admin/adminNav :: nav}"></nav>
     <!-- 카테고리 관련 -->
-    <section class="section1">
+    <section class="main-content">
         <h1>관리자 설정 페이지</h1>
 
         <h2>카테고리 관리</h2>
         <h3>현재 카테고리</h3>
-        <article th:each="category: ${categorylist}" th:style="'background-color: ' + ${category.colorCode} + '; width: 300px; height: 300;'">
-            <p th:text="${category.categoryName}"></p>
-            <p th:text="${category.colorCode}"></p>
 
-            <form action="/admin/setting/callChanger" method="post">
-                <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
-                <input type="hidden" name="categoryName" th:value="${category.categoryName}"/>
-                <input type="hidden" name="colorCode" th:value="${category.colorCode}"/>
-                <button type="submit">변경</button>
-            </form>
-            <form action="/admin/setting/off" method="post" onsubmit="return confirm('정말로 이 카테고리를 삭제하시겠습니까?')">
-                <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
-                <button type="submit">삭제</button>
-            </form>
-        </article>
+        <div class="category-list">
+            <article th:each="category: ${categorylist}" th:style="'background-color: ' + ${category.colorCode} + '; width: 300px; height: 300;'">
+                <p th:text="${category.categoryName}"></p>
+                <p th:text="${category.colorCode}"></p>
 
-        <article>
-            <form action="/admin/setting/toNewCategory" method="Get">
-                <button type="submit">카테고리 추가</button>
-            </form>
-        </article>
+                <form action="/admin/setting/callChanger" method="post">
+                    <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
+                    <input type="hidden" name="categoryName" th:value="${category.categoryName}"/>
+                    <input type="hidden" name="colorCode" th:value="${category.colorCode}"/>
+                    <button type="submit">변경</button>
+                </form>
+                <form action="/admin/setting/off" method="post" onsubmit="return confirm('정말로 이 카테고리를 삭제하시겠습니까?')">
+                    <input type="hidden" name="categoryNo" th:value="${category.categoryNo}"/>
+                    <button type="submit">삭제</button>
+                </form>
+            </article>
+
+            <article>
+                <form action="/admin/setting/toNewCategory" method="Get">
+                    <button type="submit">카테고리 추가</button>
+                </form>
+            </article>
+        </div>
     </section>
 
     <!-- 방 옵션 관련 -->
-    <section class="section2">
+    <section class="sub-content">
         <h2>방 옵션 관리</h2>
         <h3>현재 방 옵션</h3>
-        <article>
-            <table>
-                <tr>
-                    <th>옵션명</th>
-                    <th>기능</th>
-                </tr>
-                <tr th:each="option : ${optionList}">
-                    <td th:text="${option.optionName}"></td>
-                    <td>
-                        <button type="button" id="giveNo" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop" th:attr="data-option-idx=${option.optionIdx}" onclick="fn_giveNo(this)">
-                            옵션명 변경
-                        </button>
-                    </td>
-                </tr>
-            </table>
-        </article>
-
-        <article>
-            <form action="/admin/setting/toNewOption" method="get">
-                <button type="submit">새로운 옵션 추가</button>
-            </form>
-        </article>
+        <div class="option-list">
+            <article class="option" th:each="option : ${optionList}">
+                <p th:text="${option.optionName}"></p>
+                <button type="button" id="giveNo" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop" th:attr="data-option-idx=${option.optionIdx}" onclick="fn_giveNo(this)">
+                    옵션명 변경
+                </button>
+            </article>
+            <article>
+                <form action="/admin/setting/toNewOption" method="get">
+                    <button type="submit">새로운 옵션 추가</button>
+                </form>
+            </article>
+        </div>
     </section>
 
 <!-- Modal -->
