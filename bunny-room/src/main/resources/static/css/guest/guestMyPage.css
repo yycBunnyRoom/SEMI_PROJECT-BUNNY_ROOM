@@ -10,7 +10,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* 헤더 (MEMBER) 스타일링 */
+
 section {
     max-width: 600px;
     margin: 20px auto;
@@ -20,7 +20,7 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 이미지 스타일링 */
+
 section img {
     max-width: 100%; /* 이미지를 부모 요소의 너비에 맞추기 */
     height: auto;    /* 가로 세로 비율 유지 */

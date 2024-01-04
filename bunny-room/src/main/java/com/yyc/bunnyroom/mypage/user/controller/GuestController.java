@@ -137,7 +137,7 @@ public class GuestController {
     @PostMapping("/passwordChanger")
     public String passwordChanger(@RequestParam("userNo")int userNo, @RequestParam("password")String password,
                                   @RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword,
-                                  @RequestParam("newPasswordRe")String newPasswordRe, Model model){
+                                  @RequestParam("newPasswordRe")String newPasswordRe, Model model, RedirectAttributes redirectAttributes){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
         model.addAttribute("userNo", userNo);
@@ -164,8 +164,8 @@ public class GuestController {
         }else {
             String encodedNewPassword = passwordEncoder.encode(newPassword);
             result = guestService.changePasswordByUserNo(userNo, encodedNewPassword);
-            model.addAttribute("message", "비밀번호가 정상적으로 변경되었습니다.");
-            return "/myPage/guestSearch";
+            redirectAttributes.addFlashAttribute("message", "비밀번호가 정상적으로 변경되었습니다.");
+            return "redirect:/myPage/search";
         }
     }
 

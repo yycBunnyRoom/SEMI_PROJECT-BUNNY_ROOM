@@ -1,4 +1,5 @@
 /* 예약 리스트 스타일링 */
+
 h1 {
     text-align: center;
     margin-top: 20px;
@@ -8,20 +9,22 @@ section {
     margin: 20px;
 }
 
+/*.list {*/
+/*    margin-bottom: 20px;*/
+/*    border: 1px solid #ddd;*/
+/*    padding: 10px;*/
+/*}*/
+
+
 table {
     width: 100%;
     border-collapse: collapse;
 }
 
-/*th, td {*/
-/*    padding: 10px;*/
-/*    border: 1px solid #ddd;*/
-/*    text-align: center;*/
-/*}*/
 
-/*th {*/
-/*    background-color: #f2f2f2;*/
-/*}*/
+th {
+    background-color: #f2f2f2;
+}
 
 /* 예약 취소 버튼 스타일링 */
 .btn-primary {
@@ -32,4 +35,3 @@ table {
     border-radius: 4px;
     cursor: pointer;
 }
-
