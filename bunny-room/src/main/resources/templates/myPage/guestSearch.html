@@ -6,13 +6,14 @@
     <!-- 제이쿼리 -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <link rel="stylesheet" href="/css/guest/guestNav.css" th:href="@{/css/guest/guestNav.css}" />
+    <link rel="stylesheet" href="/css/guest/guestMyPage.css" th:href="@{/css/guest/guestMyPage.css}" />
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 
 <div th:insert="~{/myPage/myPageNav :: myPageNav}"></div>
 
-    <section class="mp1">
+    <section>
         <h1>MEMBER</h1>
         <article>
             <img src="/img/profile/엄지척%20토끼.jpg" alt="임시 프로필"/>
@@ -27,7 +28,7 @@
         </form>
     </section>
 
-    <section class="mp2">
+    <section>
         <article>
             EMAIL : <span th:text="${user.userEmail}"></span>
         </article>
