@@ -40,30 +40,14 @@
                                   <table class="table table-striped">
                                       <thead>
                                       <tr>
-                                          <th>
-                                              회원 번호
-                                          </th>
-                                          <th>
-                                              회원 분류
-                                          </th>
-                                          <th>
-                                              이메일
-                                          </th>
-                                          <th>
-                                              닉네임
-                                          </th>
-                                          <th>
-                                              연락처
-                                          </th>
-                                          <th>
-                                              회원 가입일
-                                          </th>
-                                          <th>
-                                              회원 정보 수정일
-                                          </th>
-                                          <th>
-                                              회원 상태
-                                          </th>
+                                          <th>회원 번호</th>
+                                          <th>회원 분류</th>
+                                          <th>이메일</th>
+                                          <th>닉네임</th>
+                                          <th>연락처</th>
+                                          <th>회원 가입일</th>
+                                          <th>회원 정보 수정일</th>
+                                          <th>기능</th>
                                       </tr>
                                       </thead>
                                       <tbody>
@@ -73,9 +57,8 @@
                                           <td th:text="${member.email}"></td>
                                           <td th:text="${member.nickname}"></td>
                                           <td th:text="${member.phone}"></td>
-                                          <td th:text="${member.userRegistDate}"></td>
-                                          <td th:text="${member.userUpdateDate}"></td>
-                                          <td th:text="${member.status}"></td>
+                                          <td th:text="${#calendars.format(member.userRegistDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                          <td th:text="${#calendars.format(member.userUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                           <td>
                                               <form action="/admin/black/addBlacklist" method="post">
                                                   <input type="hidden" name="userNo" th:value="${member.userNo}">
