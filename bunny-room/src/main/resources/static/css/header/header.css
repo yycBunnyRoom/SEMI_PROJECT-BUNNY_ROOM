@@ -1,13 +1,12 @@
 .header, .div {
     background-color: #FFB545; /* 헤더 배경 색상 */
-    color: #FF5C00; /* 헤더 텍스트 색상 */
-    padding: 10px; /* 내부 여백 */
-    margin: 0;
+    padding: 1rem; /* 내부 여백 */
+    margin: -1rem; /* 빈틈 없애기*/
 }
 
 .header h1 {
     margin: 0; /* 기본 마진 제거 */
-    font-size: 24px; /* 헤딩 폰트 크기 */
+    font-size: 2.4rem; /* 헤딩 폰트 크기 */
     text-align: center;
 }
 
