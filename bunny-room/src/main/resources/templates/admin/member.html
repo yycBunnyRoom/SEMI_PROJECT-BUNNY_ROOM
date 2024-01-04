@@ -72,6 +72,7 @@
                                           </td>
                                           <td>
                                               <form action="/admin/withdrawReason" method="post">
+                                                  <input type="hidden" name="userNo" th:value="${member.userNo}">
                                                   <input type="hidden" name="email" th:value="${member.email}">
                                                   <button type="submit">탈퇴</button>
                                               </form>
