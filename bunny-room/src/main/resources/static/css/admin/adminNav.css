@@ -1,16 +1,18 @@
 nav {
-    margin: -1rem;
-}
-.nav ul {
-    list-style-type: none;
     padding: 1rem;
-    margin: 0rem;
+    margin: 1rem -1rem -1rem;
     width: 12rem;
     background: #ffcc00;
     height: 100%;
+    position: absolute;
+}
+.nav ul {
+    list-style-type: none;
     overflow: auto;
-    position: fixed;
     text-align: center;
+    position: fixed;
+    margin-top: 3rem;
+    margin-left: -1.5rem;
 }
 .nav li {
     margin: 1rem;
@@ -34,17 +36,14 @@ nav {
     color: #fff;
 }
 
-.cd1 {
-    margin-left: 150px;
-}
-
 #logout-btn {
-    position: absolute;
-    bottom: 15rem; /* 하단 여백 설정 */
+    position: fixed;
+    bottom: 10rem; /* 하단 여백 설정 */
     width: 12rem;
     text-align: center;
     color: #fff;
     padding: 0rem;
+    margin:-0.8rem;
 }
 
 #logout-btn:hover {
