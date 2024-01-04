@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <title>탈퇴 사유</title>
 </head>
+<link th:href="@{/css/header/header.css}" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 <body>
+<div th:insert="~{/common/header :: headerFragment}"></div>
+<div th:insert="~{/admin/adminNav :: nav}"></div>
+
   <h3>탈퇴 사유를 작성해주세요</h3>
   <form action="/admin/withdraw" method="post">
     <input type="hidden" name="email" th:value="${email}">

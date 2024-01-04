@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 메인 페이지</title>
-
+    <link th:href="@{/css/header/header.css}" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 </head>
 <body>
     <div th:insert="~{/common/header :: headerFragment}"></div>
-
         <h1>관리자 메인</h1>
 
     <div th:insert="~{/admin/adminNav :: nav}"></div>

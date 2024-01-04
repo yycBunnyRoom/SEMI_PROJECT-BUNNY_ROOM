@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>새로운 공간 옵션 추가</title>
+    <link th:href="@{/css/header/header.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 </head>
 <body>
+<div th:insert="~{/common/header :: headerFragment}"></div>
+<div th:insert="~{/admin/adminNav :: nav}"></div>
+
   <h1>새로운 옵션 추가</h1>
   <section>
     <form action="/admin/setting/addOption" method="post">
