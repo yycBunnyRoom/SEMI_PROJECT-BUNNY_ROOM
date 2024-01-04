@@ -71,7 +71,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.BunnyRoomApplication.executor": "Run",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feature/security",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/dev/10_spring_boot/chap04-exception",
     "list.type.of.created.stylesheet": "CSS",
@@ -154,7 +154,7 @@
       <workItem from="1704158786374" duration="28486000" />
       <workItem from="1704193660095" duration="18587000" />
       <workItem from="1704241011676" duration="38727000" />
-      <workItem from="1704297043353" duration="13617000" />
+      <workItem from="1704297043353" duration="32426000" />
     </task>
     <servers />
   </component>

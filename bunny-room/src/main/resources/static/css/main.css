@@ -216,50 +216,128 @@
 
 
 
-.room-search {
-    margin: 20px 0;
-    display: flex;
+/*.room-search {*/
+/*    margin: 20px 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    position: relative;*/
+/*    top: 1rem;*/
+
+/*}*/
+
+/*.room-search form {*/
+/*    display: flex;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 20px;*/
+/*    overflow: hidden;*/
+/*    width: 40%;*/
+/*}*/
+
+/*.room-search input[type="text"] {*/
+/*    padding: 10px;*/
+/*    border: none;*/
+/*    width: 85%;*/
+/*    outline: none;*/
+
+/*}*/
+
+/*.room-search button {*/
+/*    padding: 10px 20px;*/
+/*    background-color: rgb(255, 181, 69);*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    width: 15%;*/
+/*    border-radius: 0 20px 20px 0;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.room-search button:hover {*/
+/*    background-color: rgba(255, 115, 0, 0.96);*/
+/*}*/
+
+/*.room-search input[type="text"]::placeholder {*/
+/*    color: #999;*/
+/*    font-style: italic;*/
+/*}*/
+
+
+
+
+/* 검색 창 */
+
+.container{
     justify-content: center;
-    position: relative;
-    top: 1rem;
-
+    position: relative;~
+    width: 50%;
 }
 
-.room-search form {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    overflow: hidden;
-    width: 40%;
+.btn:hover{
+    color:#fff;
+}
+.row_search{
+    width: 75%;
+}
+.col_search{
+    width: 100%;
 }
 
-.room-search input[type="text"] {
-    padding: 10px;
-    border: none;
-    width: 85%;
-    outline: none;
-
+.input-text:focus{
+    box-shadow: 0px 0px 0px;
+    border-color:#f8c146;
+    outline: 0px;
 }
 
-.room-search button {
-    padding: 10px 20px;
+.form-control {
+    border: 1px solid #f8c146;
+}
+
+#btn_search{
     background-color: rgb(255, 181, 69);
     color: #fff;
-    border: none;
-    width: 15%;
-    border-radius: 0 20px 20px 0;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100px;
 }
 
-.room-search button:hover {
-    background-color: rgba(255, 115, 0, 0.96);
+#btn_search:hover{
+    background-color: rgba(255, 115, 0, 0.96); /* 마우스 호버 시 색상 변화 */
+    color:#fff;
 }
 
-.room-search input[type="text"]::placeholder {
-    color: #999;
-    font-style: italic;
+.btn, .form-control {
+    border-radius: 20px; /* 더 둥글게 만들고 싶으면 값을 조절하세요 */
 }
+
+.containerSearch {
+    top: 3em;
+    display: flex;
+}
+.brandNew {
+    max-width: initial;
+    flex: initial;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -288,3 +366,20 @@
 #categoryButtons button:hover {
     background-color: rgba(255, 115, 0, 0.96); /* 마우스 호버 시 색상 변화 */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
