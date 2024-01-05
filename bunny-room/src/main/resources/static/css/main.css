@@ -45,7 +45,7 @@
 
 #btn_goToAdmin {
     position: fixed;
-    bottom: 12%;
+    bottom: 15%;
 }
 
 /* 호버 효과 */
@@ -60,7 +60,7 @@
 #btn_logout {
     /* 기존 스타일 유지 */
     position: fixed;
-    bottom: 20px;
+    bottom: 6%;
     right: 20px;
     width: 80px;
     height: 80px;
@@ -82,7 +82,7 @@
 #btn_login {
     /* 기존 스타일 유지 */
     position: fixed;
-    bottom: 20px;
+    bottom: 6%;
     right: 20px;
     width: 80px;
     height: 80px;
@@ -125,7 +125,7 @@
 
 #btn_myPage {
     position: fixed;
-    bottom: 12%;
+    bottom: 15%;
 }
 
 #btn_myPage:hover {
@@ -135,7 +135,7 @@
 /* 호스트 페이지 버튼 위치 조정 */
 #btn_goToHost {
     position: fixed;
-    bottom: 12%;
+    bottom: 15%;
 }
 
 #btn_goToHost:hover {
@@ -181,7 +181,7 @@
 
 .circular-button {
     position: fixed;
-    bottom: 40px; /* 아래 여백 조정 */
+    bottom: 6%; /* 아래 여백 조정 */
     left: 40px; /* 왼쪽 여백 조정 */
     width: 80px; /* 버튼 크기 */
     height: 80px; /* 버튼 크기 */
