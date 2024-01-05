@@ -46,6 +46,7 @@
     border: 1px solid #ccc;
     cursor: pointer; /* 클릭 가능한 커서 스타일 설정 */
     border-radius: 10px;
+    background-color: white;
 }
 
 /* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
@@ -53,7 +54,10 @@
     background-color: #f0f0f0;
 }
 
-
+#rooms {
+    position: relative;
+    top: 3rem;
+}
 
 
 
