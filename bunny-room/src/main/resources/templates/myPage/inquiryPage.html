@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>내 문의사항</title>
+    <link th:href="@{/css/common/header.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="/css/guest/guestNav.css" th:href="@{/css/guest/guestNav.css}" />
 </head>
 <body>
-문의사항
+<div th:insert="~{/common/header :: headerFragment}"></div>
+
+<div th:insert="~{/myPage/myPageNav :: myPageNav}"></div>
+
+
+<section class="main-contents">
+    <h1>문의사항</h1>
+    <img src="/img/sorry/금지_토끼.png"/>
+</section>
 </body>
 </html>

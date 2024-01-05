@@ -1,14 +1,39 @@
-/* hostBusinessView.css */
-
-/* business-item 클래스에 적용되는 스타일 */
 .business-item {
-    padding: 10px;
-    margin: 5px;
+    padding: 15px;
+    margin: 10px 0;
     border: 1px solid #ccc;
-    cursor: pointer; /* 클릭 가능한 커서 스타일 설정 */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 
-/* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
+/* Hover effect */
 .business-item:hover {
     background-color: #f0f0f0;
 }
+
+/* Header styles (adjust as needed) */
+#businessList {
+    margin-top: 20px;
+}
+
+/* Button styles */
+#addBusinessButton {
+    margin-top: 20px;
+}
+
+#addBusinessButton button {
+    padding: 10px;
+    background-color: #FF9900;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#addBusinessButton button:hover {
+    background-color: #FFB545;
+}
+
+
