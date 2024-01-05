@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
     <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/business/businessDetail.css}"/>
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
@@ -17,11 +18,11 @@
 <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
     <section class="main-content">
-        <h5 th:text="${business.categoryName}"></h5>
-        <h1 th:text="${business.businessName}"></h1>
+        <h5 id="businessCategory" th:text="${business.categoryName}"></h5>
+        <h1 id="businessTitle" th:text="${business.businessName}"></h1>
 
         <article>
-            <h4>사업자 정보</h4>
+            <h4 class="sub-title">사업자 정보</h4>
             <p th:text="'사업자 등록 번호 : ' + ${business.registerNo}"></p>
             <p th:text="'사업자 닉네임 : ' + ${business.owner}"></p>
             <p th:text="'사업자 EMAIL : ' + ${business.email}"></p>
@@ -29,7 +30,7 @@
         </article>
 
         <article>
-            <h4>업체 정보</h4>
+            <h4 class="sub-title">업체 정보</h4>
             <p th:text="'우편번호 : ' + ${business.zipCode}"></p>
             <p th:text="'주소 : ' + ${business.address}"></p>
             <p th:text="'업체 연락처 : ' + ${business.businessPhone}"></p>
@@ -42,24 +43,26 @@
         </article>
 
         <article>
-            <h4>정기 휴일</h4>
-            <table>
+            <h4 class="sub-title">정기 휴일</h4>
+            <table id="vacation">
                 <tr th:each="day : ${closedDay}">
                     <td th:text="${day.closedDay}"></td>
                 </tr>
             </table>
         </article>
 
-        <h4>비정기 휴일</h4>
-        <article th:each="holiday : ${holiday}" th:if="${holiday.activeStatus} eq 'active'">
-            <p th:text="${holiday.holidayName}"></p>
-            <p th:text="${#dates.format(holiday.startDate, 'yy-MM-dd') + ' ~ ' + #dates.format(holiday.endDate, 'yy-MM-dd')}"></p>
-            <p th:text="${holiday.reason}"></p>
-        </article>
+        <h4 class="sub-title">비정기 휴일</h4>
+        <div id="holiday">
+            <article class="holiday" th:each="holiday : ${holiday}" th:if="${holiday.activeStatus} eq 'active'">
+                <p class="holiday-title" th:text="${holiday.holidayName}"></p>
+                <p class="holiday-content" th:text="${#dates.format(holiday.startDate, 'yy-MM-dd') + ' ~ ' + #dates.format(holiday.endDate, 'yy-MM-dd')}"></p>
+                <p class="holiday-content" th:text="${holiday.reason}"></p>
+            </article>
+        </div>
     </section>
 
     <section class="main-content">
-        <h3>방 정보</h3>
+        <h4 class="sub-title">방 정보</h4>
         <table>
             <tr>
                 <th>방 이름</th>
@@ -72,10 +75,9 @@
                 <th>유의사항</th>
                 <th>등록일</th>
                 <th>수정일</th>
-                <th>상태</th>
-                <th>관리 기능</th>
+                <th>기능</th>
             </tr>
-            <tr th:each="room : ${room}">
+            <tr th:each="room : ${room}" th:if="${room.roomStatus == 'active'}">
                 <td th:text="${room.roomName}"></td>
                 <td th:text="${room.roomIntro}"></td>
                 <td th:text="${room.roomDetail}"></td>
@@ -86,7 +88,6 @@
                 <td th:text="${room.roomNotice}"></td>
                 <td th:text="${#calendars.format(room.roomRegistDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                 <td th:text="${#calendars.format(room.roomUpdateDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                <td th:text="${room.roomStatus}"></td>
                 <td>
                     <button type="button" id="deleteRoom" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop" th:data1="${room.roomNo}" th:data2="${room.roomStatus}" onclick="getRoomInfo(this)" th:if="${room.roomStatus} eq 'active'">삭제</button>

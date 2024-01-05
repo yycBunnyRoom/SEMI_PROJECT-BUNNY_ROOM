@@ -32,6 +32,7 @@ div.card-body {
     text-align: center;
     font-weight: bold;
     color: white;
+    text-transform: uppercase;
 }
 
 .sub-content {
