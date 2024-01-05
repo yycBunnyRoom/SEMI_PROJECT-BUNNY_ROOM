@@ -14,6 +14,8 @@ spring:
   thymeleaf:
     prefix: classpath:/templates
     suffix: .html
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
 
 mybatis:
   mapper-locations: classpath:resources/mapper/**/*.xml
