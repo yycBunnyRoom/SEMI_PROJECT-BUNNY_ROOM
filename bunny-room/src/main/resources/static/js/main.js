@@ -14,6 +14,8 @@ $(document).ready(function()
             var newItem = $(
                 '<div class="owl-item">' +
                 '<div class="bbb_item is_new">' +
+                /* 이미지를 불러온다*/
+                '<div class="bbb_image d-flex flex-column align-items-center justify-content-center"><img id="' + room.roomNo + '" src="" alt=""></div>' +
                 '<div class="bbb_content">' +
                 '<div class="bbb_category">' + room.categoryName + '</a></div>' +
 
@@ -31,7 +33,7 @@ $(document).ready(function()
                 '<div class="bbb_fav"><i class="fas fa-heart"></i></div>' +
                 '</div>' +
                 '</div>');
-
+            downloadImage(room.roomNo);
             // 해당방 상세 페이지
             newItem.find('.bbb_name a').attr('url', '/search/roomDetail?roomNo=' + room.roomNo);
 
@@ -90,6 +92,26 @@ $(document).ready(function()
         }
     }
 });
+
+function downloadImage(roomNo) {
+
+    fetch(`/image/download/${roomNo}`, {method: 'GET'}).then(response => {
+        if (response.ok) {
+            return response.blob();
+        }
+        throw new Error('이미지 다운로드 실패');
+    }).then(imageBlob => {
+        console.log(imageBlob)
+        const imageUrl = URL.createObjectURL(imageBlob);
+        const downloadedImage = document.getElementById(roomNo);
+        downloadedImage.src = imageUrl;
+        console.log("성공")
+    }).catch(error => {
+        console.error('이미지 다운로드 실패:', error);
+    });
+
+}
+
 
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RoomRegisterMapper {
@@ -63,4 +64,8 @@ public interface RoomRegisterMapper {
 
 
     List<RoomDTO> getLatestRoomsByLimit10();
+
+    int updateImage(Map<String, Object> data);
+
+    int getImageByRoomNo(int roomNo);
 }

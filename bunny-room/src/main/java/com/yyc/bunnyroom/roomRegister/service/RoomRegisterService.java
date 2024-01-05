@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -118,5 +120,19 @@ public class RoomRegisterService {
 
     public List<RoomDTO> getLatestRoomsByLimit10() {
         return roomRegisterMapper.getLatestRoomsByLimit10();
+    }
+
+    public int updateImage(Integer roomNo, Integer imageNo) {
+
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("roomNo", roomNo);
+        data.put("imageNo", imageNo);
+
+        return roomRegisterMapper.updateImage(data);
+    }
+
+    public int getImageByRoomNo(int roomNo) {
+        return roomRegisterMapper.getImageByRoomNo(roomNo);
     }
 }

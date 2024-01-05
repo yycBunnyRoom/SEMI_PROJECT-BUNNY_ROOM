@@ -1,235 +1,83 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Test3</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<form action="item.html" th:action th:object="${item}" method="post">-->
-<!--  <div>-->
-<!--    <label for="itemName">상품명</label>-->
-<!--    <input type="text" id="itemName" th:field="*{itemName}" class="form- -->
-<!--control" placeholder="이름을 입력하세요"> </div>-->
-<!--  <div>-->
-<!--    <label for="price">가격</label>-->
-<!--    <input type="text" id="price" th:field="*{price}" class="form-control" placeholder="가격을 입력하세요">-->
-<!--  </div> <div>-->
-<!--  <label for="quantity">수량</label>-->
-<!--  <input type="text" id="quantity" th:field="*{quantity}" class="form- -->
-<!--control" placeholder="수량을 입력하세요"> </div>-->
+<!DOCTYPE html>
+<html>
+<head><title>이미지 업로드</title></head>
+<body>
+<h1>이미지 업로드</h1>
+<input id="fileInput" type="file">
+<button onclick="uploadImage()">이미지 업로드</button>
 
 
-
-<!--  <hr class="my-4">-->
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div>-->
-<!--    <div>-->
-<!--      <div class="form-check">-->
-<!--        <input type="checkbox" id="open" name="open" class="form-check-input">-->
-<!--        <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div>-->
-<!--  <div>-->
-<!--    <div class="form-check">-->
-<!--      <input type="checkbox" id="open" name="open" class="form-check-input">-->
-<!--      <input type="hidden" name="_open" value="on"/> &lt;!&ndash; 히든 필드 추가 &ndash;&gt;-->
-<!--      <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div>-->
-<!--  <div>-->
-<!--    <div class="form-check">-->
-<!--      <input type="checkbox" id="open"-->
-<!--             th:field="*{open}"-->
-<!--             class="form-check-input">-->
-<!--      <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div> <div>-->
-<!--    <div class="form-check">-->
-<!--      <input type="checkbox"-->
-<!--             id="open"-->
-<!--             class="form-check-input"-->
-<!--             name="open"-->
-<!--             value="true">-->
-<!--      <input type="hidden" name="_open" value="on"/>-->
-<!--      <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--    </div>-->
-<!--  </div>-->
+<h1>이미지 출력</h1>
+<input id="fileId" type="number">
+<button onclick="downloadImage()">이미지 다운로드</button>
+<img alt="다운로드된 이미지" id="downloadedImage" src="">
 
 
-<!--  <hr class="my-4">-->
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div> <div>-->
-<!--    <div class="form-check">-->
-<!--      <input type="checkbox"-->
-<!--             id="open"-->
-<!--             th:field="${item.open}"-->
-<!--             class="form-check-input"-->
-<!--             disabled>-->
-<!--      <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--    </div>-->
-<!--  </div>-->
+<script>
 
-<!--  <hr class="my-4">-->
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div class="form-check">-->
-<!--    <input type="checkbox"-->
-<!--           id="open"-->
-<!--           class="form-check-input"-->
-<!--           disabled-->
-<!--           name="open"-->
-<!--           value="true"-->
-<!--           checked="checked">-->
-<!--    <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--  </div>-->
+    let isSending = false;
+    function uploadImage() {
 
-<!--  <hr class="my-4">-->
-<!--  &lt;!&ndash; single checkbox &ndash;&gt;-->
-<!--  <div>판매 여부</div> <div>-->
-<!--    <div class="form-check">-->
-<!--      <input type="checkbox"-->
-<!--             id="open"-->
-<!--             th:field="*{open}"-->
-<!--             class="form-check-input">-->
-<!--      <label for="open" class="form-check-label">판매 오픈</label>-->
-<!--    </div>-->
-<!--  </div>-->
+        if (!isSending){
 
-<!--  &lt;!&ndash; multi checkbox &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>등록 지역</div>-->
-<!--    <div th:each="region : ${regions}" class="form-check form-check-inline">-->
-<!--      <input type="checkbox"-->
-<!--             th:field="*{regions}"-->
-<!--             th:value="${region.key}"-->
-<!--             class="form-check-input">-->
-<!--      <label th:for="${#ids.prev('regions')}"-->
-<!--             th:text="${region.value}" class="form-check-label">서울</label>-->
-<!--    </div>-->
-<!--  </div>-->
+            isSending = true;
+
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+
+            formData.append('file', file);
 
 
+            fetch('/image/upload', {method: 'POST', body: formData}).then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('이미지 업로드 실패');
+            }).then(imageNo => {
+                if (parseInt(imageNo) > 0){
+                    alert("이미지 등록 성공")
+                }
+            }).catch(error => {
+                console.error('이미지 업로드 실패:', error);
+            }).finally(()=>{isSending=false});
 
-<!--  &lt;!&ndash; multi checkbox &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>등록 지역</div>-->
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="checkbox" value="SEOUL" class="form-check-input"-->
-<!--             id="regions1" name="regions">-->
-<!--      <input type="hidden" name="_regions" value="on"/>-->
-<!--      <label for="regions1"-->
-<!--             class="form-check-label">서울</label>-->
-<!--    </div>-->
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="checkbox" value="BUSAN" class="form-check-input"-->
-<!--             id="regions2" name="regions">-->
-
-<!--      <input type="hidden" name="_regions" value="on"/>-->
-<!--      <label for="regions2"-->
-<!--             class="form-check-label">부산</label>-->
-<!--    </div>-->
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="checkbox" value="JEJU" class="form-check-input"-->
-<!--             id="regions3" name="regions">-->
-<!--      <input type="hidden" name="_regions" value="on"/>-->
-<!--      <label for="regions3" class="form-check-label">제주</label>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--  &lt;!&ndash; &ndash;&gt;-->
+        }
+        else {
+            alert("이미지를 업로드하고 있습니다.")
+        }
 
 
+}
 
-<!--  &lt;!&ndash; multi checkbox &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>등록 지역</div>-->
-<!--    <div th:each="region : ${regions}" class="form-check form-check-inline">-->
-<!--      <input type="checkbox"-->
-<!--             th:field="${item.regions}"-->
-<!--             th:value="${region.key}"-->
-<!--             class="form-check-input"-->
-<!--             disabled>-->
-<!--      <label th:for="${#ids.prev('regions')}"-->
-<!--             th:text="${region.value}"-->
-<!--             class="form-check-label">서울</label>-->
-<!--    </div>-->
-<!--  </div>-->
+function downloadImage() {
+    const fileId = document.getElementById('fileId').value;
 
+    if (!isSending){
 
+        isSending = true;
 
-<!--  &lt;!&ndash; multi checkbox &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>등록 지역</div>-->
-<!--    <div th:each="region : ${regions}" class="form-check form-check-inline">-->
-<!--      <input type="checkbox"-->
-<!--             th:field="${item.regions}"-->
-<!--             th:value="${region.key}"-->
-<!--             class="form-check-input">-->
-<!--      <label th:for="${#ids.prev('regions')}"-->
-<!--             th:text="${region.value}"-->
-<!--             class="form-check-label">서울</label>-->
-<!--    </div>-->
-<!--  </div>-->
+        fetch(`/image/download/${fileId}`, {method: 'GET'}).then(response => {
+            if (response.ok) {
 
-
-
-
-
-<!--  &lt;!&ndash; radio button &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>상품 종류</div>-->
-<!--    <div th:each="type : ${itemTypes}" class="form-check form-check-inline">-->
-<!--      <input type="radio" th:field="*{itemType}" th:value="${type.name()}"-->
-
-<!--             class="form-check-input">-->
-<!--      <label th:for="${#ids.prev('itemType')}" th:text="${type.description}"-->
-<!--             class="form-check-label">-->
-<!--        BOOK-->
-<!--      </label>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; radio button &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>상품 종류</div>-->
-<!--    <div th:each="type : ${itemTypes}" class="form-check form-check-inline">-->
-<!--      <input type="radio" th:field="*{itemType}" th:value="${type.name()}"-->
-<!--             class="form-check-input">-->
-<!--      <label th:for="${#ids.prev('itemType')}" th:text="${type.description}"-->
-<!--             class="form-check-label">-->
-<!--        BOOK-->
-<!--      </label>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; radio button &ndash;&gt;-->
-<!--  <div>-->
-<!--    <div>상품 종류</div>-->
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="radio" value="BOOK" class="form-check-input"-->
-<!--             id="itemType1" name="itemType">-->
-<!--      <label for="itemType1" class="form-check-label">도서</label>-->
-<!--    </div>-->
-
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="radio" value="FOOD" class="form-check-input"-->
-<!--             id="itemType2" name="itemType" checked="checked">-->
-<!--      <label for="itemType2" class="form-check-label">식품</label>-->
-<!--    </div>-->
-<!--    <div class="form-check form-check-inline">-->
-<!--      <input type="radio" value="ETC" class="form-check-input" id="itemType3"-->
-<!--             name="itemType">-->
-<!--      <label for="itemType3" class="form-check-label">기타</label> </div>-->
-<!--  </div>-->
-
-
-<!--</body>-->
-<!--</html>-->
+                return response.blob();
+            }
+            throw new Error('이미지 다운로드 실패');
+        }).then(imageBlob => {
+            alert("요청을 보냈습니다")
+            console.log(imageBlob)
+            const imageUrl = URL.createObjectURL(imageBlob);
+            const downloadedImage = document.getElementById('downloadedImage');
+            downloadedImage.src = imageUrl;
+            alert("이미지 도착")
+        }).catch(error => {
+            console.error('이미지 다운로드 실패:', error);
+        }).finally(()=>{isSending=false});
+    }
+    else {
+        alert("다운로드중입니다")
+    }
+}
+</script>
+</body>
+</html>

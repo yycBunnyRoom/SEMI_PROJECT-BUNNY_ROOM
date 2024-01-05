@@ -61,6 +61,11 @@ public class MainController {
         return "/test/test2";
     }
 
+    @GetMapping("/test3")
+    public String test3(){
+        return "/test/test3";
+    }
+
     @GetMapping("/test4")
     public String test4(){
         return "/test/test4";

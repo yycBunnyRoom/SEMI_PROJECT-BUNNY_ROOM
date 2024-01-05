@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.model;
 
+import com.yyc.bunnyroom.test.ImageEntity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,5 +46,7 @@ public class RoomDTO {
     private int [] appliedOptions;
 
     private String categoryName;
+
+    private ImageEntity imageEntity;
 
 }
