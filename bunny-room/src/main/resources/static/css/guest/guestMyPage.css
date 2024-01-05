@@ -1,3 +1,8 @@
+.main-contents {
+    margin-left: 14.5rem;
+    margin-top: 2rem;
+}
+
 /* 기본 스타일 초기화 */
 body, h1, h2, p {
     margin: 0;
@@ -27,8 +32,6 @@ section img {
     display: block;  /* 인라인 요소로부터 블록 요소로 변환 */
     margin: 0 auto;  /* 가운데 정렬을 위한 왼쪽 및 오른쪽 마진 자동 설정 */
 }
-
-
 
 h1 {
     color: #333;

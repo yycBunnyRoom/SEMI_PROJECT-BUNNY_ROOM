@@ -1,15 +1,79 @@
-ul {
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-    width: 120px;
-    background: #FF6347;
+/*ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0px;*/
+/*    margin: 0px;*/
+/*    width: 120px;*/
+/*    background: #FF6347;*/
+/*    height: 100%;*/
+/*    overflow: auto;*/
+/*    position: fixed;*/
+/*}*/
+
+/*li a {*/
+/*    text-decoration: none;*/
+/*    padding: 10px;*/
+/*    display: block;*/
+/*    color: #000;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*li a:hover {*/
+/*    background: #333;*/
+/*    color: #fff;*/
+/*}*/
+
+
+
+/*#logout-btn {*/
+/*    position: fixed;*/
+/*    bottom: 10px; !* 하단 여백 설정 *!*/
+/*    width: 100px;*/
+/*    text-align: center;*/
+/*    background: #FF6347;*/
+/*    color: #fff;*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#logout-btn:hover {*/
+/*    background: #555;*/
+/*}*/
+
+body {
     height: 100%;
-    overflow: auto;
-    position: fixed;
+    position: relative;
+    min-height: 100vh;
 }
 
-li a {
+.nav{
+    padding: 1rem;
+    margin: 1rem -1rem -1rem;
+    width: 12rem;
+    background: #ffcc00;
+    height: 100%;
+    position: absolute;
+}
+nav {
+    padding: 1rem;
+    margin: 1rem -1rem -1rem;
+    width: 12rem;
+    background: #ffcc00;
+    height: 100%;
+    position: absolute;
+}
+.nav ul {
+    list-style-type: none;
+    overflow: auto;
+    text-align: center;
+    position: fixed;
+    margin-top: 3rem;
+    margin-left: -1.5rem;
+}
+.nav li {
+    margin: 1rem;
+
+}
+.nav li a {
     text-decoration: none;
     padding: 10px;
     display: block;
@@ -17,25 +81,42 @@ li a {
     font-weight: bold;
 }
 
-li a:hover {
+.nav li a:hover {
     background: #333;
     color: #fff;
 }
 
-
-
-#logout-btn {
-    position: fixed;
-    bottom: 10px; /* 하단 여백 설정 */
-    width: 100px;
-    text-align: center;
-    background: #FF6347;
+.nav li a.pass {
+    background : #333;
     color: #fff;
-    padding: 10px;
-    cursor: pointer;
 }
 
-#logout-btn:hover {
-    background: #555;
+#mypage-logout {
+    position: fixed;
+    bottom: 10rem; /* 하단 여백 설정 */
+    width: 12rem;
+    text-align: center;
+    color: #fff;
+    padding: 0rem;
+    margin: -1rem;
 }
 
+#mypage-logout-btn {
+    height: 3rem;
+    width: 10rem;
+    font-size: large;
+    font-weight: bold;
+    font-family: auto;
+    background-color: #FFB545;
+    transition: background-color 0.5s;
+}
+
+#mypage-logout-btn:hover {
+    background-color: orange;
+    height: 3rem;
+    width: 10rem;
+    font-size: large;
+    font-weight: bold;
+    font-family: auto;
+    text-emphasis-color: white;
+}

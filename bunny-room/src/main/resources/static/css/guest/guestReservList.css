@@ -1,3 +1,8 @@
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
 section {
     max-width: 800px;
     margin: 60px auto; /* 네비게이션 바 높이만큼 여백 추가 */
@@ -6,6 +11,7 @@ section {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 
 /* 예약 목록 섹션 내의 항목 스타일링 */
 .reservation-item {
