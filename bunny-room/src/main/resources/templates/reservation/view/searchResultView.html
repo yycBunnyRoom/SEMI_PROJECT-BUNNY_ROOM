@@ -6,7 +6,9 @@
     <script th:inline="javascript">
         let rooms = [[${rooms}]]
     </script>
-
+    <link th:href="@{/css/common/header.css}" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/common/footer.css}"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/reservation/view/searchResultView.css">
 
 </head>
@@ -26,6 +28,7 @@
     <!-- 여기에 결과가 표시될 부분 -->
 </div>
 
+<div class="footer" th:insert="~{/common/footer :: footerFragment}"></div>
 
 <script src="/js/reservation/view/searchResultView.js"></script>
 </body>

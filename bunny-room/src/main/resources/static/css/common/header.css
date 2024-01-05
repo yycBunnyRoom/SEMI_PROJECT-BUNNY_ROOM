@@ -1,7 +1,7 @@
 .header, .div {
     background-color: #FFB545; /* 헤더 배경 색상 */
     padding: 1rem; /* 내부 여백 */
-    margin: -1rem; /* 빈틈 없애기*/
+    margin: -1rem 0rem -1rem -1rem; /* 빈틈 없애기*/
 }
 
 .header h1 {
@@ -18,4 +18,16 @@
 
 .header a:hover {
     text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+
+#header h1 {
+    margin: 0; /* 기본 마진 제거 */
+    font-size: 2.4rem; /* 헤딩 폰트 크기 */
+    text-align: center;
+}
+
+#header .a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #fff; /* 링크 텍스트 색상 */
+    font-weight: bold; /* 굵게 표시 */
 }
