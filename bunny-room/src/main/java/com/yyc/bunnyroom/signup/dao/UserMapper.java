@@ -25,4 +25,6 @@ public interface UserMapper {
     boolean checkEmailByUserEmail(String userEmail);
 
     boolean isUserDeleted(String userEmail);
+
+    boolean checkEmailByUserNickname(String userNickname);
 }

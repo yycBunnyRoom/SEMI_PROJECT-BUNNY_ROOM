@@ -143,12 +143,7 @@ startTimeSelect.addEventListener('change', function() {
     selectedStartTime = Number(selectedTime);
 
     updateEndTime();
-    if (selectedTime <10){
-        alert(`시작시간: 0${selectedTime}:00`);
-    }
-    else {
-        alert(`시작시간: ${selectedTime}:00`);
-    }
+
 });
 
 /* 동적으로 최소 예약 시간 선택 요소 생성 */
@@ -164,7 +159,6 @@ minRsvTime.addEventListener('change',function (){
     const selectedMinRsvTimeOption = minRsvTime.value;
     selectedMinRsvTime = Number(selectedMinRsvTimeOption);
     updateEndTime();
-    alert(`최소 예약시간: ${selectedMinRsvTimeOption} 시간`);
 })
 
 const endTime = document.getElementById('endTime');
@@ -199,7 +193,6 @@ function updateEndTime() {
 // minRsvTime 을 선택할 시 alert가 뜨게
 endTime.addEventListener('change',function (){
     const selectedEndTime = endTime.value;
-    alert(`종료시간: ${selectedEndTime}`);
 })
 
 

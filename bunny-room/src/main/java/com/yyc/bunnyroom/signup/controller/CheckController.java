@@ -34,6 +34,15 @@ public class CheckController {
         return ResponseEntity.ok("{\"duplicate\": " + isDuplicate + "}");
     }
 
+    @GetMapping("/nickname/{userNickname}")
+    public ResponseEntity<?> checkNickname(@PathVariable("userNickname") String userNickname){
+
+        // DB에 중복되는 이메일이있는지 확인, 중복되면 true를 반환
+        boolean isDuplicate = userService.checkEmailByUserNickname(userNickname);
+
+        return ResponseEntity.ok("{\"duplicate\": " + isDuplicate + "}");
+    }
+
 
     @PostMapping("/register")
     public ResponseEntity<?> registUser(@RequestBody @Valid SignupDTO newUser, BindingResult bindingResult) throws JsonProcessingException {

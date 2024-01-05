@@ -80,4 +80,6 @@ public class UserService {
         return userMapper.checkEmailByUserEmail(userEmail);
     }
 
+    public boolean checkEmailByUserNickname(String userNickname) { return userMapper.checkEmailByUserNickname(userNickname);
+    }
 }

@@ -85,6 +85,17 @@
         WHERE USER_EMAIL = #{userEmail}
     </select>
 
+    <!--checkEmailByUserNickname-->
+    <select id="checkEmailByUserNickname" resultType="boolean">
+        SELECT
+            COUNT(*) > 0
+        FROM
+            TBL_USER
+        WHERE
+            USER_NICKNAME = #{userNickname}
+    </select>
+
+
     <select id="phoneCheck" parameterType="com.yyc.bunnyroom.common.dto.UserDTO" resultType="int">
         SELECT COUNT(*)
         FROM TBL_USER

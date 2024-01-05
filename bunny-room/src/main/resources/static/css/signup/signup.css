@@ -1,18 +1,24 @@
-/* 스타일을 적용할 클래스 정의 */
-.signup-message {
+    /* 스타일을 적용할 클래스 정의 */
+.password-message {
     font-size: 0.8em; /* 글자 크기 조절 */
     margin-top: 5px; /* 위쪽 여백 추가 */
 }
 
 /* 중복 메시지에 대한 스타일 */
-.signup-message.duplicate {
+.password-message.duplicate {
     color: red; /* 빨간색 텍스트 */
 }
 
 /* 사용 가능 메시지에 대한 스타일 */
-.signup-message.available {
+.password-message.available {
     color: green; /* 초록색 텍스트 */
 }
+
+
+
+
+
+
 
 section {
     text-align: center;
