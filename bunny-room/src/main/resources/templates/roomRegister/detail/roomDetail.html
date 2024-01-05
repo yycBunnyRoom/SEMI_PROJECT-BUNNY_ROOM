@@ -6,6 +6,7 @@
 
     <script th:inline="javascript">
         let appliedOptions = [[${appliedOptions}]]
+        let roomNo = [[${roomDetails.roomNo}]]
     </script>
 
     <link rel="stylesheet" href="/css/roomRegister/detail/roomDetail.css">
@@ -30,6 +31,13 @@
 </div>
 
 <div id="appliedOptionsButtons"></div>
+
+
+<h3>이미지 업로드</h3>
+<input id="imageIdx" type="file">
+<button onclick="uploadImage()">이미지 업로드</button>
+
+
 
 
 </body>

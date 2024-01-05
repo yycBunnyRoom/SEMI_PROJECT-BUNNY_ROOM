@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyc.bunnyroom.test.ImageMapper">
+
+
+    <resultMap id="ImageEntity" type="com.yyc.bunnyroom.test.ImageEntity">
+        <id property="id" column="id"/>
+        <result property="imageData" column="imageData"/>
+    </resultMap>
+
+
+    <insert id="insertImage" parameterType="com.yyc.bunnyroom.test.ImageEntity" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO TBL_IMAGE (id, imageData) VALUES (null, #{imageData})
+    </insert>
+
+
+    <select id="getImageById" resultMap="ImageEntity">
+        SELECT
+            *
+        FROM
+            TBL_IMAGE
+        WHERE
+            id = #{id}
+    </select>
+</mapper>
+
+

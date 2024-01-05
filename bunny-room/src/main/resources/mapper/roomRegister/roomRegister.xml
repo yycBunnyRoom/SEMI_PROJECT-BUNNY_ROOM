@@ -616,4 +616,32 @@
 
 
 
+
+
+
+    <!--updateImage-->
+    <update id="updateImage" parameterType="map">
+        UPDATE TBL_ROOM
+        SET
+            image_no = #{imageNo}
+        WHERE
+            ROOM_NO = #{roomNo}
+    </update>
+
+
+
+    <!--getImageByRoomNo-->
+    <select id="getImageByRoomNo" resultType="int">
+        SELECT
+            id
+        FROM
+            TBL_IMAGE AS A
+        JOIN
+            TBL_ROOM AS B ON (A.id = B.image_no)
+        WHERE
+            B.ROOM_NO = #{roomNo}
+    </select>
+
+
+
 </mapper>
