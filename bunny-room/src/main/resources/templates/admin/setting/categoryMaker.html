@@ -10,16 +10,19 @@
     <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
     <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/admin/sub-input.css}"/>
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
-    <section class="main-content">
+    <section class="main-content sub-input2">
         <h3>추가할 카테고리의 정보를 입력해주세요.</h3>
         <form action="/admin/setting/newCategory" method="post">
             카테고리 이름 : <input type="text" name="categoryName"/><br>
-            카테고리 색상 : <input type="text" name="colorCode" data-coloris/>
+            카테고리 색상 : <input id="color" type="text" name="colorCode" data-coloris/>
             <button type="submit">추가하기</button>
         </form>
     </section>

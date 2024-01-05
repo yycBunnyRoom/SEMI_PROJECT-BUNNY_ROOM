@@ -1,0 +1,67 @@
+#businessCategory {
+    font-size: 1.25rem;
+    width: 7rem;
+    height: fit-content;
+    background-color: greenyellow;
+    border-radius: 5rem;
+    text-align: center;
+}
+
+#businessTitle {
+    background-color: orange;
+    width: 101rem;
+    font-weight: bold;
+    height: fit-content;
+    font-size: xxx-large;
+}
+
+.sub-title {
+    background-color: #ffdd00;
+    width: 101rem;
+    font-size: x-large;
+    margin-top: 0.5rem;
+}
+
+th {
+    background-color: sandybrown;
+    width: 9.18rem;
+    border: solid 0.1rem #f9f9fa;
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    background-color: beige;
+    border: solid 0.1rem #f9f9fa;
+}
+
+#vacation tbody {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.holiday {
+    text-align: center;
+    width: 20rem;
+    border: 1px dotted orange;
+}
+
+.holiday-content {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5rem;
+}
+
+.holiday-title {
+    background-color: lightgreen;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#holiday {
+    display: flex;
+    flex-wrap: wrap;
+}
