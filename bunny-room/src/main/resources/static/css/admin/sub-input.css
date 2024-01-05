@@ -1,0 +1,36 @@
+.sub-input {
+    background-color: #ffcc00;
+    width: 50rem;
+    height: 20rem;
+    margin: 22rem 12rem 12rem 38rem;
+    padding: 1rem;
+}
+
+.sub-input h3{
+    background-color: orange;
+}
+
+.sub-input form input {
+    width: 48rem;
+    height: 10rem;
+}
+
+.sub-input form button {
+    position: relative;
+    left: 36rem;
+    top: 1.3rem;
+    height: 4rem;
+    width: 12rem;
+}
+
+.sub-input2 {
+    background-color: #ffcc00;
+    width: 35rem;
+    height: 13rem;
+    margin: 26rem 12rem 12rem 44rem;
+    padding: 1rem;
+}
+
+.sub-input2 h3{
+    background-color: orange;
+}

@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
   <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
   <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+  <link rel="stylesheet" th:href="@{/css/admin/sub-input.css}"/>
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
 
-  <section class="main-content">
-    <h2>업체 삭제 사유</h2>
+  <section class="main-content sub-input">
     <article>
       <h3>업체를 삭제하는 사유를 작성해주세요.</h3>
       <form action="/admin/business/deleteReason" method="post">

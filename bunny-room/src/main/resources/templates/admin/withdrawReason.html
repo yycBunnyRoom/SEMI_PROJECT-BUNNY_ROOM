@@ -11,16 +11,17 @@
 <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
 <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
 <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+<link rel="stylesheet" th:href="@{/css/admin/sub-input.css}"/>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
-    <section class="main-content">
+    <section class="main-content sub-input">
         <h3>탈퇴 사유를 작성해주세요</h3>
         <form action="/admin/withdraw" method="post">
             <input type="hidden" name="email" th:value="${email}">
             <input type="hidden" name="userNo" th:value="${userNo}">
-            <p>사유 : </p><input type="text" name="reason"/>
+            <input type="text" name="reason"/>
             <button type="submit">탈퇴</button>
         </form>
     </section>

@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="/css/admin/sectionSearching.css" th:href="@{/css/admin/sectionSearching.css}" />
     <link rel="stylesheet" href="/css/admin/adminNav.css" th:href="@{/css/admin/adminNav.css}" />
     <link rel="stylesheet" th:href="@{/css/admin/adminPages.css}"/>
+    <link rel="stylesheet" th:href="@{/css/admin/sub-input.css}"/>
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 <div class="nav" th:insert="~{/admin/adminNav :: nav}"></div>
 
 
-  <section class="main-content">
-      <h1>새로운 옵션 추가</h1>
+  <section class="main-content sub-input">
+      <h3>새로운 옵션 추가</h3>
 
         <form action="/admin/setting/addOption" method="post">
           <input type="text" name="optionName" placeholder="새로운 옵션을 추가해주세요..."/>
