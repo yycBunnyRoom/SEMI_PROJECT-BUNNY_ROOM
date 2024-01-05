@@ -13,3 +13,83 @@
 .signup-message.available {
     color: green; /* 초록색 텍스트 */
 }
+
+section {
+    text-align: center;
+    position: relative;
+    top: 5rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.title {
+    padding: 3rem;
+    font-weight: bold;
+}
+label {
+    font-weight: bold;
+}
+
+#email{
+    padding: 1rem;
+    height: 12rem;
+    width: 20rem;
+    text-align: left;
+}
+
+#checkEmail {
+    font-size: large;
+}
+
+#inputUserEmail {
+    width: 14rem;
+}
+
+#inputPassword {
+    width: 20rem;
+    text-align: left;
+}
+
+#password1{
+    width: 14rem;
+}
+
+#password2 {
+    width: 14rem;
+    position: relative;
+    left: 4.95rem;
+}
+
+#nickname {
+    text-align: left;
+    width: 20rem;
+    padding: 1rem;
+}
+
+#userNickname {
+    width: 14rem;
+}
+
+#inputUserPhone{
+    text-align: left;
+    width: 20rem;
+}
+#phone2 {
+    width: 5rem;
+}
+
+#phone3 {
+    width: 5rem;
+}
+
+#register {
+    margin: 1rem;
+    width: 20rem;
+    height: 3rem;
+}
+
+body{
+    background-color: #ffb545;
+}
