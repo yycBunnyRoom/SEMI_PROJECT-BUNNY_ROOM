@@ -52,17 +52,8 @@ public class ImageController {
 
     @GetMapping("/download/{roomNo}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable int roomNo) throws IOException {
-
-        System.out.println("입력 받은 방 번호: "+roomNo);
-
         int imageNo = roomRegisterService.getImageByRoomNo(roomNo);
-
-
-        System.out.println("조회한 이미지 번호: "+imageNo);
-
         byte[] imageData = imageService.getImageById(imageNo);
-
-        System.out.println(Arrays.toString(imageData));
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
