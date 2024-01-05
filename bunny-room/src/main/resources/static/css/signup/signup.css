@@ -85,8 +85,17 @@ label {
 }
 
 #register {
+    background-color: orange;
+    border-color: #ffb545;
     margin: 1rem;
     width: 20rem;
+    height: 3rem;
+}
+
+button {
+    background-color: orange;
+    border-color: #ffb545;
+    width: 10rem;
     height: 3rem;
 }
 
