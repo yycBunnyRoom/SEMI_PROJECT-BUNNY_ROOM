@@ -48,7 +48,5 @@ public class RoomDTO {
 
     private String categoryName;
 
-    private byte[] imageData;
-    private MultipartFile image;
 
 }

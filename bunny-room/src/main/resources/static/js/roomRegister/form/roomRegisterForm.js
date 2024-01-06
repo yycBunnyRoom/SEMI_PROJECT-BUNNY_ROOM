@@ -1,7 +1,6 @@
 let isRegistering = false;
 let isSending = false;
 
-console.log(123)
 
 
 /*          Room Options             */
@@ -36,6 +35,8 @@ window.onload = () => {
     createButtons();
 };
 
+
+
 function submitRoomRegisterForm() {
 
     if (isRegistering){
@@ -52,6 +53,18 @@ function submitRoomRegisterForm() {
     const roomNotice = document.getElementById('roomNotice').value;
     const price = document.getElementById('price').value;
 
+    var roomDTO = {
+        businessNo:businessNo,
+        roomName: roomName,
+        roomIntro: roomIntro,
+        roomDetail: roomDetail,
+        roomMinPeople: roomMinPeople,
+        roomMaxPeople: roomMaxPeople,
+        roomFacilityInfo: roomFacilityInfo,
+        roomNotice: roomNotice,
+        price: price,
+        appliedOptions: appliedOptions,
+    }
 
     // 유효성 검사
     if (!roomName.trim()){
@@ -101,25 +114,24 @@ function submitRoomRegisterForm() {
 
     isRegistering = true;
 
-    const data = {
-        businessNo: businessNo,
-        roomName: roomName,
-        roomIntro: roomIntro,
-        roomDetail: roomDetail,
-        roomMinPeople: roomMinPeople,
-        roomMaxPeople: roomMaxPeople,
-        roomFacilityInfo: roomFacilityInfo,
-        roomNotice: roomNotice,
-        price: price,
-        appliedOptions: appliedOptions
-    };
+    // formData로 보내기 위해서 formData를 선언
+    const formData = new FormData();
+
+    // imageFile에 file을 저장
+    const roomImage = document.getElementById('imageIdx').files[0];
+
+    //formData에 선언된 데이터를 담음
+
+    formData.append('roomDTO', JSON.stringify(roomDTO));
+
+    formData.append('roomImage', roomImage);
+
+     console.log(formData)
+
 
     fetch('/roomRegister/room/register', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
-        },
-        body: JSON.stringify(data)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
@@ -146,55 +158,3 @@ function submitRoomRegisterForm() {
 }
 
 
-
-
-///////////////////////////////////// GPT 코드
-
-function submitRoomRegisterForm() {
-    const roomName = document.getElementById('roomName').value;
-    const roomIntro = document.getElementById('roomIntro').value;
-    const roomDetail = document.getElementById('roomDetail').value;
-    const roomMinPeople = document.getElementById('roomMinPeople').value;
-    const roomMaxPeople = document.getElementById('roomMaxPeople').value;
-    const roomFacilityInfo = document.getElementById('roomFacilityInfo').value;
-    const roomNotice = document.getElementById('roomNotice').value;
-    const price = document.getElementById('price').value;
-
-    const formData = new FormData();
-    const imageFile = document.getElementById('imageIdx').files[0];
-    formData.append('roomImage', imageFile);
-    formData.append('businessNo', businessNo);
-    formData.append('roomName', roomName);
-    formData.append('roomIntro', roomIntro);
-    formData.append('roomDetail', roomDetail);
-    formData.append('roomMinPeople', roomMinPeople);
-    formData.append('roomMaxPeople', roomMaxPeople);
-    formData.append('roomFacilityInfo', roomFacilityInfo);
-    formData.append('roomNotice', roomNotice);
-    formData.append('price', price);
-    formData.append('appliedOptions', JSON.stringify(appliedOptions));
-
-    fetch('/roomRegister/room/register', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Success:', data);
-            if (data === 1) {
-                alert('방 등록 성공');
-                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
-            } else {
-                alert('방 등록 실패');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('네트워크 오류가 발생했습니다.');
-        });
-}

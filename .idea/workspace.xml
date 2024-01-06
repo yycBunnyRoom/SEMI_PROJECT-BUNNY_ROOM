@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/BusinessController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/BusinessController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/model/RoomDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/model/RoomDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/test/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/test/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/businessRegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/businessRegisterForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/roomRegisterForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/roomRegister/form/roomRegisterForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/form/roomRegisterForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/form/roomRegisterForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +169,7 @@
       <workItem from="1704365802935" duration="1203000" />
       <workItem from="1704420765545" duration="25753000" />
       <workItem from="1704450315448" duration="24395000" />
-      <workItem from="1704526921240" duration="2539000" />
+      <workItem from="1704526921240" duration="10946000" />
     </task>
     <servers />
   </component>

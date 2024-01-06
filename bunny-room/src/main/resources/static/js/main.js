@@ -168,6 +168,7 @@ function createCategoryButtons() {
         const button = document.createElement('button');
         button.textContent = category.businessCategoryName;
         button.style.backgroundColor = category.businessCategoryColorCode;
+        button.classList.add('category-buttons')
         button.addEventListener('click', function () {
             window.location.href = '/search/category?businessCategoryName='+category.businessCategoryName;
         })

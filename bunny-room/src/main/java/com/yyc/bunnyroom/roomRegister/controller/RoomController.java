@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO;
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -44,7 +46,16 @@ public class RoomController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Integer> roomRegister(@RequestBody RoomDTO newRoom ) throws IOException {
+    public ResponseEntity<Integer> roomRegister(
+            @RequestParam("roomDTO") String jsonData ,
+            @RequestParam("roomImage")MultipartFile roomImage) throws IOException {
+
+        System.out.println("여기까지는 왔어");
+        // jsonData를 객체로 변환하여 처리
+        RoomDTO newRoom = new ObjectMapper().readValue(jsonData, RoomDTO.class);
+
+        System.out.println("Arrived: "+newRoom);
+        System.out.println("Image: "+roomImage);
 
         /* newRoom 에 roomRegistDate 입력*/
         ZonedDateTime currentTime = ZonedDateTime.now();
@@ -67,8 +78,11 @@ public class RoomController {
 
             /*등록 대표이미지을 등록*/
 
-            System.out.println(newRoom.getImage());
-            int imageRegistResult = imageController.uploadImage(newRoom.getImage(),newRoom.getRoomNo());
+            System.out.println("newRoom: "+newRoom);
+
+            System.out.println("newRoom에 이미지 있나: "+roomImage);
+
+            int imageRegistResult = imageController.uploadImage(roomImage,newRoom.getRoomNo());
             System.out.println("성공했니?: "+imageRegistResult);
 
             /*등록 성공했다면 방옵션을 등록*/
