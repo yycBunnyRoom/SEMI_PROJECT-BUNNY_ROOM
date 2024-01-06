@@ -336,9 +336,11 @@ function submitBusinessRegisterForm() {
     })
     .then(data => {
         console.log('Received data:', data);
-        if (data === 1) {
+
+        console.log("businessNo",data.businessNo)
+        if (data !== 0) {
             alert('사업체를 성공적으로 등록하셨습니다.');
-            window.location.href = '/roomRegister/hostMainView';
+            window.location.href = `/roomRegister/business/businessDetail/${data.businessNo}`;
         } else {
             alert('사업체를 등록 실패했습니다.');
         }

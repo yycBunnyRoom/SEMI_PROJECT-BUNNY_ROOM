@@ -1,4 +1,5 @@
 let isRegistering = false;
+let isSending = false;
 
 console.log(123)
 
@@ -146,43 +147,54 @@ function submitRoomRegisterForm() {
 
 
 
-let isSending = false;
-function uploadImage() {
 
-    if (!isSending) {
+///////////////////////////////////// GPT 코드
 
-        isSending = true;
+function submitRoomRegisterForm() {
+    const roomName = document.getElementById('roomName').value;
+    const roomIntro = document.getElementById('roomIntro').value;
+    const roomDetail = document.getElementById('roomDetail').value;
+    const roomMinPeople = document.getElementById('roomMinPeople').value;
+    const roomMaxPeople = document.getElementById('roomMaxPeople').value;
+    const roomFacilityInfo = document.getElementById('roomFacilityInfo').value;
+    const roomNotice = document.getElementById('roomNotice').value;
+    const price = document.getElementById('price').value;
 
-        const fileInput = document.getElementById('imageIdx');
-        if (fileInput.files.length === 1) {
-            // 이미지가 한 개만 선택된 경우
-            const file = fileInput.files[0];
-            const formData = new FormData();
+    const formData = new FormData();
+    const imageFile = document.getElementById('imageIdx').files[0];
+    formData.append('roomImage', imageFile);
+    formData.append('businessNo', businessNo);
+    formData.append('roomName', roomName);
+    formData.append('roomIntro', roomIntro);
+    formData.append('roomDetail', roomDetail);
+    formData.append('roomMinPeople', roomMinPeople);
+    formData.append('roomMaxPeople', roomMaxPeople);
+    formData.append('roomFacilityInfo', roomFacilityInfo);
+    formData.append('roomNotice', roomNotice);
+    formData.append('price', price);
+    formData.append('appliedOptions', JSON.stringify(appliedOptions));
 
-            formData.append('file', file);
-            formData.append('roomNo', roomNo);
-
-
-            fetch('/image/upload', {method: 'POST', body: formData}).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('이미지 업로드 실패');
-            }).then(imageNo => {
-                if (parseInt(imageNo) > 0){
-                    alert("이미지 등록 성공")
-                }
-            }).catch(error => {
-                console.error('이미지 업로드 실패:', error);
-            }).finally(() => {
-                isSending = false
-            });
-
-        } else {
-            alert("대표 이미지는 하나만 선택해주세요.");
-        }
-
-    } else {
-        alert("이미지를 등록하고 있습니다.")
-    }
+    fetch('/roomRegister/room/register', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success:', data);
+            if (data === 1) {
+                alert('방 등록 성공');
+                window.location.href = `/roomRegister/business/businessDetail/${businessNo}`;
+            } else {
+                alert('방 등록 실패');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('네트워크 오류가 발생했습니다.');
+        });
 }

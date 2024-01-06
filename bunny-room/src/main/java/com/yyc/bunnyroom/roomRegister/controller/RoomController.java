@@ -6,6 +6,7 @@ import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomOptionDTO;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import com.yyc.bunnyroom.security.auth.model.AuthDetails;
+import com.yyc.bunnyroom.test.ImageController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,9 @@ public class RoomController {
 
     @Autowired
     RoomRegisterService roomRegisterService;
+
+    @Autowired
+    ImageController imageController;
 
 
 
@@ -39,7 +44,7 @@ public class RoomController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Integer> roomRegister(@RequestBody RoomDTO newRoom ){
+    public ResponseEntity<Integer> roomRegister(@RequestBody RoomDTO newRoom ) throws IOException {
 
         /* newRoom 에 roomRegistDate 입력*/
         ZonedDateTime currentTime = ZonedDateTime.now();
@@ -59,6 +64,12 @@ public class RoomController {
             // 성공적으로 등록됨
 
             System.out.println("마지막으로 등록된 방번호: newRoom: "+newRoom.getRoomNo());
+
+            /*등록 대표이미지을 등록*/
+
+            System.out.println(newRoom.getImage());
+            int imageRegistResult = imageController.uploadImage(newRoom.getImage(),newRoom.getRoomNo());
+            System.out.println("성공했니?: "+imageRegistResult);
 
             /*등록 성공했다면 방옵션을 등록*/
 
