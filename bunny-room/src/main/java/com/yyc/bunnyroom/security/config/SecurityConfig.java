@@ -52,7 +52,7 @@ public class SecurityConfig {
                     request.requestCache(requestCache))
             .authorizeHttpRequests(auth -> { // 서버의 리소스에 접근 가능한 권한을 설정함
                 //여기부터 로그인 권한을 설정하는 공간
-                auth.requestMatchers("/security/auth/*","/image/**", "/security/auth/login", "/signup/*", "/main/**","/check/**", "/mailSend", "/mailAuthCheck", "/search/**", "/main/test2", "/").permitAll();
+                auth.requestMatchers("/inquirys","/security/auth/*","/image/**", "/security/auth/login", "/signup/*", "/main/**","/check/**", "/mailSend", "/mailAuthCheck", "/search/**", "/main/test2", "/").permitAll();
                 auth.requestMatchers("/roomRegister/**").hasAnyAuthority(UserRole.HOST.getRole());
                 auth.requestMatchers("/reservation/**").hasAnyAuthority(UserRole.GUEST.getRole());
                 auth.requestMatchers("/myPage/**").hasAnyAuthority(UserRole.GUEST.getRole(),UserRole.HOST.getRole());
