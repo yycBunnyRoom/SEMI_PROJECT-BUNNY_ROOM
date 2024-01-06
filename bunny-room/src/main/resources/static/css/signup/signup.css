@@ -51,6 +51,8 @@ label {
 
 #inputUserEmail {
     width: 14rem;
+    position: relative;
+    left: 0.5rem;
 }
 
 #inputPassword {
@@ -62,10 +64,15 @@ label {
     width: 14rem;
 }
 
+#checkPassword1 p {
+    position: relative;
+    left: -1rem;
+}
+
 #password2 {
     width: 14rem;
     position: relative;
-    left: 4.95rem;
+    left: -1.05rem;
 }
 
 #nickname {
@@ -107,4 +114,9 @@ button {
 
 body{
     background-color: #ffb545;
+}
+
+#btn_checkEmail, #sendAuthNumber, #confirmAuthNumberBtn {
+    position: relative;
+    left: 4.4rem;
 }
