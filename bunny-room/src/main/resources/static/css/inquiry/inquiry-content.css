@@ -1,0 +1,25 @@
+.content {
+    position: relative;
+    top: 4rem;
+    left: 4rem;
+    background-color: lightyellow;
+    width: 77rem;
+    height: 46.5rem;
+}
+
+.content h2 {
+    background-color: palegreen;
+}
+
+.content p {
+    padding: 0.5rem;
+    height: 40rem;
+}
+
+.content button {
+    position: relative;
+    left: 66rem;
+    background-color: orange;
+    color: white;
+    border: orange;
+}

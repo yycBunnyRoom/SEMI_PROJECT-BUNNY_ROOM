@@ -1,0 +1,32 @@
+.inquiry-table {
+    position: relative;
+    left: 4rem;
+    top: 4rem;
+}
+
+.inquiry-table h1 {
+    background: orange;
+    width: fit-content;
+    color: white;
+}
+
+th {
+    background-color: orange;
+    color: white;
+    border: solid 0.2rem white;
+}
+
+table {
+    width: 77rem;
+    text-align: center;
+    height: 35rem;
+}
+
+button {
+    background-color: orange;
+    border: orange;
+    color: white;
+    position: relative;
+    left: 70rem;
+    top: 1rem;
+}
