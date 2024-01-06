@@ -2,8 +2,10 @@
     background-color: #ffcc00;
     width: 50rem;
     height: 20rem;
-    margin: 22rem 12rem 12rem 38rem;
     padding: 1rem;
+    position: relative;
+    left: 24.5rem;
+    top: 17rem;
 }
 
 .sub-input h3{

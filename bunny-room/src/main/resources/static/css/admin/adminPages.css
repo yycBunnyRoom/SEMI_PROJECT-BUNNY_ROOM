@@ -1,7 +1,9 @@
 .main-content {
-    margin-left: 14.5rem;
-    margin-top: 2rem;
+    position: relative;
+    left: 14.5rem;
+    top: 2rem;
 }
+
 
 .search {
     padding-top: 1rem;
@@ -11,7 +13,6 @@
 
 .padding {
     padding-top: 1rem;
-    padding-left: 0rem;
 }
 
 div.card-body {
@@ -69,3 +70,8 @@ button#giveNo {
     border: solid 0.1rem green;
     margin-top: -8rem;
 }
+
+form#deleteForm_\$\{business\.businessNo\} {
+    width: max-content;
+}
+
