@@ -10,6 +10,6 @@ public class ErrorController {
 
     @GetMapping
     public String error(){
-        return "redirect:/main";
+        return "/main";
     }
 }
