@@ -12,7 +12,11 @@ button:active {
     background-color: #555; /* 클릭 시 색상 변경 */
 }
 
-
+.main {
+    position: relative;
+    top: 2rem;
+    left: 2rem;
+}
 
 
 

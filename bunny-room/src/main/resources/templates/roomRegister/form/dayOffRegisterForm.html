@@ -11,45 +11,47 @@
 </head>
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
+<div class="main">
+    <h1>정기 휴무</h1>
 
-<h1>정기 휴무</h1>
+    <label for="weekDaysButtons"></label>
+    <!--weekDays 버튼이 생성되는 곳-->
+    <div id="weekDaysButtons"></div>
 
-<label for="weekDaysButtons"></label>
-<!--weekDays 버튼이 생성되는 곳-->
-<div id="weekDaysButtons"></div>
+    <p id="selectedDays">선택된 요일: </p>
 
-<p id="selectedDays">선택된 요일: </p>
-
-<button id="btn_addClosedDays" onclick="addClosedDays()" style="display: none">확인</button>
-
-
+    <button id="btn_addClosedDays" onclick="addClosedDays()" style="display: none">확인</button>
 
 
 
 
-<h1>지정 휴무</h1>
 
-<div id="forms">
-    <!-- 초기 휴가 신청 폼 -->
-    <div class="holiday-form" id="holidayForm1">
-        <label for="holidayName1">휴가 이름:</label>
-        <input type="text" id="holidayName1"><br><br>
 
-        <label for="reason1">휴가 사유:</label>
-        <textarea id="reason1" rows="4" cols="50"></textarea><br><br>
+    <h1>지정 휴무</h1>
 
-        <label for="startDate1">휴가 시작일:</label>
-        <input type="date" id="startDate1"><br><br>
+    <div id="forms">
+        <!-- 초기 휴가 신청 폼 -->
+        <div class="holiday-form" id="holidayForm1">
+            <label for="holidayName1">휴가 이름:</label>
+            <input type="text" id="holidayName1"><br><br>
 
-        <label for="endDate1">휴가 종료일:</label>
-        <input type="date" id="endDate1"><br><br>
+            <label for="reason1">휴가 사유:</label>
+            <textarea id="reason1" rows="4" cols="50"></textarea><br><br>
 
-        <button onclick="removeHolidayForm(1)">취소</button>
+            <label for="startDate1">휴가 시작일:</label>
+            <input type="date" id="startDate1"><br><br>
+
+            <label for="endDate1">휴가 종료일:</label>
+            <input type="date" id="endDate1"><br><br>
+
+            <button onclick="removeHolidayForm(1)">취소</button>
+        </div>
     </div>
+
+    <button onclick="addHolidayForm()">신규 휴가 추가</button>
+    <button onclick="addHolidays()">확인</button>
 </div>
 
-<button onclick="addHolidayForm()">신규 휴가 추가</button>
-<button onclick="addHolidays()">확인</button>
 
 
 <!--Thymeleaf 를 활용 해서 해당 휴가가 대응 하는 기업 번호를 JS 변수에 저장-->

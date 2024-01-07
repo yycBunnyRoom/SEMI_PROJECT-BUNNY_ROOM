@@ -17,27 +17,30 @@
 
 <div th:insert="~{/common/header :: headerFragment}"></div>
 
-<h1>영업 시간 관리</h1>
+<div class="main">
+    <h1>영업 시간 관리</h1>
 
 
-<!--시작시간<0100 - 1200 (1hr)>-->
-<label for="startTime">시작시간</label>
-<select id="startTime" name="startTime"></select>
+    <!--시작시간<0100 - 1200 (1hr)>-->
+    <label for="startTime">시작시간</label>
+    <select id="startTime" name="startTime"></select>
 
-<br><br>
+    <br><br>
 
-<!--최소 예약 시간 <select1~12>-->
-<label for="minRsvTime">최소 예약 시간</label>
-<select id="minRsvTime" name="minRsvTime"></select>
+    <!--최소 예약 시간 <select1~12>-->
+    <label for="minRsvTime">최소 예약 시간</label>
+    <select id="minRsvTime" name="minRsvTime"></select>
 
-<br><br>
+    <br><br>
 
-<!--종료시간(동적으로 옵션 생기게)<select before24>-->
-<label for="endTime">종료 시간</label>
-<select id="endTime" name="endTime"></select>
+    <!--종료시간(동적으로 옵션 생기게)<select before24>-->
+    <label for="endTime">종료 시간</label>
+    <select id="endTime" name="endTime"></select>
 
-<!--    확인하면 등록-->
-<div class="button" id="addTimeSchedule">예약 시간 추가</div>
+    <!--    확인하면 등록-->
+    <div class="button" id="addTimeSchedule">예약 시간 추가</div>
+</div>
+
 
 
 <!--    등록되면(다시 등록 못하게)-->

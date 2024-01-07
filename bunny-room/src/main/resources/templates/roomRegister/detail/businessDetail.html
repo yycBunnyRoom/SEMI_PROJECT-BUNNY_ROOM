@@ -22,50 +22,52 @@
 <body>
 <div th:insert="~{/common/header :: headerFragment}"></div>
 
+<div class="main">
+    <h1>상세 페이지</h1>
 
-<h1>상세 페이지</h1>
+    <!-- 비즈니스 상세 정보가 표시될 부분 -->
+    <div id="businessDetails">
+        <h2 th:text="${businessDetails.businessName}"></h2>
+        <p><strong>사업자 번호:</strong> <span th:text="${businessDetails.businessRegistNo}"></span></p>
+        <p><strong>주소:</strong> <span th:text="|${businessDetails.businessAddressRoad}  ${businessDetails.businessAddressDetail}|"></span></p>
 
-<!-- 비즈니스 상세 정보가 표시될 부분 -->
-<div id="businessDetails">
-    <h2 th:text="${businessDetails.businessName}"></h2>
-    <p><strong>사업자 번호:</strong> <span th:text="${businessDetails.businessRegistNo}"></span></p>
-    <p><strong>주소:</strong> <span th:text="|${businessDetails.businessAddressRoad}  ${businessDetails.businessAddressDetail}|"></span></p>
-
-    <!--영업시간-->
-    <p><strong></strong> <span id="openingHours"></span></p>
-
-
-    <!-- 다른 필드들에 대한 정보를 추가 -->
-</div>
+        <!--영업시간-->
+        <p><strong></strong> <span id="openingHours"></span></p>
 
 
-<div>
+        <!-- 다른 필드들에 대한 정보를 추가 -->
+    </div>
+
+
     <div>
-        <!--휴무 시간 보여줘-->
-        <label for="btn_closedDays">정기 휴일</label>
-        <div id="btn_closedDays"></div>
-<!--        <div id="appliedOptionsButtons"></div>-->
+        <div>
+            <!--휴무 시간 보여줘-->
+            <label for="btn_closedDays">정기 휴일</label>
+            <div id="btn_closedDays"></div>
+            <!--        <div id="appliedOptionsButtons"></div>-->
+        </div>
+        <div>
+            <!-- 휴무 관리 버튼 -->
+            <div class="button" id="dayOffButton">휴무 관리</div>
+
+            <!--예약 시간 관리 버튼-->
+            <div class="button" id="timeScheduleButton">영업시간 관리</div>
+        </div>
     </div>
+
+
+
+    <br><br><br><br>
+
+
     <div>
-        <!-- 휴무 관리 버튼 -->
-        <div class="button" id="dayOffButton">휴무 관리</div>
+        <div id="roomList">
+            <!-- 여기에 결과가 표시될 부분 -->
+        </div>
 
-        <!--예약 시간 관리 버튼-->
-        <div class="button" id="timeScheduleButton">영업시간 관리</div>
-    </div>
-</div>
-
-
-
-<br><br><br><br>
-
-
-<div>
-    <div id="roomList">
-        <!-- 여기에 결과가 표시될 부분 -->
+        <div class="button" id="addRoomButton">방 추가</div>
     </div>
 
-    <div class="button" id="addRoomButton">방 추가</div>
 </div>
 
 

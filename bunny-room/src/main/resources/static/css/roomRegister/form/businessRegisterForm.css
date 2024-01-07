@@ -13,3 +13,15 @@
 .business-message.available {
     color: green; /* 초록색 텍스트 */
 }
+
+#main {
+    position: relative;
+    top: 4rem;
+    left: 4rem;
+}
+
+#main .btn {
+    background-color: orange;
+    border: orange;
+    color: white;
+}
