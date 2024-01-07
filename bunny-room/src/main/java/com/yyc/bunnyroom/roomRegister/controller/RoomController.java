@@ -1,6 +1,9 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.mail.imap.protocol.MODSEQ;
+import com.yyc.bunnyroom.mypage.user.dto.ReservationListDTO;
+import com.yyc.bunnyroom.mypage.user.service.GuestService;
 import com.yyc.bunnyroom.roomRegister.model.AppliedOptionDTO;
 import com.yyc.bunnyroom.roomRegister.model.BusinessDTO;
 import com.yyc.bunnyroom.roomRegister.model.RoomDTO;
@@ -11,8 +14,10 @@ import com.yyc.bunnyroom.test.ImageController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -32,6 +37,9 @@ public class RoomController {
 
     @Autowired
     ImageController imageController;
+
+    @Autowired
+    GuestService guestService;
 
 
 
@@ -133,11 +141,18 @@ public class RoomController {
         System.out.println(roomNo+"번방의 옵션들: "+appliedOptions);
 
 
-        modelAndView.setViewName("/roomRegister/detail/roomDetail");
+        /* 해당 방에 관련된 예약 리스트를 가져온다 */
+        List<ReservationListDTO> reservationList = guestService.showReservationByRoomNo(roomNo);
+
+
+        modelAndView.addObject("reservationList",reservationList);
         modelAndView.addObject("appliedOptions",appliedOptions);
         modelAndView.addObject("roomDetails",roomDetails);
+
+        modelAndView.setViewName("/roomRegister/detail/roomDetail");
         return modelAndView;
     }
+
 
 
 

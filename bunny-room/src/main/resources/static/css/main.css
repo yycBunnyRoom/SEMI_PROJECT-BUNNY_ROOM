@@ -771,16 +771,29 @@ section {
     font-weight: bold; /* 글꼴 두껍게 */
 }
 
-#categoryButtons button:hover {
-    background-color: rgba(255, 115, 0, 0.96); /* 마우스 호버 시 색상 변화 */
+.row_fixed{
+    justify-content: center;
 }
 
 
 
 
+.item_fixed{
+    width: 336px;
+    height: 276px;
+    background-color: rgb(250, 235, 215);
+    overflow: hidden;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 05);
+    border-radius: 12px;
+    margin: 2%;
+}
 
 
-
+.img_fixed{
+    height: 65%;
+    width: 100%;
+    background-color: antiquewhite  ;
+}
 
 
 

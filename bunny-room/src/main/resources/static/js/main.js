@@ -12,10 +12,9 @@ $(document).ready(function()
     if (latestRooms && trendsSlider.length) {
         latestRooms.forEach(function(room) {
             var newItem = $(
-                '<div class="owl-item">' +
-                '<div class="bbb_item is_new">' +
+                '<div class="owl-item item_fixed">' +
                 /* 이미지를 불러온다*/
-                '<div class="bbb_image d-flex flex-column align-items-center justify-content-center"><img id="' + room.roomNo + '" src="" alt=""></div>' +
+                '<img class="bbb_image d-flex flex-column align-items-center justify-content-center img_fixed" id="' + room.roomNo + '" src="" alt="">' +
                 '<div class="bbb_content">' +
                 '<div class="bbb_category">' + room.categoryName + '</a></div>' +
 
@@ -117,10 +116,10 @@ function downloadImage(roomNo) {
 
 
 // JavaScript 변수 정의
-var myString = userAuth+" "+userNickname+"님";
+// var myString = userAuth+" "+userNickname+"님";
 
 // 변수 값을 <p> 태그 안에 넣기
-document.getElementById("output").innerHTML = myString;
+// document.getElementById("output").innerHTML = myString;
 
 
 <!--    로그인 버튼 관련 JS-->

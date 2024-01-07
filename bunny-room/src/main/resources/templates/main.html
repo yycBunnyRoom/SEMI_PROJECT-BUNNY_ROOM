@@ -32,12 +32,6 @@
 
     <div id="header" th:insert="~{/common/header :: headerFragment}"></div>
 
-<!--    <div class="room-search">-->
-<!--        <form action="/search/keyword" method="GET">-->
-<!--            <input type="text" name="keyword" placeholder="키워드를 입력해 주세요">-->
-<!--            <button type="submit">검색</button>-->
-<!--        </form>-->
-<!--    </div>-->
 
 
     <div class="container justify-content-center containerSearch">
@@ -64,8 +58,8 @@
 
     <!--최신 방 보여주는 공간-->
     <div class="trends trend-fix">
-        <div class="bbb_background"></div>
-        <div class="bbb_overlay"></div>
+<!--        <div class="bbb_background"></div>-->
+<!--        <div class="bbb_overlay"></div>-->
 
         <div>
             <h2 class="bbb_title">Latest Rooms 2024</h2>
@@ -76,7 +70,7 @@
 
 
         <div class="container">
-            <div class="row">
+            <div class="row row_fixed">
 
                 <div class="bbb_prev bbb_nav"><i class="fas fa-angle-left ml-auto"></i></div>
 
@@ -125,7 +119,7 @@
 
 
 
-    <p id="output"></p>
+   <!-- <p id="output"></p>-->
 
     <div class="footer" th:insert="~{/common/footer :: footerFragment}"></div>
 </body>

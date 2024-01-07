@@ -146,4 +146,53 @@
             AND
             RESERVATION_DATE > CURRENT_TIMESTAMP()
     </update>
+
+
+
+
+
+
+    <!--showReservationByRoomNo-->
+    <select id="showReservationByRoomNo" resultMap="reservation">
+        SELECT
+            R.RESERVATION_NO,
+            R.USER_NO,
+            BR.BUSINESS_NAME,
+            BR.ROOM_NAME,
+            BR.BUSINESS_PHONE,
+            R.RESERVATION_DATE,
+            R.RESERVATION_UNIT,
+            R.RESERVATION_PERSON,
+            R.RESERVATION_TOTAL_COST,
+            R.RESERVATION_STATUS,
+            R.RESERVATION_CANCEL_REASON,
+            R.RESERVATION_REGIST_DATE,
+            R.RESERVATION_CANCEL_DATE
+        FROM
+            TBL_RESERVATION AS R
+        JOIN
+            (SELECT
+                R.ROOM_NO,
+                R.ROOM_NAME,
+                B.BUSINESS_NAME,
+                B.BUSINESS_PHONE
+            FROM
+                TBL_ROOM AS R
+            JOIN
+                TBL_BUSINESS AS B ON (R.BUSINESS_NO = B.BUSINESS_NO)
+            ) AS BR ON (R.ROOM_NO = BR.ROOM_NO)
+        WHERE
+            R.ROOM_NO = #{roomNo}
+        ORDER BY
+            R.RESERVATION_REGIST_DATE DESC
+    </select>
+
+
+
+
+
+
+
+
+
 </mapper>
