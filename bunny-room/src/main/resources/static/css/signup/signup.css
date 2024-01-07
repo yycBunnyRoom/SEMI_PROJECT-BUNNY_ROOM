@@ -14,9 +14,18 @@
     color: green; /* 초록색 텍스트 */
 }
 
+.password-container{
+    padding:1em;
+}
 
 
 
+
+    #authNum {
+        width: 14rem;
+        position: relative;
+        left: 4.5rem;
+    }
 
 
 
@@ -38,12 +47,17 @@ label {
     font-weight: bold;
 }
 
-#email{
-    padding: 1rem;
-    height: 12rem;
-    width: 20rem;
-    text-align: left;
-}
+    #email {
+        padding: 1rem;
+        height: initial;
+        width: 20rem;
+        text-align: left;
+    }
+
+
+
+
+
 
 #checkEmail {
     font-size: large;
