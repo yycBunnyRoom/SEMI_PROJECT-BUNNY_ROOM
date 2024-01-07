@@ -12,14 +12,15 @@ $(document).ready(function()
     if (latestRooms && trendsSlider.length) {
         latestRooms.forEach(function(room) {
             var newItem = $(
-                '<div class="owl-item item_fixed">' +
+                '<div class="owl-item item_fixed" style="margin: 10px">' +
                 /* 이미지를 불러온다*/
                 '<img class="bbb_image d-flex flex-column align-items-center justify-content-center img_fixed" id="' + room.roomNo + '" src="" alt="">' +
-                '<div class="bbb_content">' +
-                '<div class="bbb_category">' + room.categoryName + '</a></div>' +
+                '<div class="bbb_content content_fixed">' +
+
+                '<div class="bbb_name EachRoomName"><a href="#">' + room.roomName + '</a></div>' +
 
                 '<div class="bbb_info clearfix">' +
-                '<div class="bbb_name"><a href="#">' + room.roomName + '</a></div><br>' +
+                '<div class="bbb_category">' + room.categoryName + '</a></div>' +
                 '<div class="bbb_price">' + room.price + '원/인' + '</div>' +
                 '</div>' +
 
@@ -32,17 +33,22 @@ $(document).ready(function()
                 '<div class="bbb_fav"><i class="fas fa-heart"></i></div>' +
                 '</div>' +
                 '</div>');
-            downloadImage(room.roomNo);
-            // 해당방 상세 페이지
-            newItem.find('.bbb_name a').attr('url', '/search/roomDetail?roomNo=' + room.roomNo);
 
-            newItem.find('.bbb_name a').on('click', function(event) {
+
+            trendsSlider.append(newItem);
+
+            newItem.find('.EachRoomName a').attr('url', '/search/roomDetail?roomNo=' + room.roomNo);
+
+            newItem.find('.EachRoomName a').on('click', function(event) {
                 event.preventDefault(); // 기본 이벤트 방지
                 let url = $(this).attr('url');
                 window.location.href = url; // 해당 URL로 이동
             });
 
-            trendsSlider.append(newItem);
+
+            downloadImage(room.roomNo);
+            // 해당방 상세 페이지
+
         });
     }
 

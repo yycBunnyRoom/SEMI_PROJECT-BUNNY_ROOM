@@ -776,12 +776,28 @@ section {
 }
 
 
+.EachRoomName {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    width: 100%;
+    margin-top: 2px;
+    margin-bottom: 5px;
+}
+
+
+.content_fixed{
+    position: initial;
+    bottom: initial;
+    margin: initial;
+
+}
 
 
 .item_fixed{
     width: 336px;
     height: 276px;
-    background-color: rgb(250, 235, 215);
+    background-color: white;
     overflow: hidden;
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 05);
     border-radius: 12px;
@@ -792,7 +808,7 @@ section {
 .img_fixed{
     height: 65%;
     width: 100%;
-    background-color: antiquewhite  ;
+    background-color: whitesmoke;
 }
 
 
