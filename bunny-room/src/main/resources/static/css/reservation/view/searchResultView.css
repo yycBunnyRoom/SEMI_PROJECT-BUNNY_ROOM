@@ -39,15 +39,42 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+.room-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 각 방 사이의 간격 설정 */
+    padding: 3%;
+}
+
+
 /* business-item 클래스에 적용되는 스타일 */
 .room-item {
-    padding: 10px;
+    flex: 0 0 calc(30% - 20px); /* 한 줄에 3개씩 정사각형 형태로 배치, 간격 제거 */
+    background-color: #f1f1f1; /* 배경색 설정 */
+    padding: 20px; /* 각 방의 패딩 설정 */
+    box-sizing: border-box; /* 내부 padding을 고려한 크기 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    border-radius: 10px; /* 모서리 둥글게 */
     margin: 5px;
     border: 1px solid #ccc;
     cursor: pointer; /* 클릭 가능한 커서 스타일 설정 */
-    border-radius: 10px;
-    background-color: white;
 }
+
+
+
+
+
 
 /* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
 .room-item:hover {
@@ -88,3 +115,4 @@
 .more-results-button:hover {
     background-color: rgba(255, 115, 0, 0.96); /* 호버 시 색상 변화 */
 }
+

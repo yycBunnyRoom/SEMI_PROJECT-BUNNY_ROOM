@@ -1,7 +1,7 @@
 const roomsContainer = document.getElementById('rooms');
 
 let currentIndex = 0;
-const itemsPerPage = 4;
+const itemsPerPage = 3;
 
 function displayRooms(startIndex, endIndex) {
     const roomsContainer = document.getElementById('rooms');
@@ -23,7 +23,6 @@ function displayRooms(startIndex, endIndex) {
         roomsContainer.appendChild(roomDiv);
     }
 }
-
 
 
 
