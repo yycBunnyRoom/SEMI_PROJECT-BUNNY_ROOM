@@ -1,6 +1,6 @@
 let isRegistering = false;
+let isSending = false;
 
-console.log(123)
 
 
 /*          Room Options             */
@@ -35,6 +35,8 @@ window.onload = () => {
     createButtons();
 };
 
+
+
 function submitRoomRegisterForm() {
 
     if (isRegistering){
@@ -51,6 +53,18 @@ function submitRoomRegisterForm() {
     const roomNotice = document.getElementById('roomNotice').value;
     const price = document.getElementById('price').value;
 
+    var roomDTO = {
+        businessNo:businessNo,
+        roomName: roomName,
+        roomIntro: roomIntro,
+        roomDetail: roomDetail,
+        roomMinPeople: roomMinPeople,
+        roomMaxPeople: roomMaxPeople,
+        roomFacilityInfo: roomFacilityInfo,
+        roomNotice: roomNotice,
+        price: price,
+        appliedOptions: appliedOptions,
+    }
 
     // 유효성 검사
     if (!roomName.trim()){
@@ -100,25 +114,24 @@ function submitRoomRegisterForm() {
 
     isRegistering = true;
 
-    const data = {
-        businessNo: businessNo,
-        roomName: roomName,
-        roomIntro: roomIntro,
-        roomDetail: roomDetail,
-        roomMinPeople: roomMinPeople,
-        roomMaxPeople: roomMaxPeople,
-        roomFacilityInfo: roomFacilityInfo,
-        roomNotice: roomNotice,
-        price: price,
-        appliedOptions: appliedOptions
-    };
+    // formData로 보내기 위해서 formData를 선언
+    const formData = new FormData();
+
+    // imageFile에 file을 저장
+    const roomImage = document.getElementById('imageIdx').files[0];
+
+    //formData에 선언된 데이터를 담음
+
+    formData.append('roomDTO', JSON.stringify(roomDTO));
+
+    formData.append('roomImage', roomImage);
+
+     console.log(formData)
+
 
     fetch('/roomRegister/room/register', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json' // JSON 형태로 데이터 전송
-        },
-        body: JSON.stringify(data)
+        body: formData
     })
     .then(response => {
         if (!response.ok) {
@@ -145,44 +158,3 @@ function submitRoomRegisterForm() {
 }
 
 
-
-let isSending = false;
-function uploadImage() {
-
-    if (!isSending) {
-
-        isSending = true;
-
-        const fileInput = document.getElementById('imageIdx');
-        if (fileInput.files.length === 1) {
-            // 이미지가 한 개만 선택된 경우
-            const file = fileInput.files[0];
-            const formData = new FormData();
-
-            formData.append('file', file);
-            formData.append('roomNo', roomNo);
-
-
-            fetch('/image/upload', {method: 'POST', body: formData}).then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('이미지 업로드 실패');
-            }).then(imageNo => {
-                if (parseInt(imageNo) > 0){
-                    alert("이미지 등록 성공")
-                }
-            }).catch(error => {
-                console.error('이미지 업로드 실패:', error);
-            }).finally(() => {
-                isSending = false
-            });
-
-        } else {
-            alert("대표 이미지는 하나만 선택해주세요.");
-        }
-
-    } else {
-        alert("이미지를 등록하고 있습니다.")
-    }
-}

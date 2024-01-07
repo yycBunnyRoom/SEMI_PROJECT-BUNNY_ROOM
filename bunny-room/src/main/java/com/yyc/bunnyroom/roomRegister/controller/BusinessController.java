@@ -1,5 +1,7 @@
 package com.yyc.bunnyroom.roomRegister.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yyc.bunnyroom.common.eNum.WeekDay;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/roomRegister/business")
@@ -56,7 +59,7 @@ public class BusinessController {
 
     /* 업체 등록 */
     @PostMapping("/register")
-    public ResponseEntity<Integer> businessRegister(@RequestBody BusinessDTO businessDTO){
+    public ResponseEntity<?> businessRegister(@RequestBody BusinessDTO businessDTO) throws JsonProcessingException {
 
         /* businessDTO 에 사용자 번호 입력*/
         // 현재 사용중인 사용자를 지정
@@ -88,9 +91,21 @@ public class BusinessController {
 
         Integer result = registTimeSchedule(timeSchedule);
 
+
+
+        // ObjectMapper를 사용해서 JSON 객체를 만들고 그안에 message랑 result 할당
+
+
+
+
         if (result > 0) {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonString;
+            jsonString = objectMapper.writeValueAsString(
+                    Map.of("businessNo",businessDTO.getBusinessNo())
+            );
             // 성공적으로 등록됨을 나타내는 1 반환
-            return ResponseEntity.ok(1);
+            return ResponseEntity.ok(jsonString);
         } else {
             // 등록 실패를 나타내는 0 반환
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(0);

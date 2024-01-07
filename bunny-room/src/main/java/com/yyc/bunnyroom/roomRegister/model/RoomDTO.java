@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -47,6 +48,5 @@ public class RoomDTO {
 
     private String categoryName;
 
-    private ImageEntity imageEntity;
 
 }

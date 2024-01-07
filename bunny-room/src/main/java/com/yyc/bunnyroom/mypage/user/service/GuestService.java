@@ -113,4 +113,8 @@ public class GuestService {
             return 0;
         }
     }
+
+    public List<ReservationListDTO> showReservationByRoomNo(int roomNo) {
+        return guestMapper.showReservationByRoomNo(roomNo);
+    }
 }

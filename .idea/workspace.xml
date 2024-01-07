@@ -6,16 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/controller/CheckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/controller/CheckController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/dao/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/dao/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/signup/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/test/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/test/ImageController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/roomRegister/roomRegister.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/signup/user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/signup/user.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/signup/signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/signup/signup.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/signup/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/signup/signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/mypage/user/model/GuestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/mypage/user/model/GuestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/mypage/user/service/GuestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/mypage/user/service/GuestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/roomRegister/controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/mypage/user/GuestMyPage.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/mapper/mypage/user/GuestMyPage.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/guest/guestReservList.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/guest/guestReservList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/roomRegister/detail/roomDetail.css" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/css/roomRegister/detail/roomDetail.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/signup/signup.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/signup/signup.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/detail/roomDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/roomRegister/detail/roomDetail.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +83,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.BunnyRoomApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/security&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/dev/10_spring_boot/chap04-exception&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
@@ -172,7 +172,9 @@
       <workItem from="1704297043353" duration="33399000" />
       <workItem from="1704365802935" duration="1203000" />
       <workItem from="1704420765545" duration="25753000" />
-      <workItem from="1704450315448" duration="17547000" />
+      <workItem from="1704450315448" duration="24395000" />
+      <workItem from="1704526921240" duration="19199000" />
+      <workItem from="1704633125602" duration="2385000" />
     </task>
     <servers />
   </component>
