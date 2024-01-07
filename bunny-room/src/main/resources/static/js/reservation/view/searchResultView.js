@@ -11,6 +11,7 @@ function displayRooms(startIndex, endIndex) {
         roomDiv.classList.add('room-item');
         roomDiv.innerHTML = `
             <h2>방 이름: ${room.roomName}</h2>
+            <img class="searchResult_img" id=${room.roomNo} style="width: 336px; height: 276px;" src="" alt="">'
             <p>방 소개: ${room.roomIntro}</p>
             <p>수용가능 인원: ${room.roomMinPeople} ~ ${room.roomMaxPeople}명</p>
         `;
@@ -20,9 +21,36 @@ function displayRooms(startIndex, endIndex) {
         roomDiv.addEventListener('click', function () {
             goToRoomPage(room.roomNo);
         })
+
+        console.log(room.roomNo)
+        downloadImage(room.roomNo);
         roomsContainer.appendChild(roomDiv);
     }
 }
+
+function downloadImage(roomNo) {
+
+    fetch(`/image/download/${roomNo}`, {method: 'GET'}).then(response => {
+        if (response.ok) {
+            return response.blob();
+        }
+        throw new Error('이미지 다운로드 실패');
+    }).then(imageBlob => {
+        console.log(imageBlob)
+        const imageUrl = URL.createObjectURL(imageBlob);
+        const downloadedImage = document.getElementById(roomNo);
+        downloadedImage.src = imageUrl;
+        console.log("성공")
+    }).catch(error => {
+        console.error('이미지 다운로드 실패:', error);
+    });
+
+}
+
+
+
+
+
 
 
 

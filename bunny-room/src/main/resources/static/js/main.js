@@ -47,7 +47,6 @@ $(document).ready(function()
 
 
             downloadImage(room.roomNo);
-            // 해당방 상세 페이지
 
         });
     }
