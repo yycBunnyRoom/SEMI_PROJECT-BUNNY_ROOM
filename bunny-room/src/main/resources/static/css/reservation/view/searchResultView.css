@@ -78,7 +78,7 @@
 
 /* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
 .room-item:hover {
-    background-color: #f0f0f0;
+    transform: scale(1.05); /* 마우스 호버 시 크기를 1.2배로 확대 */
 }
 
 #rooms {

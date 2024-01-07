@@ -17,7 +17,7 @@ $(document).ready(function()
                 '<img class="bbb_image d-flex flex-column align-items-center justify-content-center img_fixed" id="' + room.roomNo + '" src="" alt="">' +
                 '<div class="bbb_content content_fixed">' +
 
-                '<div class="bbb_name EachRoomName"><a href="#">' + room.roomName + '</a></div>' +
+                '<div class="bbb_name EachRoomName" style="z-index: 1;"><a href="#">' + room.roomName + '</a></div>' +
 
                 '<div class="bbb_info clearfix">' +
                 '<div class="bbb_category">' + room.categoryName + '</a></div>' +

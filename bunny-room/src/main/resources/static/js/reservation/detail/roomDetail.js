@@ -223,6 +223,14 @@ function addReservation(){
             alert("예약 인원은 음수일 수 없습니다.")
             return;
         }
+        else if (totalPeople < roomDetails.roomMinPeople){
+            alert("총 예약 인원은 최소 인원 보다 적을 수 없습니다")
+            return;
+        }
+        else if (totalPeople > roomDetails.roomMaxPeople){
+            alert("총 예약 인원은 최대 인원을 초과할 수 없습니다")
+            return;
+        }
 
         isRegistering = true;
 

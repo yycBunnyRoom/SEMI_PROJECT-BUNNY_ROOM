@@ -811,8 +811,9 @@ section {
     background-color: whitesmoke;
 }
 
-
-
+.item_fixed:hover{
+    transform: scale(1.05); /* 마우스 호버 시 크기를 1.2배로 확대 */
+}
 
 
 
