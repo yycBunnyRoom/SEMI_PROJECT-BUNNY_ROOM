@@ -13,71 +13,71 @@
 
 <div th:insert="~{/common/header :: headerFragment}"></div>
 
+<div id="main">
+    <!--        사업자 번호를 입력받음-->
+    <label for="businessRegistNo">사업자번호를 입력하세요:</label>
+    <input type="number" id="businessRegistNo" name="businessRegistNo" required/><br>
+    <!--비동기 사업자 번호 중복확인-->
+    <p id="checkBusinessRegistNo" class="business-message"></p>
 
-<!--        사업자 번호를 입력받음-->
-        <label for="businessRegistNo">사업자번호를 입력하세요:</label>
-        <input type="number" id="businessRegistNo" name="businessRegistNo" required/><br>
-        <!--비동기 사업자 번호 중복확인-->
-        <p id="checkBusinessRegistNo" class="business-message"></p>
-
-<!--        사업체 이름을 입력받음-->
-        <label for="businessName">사업체 이름을 입력하세요:</label>
-        <input type="text" id="businessName" name="businessName" required/><br>
-
-
-<!--        카테고리 테이블에 있는 데이터를 가져와서 동적으로 select할 수 있게 하는 메소드 -->
+    <!--        사업체 이름을 입력받음-->
+    <label for="businessName">사업체 이름을 입력하세요:</label>
+    <input type="text" id="businessName" name="businessName" required/><br>
 
 
-        <label for="businessCategoryNo">카테고리</label>
-        <select id="businessCategoryNo" name="businessCategoryNo" required>
-            <option
-                    th:each="category : ${categories}"
-                    th:value="${category.businessCategoryNo}"
-                    th:text="${category.businessCategoryName}">
-            </option>
-        </select><br>
+    <!--        카테고리 테이블에 있는 데이터를 가져와서 동적으로 select할 수 있게 하는 메소드 -->
 
 
-<!--        사업체 주소를 입력 받음-->
+    <label for="businessCategoryNo">카테고리</label>
+    <select id="businessCategoryNo" name="businessCategoryNo" required>
+        <option
+                th:each="category : ${categories}"
+                th:value="${category.businessCategoryNo}"
+                th:text="${category.businessCategoryName}">
+        </option>
+    </select><br>
 
-        <input type="button" onclick="fn_searchAddress()" value="주소찾기"><br>
+<br>
+    <!--        사업체 주소를 입력 받음-->
 
-        <input type="text" id="showBusinessZipCode" name="showBusinessZipCode" style="display:none;">
-        <input type="text" id="showBusinessAddressRoad" name="showBusinessAddressRoad" style="display:none;">
-        <input type="text" id="businessAddressDetail" name="businessAddressDetail" style="display:none;" placeholder="상세주소를 입력해주세요">
+    <input class="btn" type="button" onclick="fn_searchAddress()" value="주소찾기"><br>
 
-
-        <input type="hidden" id="businessZipCode" name="businessZipCode" style="display:none;">
-        <input type="hidden" id="businessAddressRoad" name="businessAddressRoad" style="display:none;">
-
+    <input type="text" id="showBusinessZipCode" name="showBusinessZipCode" style="display:none;">
+    <input type="text" id="showBusinessAddressRoad" name="showBusinessAddressRoad" style="display:none;">
+    <input type="text" id="businessAddressDetail" name="businessAddressDetail" style="display:none;" placeholder="상세주소를 입력해주세요">
 
 
-
-<!--        사업체 연락처를 입력 받음-->
-        <label for="businessPhone" th:value=phone1+phone2+phone3>전화번호</label>
-        <div>
-            <label>
-                <select id="phone1" name="phone1">
-                    <option value="010">010</option>
-                    <option value="02">02</option>
-                    <option value="031">031</option>
-                    <option value="032">032</option>
-                    <option value="033">033</option>
-                    <option value="064">064</option>
-                    <option value="062">062</option>
-                </select>
-            </label>
-            <input type="text" id="phone2" name="phone2" maxlength="4" pattern="[0-9]{3,4}" placeholder="가운데 번호"/>
-            <input type="text" id="phone3" name="phone3" maxlength="4" pattern="[0-9]{4}" placeholder="끝 번호"/>
-        </div><br>
-
-        <!--        자바 스크립트를 활용해서 동적으로 값을 숨겨진 userPhone 저장-->
-        <input type="hidden" id="businessPhone" name="businessPhone"/>
+    <input type="hidden" id="businessZipCode" name="businessZipCode" style="display:none;">
+    <input type="hidden" id="businessAddressRoad" name="businessAddressRoad" style="display:none;">
 
 
 
-        <!--영업시간 필수 등록-->
-<!--시작시간<0100 - 1200 (1hr)>-->
+
+    <!--        사업체 연락처를 입력 받음-->
+    <label for="businessPhone" th:value=phone1+phone2+phone3>전화번호</label>
+    <div>
+        <label>
+            <select id="phone1" name="phone1">
+                <option value="010">010</option>
+                <option value="02">02</option>
+                <option value="031">031</option>
+                <option value="032">032</option>
+                <option value="033">033</option>
+                <option value="064">064</option>
+                <option value="062">062</option>
+            </select>
+        </label>
+        <input type="text" id="phone2" name="phone2" maxlength="4" pattern="[0-9]{3,4}" placeholder="가운데 번호"/>
+        <input type="text" id="phone3" name="phone3" maxlength="4" pattern="[0-9]{4}" placeholder="끝 번호"/>
+    </div><br>
+
+    <!--        자바 스크립트를 활용해서 동적으로 값을 숨겨진 userPhone 저장-->
+    <input type="hidden" id="businessPhone" name="businessPhone"/>
+
+
+
+    <!--영업시간 필수 등록-->
+    <!--시작시간<0100 - 1200 (1hr)>-->
     <label for="operatingTime">영업시간</label>
     <div id="operatingTime">
         <label for="startTime">시작시간</label>
@@ -97,16 +97,11 @@
     </div>
 
 
-        <br><br><br>
+    <br>
 
+    <input class="btn" type="button" onclick="submitBusinessRegisterForm()" value="업체등록하기">
+</div>
 
-
-
-
-
-
-
-        <input type="button" onclick="submitBusinessRegisterForm()" value="업체등록하기">
 
 
 

@@ -1,5 +1,3 @@
-
-
 button {
     padding: 8px 12px;
     margin: 4px;
@@ -25,4 +23,27 @@ button:hover {
 button.selected {
     background-color: rgba(58, 194, 239, 0.73); /* 주황색 */
     color: white;
+}
+
+.main {
+    position: relative;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 97%;
+    margin-bottom: 8rem;
+}
+
+.btn {
+    background-color: orange;
+    color: white;
+    border: orange;
+}
+
+.btn:hover {
+    background-color: darkorange;
+    color: white;
+    border: orange;
 }
