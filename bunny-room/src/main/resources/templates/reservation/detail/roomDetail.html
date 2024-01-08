@@ -37,8 +37,7 @@
 <div th:insert="~{/common/header :: headerFragment}"></div>
 
 
-
-
+<section class="main">
     <!-- 비즈니스 상세 정보가 표시될 부분 -->
     <div id="roomDetails">
         <h1 th:text="${roomDetails.roomName}"></h1>
@@ -63,38 +62,41 @@
 
 
 
-<div class="reservation-container">
-    <button id="btn_reservation">예약</button>
-    <div id="reservation_form">
-        <!--예약 날짜를 선택함-->
-        <div>
-            <!-- 달력을 보여줄 div -->
+    <div class="reservation-container">
+        <button id="btn_reservation">예약</button>
+        <div id="reservation_form">
+            <!--예약 날짜를 선택함-->
+            <div>
+                <!-- 달력을 보여줄 div -->
 
-            <div id="datepicker"></div>
-        </div>
-        <!--선택된 날짜를  보여 준다-->
-        <div id="selectedDate">선택한 날짜: </div>
-
-        <!--예약 시간을 선택함-->
-        <div id="btn_timeUnits"></div>
-
-        <div>
-            <!--Flexbox를 사용한 방법-->
-            <div style="display: flex; align-items: center;">
-                <input type="number" id="reservation_people" class="chrome-style-input" style="width: 50px">
-                <label for="reservation_people">인</label>
+                <div id="datepicker"></div>
             </div>
+            <!--선택된 날짜를  보여 준다-->
+            <div id="selectedDate">선택한 날짜: </div>
 
-            <p id="pricePerPerson"></p>
+            <!--예약 시간을 선택함-->
+            <div id="btn_timeUnits"></div>
 
-            <h3 id="totalPrice"></h3>
+            <div>
+                <!--Flexbox를 사용한 방법-->
+                <div style="display: flex; align-items: center;">
+                    <input type="number" id="reservation_people" class="chrome-style-input" style="width: 70px">
+                    <label for="reservation_people">인</label>
+                </div>
 
-            <!--예약하기 버튼-->
+                <p id="pricePerPerson"></p>
 
-            <div class="button" id="btn_addReservation" style="width: 150px" onclick="addReservation()">예약하기</div>
+                <h3 id="totalPrice"></h3>
+
+                <!--예약하기 버튼-->
+
+                <div class="button" id="btn_addReservation" style="width: 150px" onclick="addReservation()">예약하기</div>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+
 
 <div class="footer" th:insert="~{/common/footer :: footerFragment}"></div>
 
