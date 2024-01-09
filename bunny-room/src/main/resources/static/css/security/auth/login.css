@@ -1,6 +1,6 @@
 body {
     font-family: '맑은 고딕', 'Malgun Gothic', sans-serif;
-    background-color: #ffb545;
+    background-color: orange;
     display: flex;
     flex-direction: column;
     align-items: center;
