@@ -131,6 +131,7 @@ function downloadImage(roomNo) {
 if (userAuth == null){
     document.getElementById("btn_login").style.display = 'block';
     document.getElementById("btn_logout").style.display = 'none';
+    document.getElementById("btn_signup").style.display = 'block';
 }
 if (userAuth)
 {
@@ -171,8 +172,13 @@ function createCategoryButtons() {
     categories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category.businessCategoryName;
-        button.style.backgroundColor = category.businessCategoryColorCode;
         button.classList.add('category-buttons')
+        button.addEventListener('mouseover', function (){
+            button.style.backgroundColor = category.businessCategoryColorCode;
+        })
+        button.addEventListener('mouseout', function (){
+            button.style.backgroundColor = 'white';
+        })
         button.addEventListener('click', function () {
             window.location.href = '/search/category?businessCategoryName='+category.businessCategoryName;
         })
