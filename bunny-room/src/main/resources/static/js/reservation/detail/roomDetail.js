@@ -16,6 +16,16 @@ window.onload = () => {
 };
 
 
+
+
+
+
+
+
+
+
+
+
 //카카오 지도 API
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -55,24 +65,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
 /* 달력 */
 
 $(document).ready(function() {
     function disableDays(date) {
+        var today = new Date();
         var day = date.getDay();
         var dayName = getDayName(day);
         var dateString = $.datepicker.formatDate('yy-mm-dd', date);
 
+
+        /* 정기 휴무를 disable 한다 */
         var isClosedDay = closedDays.some(function(closedDayDTO) {
             return closedDayDTO.closedDay.includes(dayName);
         });
 
+        /* 지정 휴무를 disable 한다 */
         var isHoliday = holidays.some(function(holidayDTO) {
-            // startDate와 endDate 사이의 날짜를 disable
             return date >= new Date(holidayDTO.startDate) && date <= new Date(holidayDTO.endDate);
         });
 
-        if (isClosedDay || isHoliday) {
+        /* 금일 이전의 휴무를 disable 한다 */
+        if (date <= today || isClosedDay || isHoliday) {
             return [false, "holidayStyle", "Closed or Holiday"];
         } else {
             return [true, ""];
@@ -86,14 +106,7 @@ $(document).ready(function() {
 
     $("#datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
-        beforeShowDay: function(date) {
-
-            /* 오늘 포함 오늘 이전의 날은 다 비활성화 */
-            let today = new Date();
-
-            // 오늘 이후의 날짜는 활성화, 이전 날짜는 비활성화
-            return date > today ? [true] : [false];
-        },
+        beforeShowDay: disableDays,
         onSelect: function(dateText, inst) {
             $("#selectedDate").text("선택한 날짜: " + dateText);
             reservationDate = dateText;

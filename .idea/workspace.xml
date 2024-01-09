@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/common/controller/ErrorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/common/controller/ErrorController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/java/com/yyc/bunnyroom/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/signup/signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/signup/signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/signup/signupMethod.html" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/templates/signup/signupMethod.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +169,7 @@
       <workItem from="1704647894383" duration="1194000" />
       <workItem from="1704673819821" duration="2884000" />
       <workItem from="1704759516545" duration="1014000" />
-      <workItem from="1704781282791" duration="2584000" />
+      <workItem from="1704781282791" duration="3585000" />
     </task>
     <servers />
   </component>
