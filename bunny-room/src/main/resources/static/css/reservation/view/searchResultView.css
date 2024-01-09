@@ -55,29 +55,36 @@
     flex-wrap: wrap;
     gap: 20px; /* 각 방 사이의 간격 설정 */
     padding: 3%;
+    justify-content: center;
+    margin: 0 auto 0 auto;
+    width: 1300px;
 }
 
 
 /* business-item 클래스에 적용되는 스타일 */
 .room-item {
     flex: 0 0 calc(30% - 20px); /* 한 줄에 3개씩 정사각형 형태로 배치, 간격 제거 */
-    background-color: #f1f1f1; /* 배경색 설정 */
-    padding: 20px; /* 각 방의 패딩 설정 */
+    background-color: white;
     box-sizing: border-box; /* 내부 padding을 고려한 크기 설정 */
     text-align: center; /* 텍스트 가운데 정렬 */
-    border-radius: 10px; /* 모서리 둥글게 */
-    margin: 5px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 05);
+    margin: 10px;
     border: 1px solid #ccc;
+    overflow: hidden;
     cursor: pointer; /* 클릭 가능한 커서 스타일 설정 */
+    height: calc(30vh - 10px);
 }
 
 
 
+.searchResult_img{
+    height: 65%;
+    width: 100%;
+    transition: 0.25s;
+}
 
-
-
-/* business-item 클래스에 마우스 호버 시 적용되는 스타일 */
-.room-item:hover {
+.searchResult_img:hover {
     transform: scale(1.05); /* 마우스 호버 시 크기를 1.2배로 확대 */
 }
 

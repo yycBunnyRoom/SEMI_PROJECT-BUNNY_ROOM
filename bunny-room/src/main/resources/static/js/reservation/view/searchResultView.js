@@ -10,10 +10,15 @@ function displayRooms(startIndex, endIndex) {
         const roomDiv = document.createElement('div');
         roomDiv.classList.add('room-item');
         roomDiv.innerHTML = `
-            <h2>방 이름: ${room.roomName}</h2>
-            <img class="searchResult_img" id=${room.roomNo} style="width: 336px; height: 276px;" src="" alt="">'
-            <p>방 소개: ${room.roomIntro}</p>
-            <p>수용가능 인원: ${room.roomMinPeople} ~ ${room.roomMaxPeople}명</p>
+            <img class="searchResult_img" id=${room.roomNo} style="" src="" alt="">
+            <div class="room-contents">
+                <h3>${room.roomName}</h3>
+                <p>방 소개: ${room.roomIntro}</p>
+                <div>
+                    <p>${room.price}원/인</p>
+                    <p>수용가능 인원: ${room.roomMinPeople} ~ ${room.roomMaxPeople}명</p>
+                </div>
+            </div>
         `;
         roomDiv.dataset.roomNo = room.roomNo;
 
