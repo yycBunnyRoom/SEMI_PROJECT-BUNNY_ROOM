@@ -60,15 +60,14 @@ $(document).ready(function()
         trendsSlider.owlCarousel(
             {
                 loop:false,
-                margin:30,
+                margin:70,
                 nav:false,
                 dots:false,
                 autoplayHoverPause:true,
                 autoplay:false,
                 responsive: {
                     0: { items: 1 },
-                    575: { items: 2 },
-                    991: { items: 3 }
+                    575: { items: 2 }
                 }
             });
 
@@ -174,9 +173,11 @@ function createCategoryButtons() {
         button.textContent = category.businessCategoryName;
         button.classList.add('category-buttons')
         button.addEventListener('mouseover', function (){
+            button.style.transition = 'background-color 2s ease';
             button.style.backgroundColor = category.businessCategoryColorCode;
         })
         button.addEventListener('mouseout', function (){
+            button.style.transition = 'background-color 2s ease';
             button.style.backgroundColor = 'white';
         })
         button.addEventListener('click', function () {
