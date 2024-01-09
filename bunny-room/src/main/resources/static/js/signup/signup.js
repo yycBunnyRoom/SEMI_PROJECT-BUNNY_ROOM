@@ -115,26 +115,6 @@ function fn_checkEmail(){
 }
 
 
-// .then(function (data) {
-//     checkEmail.style.display = 'block'; // 텍스트를 보이도록 설정
-//
-//     if (data.duplicate) {
-//         alert("가입된 이메일이 있습니다")
-//         checkEmail.textContent = '가입된 이메일이 있습니다.';
-//         checkEmail.classList.remove('available');
-//         checkEmail.classList.add('duplicate');
-//
-//         document.getElementById('sendAuthNumber').style.display = 'none';
-//     } else {
-//         alert("사용가능한 이메일입니다.")
-//         checkEmail.textContent = '사용가능한 이메일입니다.';
-//         checkEmail.classList.remove('duplicate');
-//         checkEmail.classList.add('available');
-//
-//         // 이메일 중복확인을 누르면 이메일 인증하기 버튼이 보이게
-//         document.getElementById('sendAuthNumber').style.display = 'block';
-//     }
-// })
 
 
 

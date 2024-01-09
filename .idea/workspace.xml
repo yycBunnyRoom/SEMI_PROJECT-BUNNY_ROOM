@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="" />
+=======
+    <list default="true" id="465a409a-20bc-4b20-8810-addbf318d527" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/bunny-room/src/main/resources/static/js/reservation/detail/roomDetail.js" afterDir="false" />
+    </list>
+>>>>>>> b59c2f677b3f2aaeb73ced87e5dad216af516a42
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +80,11 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
+<<<<<<< HEAD
     "last_opened_file_path": "C:/dev/SEMI_PROJECT-BUNNY_ROOM/bunny-room",
+=======
+    "last_opened_file_path": "C:/dev/SEMI_PROJECT-BUNNY_ROOM/SEMI_PROJECT-BUNNY_ROOM",
+>>>>>>> b59c2f677b3f2aaeb73ced87e5dad216af516a42
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -164,7 +175,13 @@
       <workItem from="1704526921240" duration="19199000" />
       <workItem from="1704633125602" duration="12247000" />
       <workItem from="1704647894383" duration="1194000" />
+<<<<<<< HEAD
       <workItem from="1704780286028" duration="17000" />
+=======
+      <workItem from="1704673819821" duration="2884000" />
+      <workItem from="1704759516545" duration="1014000" />
+      <workItem from="1704781282791" duration="3585000" />
+>>>>>>> b59c2f677b3f2aaeb73ced87e5dad216af516a42
     </task>
     <servers />
   </component>

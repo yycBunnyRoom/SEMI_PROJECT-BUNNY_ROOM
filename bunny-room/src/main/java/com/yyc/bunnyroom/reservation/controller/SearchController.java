@@ -120,10 +120,14 @@ public class SearchController {
         // 정기 휴무를 가져온다
         List<ClosedDayDTO> closedDays = roomRegisterService.getAllClosedDays(businessNo);
 
+        System.out.println(closedDays);
+
         modelAndView.addObject("closedDays",closedDays);
 
         // 지정 휴무를 가져온다
         List<HolidayDTO> holidays = roomRegisterService.getHolidaysByBusinessNo(businessNo);
+
+        System.out.println(holidays);
 
         modelAndView.addObject("holidays",holidays);
 
