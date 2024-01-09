@@ -886,3 +886,26 @@ img#toki2 {
     right: -76rem;
     width: 18rem;
 }
+
+.bbb_name.EachRoomName {
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    background-color: gold;
+}
+
+.bbb_category {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.bbb_price {
+    font-size: 14px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.content_fixed {
+    position: relative;
+    bottom: 0.5rem;
+}
