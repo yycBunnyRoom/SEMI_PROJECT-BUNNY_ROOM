@@ -4,8 +4,8 @@
     height: 20rem;
     padding: 1rem;
     position: relative;
-    left: 24.5rem;
-    top: 17rem;
+    left: 37.5rem;
+    top: 18rem;
 }
 
 .sub-input h3{
@@ -29,8 +29,10 @@
     background-color: #ffcc00;
     width: 35rem;
     height: 13rem;
-    margin: 26rem 12rem 12rem 44rem;
     padding: 1rem;
+    position: relative;
+    top: 22rem;
+    left: 46rem;
 }
 
 .sub-input2 h3{
