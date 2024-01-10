@@ -83,7 +83,7 @@ public class GuestController {
             SecurityContextHolder.clearContext();
             // 세션 만료
             request.getSession().invalidate();
-            return "/myPage/goodByePage";
+            return "redirect:/main";
         }else {
             redirectAttributes.addFlashAttribute("message", "탈퇴에 실패하였습니다.");
             return "/myPage/withdrawReason";
