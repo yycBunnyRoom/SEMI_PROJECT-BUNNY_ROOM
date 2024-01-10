@@ -22,8 +22,8 @@
     <section class="main-content">
         <h1>관리자 설정 페이지</h1>
 
-        <h2>카테고리 관리</h2>
-        <h3>현재 카테고리</h3>
+        <h3>카테고리 관리</h3>
+        <h4>현재 카테고리</h4>
 
         <div class="category-list">
             <article th:each="category: ${categorylist}" th:style="'background-color: ' + ${category.colorCode} + '; width: 300px; height: 300;'">
@@ -43,8 +43,8 @@
             </article>
 
             <article>
-                <form action="/admin/setting/toNewCategory" method="Get">
-                    <button type="submit">카테고리 추가</button>
+                <form  action="/admin/setting/toNewCategory" method="Get">
+                    <button class="add-button1" type="submit">카테고리 추가</button>
                 </form>
             </article>
         </div>
@@ -52,8 +52,8 @@
 
     <!-- 방 옵션 관련 -->
     <section class="sub-content">
-        <h2>방 옵션 관리</h2>
-        <h3>현재 방 옵션</h3>
+        <h3>방 옵션 관리</h3>
+        <h4>현재 방 옵션</h4>
         <div class="option-list">
             <article class="option" th:each="option : ${optionList}">
                 <p th:text="${option.optionName}"></p>
@@ -64,7 +64,7 @@
             </article>
             <article>
                 <form action="/admin/setting/toNewOption" method="get">
-                    <button type="submit">새로운 옵션 추가</button>
+                    <button class="add-button2" type="submit">새로운 옵션 추가</button>
                 </form>
             </article>
         </div>
