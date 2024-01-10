@@ -58,6 +58,7 @@ div.card-body {
     background-color: coral;
     margin: 2rem;
     border-radius: 10% 10% 20rem 20rem;
+    color: white;
 }
 
 .option p {
@@ -70,6 +71,10 @@ button#giveNo {
     background-color: limegreen;
     border: solid 0.1rem green;
     margin-top: -8rem;
+}
+
+#giveNo:hover {
+    background-color: darkgreen;
 }
 
 form#deleteForm_\$\{business\.businessNo\} {

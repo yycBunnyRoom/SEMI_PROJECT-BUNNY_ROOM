@@ -18,13 +18,17 @@ body {
 
 section {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 1rem;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.5s;
 }
 
+section:hover {
+    transform: scale(1.05);
+}
 
 section img {
     max-width: 100%; /* 이미지를 부모 요소의 너비에 맞추기 */
@@ -81,4 +85,43 @@ input[type="text"] {
 /* 스크립트로 생성된 알림 내의 폼 버튼 스타일링 */
 .alert button {
     margin-top: 5px;
+}
+
+#userInfo {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 6rem;
+    width: 70rem;
+    left: 28rem;
+}
+
+#mainInfo {
+    text-align: center;
+    background-color: orange;
+    border-radius: 0.5rem;
+    height: 6rem;
+}
+
+#memberNickname {
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+}
+
+#user2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: moccasin;
+}
+
+article {
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#user2 button {
+    width: -webkit-fill-available;
 }
