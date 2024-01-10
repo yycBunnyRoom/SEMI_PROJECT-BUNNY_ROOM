@@ -68,6 +68,7 @@ nav {
     font-family: auto;
     background-color: ghostwhite;
     transition: background-color 0.5s;
+    border-radius: 1rem;
 }
 
 #logout-btn-icon:hover {

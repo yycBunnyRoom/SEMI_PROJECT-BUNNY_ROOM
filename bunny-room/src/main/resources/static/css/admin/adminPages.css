@@ -39,7 +39,7 @@ div.card-body {
 
 .sub-content {
     margin-left: 14.5rem;
-    margin-top: 1.5rem;
+    margin-top: 4rem;
 }
 
 .option-list {
@@ -58,6 +58,7 @@ div.card-body {
     background-color: coral;
     margin: 2rem;
     border-radius: 10% 10% 20rem 20rem;
+    color: white;
 }
 
 .option p {
@@ -72,7 +73,44 @@ button#giveNo {
     margin-top: -8rem;
 }
 
+#giveNo:hover {
+    background-color: darkgreen;
+}
+
 form#deleteForm_\$\{business\.businessNo\} {
     width: max-content;
 }
 
+section button {
+    background-color: orange;
+    border: solid orange;
+    margin: 0.2rem;
+    color: white;
+    border-radius: 0.5rem;
+    transition: 0.5s;
+    width: max-content;
+}
+
+section button:hover {
+    background-color: darkorange;
+    border: darkorange solid;
+}
+
+.add-button1 {
+    position: relative;
+    width: 18rem;
+    height: 8rem;
+}
+
+.add-button2 {
+    position: relative;
+    width: 12rem;
+    height: 5rem;
+}
+
+.main-content img {
+    position: relative;
+    left: 25rem;
+    top: 5rem;
+    width: 40rem;
+}
