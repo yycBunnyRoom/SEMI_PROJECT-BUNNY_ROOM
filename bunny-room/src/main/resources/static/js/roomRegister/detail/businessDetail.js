@@ -16,6 +16,7 @@ else{
         // 데이터 속성 추가
         roomDiv.dataset.roomNo = room.roomNo;
         roomListContainer.appendChild(roomDiv);
+        roomDiv.style.width = '80%';
 
         // 클릭 이벤트를 새로운 div에 추가
         roomDiv.addEventListener('click', function () {

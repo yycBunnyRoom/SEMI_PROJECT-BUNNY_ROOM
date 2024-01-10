@@ -29,26 +29,25 @@ h1{
     font-weight: bold;
 }
 /* 버튼 스타일 */
-.button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
+/*.button {*/
+/*    display: inline-block;*/
+/*    padding: 10px 20px;*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
 
-.button:hover {
-    background-color: #0056b3;
-}
+/*.button:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
 
 
 
 /* business-item 클래스에 적용되는 스타일 */
 #roomList {
     margin-top: 20px;
-    display: flex;
     flex-wrap: wrap;
 }
 
@@ -97,8 +96,32 @@ h1{
     transition: background-color 0.3s, color 0.3s;
 }
 
-.main {
-    position: relative;
+
+
+.businessManagement{
+    order: 1; /* 기본 값은 0이며, 작은 값을 갖는 요소가 왼쪽으로 간다 */
+    width: 50%;
+}
+.relatedRooms{
+    order: 2; /* div2는 div1보다 뒤로 밀립니다. */
+    width: 50%
+}
+.businessDetailView{
     top: 2rem;
     left: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn{
+    padding: 10px;
+    background-color: #FF9900;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn :hover {
+    background-color: #FFB545;
 }
