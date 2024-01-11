@@ -253,7 +253,7 @@ button:hover {
 }
 
 #reservation_form {
-    width: calc(100% - 40px); /* Adjusted to match .main padding and margin */
+    width: calc(100%); /* Adjusted to match .main padding and margin */
     margin-top: 20px;
     background-color: #fff;
     border-radius: 8px;

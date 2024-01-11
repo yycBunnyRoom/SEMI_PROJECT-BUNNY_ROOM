@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.reservation.controller;
 
+import com.yyc.bunnyroom.common.config.KeysForYYC;
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.reservation.model.ReservationDTO;
 import com.yyc.bunnyroom.reservation.service.ReservationService;
