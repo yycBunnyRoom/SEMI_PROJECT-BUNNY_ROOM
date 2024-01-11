@@ -1,0 +1,26 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:mysql://222.112.124.237/bunnyroom
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: yyc
+    password: yyc
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+mybatis:
+  mapper-locations: classpath:resources/mapper/**/*.xml
+  config-location: classpath:mapper/mapper-config.xml
+
+
+
+
