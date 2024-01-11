@@ -1,5 +1,6 @@
 package com.yyc.bunnyroom.reservation.controller;
 
+import com.yyc.bunnyroom.common.config.KeysForYYC;
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.reservation.model.ReservationDTO;
 import com.yyc.bunnyroom.reservation.service.ReservationService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Field;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +24,8 @@ import java.util.Objects;
 @Controller
 @RequestMapping("/search")
 public class SearchController {
+
+    KeysForYYC keys = new KeysForYYC();
 
     @Autowired
     RoomRegisterService roomRegisterService;
@@ -143,6 +147,11 @@ public class SearchController {
 
         // 해당하는 방의 예약리스트를 가져옴
         List<ReservationDTO> reserved = reservationService.getReservationsByRoomNo(roomNo);
+
+
+
+        String kakaoMap = "//dapi.kakao.com/v2/maps/sdk.js?appkey="+keys.getKakaoAPI()+"&libraries=services";
+        modelAndView.addObject("kakaoAPI",kakaoMap);
 
         System.out.println("예약된 리스트를 가져왔니: "+reserved);
 
