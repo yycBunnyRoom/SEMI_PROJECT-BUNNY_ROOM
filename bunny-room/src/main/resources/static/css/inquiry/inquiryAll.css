@@ -30,4 +30,10 @@ button {
     position: relative;
     left: 106rem;
     top: 1rem;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: orangered;
+    border: orangered;
 }

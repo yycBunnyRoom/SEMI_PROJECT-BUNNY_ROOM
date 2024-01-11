@@ -1,0 +1,39 @@
+section {
+    position: relative;
+    top: 4rem;
+    left: 4rem;
+    width: 93%;
+    border: solid orange 0.1rem;
+}
+
+.title {
+    background-color: orange;
+    width: fit-content;
+}
+
+input#inquiryTitle {
+    width: -webkit-fill-available;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    resize: vertical;
+    height: 40rem;
+}
+
+button {
+    background-color: orange;
+    border: solid orange;
+    color: white;
+    border-radius: 0.3rem;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: orangered;
+    border: solid orangered;
+}

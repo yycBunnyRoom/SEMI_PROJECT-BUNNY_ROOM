@@ -1,14 +1,17 @@
 .content {
     position: relative;
-    top: 4rem;
-    left: 4rem;
-    background-color: lightyellow;
-    width: 77rem;
+    top: 7rem;
+    left: 20rem;
+    background-color: white;
+    width: 78rem;
     height: 46.5rem;
+    border: solid orange 0.1rem;
 }
 
 .content h2 {
-    background-color: palegreen;
+    background-color: orange;
+    padding: 0.5rem;
+    font-weight: bold;
 }
 
 .content p {
@@ -18,8 +21,16 @@
 
 .content button {
     position: relative;
-    left: 66rem;
+    bottom: 1rem;
+    left: 67rem;
     background-color: orange;
     color: white;
     border: orange;
+    transition: 0.3s;
+    border-radius: 0.3rem;
+}
+
+.content button:hover {
+    background-color: orangered;
+    border: orangered;
 }
