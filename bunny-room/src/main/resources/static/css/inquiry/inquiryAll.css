@@ -2,7 +2,7 @@
     position: relative;
     left: 4rem;
     top: 4rem;
-    width: 90%;
+    width: 93%;
 }
 
 .inquiry-table h1 {
@@ -18,7 +18,7 @@ th {
 }
 
 table {
-    width: 77rem;
+    width: -webkit-fill-available;
     text-align: center;
     height: 35rem;
 }
@@ -28,6 +28,6 @@ button {
     border: orange;
     color: white;
     position: relative;
-    left: 70rem;
+    left: 106rem;
     top: 1rem;
 }
