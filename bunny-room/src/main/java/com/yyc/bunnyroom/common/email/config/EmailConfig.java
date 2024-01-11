@@ -1,5 +1,4 @@
 package com.yyc.bunnyroom.common.email.config;
-import com.yyc.bunnyroom.common.config.KeysForYYC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;

@@ -1,22 +1,18 @@
 package com.yyc.bunnyroom.reservation.controller;
 
-import com.yyc.bunnyroom.common.config.KeysForYYC;
 import com.yyc.bunnyroom.reservation.model.KeywordDTO;
 import com.yyc.bunnyroom.reservation.model.ReservationDTO;
 import com.yyc.bunnyroom.reservation.service.ReservationService;
 import com.yyc.bunnyroom.roomRegister.model.*;
 import com.yyc.bunnyroom.roomRegister.service.RoomRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Field;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
