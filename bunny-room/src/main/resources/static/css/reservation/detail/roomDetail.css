@@ -5,17 +5,17 @@ body {
 }
 
 .main {
-    max-width: 75rem; /* Converted from 1200px to rem */
+    max-width: 75rem;
     margin: 2rem auto;
-    padding: 1.25rem; /* Converted from 20px to rem */
+    padding: 1.25rem;
 }
 
 #roomDetails {
     background-color: #fff;
-    padding: 1.25rem; /* Converted from 20px to rem */
-    border-radius: 0.5rem; /* Converted from 8px to rem */
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); /* Converted from 10px to rem */
-    margin-bottom: 1.25rem; /* Converted from 20px to rem */
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.25rem;
     z-index: 0;
 }
 
@@ -36,11 +36,11 @@ span {
 }
 
 #map {
-    margin-top: 1.25rem; /* Converted from 20px to rem */
+    margin-top: 1.25rem;
     border: 1px solid #ddd;
-    border-radius: 0.5rem; /* Converted from 8px to rem */
-    width: calc(100% - 0.125rem); /* Converted from 2px to rem */
-    height: calc(100% - 2rem); /* Converted from 2rem to rem */
+    border-radius: 0.5rem;
+    width: calc(100% - 0.125rem);
+    height: calc(100% - 2rem);
     margin-bottom: 3rem;
     z-index: 0;
 }
@@ -55,8 +55,6 @@ span {
     cursor: pointer;
 }
 .applied-option-button {
-    /* 여기에 적절한 스타일 추가 */
-    /* 예를 들어 배경색, 패딩, 테두리, 텍스트 스타일 등을 지정할 수 있습니다 */
     background-color: lightblue;
     padding: 8px 12px;
     border: none;
@@ -89,19 +87,19 @@ button:hover {
 
 
 #btn_timeUnits button {
-    width: 6.875rem; /* Converted from 110px to rem */
-    height: 2.5rem; /* Converted from 40px to rem */
-    padding: 0.5rem; /* Converted from 8px to rem */
-    margin: 0.25rem; /* Converted from 4px to rem */
+    width: 6.875rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+    margin: 0.25rem;
     border: 1px solid;
-    border-radius: 0.25rem; /* Converted from 4px to rem */
+    border-radius: 0.25rem;
     background-color: #ffffff;
     color: #4b4f56;
     font-family: Arial, sans-serif;
-    font-size: 0.875rem; /* Converted from 14px to rem */
+    font-size: 0.875rem;
     line-height: 1.5;
     cursor: pointer;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1); /* Converted from 2px 4px to rem */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -136,15 +134,15 @@ button:hover {
 /* 날짜 선택기 스타일 */
 .ui-datepicker {
     background-color: white;
-    border: 0.0625rem solid #ccc; /* Converted from 1px to rem */
-    border-radius: 0.5rem; /* Converted from 8px to rem */
+    border: 0.0625rem solid #ccc;
+    border-radius: 0.5rem;
     font-family: Arial, sans-serif;
-    width: 100%; /* Full width */
+    width: 100%;
 }
 
 .ui-datepicker-header {
     background-color: #ffa500; /* 오렌지 헤더 */
-    border-radius: 0.5rem 0.5rem 0 0; /* Converted from 8px to rem */
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .ui-datepicker-title {
@@ -152,22 +150,22 @@ button:hover {
 }
 
 .ui-datepicker-calendar {
-    border-radius: 0 0 0.5rem 0.5rem; /* Converted from 8px to rem */
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 .ui-datepicker-calendar th,
 .ui-datepicker-calendar td {
-    border-radius: 0.5rem; /* Converted from 8px to rem */
+    border-radius: 0.5rem;
 }
 
 .ui-state-default {
     background-color: white; /* 날짜 배경 */
-    border: 0.0625rem solid #ccc; /* Converted from 1px to rem */
+    border: 0.0625rem solid #ccc;
 }
 
 .ui-state-default:hover {
     background-color: #ffa500; /* 호버 색상 */
-    border: 0.0625rem solid #ccc; /* Converted from 1px to rem */
+    border: 0.0625rem solid #ccc;
     color: white;
 }
 
@@ -175,10 +173,10 @@ button:hover {
 #selectedDate {
     background-color: #ffa500; /* 오렌지 배경 */
     color: white; /* 흰색 텍스트 */
-    border-radius: 0.5rem; /* Converted from 8px to rem */
-    width: 12.7rem; /* Converted from 200px to rem */
-    padding: 0.7rem; /* Converted from 8px to rem */
-    margin-top: 1.25rem; /* Converted from 10px to rem */
+    border-radius: 0.25rem;
+    width: 12.5rem;
+    padding: 0.5rem;
+    margin-top: 1.25rem;
     font-family: Arial, sans-serif;
     text-align: center;
 }
@@ -190,9 +188,9 @@ button:hover {
 /* 크롬 스타일의 input 창 */
 
 .chrome-style-input {
-    padding: 0.5rem 0.75rem;
+    padding: 0.3rem 0.2rem;
     font-size: 16px;
-    border: 0.0625rem solid;
+    border: 0.06rem solid;
     border-radius: 0.25rem;
     outline: none;
     transition: border-color 0.3s;
@@ -252,14 +250,13 @@ button:hover {
 }
 
 #reservation_form {
-    width: calc(100%); /* Adjusted to match .main padding and margin */
-    margin-top: 1.25rem; /* Converted from 20px to rem */
+    width: calc(100% - 4rem);
     background-color: #fff;
-    border-radius: 0.5rem; /* Converted from 8px to rem */
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); /* Converted from 10px to rem */
+    border-radius: 0.5rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
     border: 1px solid #ddd;
-    padding: 1.25rem; /* Converted from 20px to rem */
+    padding: 1.25rem;
 }
 
 #reservation_people {
