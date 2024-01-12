@@ -43,6 +43,12 @@ h1{
 /*    background-color: #0056b3;*/
 /*}*/
 
+.businessDetailView{
+    position: relative;
+    top: 2em;
+    width: 90%;
+}
+
 
 
 /* business-item 클래스에 적용되는 스타일 */

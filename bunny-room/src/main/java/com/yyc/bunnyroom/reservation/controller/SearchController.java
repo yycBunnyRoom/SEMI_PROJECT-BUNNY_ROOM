@@ -145,7 +145,7 @@ public class SearchController {
         // 해당하는 방의 예약리스트를 가져옴
         List<ReservationDTO> reserved = reservationService.getReservationsByRoomNo(roomNo);
 
-
+        System.out.println("카카오 API: "+keys.getKakaoAPI());
 
         String kakaoMap = "//dapi.kakao.com/v2/maps/sdk.js?appkey="+keys.getKakaoAPI()+"&libraries=services";
         modelAndView.addObject("kakaoAPI",kakaoMap);
