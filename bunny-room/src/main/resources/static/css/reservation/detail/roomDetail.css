@@ -83,7 +83,9 @@ button:hover {
     background-color: #f1f3f4;
 }
 
-
+#btn_timeUnits {
+    margin-bottom: 1rem;
+}
 
 
 #btn_timeUnits button {
@@ -91,7 +93,6 @@ button:hover {
     height: 2.5rem;
     padding: 0.5rem;
     margin: 0.25rem;
-    border: 1px solid;
     border-radius: 0.25rem;
     background-color: #ffffff;
     color: #4b4f56;
@@ -122,7 +123,11 @@ button:hover {
     background-color: rgba(47, 47, 47, 0.2);
 }
 
-
+#reservation_ok {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
 
 
 
@@ -260,5 +265,12 @@ button:hover {
 }
 
 #reservation_people {
-
+    border: 0.1rem orange solid;
+    margin-bottom: 0.5rem;
 }
+
+p#pricePerPerson {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
